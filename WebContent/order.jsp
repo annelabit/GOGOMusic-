@@ -5,8 +5,10 @@
 <head>
 <title>Order</title>
 <%@include file="includes/head.jsp" %>
+<link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
+<%@include file="includes/navbar.jsp" %>
 
 <%@include file="includes/footer.jsp" %>
 </body>

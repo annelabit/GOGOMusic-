@@ -8,6 +8,7 @@
 <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
+<%@include file="includes/navbar.jsp" %>
 
 <div class="container">
 <div class="card w-50 mx-auto my-4"> <!-- mx-auto== centro, my-5 == allieamento -->
