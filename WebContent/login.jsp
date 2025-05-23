@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import=model.* %>
+    <%@page import=control.* %>
+        <% 
+    User user = (User) request.getSession().getAttribute("user");
+    if(user!=null){
+    	response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
+    	                                    //la pagina non sarà visibile
+    }
+    %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,17 +23,15 @@
 <div class="container">
 <div class="card w-50 mx-auto my-4"> <!-- mx-auto== centro, my-5 == allieamento -->
 <div class="card-header text-center"> User Login</div>
-<div class="card.body">
-<form action="" method="post">
-
-<form>
+<div class="card-body">
+<form action="LoginServlet" method="post">
   <div class="mb-3">
     <label for="InputUsername" class="form-label">Username</label>
-    <input type="email" class="form-control" id="InputUsername" placeholder="Enter Your Username" required>
+    <input type="text" class="form-control" name="login-username" placeholder="Enter Your Username" required>
   </div>
   <div class="mb-3">
     <label for="InputPassword1" class="form-label">Password</label>
-    <input type="password" class="form-control" id="InputPassword1" placeholder="******" required>
+    <input type="password" class="form-control" name="login-password" placeholder="*******" required>
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
