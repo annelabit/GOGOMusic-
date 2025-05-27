@@ -6,4 +6,6 @@
 }
 
 
-
+.btn {
+    line-height: 40px; /* Assicurati che sia uguale all'altezza del bottone */
+}
