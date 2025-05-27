@@ -24,27 +24,22 @@
 	<div class="container">
 		<div class="card-header my-3"> Tutti i prodotti</div>
 		<div class="row">
-		<%
-			if(!products.isEmpty()){  //se ci sono prodotti
-				for(Product p: products){ //stampa per tutti i prodotti %>
+		
 					<div class="col-md-3 my-3">
 					<div class="card w-100" style="width: 18rem;">
-	  					<img src="images<%= p.getImage() %>" class="card-img-top" alt="...">
+	  					<img src="images/ultimo.jpg" class="card-img-top" alt="...">
 	  						<div class="card-body">
-							    <h5 class="card-title"> <%= p.getName() %></h5>
-							    <h6 class="price"> Prezzo: <%= p.getPrice() %></h6>
-							    <h6 class="category"> Categoria: <%= p.getCategory() %></h6>
+							    <h5 class="card-title"></h5>
+							    <h6 class="price"> Prezzo: 100 </h6>
+							    <h6 class="category"> Categoria: cacca</h6>
 							    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p> -->
 							    <div class="mt-3 d-flex gap-3 align-items-center">>
-							    	<a href="#" class="btn btn-primary ">Aggiungi al carrello</a>
-							    	<a href="#" class="btn btn-primary ">Compra ora</a>
+							    	<a href="#" class="btn btn-dark ">Aggiungi al carrello</a>
+							    	<a href="#" class="btn btn-primary">Compra ora</a>
 							    </div>
 	  						</div>
 						</div>
 					</div>
-					<%}
-			}
-		%>
 			</div>
 		</div>
 		

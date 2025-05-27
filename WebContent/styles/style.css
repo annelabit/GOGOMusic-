@@ -7,5 +7,9 @@
 
 
 .btn {
-    line-height: 40px; /* Assicurati che sia uguale all'altezza del bottone */
+    max-width: 120px;
+}
+
+.form-control {
+    margin-left: -10px; /* Regola il valore per spostarlo più a sinistra */
 }
