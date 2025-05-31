@@ -1,6 +1,6 @@
 <%@page import= %> <!-- connessione al DB -->
-<%@page import=model.* %>
-<%@page import=control.* %>
+<%@page import="model.*" %>
+<%@page import="control.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 

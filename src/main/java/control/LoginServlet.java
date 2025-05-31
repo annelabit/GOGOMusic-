@@ -35,13 +35,14 @@ public class LoginServlet extends HttpServlet {
 			User user = udao.userLogin(username, password);
 			
 			if(user != null) {
-				out.print("Login successful");
+				out.println("Login successful");
 				request.getSession().setAttribute("auth", user);
 				response.sendRedirect("index.jsp");
 			} else {
-				out.print("Login failed");
+				out.println("Login failed");
 			}
 		} catch (ClassNotFoundException | SQLException e) {
+			out.println("Exception");
 			e.printStackTrace();
 		}
 		

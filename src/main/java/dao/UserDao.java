@@ -19,13 +19,14 @@ public class UserDao {
 		this.connection = connection;
 	}
 	
-	public User userLogin(String email, String password) {
+	public User userLogin(String username, String password) {
 		User user = null;
 		
 		
 		try {
-			query = "SELECT * FROM USER WHERE EMAIL=? AND PASSWORD=?";
-			pst = this.connection.prepareStatement(query);pst.setString(1, email);
+			query = "SELECT * FROM USER WHERE USERNAME=? AND PASSWORD=?";
+			pst = this.connection.prepareStatement(query);
+			pst.setString(1, username);
 			pst.setString(2, password);
 			rs = pst.executeQuery();
 			
@@ -33,7 +34,7 @@ public class UserDao {
 				user = new User();
 				user.setIdUtente(rs.getInt("id"));
 				user.setNome(rs.getString("nome"));
-				user.setCognome(rs.getString("congome"));
+				user.setCognome(rs.getString("cognome"));
 				user.setEmail(rs.getString("email"));
 				user.setUsername(rs.getString("username"));
 				//per ragioni di sicurezza non metto password
