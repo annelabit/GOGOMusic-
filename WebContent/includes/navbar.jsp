@@ -24,17 +24,19 @@
         <li class="nav-item">
           <a class="nav-link active" href="cart.jsp">Carrello</a>
         </li>
-        <% if(user != null){ %>
+        <% if(user != null){ %> <!-- Ignora errore -->
         		<li class="nav-item">
                 <a class="nav-link active" href="order.jsp">Ordini</a>
               </li>
               <li class="nav-item">
-              <a class="nav-link" aria-disabled="false" href="LogoutServlet">Log out</a>
+              <a class="nav-link" aria-disabled="false" href="logout">Log out</a>
             </li>
        <%	} else {    %> 
+       			<li>
         		<a class="nav-link active" aria-disabled="false" href="login.jsp">Log in</a>
                 </li>
         <% 	}   %> 
+      </ul>
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"/>
         <button class="btn btn-outline-success" type="submit">Cerca</button>
