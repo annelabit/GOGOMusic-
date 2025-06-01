@@ -1,22 +1,22 @@
 package model;
 
 public class Product {
-	
+
 	private int id;
 	private String name;
-	private String category;
 	private float price;
 	private String image;
+	private String category;
 	
 	public Product() {
 	}
-
-	public Product(int id, String name, String category, float price, String image) {
-		this.id = id;
-		this.name = name;
-		this.category = category;
-		this.price = price;
-		this.image = image;
+	
+	public Product(int id, String name, float price, String category, String image) {
+		this.id= id;
+		this.name= name;
+		this.price= price;
+		this.category= category;
+		this.image= image;
 	}
 
 	public int getId() {

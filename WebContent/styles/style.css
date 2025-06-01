@@ -6,4 +6,10 @@
 }
 
 
+.btn {
+    max-width: 120px;
+}
 
+.form-control {
+    margin-left: -10px; /* Regola il valore per spostarlo più a sinistra */
+}
