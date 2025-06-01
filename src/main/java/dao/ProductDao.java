@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import model.Cart;
 import model.Product;
 
 
@@ -49,5 +50,68 @@ public class ProductDao {
 		return products;
 	}
 	
+	public ArrayList<Cart> getCartProducts(ArrayList<Cart> cart){
+		ArrayList<Cart> cartProducts = new ArrayList<Cart>();
+		
+		try{
+			
+			if(cart.size()>0) {
+				for(Cart cartItem : cart) {
+					query = "SELECT * FROM PRODUCT WHERE ID=?";
+					pst = this.connection.prepareStatement(query);
+					pst.setInt(1, cartItem.getId());
+					rs = pst.executeQuery();
+					while(rs.next()) {
+						
+						Cart c = new Cart();
+						c.setId(rs.getInt("id"));
+						c.setName(rs.getString("name"));
+						c.setCategory(rs.getString("category"));
+						c.setPrice(rs.getFloat("price")*cartItem.getQuantity());
+						c.setQuantity(cartItem.getQuantity());
+						cartProducts.add(c);
+					}
+					
+				}
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.print(e.getMessage());		
+		}
+		
+		return cartProducts;
+	}
+	
+	public double getTotalPrice(ArrayList<Cart> cart) {
+		double total = 0;
+		
+		try {
+			if(cart.size()!=0) {
+				
+				for(Cart c : cart) {
+					query = "SELECT PRICE FROM PRODUCT WHERE ID = ?";
+					pst = this.connection.prepareStatement(query);
+					pst.setInt(1, c.getId());
+					
+					rs = pst.executeQuery();
+					
+					while(rs.next()) {
+						total+=rs.getFloat("price")*c.getQuantity();
+					}
+					
+				}
+				
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+		
+		return total;
+		
+	}
 	
 }

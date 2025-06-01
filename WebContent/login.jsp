@@ -2,12 +2,19 @@
     pageEncoding="UTF-8"%>
     <%@page import="model.*" %>
     <%@page import="control.*" %>
+    <%@page import="java.util.*" %>
         <% 
     User user = (User) request.getSession().getAttribute("user");
     if(user!=null){
     	response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
     	                                    //la pagina non sarà visibile
     }
+    
+    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+    if(cart != null){
+    	request.setAttribute("cart_list", cart);
+    }
+    
     %>
      
 <!DOCTYPE html>

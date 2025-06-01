@@ -1,6 +1,7 @@
  <!-- %@page import= %>connessione al DB -->
 <%@page import="model.*" %>
 <%@page import="control.*" %>
+<%@page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <% 
@@ -8,6 +9,11 @@
     if(user!=null){  //se l'user appartiene alla sessione
     	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
     }
+    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+    if(cart != null){
+    	request.setAttribute("cart_list", cart);
+    }
+    
     %>
 <!DOCTYPE html>
 <html>

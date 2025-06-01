@@ -22,7 +22,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="cart.jsp">Carrello</a>
+          <a class="nav-link active" href="cart.jsp">Carrello<span class="badge bg-danger">${cart_list.size()}</span></a>
         </li>
         <% if(user != null){ %> <!-- Ignora errore -->
         		<li class="nav-item">

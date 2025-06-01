@@ -1,13 +1,26 @@
 <!-- %@page import= %>connessione al DB -->
 <%@page import="model.*"%>
 <%@page import="control.*"%>
+<%@page import="dao.*"%>
+<%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	 <% 
     User user = (User) request.getSession().getAttribute("user");
     if(user!=null){
-    	response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
+    	//response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
     	                                    //la pagina non sarà visibile
     }
+    
+    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+    ArrayList<Cart> cartProducts = null;
+    if(cart != null){
+    	ProductDao pDao = new ProductDao(DBConnection.getConnection());
+    	cartProducts = pDao.getCartProducts(cart);
+    	double totalPrice = pDao.getTotalPrice(cart);
+    	request.setAttribute("cart_list", cart);
+    	request.setAttribute("total", totalPrice);
+    }
+    
     %>
     
 <!DOCTYPE html>
@@ -23,7 +36,7 @@
 	<div class="container">
 		<!-- p=padding,  m=margin -->
 		<div class="d-flex justify-content-between py-3">
-			<h3>Prezzo Totale: 300$</h3>
+			<h3>Prezzo Totale: € ${ (total>0)?total:0 }</h3>
 			<a class="btn btn-primary mx-3" href="#"> Check out </a>
 		</div>
 		<table class="table table-light">
@@ -37,20 +50,25 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
+			
+			<%if(cart != null){
+				
+				for(Cart c : cartProducts){
+					%>
+					<tr>
 					<!--  table row -->
-					<td>Ultimo</td>
-					<td>Concerto</td>
-					<td>100$</td>
+					<td><%= c.getName() %></td>
+					<td><%= c.getCategory() %></td>
+					<td><%= c.getPrice() %>€</td>
 					<td>
 						<form action="" method="post" class="form-inline">
 						<div class="input-group"> 
-							<input type="hidden" name="id" value="1" class="form-input">
+							<input type="hidden" name="id" value="<%= c.getId() %>" class="form-input">
 							<div class="d-flex align-items-center gap-2">
-								<a class="btn btn-sm btn-incre" href="#">
+								<a class="btn btn-sm btn-incre" href="quantity">
 								<i class="fas fa-plus-square"></i></a> 
 									 <input type="text"name="quantity" class="form-control text-center" value="1" readonly> 
-									 <a class="btn btn-sm btn-decre" href="#">
+									 <a class="btn btn-sm btn-decre" href="quantity">
 									 <i class="fas fa-minus-square"></i></a>
 							</div>
 							</div>
@@ -60,6 +78,14 @@
 						<a class="btn btn-sm btn-danger" href=""> Rimuovi </a>
 					</td>
 				</tr>
+					
+			<%
+				}
+				
+				
+			} %>
+			
+				
 			</tbody>
 		</table>
 	</div>
