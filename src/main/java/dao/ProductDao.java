@@ -38,7 +38,7 @@ public class ProductDao {
 				prod.setCategory(rs.getString("category"));
 				prod.setPrice(rs.getFloat("price"));
 				prod.setImage(rs.getString("image"));
-				
+				prod.setVenueId(rs.getInt("venueId"));
 				products.add(prod);
 			}
 			
@@ -69,6 +69,7 @@ public class ProductDao {
 						c.setCategory(rs.getString("category"));
 						c.setPrice(rs.getFloat("price")*cartItem.getQuantity());
 						c.setQuantity(cartItem.getQuantity());
+						c.setVenueId(rs.getInt("venueId"));
 						cartProducts.add(c);
 					}
 					
@@ -131,6 +132,7 @@ public class ProductDao {
 				p.setCategory(rs.getString("category"));
 				p.setPrice(rs.getFloat("price"));
 				p.setImage(rs.getString("image"));
+				p.setVenueId(rs.getInt("venueId"));
 			}
 			
 		}catch(Exception e) {

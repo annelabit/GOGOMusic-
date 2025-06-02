@@ -76,10 +76,6 @@ public class OrderDao {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		
 		return orderList;
 	}
 	

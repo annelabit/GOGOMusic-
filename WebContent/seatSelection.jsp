@@ -1,0 +1,59 @@
+<%@page import="dao.SeatDao"%>
+<%@page import="dao.OrderDao"%>
+<%@page import="model.*" %>
+<%@page import="control.*" %>
+<%@page import="java.util.*" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+     <% 
+    	User user = (User) request.getSession().getAttribute("user");  //recupero l'attributo dalla sessione dell'utente
+    	if(user!=null){  //se l'user appartiene alla sessione
+        	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
+        }
+        
+        SeatDao sDao = new SeatDao(DBConnection.getConnection());
+        ArrayList<Seat> seats = sDao.getAllSeats(Integer.parseInt(request.getParameter("venue_id")));
+        int pId = Integer.parseInt(request.getParameter("venue_id"));
+    %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Seleziona posto</title>
+<%@include file="includes/head.jsp" %>
+<link rel="stylesheet" type="text/css" href="styles/style.css">
+<link rel="stylesheet" type="text/css" href="styles/seatSelectionStyle.css">
+</head>
+<body>
+<script src="scripts/seatScript.js"></script>
+<%@include file="includes/navbar.jsp" %>
+
+<h1>Scegli il tuo posto!</h1>
+
+<div class="grid-container">
+  
+  <%
+  	for(Seat s : seats){
+  %>
+  	
+  <%
+  	if(s.isAvailable()==1) {
+  %>
+  		<button class="button-1" id="<%=s.getId()%>" role="button" onclick="selectSeat(<%=s.getId()%>)"> <%=s.getPrice()%>€ </button>
+  <% 	
+  	} else{
+  %>
+  	<button disabled class="button-2" role="button">N.A.</button>
+  <%
+  	}
+  }
+  %>
+  
+</div>
+
+<!-- link viene aggiunto nel js -->
+<a href="#" data-venue-id=<%=pId%> id="buy-button" class="btn btn-primary btn-sm"> Acquista </a>
+
+<%@include file="includes/footer.jsp" %>
+</body>
+</html>
