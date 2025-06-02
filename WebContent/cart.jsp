@@ -38,7 +38,7 @@
 		<!-- p=padding,  m=margin -->
 		<div class="d-flex justify-content-between py-3">
 			<h3>Prezzo Totale: €${ (total>0)?total:0 }</h3>
-			<a class="btn btn-primary mx-3" href="#"> Check out </a>
+			<a class="btn btn-primary mx-3" href="checkout"> Check out </a>
 		</div>
 		<table class="table table-light">
 			<thead>

@@ -114,4 +114,30 @@ public class ProductDao {
 		
 	}
 	
+	public Product getSingleProduct(int id) {
+		Product p = null;
+		
+		try {
+			
+			query = "SELECT * FROM PRODUCT WHERE ID=?";
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				p = new Product();
+				p.setId(rs.getInt("id"));
+				p.setName(rs.getString("name"));
+				p.setCategory(rs.getString("category"));
+				p.setPrice(rs.getFloat("price"));
+				p.setImage(rs.getString("image"));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return p;
+	}
+	
 }
