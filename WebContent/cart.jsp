@@ -1,11 +1,12 @@
 <!-- %@page import= %>connessione al DB -->
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="model.*"%>
 <%@page import="control.*"%>
 <%@page import="dao.*"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 	 <% 
-    User user = (User) request.getSession().getAttribute("user");
+	User user = (User) request.getSession().getAttribute("user");
     if(user!=null){
     	//response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
     	                                    //la pagina non sarà visibile
@@ -65,17 +66,17 @@
 						<div class="input-group"> 
 							<input type="hidden" name="id" value="<%= c.getId() %>" class="form-input">
 							<div class="d-flex align-items-center gap-2">
-								<a class="btn btn-sm btn-incre" href="quantity">
+								<a class="btn btn-sm btn-incre" href="quantity?action=inc&id=<%=c.getId()%>">
 								<i class="fas fa-plus-square"></i></a> 
-									 <input type="text"name="quantity" class="form-control text-center" value="1" readonly> 
-									 <a class="btn btn-sm btn-decre" href="quantity">
+									 <input type="text"name="quantity" class="form-control text-center" value="<%=c.getQuantity()%>" readonly> 
+									 <a class="btn btn-sm btn-decre" href="quantity?action=dec&id=<%=c.getId()%>">
 									 <i class="fas fa-minus-square"></i></a>
 							</div>
 							</div>
 						</form>
 					</td>
 					<td>
-						<a class="btn btn-sm btn-danger" href=""> Rimuovi </a>
+						<a class="btn btn-sm btn-danger" href="remove-from-cart?id=<%=c.getId()%>"> Rimuovi </a>
 					</td>
 				</tr>
 					
