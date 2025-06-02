@@ -37,7 +37,7 @@
 	<div class="container">
 		<!-- p=padding,  m=margin -->
 		<div class="d-flex justify-content-between py-3">
-			<h3>Prezzo Totale: € ${ (total>0)?total:0 }</h3>
+			<h3>Prezzo Totale: €${ (total>0)?total:0 }</h3>
 			<a class="btn btn-primary mx-3" href="#"> Check out </a>
 		</div>
 		<table class="table table-light">
@@ -62,7 +62,7 @@
 					<td><%= c.getCategory() %></td>
 					<td><%= c.getPrice() %>€</td>
 					<td>
-						<form action="" method="post" class="form-inline">
+						<form action="buy-now" method="post" class="form-inline">
 						<div class="input-group"> 
 							<input type="hidden" name="id" value="<%= c.getId() %>" class="form-input">
 							<div class="d-flex align-items-center gap-2">
@@ -73,6 +73,7 @@
 									 <i class="fas fa-minus-square"></i></a>
 							</div>
 							</div>
+							<button type="submit" class="btn btn-primary btn-sm"> Acquista </button>
 						</form>
 					</td>
 					<td>

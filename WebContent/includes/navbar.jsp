@@ -26,7 +26,7 @@
         </li>
         <% if(user != null){ %> <!-- Ignora errore -->
         		<li class="nav-item">
-                <a class="nav-link active" href="order.jsp">Ordini</a>
+                <a class="nav-link active" href="orders.jsp">Ordini</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" aria-disabled="false" href="logout">Log out</a>
