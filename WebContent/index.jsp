@@ -1,5 +1,5 @@
  <!-- %@page import= %> connessione al DB -->
-<%@page import="dao.ProductDao"%>
+<%@page import="dao.*"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.*" %>
 <%@page import="control.*" %>
@@ -13,6 +13,7 @@
     }
     
     ProductDao pDao = new ProductDao(DBConnection.getConnection());
+    SeatDao sDao = new SeatDao(DBConnection.getConnection());
     ArrayList<Product> products = pDao.getProducts();
     
     ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
@@ -48,7 +49,8 @@
 	  					<img src="images/<%= p.getImage()%>" class="card-img-top" alt="...">
 	  						<div class="card-body">
 							    <h5 class="card-title"><%= p.getName() %></h5>
-							    <h6 class="price"> Prezzo: <%= p.getPrice() %>€ </h6>
+							    <h6 class="price"> Prezzo: <%= pDao.getMinimumPrice(sDao.getAllSeatIds(p.getVenueId()), p.getVenueId(), p.getId())%>€-
+							    	<%=pDao.getMaximumPrice(sDao.getAllSeatIds(p.getVenueId()), p.getVenueId(), p.getId())%>€ </h6>
 							    <h6 class="category"> Categoria: <%= p.getCategory() %></h6>
 							    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p> -->
 							    <div class="mt-3 d-flex gap-3 align-items-center">

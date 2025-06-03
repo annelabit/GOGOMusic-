@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import dao.OrderDao;
+import dao.ProductDao;
 
 /**
  * Servlet implementation class CheckoutServlet
@@ -39,7 +40,7 @@ public class CheckoutServlet extends HttpServlet {
 			User user = (User) request.getSession().getAttribute("user");
 
 			OrderDao oDao = new OrderDao(DBConnection.getConnection());
-
+			ProductDao pDao = new ProductDao(DBConnection.getConnection());
 			
 			if(user != null && cart != null) {
 				
@@ -50,6 +51,8 @@ public class CheckoutServlet extends HttpServlet {
 					order.setUid(user.getIdUtente());
 					order.setQuantity(c.getQuantity());
 					order.setDate(formatter.format(date));
+					
+					order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getVenueId(), c.getId()));
 					
 					boolean result = oDao.insertOrder(order);
 					if(!result) break;

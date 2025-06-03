@@ -47,6 +47,28 @@ public class SeatDao {
 		
 	}
 	
+public ArrayList<Integer> getAllSeatIds(int venueId){
+		
+		ArrayList<Integer> seatIds = new ArrayList<>();
+		
+		try {
+			query = "SELECT id FROM SEAT WHERE locationId=?";
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, venueId);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				seatIds.add(rs.getInt("id"));
+			}
+			
+		}	
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return seatIds;
+		
+	}
+	
 	public boolean reserveSeat(int seatId) {
 		
 		boolean result = false;

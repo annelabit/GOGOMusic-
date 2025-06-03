@@ -151,6 +151,62 @@ public double getTotalPrice(ArrayList<Cart> cart) {
 		
 	}
 	
+	public double getMinimumPrice(ArrayList<Integer> seatIds, int venueId, int productId) {
+		
+		double min=0;
+		
+		try {
+			if(seatIds.size()!=0) {
+				
+					query = "SELECT MIN(price) FROM seat WHERE locationId = ? AND available = 1";//AGGIUNGERE ANCHE PRODUCTID!!!
+					
+					pst = this.connection.prepareStatement(query);
+					//pst.setInt(1, i);
+					pst.setInt(1, venueId);
+					
+					rs = pst.executeQuery();
+					
+					while(rs.next()) {
+						min=rs.getFloat(1);
+					}
+				
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+		
+		return min;
+	}
+	
+public double getMaximumPrice(ArrayList<Integer> seatIds, int venueId, int productId) {
+		
+		double max=0;
+		
+		try {
+			if(seatIds.size()!=0) {
+					query = "SELECT Max(PRICE) FROM SEAT WHERE locationId = ? AND available = 1";//AGGIUNGERE ANCHE PRODUCTID!!!
+					
+					pst = this.connection.prepareStatement(query);
+					pst.setInt(1, venueId);
+					
+					rs = pst.executeQuery();
+					
+					if(rs.next()) {
+						max=rs.getFloat(1);
+					}
+					
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+		
+		return max;
+	}
+
 	public double getPriceForSelected(ArrayList<Integer> seatIds, int venueId, int productId) {
 		
 		double total = 0;
