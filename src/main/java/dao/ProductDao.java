@@ -85,7 +85,8 @@ public class ProductDao {
 		return cartProducts;
 	}
 	
-	public double getTotalPrice(ArrayList<Cart> cart) {
+	/*public double getTotalPrice(ArrayList<Cart> cart) {
+		
 		double total = 0;
 		
 		try {
@@ -100,6 +101,74 @@ public class ProductDao {
 					
 					while(rs.next()) {
 						total+=rs.getFloat("price")*c.getQuantity();
+					}
+					
+				}
+				
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+		
+		return total;
+		
+	}*/
+	
+public double getTotalPrice(ArrayList<Cart> cart) {
+		
+		double total = 0;
+		
+		try {
+			
+			for(Cart c : cart) {
+					
+				if(c.getSeatIds() != null && !c.getSeatIds().isEmpty()) { 
+					
+					for(Integer seatId : c.getSeatIds()) {
+					
+						query = "SELECT PRICE FROM SEAT WHERE ID = ?";
+						pst = this.connection.prepareStatement(query);
+						pst.setInt(1, seatId);
+					
+						rs = pst.executeQuery();
+					
+						while(rs.next()) {
+							total+=rs.getFloat("price");
+						}
+					
+					}
+				}
+			
+			}	
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+		
+		return total;
+		
+	}
+	
+	public double getPriceForSelected(ArrayList<Integer> seatIds, int venueId, int productId) {
+		
+		double total = 0;
+		
+		try {
+			if(seatIds.size()!=0) {
+				
+				for(Integer i : seatIds) {
+					query = "SELECT PRICE FROM SEAT WHERE id = ? AND locationId = ?";//AGGIUNGERE ANCHE PRODUCTID!!!
+					
+					pst = this.connection.prepareStatement(query);
+					pst.setInt(1, i);
+					pst.setInt(2, venueId);
+					
+					rs = pst.executeQuery();
+					
+					while(rs.next()) {
+						total+=rs.getFloat("price");
 					}
 					
 				}

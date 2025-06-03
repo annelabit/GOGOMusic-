@@ -33,21 +33,27 @@ public class UpdateSeatServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int seatId = Integer.parseInt(request.getParameter("seatId"));
+		//stringa con gli id dei posti
+		String seatIdsString = request.getParameter("seatIds"); 
+		
+		//gli id erano separati da virgola
+		String[] seatIds = seatIdsString.split(",");
+		
 		int pId = Integer.parseInt(request.getParameter("pId"));
-		User user = (User) request.getSession().getAttribute("user");
-		int uId = user.getIdUtente();
+		
+		//User user = (User) request.getSession().getAttribute("user");
+		//int uId = user.getIdUtente();
 		
 		try (PrintWriter out = response.getWriter()){
-			
+		
 			SeatDao seatDao = new SeatDao(DBConnection.getConnection());
-			boolean result = seatDao.reserveSeat(seatId, uId);
 			
-			response.setContentType("application/json");
-			response.getWriter().print("{\"success\": true}");
-			//response.getWriter().write("{\"success\": " + result + "}");
+			for(String idString : seatIds) {
+				int seatId = Integer.parseInt(idString);
+				seatDao.reserveSeat(seatId);
+			}
 			
-			response.sendRedirect("add-to-cart?id="+pId);
+			response.sendRedirect("add-to-cart?id="+pId+"&quantity="+request.getParameter("quantity")+"&seatIds="+seatIdsString);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

@@ -12,11 +12,16 @@
     	                                    //la pagina non sarà visibile
     }
     
+    //questo carrello contiene solo gli id
     ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+    
+    //questo carrello contiene solo i prodotti scelti
     ArrayList<Cart> cartProducts = null;
+    ProductDao pDao = new ProductDao(DBConnection.getConnection());
+    
     if(cart != null){
-    	ProductDao pDao = new ProductDao(DBConnection.getConnection());
-    	cartProducts = pDao.getCartProducts(cart);
+    	
+    	//cartProducts = pDao.getCartProducts(cart);
     	double totalPrice = pDao.getTotalPrice(cart);
     	request.setAttribute("cart_list", cart);
     	request.setAttribute("total", totalPrice);
@@ -37,7 +42,13 @@
 	<div class="container">
 		<!-- p=padding,  m=margin -->
 		<div class="d-flex justify-content-between py-3">
-			<h3>Prezzo Totale: €${ (total>0)?total:0 }</h3>
+	
+	<%
+    		DecimalFormat df = new DecimalFormat("#0.00");
+			//pDao somma i prezzi per tutti i posti assegnati
+    		double totalPrice = (cart != null) ? pDao.getTotalPrice(cart) : 0.0;
+	%>
+		<h3>Prezzo Totale: €<%= df.format(totalPrice) %></h3>
 			<a class="btn btn-primary mx-3" href="checkout"> Check out </a>
 		</div>
 		<table class="table table-light">
@@ -46,21 +57,42 @@
 					<th scope="col">Name</th>
 					<th scope="col">Category</th>
 					<th scope="col">Price</th>
+					<th scope="col">Seats</th>
 					<th scope="col">Buy Now</th>
 					<th scope="col">Cancel</th>
 				</tr>
 			</thead>
 			<tbody>
 			
-			<%if(cart != null){
+			<%
+			//ArrayList<Cart> cartList = (ArrayList<Cart>) session.getAttribute("cart_list");
+				if (cart != null && !cart.isEmpty()) {
 				
-				for(Cart c : cartProducts){
-					%>
-					<tr>
-					<!--  table row -->
-					<td><%= c.getName() %></td>
-					<td><%= c.getCategory() %></td>
-					<td><%= c.getPrice() %>€</td>
+					//for(Cart c : cartProducts){
+						for(Cart c : cart){
+			%>
+						<tr>
+						<!--  table row -->
+						<td><%= c.getName() %></td>
+						<td><%= c.getCategory() %></td>
+						<td><%= pDao.getPriceForSelected(c.getSeatIds(),c.getVenueId(),c.getId()) %>€</td>
+					
+						<td>
+					
+				<%
+					
+						ArrayList<Integer> seatList = c.getSeatIds();
+				
+						if(seatList != null && !seatList.isEmpty()){
+							out.print(seatList.toString());
+						} else{ 
+							out.print("Nessun posto selezionato");
+						}
+					
+				%>
+					
+						</td>
+				
 					<td>
 						<form action="buy-now" method="post" class="form-inline">
 						<div class="input-group"> 

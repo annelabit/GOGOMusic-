@@ -47,7 +47,7 @@ public class SeatDao {
 		
 	}
 	
-	public boolean reserveSeat(int seatId, int userId) {
+	public boolean reserveSeat(int seatId) {
 		
 		boolean result = false;
 		
