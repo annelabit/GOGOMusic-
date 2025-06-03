@@ -18,7 +18,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import dao.OrderDao;
+import dao.ProductDao;
 
+import java.time.LocalTime;
 /**
  * Servlet implementation class BuyNowServlet
  */
@@ -35,6 +37,7 @@ public class BuyNowServlet extends HttpServlet {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
 			
+			ProductDao pDao = new ProductDao(DBConnection.getConnection());
 			
 			if(user != null) {
 				
@@ -44,18 +47,38 @@ public class BuyNowServlet extends HttpServlet {
 					quantity = 1;//quantità minima 1
 				}
 				
+				LocalTime currentTime = LocalTime.now();
+				String formattedTime = String.format("%02d:%02d:%02d", currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond());
+				
+				
 				Order order = new Order();
 				order.setId(id);//id prodotto
 				order.setUid(user.getIdUtente());
 				order.setQuantity(quantity);
+				
 				order.setDate(formatter.format(date));
+				order.setTime(formattedTime);
+				
+				ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list"); 
+				
+				//trovo l'oggetto nel carrello per sommare tutti i prezzi dei posti
+				//non elegantissimo
+				if(cart!=null) {
+					for(Cart c : cart) {
+						if(c.getId() == id) {
+							order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getVenueId(), c.getId()));
+							break;
+						}
+					}
+				}
+				
 				
 				try {
 					OrderDao oDao = new OrderDao(DBConnection.getConnection());
 					boolean result = oDao.insertOrder(order);
 				
 					if(result) {
-						ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list"); 
+						
 						if(cart!=null) {
 							for(Cart c : cart) {
 								if(c.getId() == id) {
@@ -81,6 +104,12 @@ public class BuyNowServlet extends HttpServlet {
 			} else {
 				response.sendRedirect("login.jsp");
 			}
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
 		}
 	
 	}

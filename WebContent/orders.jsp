@@ -39,6 +39,7 @@
 		<thead>
 			<tr>
 				<th scope="col">Date</th>
+				<th scope="col">Time</th>
 				<th scope="col">Name</th>
 				<th scope="col">Category</th>
 				<th scope="col">Quantity</th>
@@ -55,6 +56,7 @@
 			<tr>
 			<!-- data cells -->
 				<td><%=o.getDate()%></td>
+				<td><%=o.getTime()%></td>
 				<td><%=o.getName()%></td>
 				<td><%=o.getCategory()%></td>
 				<td><%=o.getQuantity()%></td>
@@ -72,12 +74,6 @@
 	</table>
 
 </div>
-
-
-
-
-
-
 
 <%@include file="includes/footer.jsp" %>
 </body>

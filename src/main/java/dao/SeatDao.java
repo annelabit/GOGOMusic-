@@ -47,7 +47,7 @@ public class SeatDao {
 		
 	}
 	
-public ArrayList<Integer> getAllSeatIds(int venueId){
+	public ArrayList<Integer> getAllSeatIds(int venueId){
 		
 		ArrayList<Integer> seatIds = new ArrayList<>();
 		

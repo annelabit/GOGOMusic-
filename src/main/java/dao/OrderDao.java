@@ -25,7 +25,7 @@ public class OrderDao {
 			
 		try {
 			
-			query = "INSERT INTO `order` (productId, userId, quantity, date, totalPrice) VALUES(?,?,?,?,?)";
+			query = "INSERT INTO `order` (productId, userId, quantity, date, totalPrice, time) VALUES(?,?,?,?,?,?)";
 			
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, order.getId());
@@ -33,6 +33,7 @@ public class OrderDao {
 			pst.setInt(3, order.getQuantity());
 			pst.setString(4, order.getDate());
 			pst.setFloat(5, order.getPrice());
+			pst.setString(6, order.getTime());
 			pst.executeUpdate();
 			result = true; //se è arrivato qui non ci sono eccezioni
 			
@@ -71,6 +72,7 @@ public class OrderDao {
 				order.setPrice(rs.getFloat("totalPrice"));
 				order.setQuantity(rs.getInt("quantity"));
 				order.setDate(rs.getString("date"));
+				order.setTime(rs.getString("time"));
 				orderList.add(order);
 			}
 		}catch(Exception e) {
@@ -90,7 +92,6 @@ public class OrderDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 	

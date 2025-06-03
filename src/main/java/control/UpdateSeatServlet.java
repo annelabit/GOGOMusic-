@@ -41,8 +41,8 @@ public class UpdateSeatServlet extends HttpServlet {
 		
 		int pId = Integer.parseInt(request.getParameter("pId"));
 		
-		//User user = (User) request.getSession().getAttribute("user");
-		//int uId = user.getIdUtente();
+		User user = (User) request.getSession().getAttribute("user");
+		int uId = user.getIdUtente();
 		
 		try (PrintWriter out = response.getWriter()){
 		

@@ -13,6 +13,7 @@ import model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -46,12 +47,15 @@ public class CheckoutServlet extends HttpServlet {
 				
 				for(Cart c : cart) {
 					
+					LocalTime currentTime = LocalTime.now();
+					String formattedTime = String.format("%02d:%02d:%02d", currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond());
+					
 					Order order = new Order();
 					order.setId(c.getId());
 					order.setUid(user.getIdUtente());
 					order.setQuantity(c.getQuantity());
 					order.setDate(formatter.format(date));
-					
+					order.setTime(formattedTime);
 					order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getVenueId(), c.getId()));
 					
 					boolean result = oDao.insertOrder(order);
@@ -69,9 +73,6 @@ public class CheckoutServlet extends HttpServlet {
 				
 				else response.sendRedirect("cart.jsp");
 			}
-			
-			
-			
 			
 		} catch(Exception e) {
 			e.printStackTrace();

@@ -11,7 +11,6 @@
     	//response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
     	                                    //la pagina non sarà visibile
     }
-    
     //questo carrello contiene solo gli id
     ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
     
@@ -21,7 +20,6 @@
     
     if(cart != null){
     	
-    	//cartProducts = pDao.getCartProducts(cart);
     	double totalPrice = pDao.getTotalPrice(cart);
     	request.setAttribute("cart_list", cart);
     	request.setAttribute("total", totalPrice);
@@ -45,6 +43,7 @@
 	
 	<%
     		DecimalFormat df = new DecimalFormat("#0.00");
+	
 			//pDao somma i prezzi per tutti i posti assegnati
     		double totalPrice = (cart != null) ? pDao.getTotalPrice(cart) : 0.0;
 	%>
@@ -65,10 +64,8 @@
 			<tbody>
 			
 			<%
-			//ArrayList<Cart> cartList = (ArrayList<Cart>) session.getAttribute("cart_list");
 				if (cart != null && !cart.isEmpty()) {
 				
-					//for(Cart c : cartProducts){
 						for(Cart c : cart){
 			%>
 						<tr>

@@ -85,38 +85,7 @@ public class ProductDao {
 		return cartProducts;
 	}
 	
-	/*public double getTotalPrice(ArrayList<Cart> cart) {
-		
-		double total = 0;
-		
-		try {
-			if(cart.size()!=0) {
-				
-				for(Cart c : cart) {
-					query = "SELECT PRICE FROM PRODUCT WHERE ID = ?";
-					pst = this.connection.prepareStatement(query);
-					pst.setInt(1, c.getId());
-					
-					rs = pst.executeQuery();
-					
-					while(rs.next()) {
-						total+=rs.getFloat("price")*c.getQuantity();
-					}
-					
-				}
-				
-			}
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-			System.out.print(e.getMessage());	
-		}
-		
-		return total;
-		
-	}*/
-	
-public double getTotalPrice(ArrayList<Cart> cart) {
+	public double getTotalPrice(ArrayList<Cart> cart) {
 		
 		double total = 0;
 		
@@ -180,7 +149,7 @@ public double getTotalPrice(ArrayList<Cart> cart) {
 		return min;
 	}
 	
-public double getMaximumPrice(ArrayList<Integer> seatIds, int venueId, int productId) {
+	public double getMaximumPrice(ArrayList<Integer> seatIds, int venueId, int productId) {
 		
 		double max=0;
 		

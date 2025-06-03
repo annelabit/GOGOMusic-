@@ -6,22 +6,25 @@ public class Order extends Product{
 	private int uid;
 	private int quantity;
 	private String date;
+	private String time;
 	
 	public Order() {}
 
-	public Order(int orderId, int uid, int quantity, String date) {
+	public Order(int orderId, int uid, int quantity, String date, String time) {
 		super();
 		this.orderId = orderId;
 		this.uid = uid;
 		this.quantity = quantity;
 		this.date = date;
+		this.time=time;
 	}
 
-	public Order(int uid, int quantity, String date) {
+	public Order(int uid, int quantity, String date, String time) {
 		super();
 		this.uid = uid;
 		this.quantity = quantity;
 		this.date = date;
+		this.time=time;
 	}
 
 
@@ -57,11 +60,18 @@ public class Order extends Product{
 		this.date = date;
 	}
 
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
 	@Override
 	public String toString() {
-		return "Order [orderId=" + orderId + ", uid=" + uid + ", quantity=" + quantity + ", date=" + date + "]";
+		return "Order [orderId=" + orderId + ", uid=" + uid + ", quantity=" + quantity + ", date=" + date + ", time="
+				+ time + "]";
 	}
-	
-	
-	
+
 }

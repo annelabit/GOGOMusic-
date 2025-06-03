@@ -42,7 +42,9 @@
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
+</div>
+</div>
+</div>
 <%@include file="includes/footer.jsp" %>
 </body>
 </html>
