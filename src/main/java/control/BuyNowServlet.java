@@ -76,19 +76,15 @@ public class BuyNowServlet extends HttpServlet {
 				
 				try {
 					OrderDao oDao = new OrderDao(DBConnection.getConnection());
-					boolean result = oDao.insertOrder(order);
 				
-					if(result) {
-						
 						if(cart!=null) {
 							for(Cart c : cart) {
 								if(c.getId() == id) {
+									oDao.insertOrder(order, c.getSeatIds());
 									cart.remove(cart.indexOf(c));
 									break;
 								}
 							}
-							
-						}
 						response.sendRedirect("orders.jsp");
 					} else {
 						out.print("Order failed");

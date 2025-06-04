@@ -51,14 +51,14 @@ public class CheckoutServlet extends HttpServlet {
 					String formattedTime = String.format("%02d:%02d:%02d", currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond());
 					
 					Order order = new Order();
-					order.setId(c.getId());
+					order.setId(c.getId());//product
 					order.setUid(user.getIdUtente());
 					order.setQuantity(c.getQuantity());
 					order.setDate(formatter.format(date));
 					order.setTime(formattedTime);
 					order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getVenueId(), c.getId()));
 					order.setShowId(c.getShowId());
-					boolean result = oDao.insertOrder(order);
+					boolean result = oDao.insertOrder(order,c.getSeatIds());
 					if(!result) break;
 				}
 				
