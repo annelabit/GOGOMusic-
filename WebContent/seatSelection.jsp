@@ -1,3 +1,4 @@
+<%@page import="dao.ShowSeatDao"%>
 <%@page import="dao.SeatDao"%>
 <%@page import="dao.OrderDao"%>
 <%@page import="model.*" %>
@@ -12,9 +13,15 @@
         }
         
         SeatDao sDao = new SeatDao(DBConnection.getConnection());
-        ArrayList<Seat> seats = sDao.getAllSeats(Integer.parseInt(request.getParameter("venue_id")));
+        ShowSeatDao showSeatDao = new ShowSeatDao(DBConnection.getConnection());
+        
+        //ArrayList<Seat> seats = sDao.getAllSeats(Integer.parseInt(request.getParameter("venue_id")));
+        ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));
+        
         int pId = Integer.parseInt(request.getParameter("venue_id"));
-    %>
+   		int showId = Integer.parseInt(request.getParameter("showId"));
+   		//RICORDA DI PASSARE ANCHE SHOWID
+     %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,13 +40,13 @@
 <div class="grid-container">
   
   <%
-  	for(Seat s : seats){
+  	for(ShowSeat s : seats){
   %>
   	
   <%
   	if(s.isAvailable()==1) {
   %>
-  		<button class="button-1" id="<%=s.getId()%>" role="button" onclick="selectSeat(<%=s.getId()%>)"> <%=s.getPrice()%>€ </button>
+  		<button class="button-1" id="<%=s.getSeatId()%>" role="button" onclick="selectSeat(<%=s.getSeatId()%>)"> <%=s.getPrice()%>€ </button>
   <% 	
   	} else{
   %>
@@ -52,7 +59,7 @@
 </div>
 
 <!-- link viene aggiunto nel js -->
-<a href="#" data-venue-id=<%=pId%> id="buy-button" class="btn btn-primary btn-sm"> Acquista </a>
+<a href="#" data-show-id="<%=showId%>" data-venue-id=<%=pId%> id="buy-button" class="btn btn-primary btn-sm"> Acquista </a>
 
 <%@include file="includes/footer.jsp" %>
 </body>

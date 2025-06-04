@@ -32,9 +32,13 @@ public class AddToCartServlet extends HttpServlet {
 		    
 			
 			int id = Integer.parseInt(request.getParameter("id"));
+			int showId = Integer.parseInt(request.getParameter("showId"));
+			
 			Product p = pDao.getSingleProduct(id);
 			Cart cartItem = new Cart(p);
 			cartItem.setId(id);
+			cartItem.setShowId(showId);
+			
 			int q = Integer.parseInt(request.getParameter("quantity"));
 			cartItem.setQuantity(q);
 			
@@ -84,7 +88,8 @@ public class AddToCartServlet extends HttpServlet {
 				
 				//controlla se il prodotto è già presente nel carrello
 				for(Cart c : cart) {
-					if(c.getId() == id) {//c'è già
+					//controllo sia l'id dell'evento sia dello spettacolo
+					if(c.getId() == id && c.getShowId() == showId) {//c'è già
 						
 						exists = true;
 						

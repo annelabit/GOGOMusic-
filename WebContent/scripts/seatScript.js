@@ -28,6 +28,6 @@ function selectSeat(seatId){
 	const Ids = selectedSeatsIds.join(",");
 	
 	//passo la stringa con gli id
-	buyLink.href = "update-seat?seatIds=" + encodeURIComponent(Ids) + "&pId=" + buyLink.dataset.venueId +"&quantity="+selectedSeatsIds.length;
+	buyLink.href = "update-seat?seatIds=" + encodeURIComponent(Ids) + "&pId=" + buyLink.dataset.venueId + "&showId=" + buyLink.dataset.showId + "&quantity="+selectedSeatsIds.length;
 	
 }

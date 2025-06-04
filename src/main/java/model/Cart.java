@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Cart extends Product{
 
 	private int quantity;
+	private int showId;
 	
 	private ArrayList<Integer> seatIds;
 	
@@ -27,6 +28,14 @@ public class Cart extends Product{
 
 	
 	
+	public int getShowId() {
+		return showId;
+	}
+
+	public void setShowId(int showId) {
+		this.showId = showId;
+	}
+
 	public ArrayList<Integer> getSeatIds() {
 		return seatIds;
 	}
@@ -37,10 +46,9 @@ public class Cart extends Product{
 
 	@Override
 	public String toString() {
-		return "Cart [quantity=" + quantity + ", getQuantity()=" + getQuantity() + ", getId()=" + getId()
-				+ ", getName()=" + getName() + ", getCategory()=" + getCategory() + ", getPrice()=" + getPrice()
-				+ ", getImage()=" + getImage() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
-				+ ", hashCode()=" + hashCode() + "]";
+		return "Cart [quantity=" + quantity + ", showId=" + showId + ", seatIds=" + seatIds + "]";
 	}
+
+	
 
 }

@@ -10,8 +10,10 @@ import model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import dao.SeatDao;
+import dao.ShowSeatDao;
 
 /**
  * Servlet implementation class UpdateSeatServlet
@@ -40,20 +42,29 @@ public class UpdateSeatServlet extends HttpServlet {
 		String[] seatIds = seatIdsString.split(",");
 		
 		int pId = Integer.parseInt(request.getParameter("pId"));
+		int showId = Integer.parseInt(request.getParameter("showId"));
 		
 		User user = (User) request.getSession().getAttribute("user");
-		int uId = user.getIdUtente();
+		//int uId = user.getIdUtente();
+		
+		//converto array di stringhe in arrayList di interi
+		ArrayList<Integer> seatIdList = new ArrayList<>();
+		for (String id : seatIds) {
+		    try {
+		        seatIdList.add(Integer.parseInt(id));
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
 		
 		try (PrintWriter out = response.getWriter()){
 		
-			SeatDao seatDao = new SeatDao(DBConnection.getConnection());
+			//SeatDao seatDao = new SeatDao(DBConnection.getConnection());
+			ShowSeatDao showSeatDao = new ShowSeatDao(DBConnection.getConnection());
 			
-			for(String idString : seatIds) {
-				int seatId = Integer.parseInt(idString);
-				seatDao.reserveSeat(seatId);
-			}
+			showSeatDao.reserveSeats(showId,seatIdList);
 			
-			response.sendRedirect("add-to-cart?id="+pId+"&quantity="+request.getParameter("quantity")+"&seatIds="+seatIdsString);
+			response.sendRedirect("add-to-cart?id="+pId+"&quantity="+request.getParameter("quantity")+"&seatIds="+seatIdsString+"&showId="+showId);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

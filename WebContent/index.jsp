@@ -14,6 +14,7 @@
     
     ProductDao pDao = new ProductDao(DBConnection.getConnection());
     SeatDao sDao = new SeatDao(DBConnection.getConnection());
+    ShowDao showDao = new ShowDao(DBConnection.getConnection());
     ArrayList<Product> products = pDao.getProducts();
     
     ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
@@ -42,6 +43,8 @@
 			if(!products.isEmpty()){ //se c'è almeno un prodotto
 				
 				for(Product p : products){
+					
+					//showDao.getShow()
 		%>
 					
 					<div class="col-md-3 my-3">
@@ -49,14 +52,14 @@
 	  					<img src="images/<%= p.getImage()%>" class="card-img-top" alt="...">
 	  						<div class="card-body">
 							    <h5 class="card-title"><%= p.getName() %></h5>
-							    <h6 class="price"> Prezzo: <%= pDao.getMinimumPrice(sDao.getAllSeatIds(p.getVenueId()), p.getVenueId(), p.getId())%>€-
-							    	<%=pDao.getMaximumPrice(sDao.getAllSeatIds(p.getVenueId()), p.getVenueId(), p.getId())%>€ </h6>
+							    <h6 class="price"> Prezzo: <%= showDao.getMinimumPrice(p.getId())%>€-
+							    	<%=showDao.getMaximumPrice(p.getId())%>€ </h6>
 							    <h6 class="category"> Categoria: <%= p.getCategory() %></h6>
 							    <!-- <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p> -->
 							    <div class="mt-3 d-flex gap-3 align-items-center">
 							    	<!-- TEST. CAMBIARE VENUE ID -->
 							    	<!-- <a href="add-to-cart?id=<=p.getId()%>" class="btn btn-dark">Aggiungi al carrello</a> -->
-							    	<a href="seatSelection.jsp?venue_id=<%=p.getVenueId()%>&pId=<%=p.getId() %>" class="btn btn-dark">Aggiungi al carrello</a>
+							    	<a href="seatSelection.jsp?venue_id=<%=p.getVenueId()%>&pId=<%=p.getId() %>&showId=4" class="btn btn-dark">Aggiungi al carrello</a>
 							    	<a href="buy-now?quantity=1&id=<%=p.getId()%>" class="btn btn-primary">Compra ora</a>
 							    </div>
 	  						</div>
