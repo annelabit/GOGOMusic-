@@ -59,7 +59,7 @@
 							    <div class="mt-3 d-flex gap-3 align-items-center">
 							    	<!-- TEST. CAMBIARE VENUE ID -->
 							    	<!-- <a href="add-to-cart?id=<=p.getId()%>" class="btn btn-dark">Aggiungi al carrello</a> -->
-							    	<a href="seatSelection.jsp?venue_id=<%=p.getVenueId()%>&pId=<%=p.getId() %>&showId=4" class="btn btn-dark">Aggiungi al carrello</a>
+							    	<a href="seatSelection.jsp?venue_id=<%=p.getVenueId()%>&pId=<%=p.getId() %>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>" class="btn btn-dark">Aggiungi al carrello</a>
 							    	<a href="buy-now?quantity=1&id=<%=p.getId()%>" class="btn btn-primary">Compra ora</a>
 							    </div>
 	  						</div>

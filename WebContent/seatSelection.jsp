@@ -1,6 +1,4 @@
-<%@page import="dao.ShowSeatDao"%>
-<%@page import="dao.SeatDao"%>
-<%@page import="dao.OrderDao"%>
+<%@page import="dao.*"%>ì
 <%@page import="model.*" %>
 <%@page import="control.*" %>
 <%@page import="java.util.*" %>
@@ -14,6 +12,7 @@
         
         SeatDao sDao = new SeatDao(DBConnection.getConnection());
         ShowSeatDao showSeatDao = new ShowSeatDao(DBConnection.getConnection());
+        ShowDao showDao = new ShowDao(DBConnection.getConnection());
         
         //ArrayList<Seat> seats = sDao.getAllSeats(Integer.parseInt(request.getParameter("venue_id")));
         ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));
@@ -57,6 +56,19 @@
   %>
   
 </div>
+
+<%ArrayList<Show> shows = showDao.getShows(Integer.parseInt(request.getParameter("pId"))); %>
+<p>
+Seleziona spettacolo
+<select id="showSelect">
+
+<% for(Show s : shows){%>
+
+<option value=<%=s.getId()%>> <%=s.getDate() %>, <%=s.getTime() %> </option>
+
+<% }%>
+</select>
+</p>
 
 <!-- link viene aggiunto nel js -->
 <a href="#" data-show-id="<%=showId%>" data-venue-id=<%=pId%> id="buy-button" class="btn btn-primary btn-sm"> Acquista </a>

@@ -83,6 +83,25 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
         }
         return false;
     }
+	
+	public boolean setSeatsAvailable(int showId, ArrayList<Integer> seatIds) {
+        
+		query = "UPDATE show_seats SET available = 1 WHERE showId = ? AND seatId = ? AND available = 0";
+        
+		try {
+        	PreparedStatement pst = connection.prepareStatement(query);
+            for (int seatId : seatIds) {
+                pst.setInt(1, showId);
+                pst.setInt(2, seatId);
+                pst.executeUpdate();
+            }
+            //pst.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 	//un solo posto
 	public float getSeatPrice(int showId, int seatId) {

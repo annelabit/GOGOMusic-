@@ -35,7 +35,7 @@ public class ShowDao {
 				Show show = new Show();
 				show.setId(rs.getInt("id"));
 				show.setProductId(eventId);
-				show.setVenueId(rs.getInt("venueId"));
+				show.setVenueId(rs.getInt("locationId"));
 				show.setDate(rs.getString("date"));
 				show.setTime(rs.getString("time"));
 				shows.add(show);
@@ -62,7 +62,7 @@ public class ShowDao {
 			if(rs.next()) {
 				show.setId(rs.getInt("id"));
 				show.setProductId(rs.getInt("eventId"));
-				show.setVenueId(rs.getInt("venueId"));
+				show.setVenueId(rs.getInt("locationId"));
 				show.setDate(rs.getString("date"));
 				show.setTime(rs.getString("time"));
 			}

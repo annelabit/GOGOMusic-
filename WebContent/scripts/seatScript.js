@@ -4,6 +4,9 @@
 
 let selectedSeatsIds = [];
 
+//let showId = document.getElementById("showSelect");
+//let showValue = showId.value;
+
 function selectSeat(seatId){
 	
 	const seatButton = document.getElementById(seatId);
