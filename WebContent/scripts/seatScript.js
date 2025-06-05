@@ -21,9 +21,16 @@ function loadSeats(){
 	    if (xhr.readyState === 4 && xhr.status === 200) {
 	        // sostituisci posti
 	        document.querySelector(".grid-container").innerHTML = xhr.responseText;
+
+			//svuoto array di posti selezionati altrimenti li conta ancora come selected			
+			selectedSeatsIds = [];
+
 			
 			//cambia il link del bottone
+			const buyLink = document.getElementById("buy-button");
+			buyLink.href = "#";
 			document.getElementById("buy-button").setAttribute("data-show-id", showId);
+			//document.getElementById("buy-button").setAttribute("seatIds", null);
 	    }
  	};
 
