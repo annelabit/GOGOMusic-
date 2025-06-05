@@ -121,7 +121,7 @@ public class ProductDao {
 	}
 	
 	
-
+	
 	public double getPriceForSelected(ArrayList<Integer> seatIds, int venueId, int productId) {
 		
 		double total = 0;
@@ -130,7 +130,7 @@ public class ProductDao {
 			if(seatIds.size()!=0) {
 				
 				for(Integer i : seatIds) {
-					query = "SELECT PRICE FROM SEAT WHERE id = ? AND locationId = ?";//AGGIUNGERE ANCHE PRODUCTID!!!
+					query = "SELECT PRICE FROM SEAT WHERE id = ? AND locationId = ?";
 					
 					pst = this.connection.prepareStatement(query);
 					pst.setInt(1, i);

@@ -114,11 +114,28 @@
 				}
 				
 				
-			} %>
+			
+			
+			%>
+				
+				
+				
+			<% %>
 			
 				
 			</tbody>
 		</table>
+		
+		<a class="btn btn-sm btn-danger" href="empty-cart"> Svuota carrello </a>
+		<% } %>
+		
+		<%if(cart.isEmpty()){ %>
+		
+			<h2>Il carrello è vuoto, <a href="index.jsp">torna alla home</a> per scoprire gli eventi!</h2> 
+		<%} %>
+		
+		
+		
 	</div>
 
 
