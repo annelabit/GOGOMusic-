@@ -1,53 +1,23 @@
- <!-- %@page import= %> connessione al DB -->
 <%@page import="dao.*"%>
-<%@page import="java.util.ArrayList"%>
 <%@page import="model.*" %>
 <%@page import="control.*" %>
+<%@page import="java.util.*" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-	<%
-    User user = (User) request.getSession().getAttribute("user");  //recupero l'attributo dalla sessione dell'utente
-    if(user!=null){  //se l'user appartiene alla sessione
-    	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
-    }
-    
-    ProductDao pDao = new ProductDao(DBConnection.getConnection());
-    SeatDao sDao = new SeatDao(DBConnection.getConnection());
-    ShowDao showDao = new ShowDao(DBConnection.getConnection());
-    ArrayList<Product> products = pDao.getProducts();
-    
-    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
-    if(cart != null){
-    	request.setAttribute("cart_list", cart);
-    }
-    %>
-    
-	
-<!DOCTYPE html>
-<html>
-<head>
-<title>GOGOMusic!</title>
-<%@include file="includes/head.jsp" %>
-<link rel="stylesheet" type="text/css" href="styles/style.css">
-
-<!-- <script src="scripts/navbar.js"></script> --><!-- ?? -->
-
-</head>
-<body>
-<h1>Welcome to GOGOMusic!</h1>
-	<%@include file="includes/navbar.jsp" %>
-
-	<div class="container" id="event-container">
-		<div class="card-header my-3"> Tutti i prodotti</div>
-		<div class="row">
 		
 		<% 
+			ProductDao pDao = new ProductDao(DBConnection.getConnection());
+		 	ArrayList<Product> products = pDao.getProducts();
+		 	SeatDao sDao = new SeatDao(DBConnection.getConnection());
+		    ShowDao showDao = new ShowDao(DBConnection.getConnection());
+			
+		    String keyword = request.getParameter("keyword");
+		    if (keyword == null) keyword = "";
+		    
 			if(!products.isEmpty()){ //se c'è almeno un prodotto
 				
 				for(Product p : products){
-					
-					//showDao.getShow()
+					if(p.getName().toLowerCase().contains(keyword.toLowerCase())){
 		%>
 					
 					<div class="col-md-3 my-3">
@@ -70,12 +40,6 @@
 					</div>
 					
 				<%}
+				}
 			}
 		%>
-			
-			</div>
-		</div>
-		
-	<%@include file="includes/footer.jsp" %>
-</body>
-</html>

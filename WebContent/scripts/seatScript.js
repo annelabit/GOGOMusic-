@@ -4,9 +4,6 @@
 
 let selectedSeatsIds = [];
 
-//let showId = document.getElementById("showSelect");
-//let showValue = showId.value;
-
 function loadSeats(){
 	
 	const xhr = new XMLHttpRequest();
@@ -25,7 +22,6 @@ function loadSeats(){
 			//svuoto array di posti selezionati altrimenti li conta ancora come selected			
 			selectedSeatsIds = [];
 
-			
 			//cambia il link del bottone
 			const buyLink = document.getElementById("buy-button");
 			buyLink.href = "#";

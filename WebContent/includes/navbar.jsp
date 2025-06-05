@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <a class="navbar-brand" href="#"><img src="images/GOGOMusic-bw.png" id="logo"></a>
@@ -38,9 +40,12 @@
         <% 	}   %> 
       </ul>
       <form class="d-flex ms-auto" role="search">
-        <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"/>
+        <input class="form-control me-2" id="searchbar" type="search" placeholder="Cerca" aria-label="Search"/>
         <button class="btn btn-outline-success" type="submit">Cerca</button>
     </form>
 </div>
     </div>
 </nav>
+
+<!-- IN FONDO perché se non ha caricato searchbar per lui non esiste -->
+<script src="scripts/navbar.js"></script>
