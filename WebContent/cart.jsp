@@ -18,9 +18,18 @@
     ArrayList<Cart> cartProducts = null;
     ProductDao pDao = new ProductDao(DBConnection.getConnection());
     
+    DecimalFormat df = new DecimalFormat("#0.00");
+    
+    double totalPrice=0;
+    
     if(cart != null){
     	
-    	double totalPrice = pDao.getTotalPrice(cart);
+    	
+    	
+    	for(Cart c : cart){
+    	
+    		totalPrice = pDao.getTotalPrice(cart,c.getShowId());
+    	}
     	request.setAttribute("cart_list", cart);
     	request.setAttribute("total", totalPrice);
     }
@@ -41,12 +50,6 @@
 		<!-- p=padding,  m=margin -->
 		<div class="d-flex justify-content-between py-3">
 	
-	<%
-    		DecimalFormat df = new DecimalFormat("#0.00");
-	
-			//pDao somma i prezzi per tutti i posti assegnati
-    		double totalPrice = (cart != null) ? pDao.getTotalPrice(cart) : 0.0;
-	%>
 		<h3>Prezzo Totale: €<%= df.format(totalPrice) %></h3>
 			<a class="btn btn-primary mx-3" href="checkout"> Check out </a>
 		</div>
@@ -72,7 +75,7 @@
 						<!--  table row -->
 						<td><%= c.getName() %></td>
 						<td><%= c.getCategory() %></td>
-						<td><%= pDao.getPriceForSelected(c.getSeatIds(),c.getVenueId(),c.getId()) %>€</td>
+						<td><%= pDao.getPriceForSelected(c.getSeatIds(),c.getShowId()) %>€</td>
 					
 						<td>
 					
@@ -127,9 +130,7 @@
 		</table>
 		
 		<a class="btn btn-sm btn-danger" href="empty-cart"> Svuota carrello </a>
-		<% } %>
-		
-		<%if(cart.isEmpty()){ %>
+		<% } else{ %>
 		
 			<h2>Il carrello è vuoto, <a href="index.jsp">torna alla home</a> per scoprire gli eventi!</h2> 
 		<%} %>

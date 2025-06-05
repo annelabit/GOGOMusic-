@@ -3,7 +3,6 @@ package model;
 public class Seat {
 
 	private int id;
-	private float price;
 	private int available;
 	private String type;
 	
@@ -14,9 +13,8 @@ public class Seat {
 		super();
 	}
 
-	public Seat(int id, float price, int available, String type, int row, int column) {
+	public Seat(int id, int available, String type, int row, int column) {
 		this.id = id;
-		this.price = price;
 		this.available = available;
 		this.type = type;
 		this.row = row;
@@ -28,12 +26,6 @@ public class Seat {
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public float getPrice() {
-		return price;
-	}
-	public void setPrice(float price) {
-		this.price = price;
 	}
 	public int isAvailable() {
 		return available;

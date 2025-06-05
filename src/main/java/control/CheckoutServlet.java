@@ -56,7 +56,7 @@ public class CheckoutServlet extends HttpServlet {
 					order.setQuantity(c.getQuantity());
 					order.setDate(formatter.format(date));
 					order.setTime(formattedTime);
-					order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getVenueId(), c.getId()));
+					order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getShowId()));
 					order.setShowId(c.getShowId());
 					boolean result = oDao.insertOrder(order,c.getSeatIds());
 					if(!result) break;

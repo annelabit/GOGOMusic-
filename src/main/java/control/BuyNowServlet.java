@@ -66,7 +66,7 @@ public class BuyNowServlet extends HttpServlet {
 				if(cart!=null) {
 					for(Cart c : cart) {
 						if(c.getId() == id) {
-							order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getVenueId(), c.getId()));
+							order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getShowId()));
 							order.setShowId(c.getShowId());
 							break;
 						}

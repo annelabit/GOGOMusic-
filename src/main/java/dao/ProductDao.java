@@ -36,7 +36,6 @@ public class ProductDao {
 				prod.setId(rs.getInt("id"));
 				prod.setName(rs.getString("name"));
 				prod.setCategory(rs.getString("category"));
-				prod.setPrice(rs.getFloat("price"));
 				prod.setImage(rs.getString("image"));
 				prod.setVenueId(rs.getInt("venueId"));
 				products.add(prod);
@@ -85,7 +84,7 @@ public class ProductDao {
 		return cartProducts;
 	}
 	
-	public double getTotalPrice(ArrayList<Cart> cart) {
+	public double getTotalPrice(ArrayList<Cart> cart, int showId) {
 		
 		double total = 0;
 		
@@ -97,10 +96,10 @@ public class ProductDao {
 					
 					for(Integer seatId : c.getSeatIds()) {
 					
-						query = "SELECT PRICE FROM SEAT WHERE ID = ?";
+						query = "SELECT PRICE FROM show_seats WHERE seatId = ? AND showId = ?";
 						pst = this.connection.prepareStatement(query);
 						pst.setInt(1, seatId);
-					
+						pst.setInt(2, showId);
 						rs = pst.executeQuery();
 					
 						while(rs.next()) {
@@ -122,7 +121,7 @@ public class ProductDao {
 	
 	
 	
-	public double getPriceForSelected(ArrayList<Integer> seatIds, int venueId, int productId) {
+	public double getPriceForSelected(ArrayList<Integer> seatIds, int showId) {
 		
 		double total = 0;
 		
@@ -130,11 +129,11 @@ public class ProductDao {
 			if(seatIds.size()!=0) {
 				
 				for(Integer i : seatIds) {
-					query = "SELECT PRICE FROM SEAT WHERE id = ? AND locationId = ?";
+					query = "SELECT PRICE FROM show_seats WHERE seatId = ? AND showId = ?";
 					
 					pst = this.connection.prepareStatement(query);
 					pst.setInt(1, i);
-					pst.setInt(2, venueId);
+					pst.setInt(2, showId);
 					
 					rs = pst.executeQuery();
 					

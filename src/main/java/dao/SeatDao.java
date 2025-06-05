@@ -33,7 +33,6 @@ public class SeatDao {
 			while(rs.next()) {
 				Seat seat = new Seat();
 				seat.setId(rs.getInt("id"));
-				seat.setPrice(rs.getFloat("price"));
 				seat.setAvailable(rs.getInt("available"));
 				seat.setType(rs.getString("type"));
 				seats.add(seat);
