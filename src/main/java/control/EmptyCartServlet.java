@@ -34,11 +34,8 @@ public class EmptyCartServlet extends HttpServlet {
 				if(cart!=null) {
 					for(Cart c : cart) {
 							showSeatDao.setSeatsAvailable(c.getShowId(), c.getSeatIds());
-							break;
 					}
-					
 				}
-			
 				cart.clear();
 				response.sendRedirect("cart.jsp");
 				
