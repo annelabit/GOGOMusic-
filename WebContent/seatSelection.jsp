@@ -71,7 +71,7 @@ Seleziona spettacolo
 </p>
 
 <!-- link viene aggiunto nel js -->
-<a href="#" data-show-id="<%=showId%>" data-venue-id=<%=pId%> id="buy-button" class="btn btn-primary btn-sm"> Acquista </a>
+<a href="#" data-show-id="<%=showId%>" data-venue-id=<%=pId%> id="buy-button" class="btn btn-primary btn-sm"> Prenota e aggiungi al carrello </a>
 
 <%@include file="includes/footer.jsp" %>
 </body>

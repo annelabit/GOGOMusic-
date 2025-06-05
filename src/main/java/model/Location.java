@@ -10,9 +10,8 @@ public class Location {
 	private int rows;
 	private int columns;
 	
-	public Location() {
-		super();
-	}
+	public Location() {}
+	
 	public Location(int id, String venue, String city, String address, String image, int rows, int columns) {
 		super();
 		this.id = id;
