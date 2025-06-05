@@ -1,4 +1,4 @@
-<%@page import="dao.*"%>ì
+<%@page import="dao.*"%>
 <%@page import="model.*" %>
 <%@page import="control.*" %>
 <%@page import="java.util.*" %>
@@ -60,7 +60,7 @@
 <%ArrayList<Show> shows = showDao.getShows(Integer.parseInt(request.getParameter("pId"))); %>
 <p>
 Seleziona spettacolo
-<select id="showSelect">
+<select id="showSelect" onchange="loadSeats()">
 
 <% for(Show s : shows){%>
 

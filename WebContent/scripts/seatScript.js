@@ -7,6 +7,30 @@ let selectedSeatsIds = [];
 //let showId = document.getElementById("showSelect");
 //let showValue = showId.value;
 
+function loadSeats(){
+	
+	const xhr = new XMLHttpRequest();
+	const select = document.getElementById("showSelect");
+	const showId = select.value;
+	const venueId = document.getElementById("buy-button").getAttribute("data-venue-id");
+
+	xhr.open("get", "loadSeats.jsp?showId=" + showId, true);
+	xhr.setRequestHeader("Connection", "close");
+
+	xhr.onreadystatechange = function() {
+	    if (xhr.readyState === 4 && xhr.status === 200) {
+	        // sostituisci posti
+	        document.querySelector(".grid-container").innerHTML = xhr.responseText;
+			
+			//cambia il link del bottone
+			document.getElementById("buy-button").setAttribute("data-show-id", showId);
+	    }
+ 	};
+
+ 	xhr.send();
+	
+}
+
 function selectSeat(seatId){
 	
 	const seatButton = document.getElementById(seatId);
