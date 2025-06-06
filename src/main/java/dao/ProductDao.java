@@ -169,7 +169,6 @@ public class ProductDao {
 				p.setId(rs.getInt("id"));
 				p.setName(rs.getString("name"));
 				p.setCategory(rs.getString("category"));
-				p.setPrice(rs.getFloat("price"));
 				p.setImage(rs.getString("image"));
 				p.setVenueId(rs.getInt("venueId"));
 			}

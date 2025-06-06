@@ -2,6 +2,7 @@
 <%@page import="model.*" %>
 <%@page import="control.*" %>
 <%@page import="java.util.*" %>
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 		
@@ -11,6 +12,7 @@
 		 	SeatDao sDao = new SeatDao(DBConnection.getConnection());
 		    ShowDao showDao = new ShowDao(DBConnection.getConnection());
 		    LocationDao lDao = new LocationDao(DBConnection.getConnection());
+		    DecimalFormat df = new DecimalFormat("#0.00");
 		    
 		    String keyword = request.getParameter("keyword");
 		    if (keyword == null) keyword = "";
@@ -29,8 +31,21 @@
 	  					<img src="images/<%= p.getImage()%>" class="card-img-top" alt="...">
 	  						<div class="card-body">
 							    <h5 class="card-title"><%= p.getName() %></h5>
-							    <h6 class="price"> <%= showDao.getMinimumPrice(p.getId())%>€-
-							    	<%=showDao.getMaximumPrice(p.getId())%>€ </h6>
+							     <%
+									double min = showDao.getMinimumPrice(p.getId());
+							    	double max = showDao.getMaximumPrice(p.getId());
+							    	if (min==0||max==0){
+							   	%>
+							    	<h6 class="price" style = "color:red"> Sold out </h6>
+							    <%
+							    	}
+							    	else{
+							    %>
+							    
+							    	<h6 class="price"> <%= df.format(min) %>€-<%= df.format(max)%>€ </h6>
+							    <% 
+							    	} 
+							    %>
 							    <h6 class="venue"> <%= lDao.getEventLocation(p.getVenueId()).getVenue()%></h6>
 							    <h6 class="category"> <%= p.getCategory() %></h6>
 							    <div class="mt-3 d-flex gap-3 align-items-center"><a href="seatSelection.jsp?venue_id=<%=p.getVenueId()%>&pId=<%=p.getId() %>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>" class="btn btn-dark">Aggiungi al carrello</a>

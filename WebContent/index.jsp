@@ -3,6 +3,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.*" %>
 <%@page import="control.*" %>
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -17,6 +18,7 @@
     ShowDao showDao = new ShowDao(DBConnection.getConnection());
     ArrayList<Product> products = pDao.getProducts();
     LocationDao lDao = new LocationDao(DBConnection.getConnection());
+    DecimalFormat df = new DecimalFormat("#0.00");
     
     ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
     if(cart != null){
@@ -68,7 +70,7 @@
 							    	else{
 							    %>
 							    
-							    	<h6 class="price"> <%= min%>€-<%=max%>€ </h6>
+							    	<h6 class="price"> <%= df.format(min) %>€-<%= df.format(max)%>€ </h6>
 							    <% 
 							    	} 
 							    %>

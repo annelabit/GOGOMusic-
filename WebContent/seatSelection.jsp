@@ -2,6 +2,7 @@
 <%@page import="model.*" %>
 <%@page import="control.*" %>
 <%@page import="java.util.*" %>
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
      <% 
@@ -13,13 +14,13 @@
         SeatDao sDao = new SeatDao(DBConnection.getConnection());
         ShowSeatDao showSeatDao = new ShowSeatDao(DBConnection.getConnection());
         ShowDao showDao = new ShowDao(DBConnection.getConnection());
+        DecimalFormat df = new DecimalFormat("#0.00");
         
-        //ArrayList<Seat> seats = sDao.getAllSeats(Integer.parseInt(request.getParameter("venue_id")));
         ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));
         
         int pId = Integer.parseInt(request.getParameter("venue_id"));
    		int showId = Integer.parseInt(request.getParameter("showId"));
-   		//RICORDA DI PASSARE ANCHE SHOWID
+   		
      %>
 <!DOCTYPE html>
 <html>
@@ -45,7 +46,7 @@
   <%
   	if(s.isAvailable()==1) {
   %>
-  		<button class="button-1" id="<%=s.getSeatId()%>" role="button" onclick="selectSeat(<%=s.getSeatId()%>)"> <%=s.getPrice()%>€ </button>
+  		<button class="button-1" id="<%=s.getSeatId()%>" role="button" onclick="selectSeat(<%=s.getSeatId()%>)"> <%=df.format(s.getPrice())%>€ </button>
   <% 	
   	} else{
   %>
