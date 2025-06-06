@@ -5,8 +5,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.DBConnection;
+import model.User;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+
+import dao.UserDao;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -24,11 +30,21 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("login-username");
 		String password = request.getParameter("login-password");
 		
-		
-		//inserire codice DAO
-		
-		out.println(username+password);
-
+		try {
+			UserDao udao = new UserDao(DBConnection.getConnection());
+			User user = udao.userLogin(username, password);
+			
+			if(user != null) {
+				out.println("Login successful");
+				request.getSession().setAttribute("user", user);
+				response.sendRedirect("index.jsp");
+			} else {
+				out.println("Login failed");
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			out.println("Exception");
+			e.printStackTrace();
+		}
 	}
 
 }

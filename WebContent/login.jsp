@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@page import=model.* %>
-    <%@page import=control.* %>
+    <%@page import="model.*" %>
+    <%@page import="control.*" %>
         <% 
     User user = (User) request.getSession().getAttribute("user");
     if(user!=null){
@@ -9,7 +9,7 @@
     	                                    //la pagina non sarà visibile
     }
     %>
-    
+     
 <!DOCTYPE html>
 <html>
 <head>
