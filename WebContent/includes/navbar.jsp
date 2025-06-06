@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
     <a class="navbar-brand" href="#"><img src="images/GOGOMusic-bw.png" id="logo"></a>
@@ -22,11 +24,11 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="cart.jsp">Carrello</a>
+          <a class="nav-link active" href="cart.jsp">Carrello<span class="badge bg-danger">${cart_list.size()}</span></a>
         </li>
         <% if(user != null){ %> <!-- Ignora errore -->
         		<li class="nav-item">
-                <a class="nav-link active" href="order.jsp">Ordini</a>
+                <a class="nav-link active" href="orders.jsp">Ordini</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" aria-disabled="false" href="logout">Log out</a>
@@ -37,10 +39,17 @@
                 </li>
         <% 	}   %> 
       </ul>
+<<<<<<< HEAD
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"/>
+=======
+      <form class="d-flex ms-auto" role="search">
+        <input class="form-control me-2" id="searchbar" type="search" placeholder="Cerca" aria-label="Search"/>
+>>>>>>> main
         <button class="btn btn-outline-success" type="submit">Cerca</button>
       </form>
     </div>
-  </div>
 </nav>
+
+<!-- IN FONDO perché se non ha caricato searchbar per lui non esiste -->
+<script src="scripts/navbar.js"></script>
