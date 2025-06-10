@@ -57,7 +57,11 @@ function selectSeat(seatId){
 	//concatena e separa con virgola
 	const Ids = selectedSeatsIds.join(",");
 	
+	const contextPath = window.location.pathname.split("/")[1];
+	const baseUrl = "/" + contextPath;
+	//const url = baseUrl + "/common/MyServlet";
+	
 	//passo la stringa con gli id
-	buyLink.href = "update-seat?seatIds=" + encodeURIComponent(Ids) + "&pId=" + buyLink.dataset.venueId + "&showId=" + buyLink.dataset.showId + "&quantity="+selectedSeatsIds.length;
+	buyLink.href = baseUrl +"/common/update-seat?seatIds=" + encodeURIComponent(Ids) + "&pId=" + buyLink.dataset.venueId + "&showId=" + buyLink.dataset.showId + "&quantity="+selectedSeatsIds.length;
 	
 }

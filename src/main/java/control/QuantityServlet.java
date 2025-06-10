@@ -14,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Servlet implementation class QuantityServlet
  */
-@WebServlet("/quantity")
+@WebServlet("/common/quantity")
 public class QuantityServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

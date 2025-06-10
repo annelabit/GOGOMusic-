@@ -18,7 +18,7 @@ import dao.ShowSeatDao;
 /**
  * Servlet implementation class EmptyCartServlet
  */
-@WebServlet("/empty-cart")
+@WebServlet("/common/empty-cart")
 public class EmptyCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    

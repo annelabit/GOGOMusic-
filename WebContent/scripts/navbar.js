@@ -6,10 +6,8 @@ searchbar.addEventListener("keyup", (event) => {
 	
 	const searchInput = searchbar.value;
 	
-	
-	
 	xhr.open("get", "loadEvent.jsp?keyword=" + encodeURIComponent(searchInput), true);
-	xhr.setRequestHeader("Connection", "close");
+	xhr.setRequestHeader("Connection", "close");//chiude la connessione dopo che è stata inviata la richiesta
 
 	console.log("Searching: " + searchInput);
 	

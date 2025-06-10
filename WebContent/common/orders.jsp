@@ -28,7 +28,7 @@
 <head>
 <title>Order</title>
 <%@include file="includes/head.jsp" %>
-<link rel="stylesheet" type="text/css" href="styles/style.css">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 <%@include file="includes/navbar.jsp" %>
@@ -61,7 +61,7 @@
 				<td><%=o.getCategory()%></td>
 				<td><%=o.getQuantity()%></td>
 				<td><%=o.getPrice()%></td>
-				<td><a class="btn btn-sm btn-danger" href="cancel-order?id=<%=o.getOrderId()%>">Cancel</a></td>
+				<td><a class="btn btn-sm btn-danger" href="<%= request.getContextPath() %>/common/cancel-order?id=<%=o.getOrderId()%>">Cancel</a></td>
 			</tr>
 			<%
 			}

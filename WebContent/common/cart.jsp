@@ -41,7 +41,7 @@
 <head>
 <title>Shopping Cart</title>
 <%@include file="includes/head.jsp"%>
-<link rel="stylesheet" type="text/css" href="styles/style.css">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 	<%@include file="includes/navbar.jsp"%>
@@ -51,7 +51,7 @@
 		<div class="d-flex justify-content-between py-3">
 	
 		<h3>Prezzo Totale: €<%= df.format(totalPrice) %></h3>
-			<a class="btn btn-primary mx-3" href="checkout"> Check out </a>
+			<a class="btn btn-primary mx-3" href="<%= request.getContextPath() %>/common/checkout"> Check out </a>
 		</div>
 		<table class="table table-light">
 			<thead>
@@ -94,14 +94,14 @@
 						</td>
 				
 					<td>
-						<form action="buy-now" method="post" class="form-inline">
+						<form action="<%= request.getContextPath() %>/common/buy-now" method="post" class="form-inline">
 						<div class="input-group"> 
 							<input type="hidden" name="id" value="<%= c.getId() %>" class="form-input">
 							<div class="d-flex align-items-center gap-2">
-								<a class="btn btn-sm btn-incre" href="quantity?action=inc&id=<%=c.getId()%>">
+								<a class="btn btn-sm btn-incre" href="<%= request.getContextPath() %>/common/quantity?action=inc&id=<%=c.getId()%>">
 								<i class="fas fa-plus-square"></i></a> 
 									 <input type="text"name="quantity" class="form-control text-center" value="<%=c.getQuantity()%>" readonly> 
-									 <a class="btn btn-sm btn-decre" href="quantity?action=dec&id=<%=c.getId()%>">
+									 <a class="btn btn-sm btn-decre" href="<%= request.getContextPath() %>/common/quantity?action=dec&id=<%=c.getId()%>">
 									 <i class="fas fa-minus-square"></i></a>
 							</div>
 							</div>
@@ -109,7 +109,7 @@
 						</form>
 					</td>
 					<td>
-						<a class="btn btn-sm btn-danger" href="remove-from-cart?id=<%=c.getId()%>"> Rimuovi </a>
+						<a class="btn btn-sm btn-danger" href="<%= request.getContextPath() %>/common/remove-from-cart?id=<%=c.getId()%>"> Rimuovi </a>
 					</td>
 				</tr>
 					

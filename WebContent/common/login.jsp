@@ -22,7 +22,7 @@
 <head>
 <title>Login</title>
 <%@include file="includes/head.jsp" %>
-<link rel="stylesheet" type="text/css" href="styles/style.css">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
 </head>
 <body>
 <%@include file="includes/navbar.jsp" %>
@@ -31,7 +31,7 @@
 <div class="card w-50 mx-auto my-4"> <!-- mx-auto== centro, my-5 == allieamento -->
 <div class="card-header text-center"> User Login</div>
 <div class="card-body">
-<form action="LoginServlet" method="post">
+<form action="<%= request.getContextPath() %>/common/login" method="post">
   <div class="mb-3">
     <label for="InputUsername" class="form-label">Username</label>
     <input type="text" class="form-control" name="login-username" placeholder="Enter Your Username" required>

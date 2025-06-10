@@ -24,7 +24,7 @@ import java.time.LocalTime;
 /**
  * Servlet implementation class BuyNowServlet
  */
-@WebServlet("/buy-now")
+@WebServlet("/common/buy-now")
 public class BuyNowServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     

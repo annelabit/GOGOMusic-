@@ -23,7 +23,7 @@ import dao.ProductDao;
 /**
  * Servlet implementation class CheckoutServlet
  */
-@WebServlet("/checkout")
+@WebServlet("/common/checkout")
 public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
      

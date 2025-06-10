@@ -2,14 +2,14 @@
 
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container">
-    <a class="navbar-brand" href="#"><img src="images/GOGOMusic-bw.png" id="logo"></a>
+    <a class="navbar-brand" href="#"><img src="<%= request.getContextPath() %>/images/GOGOMusic-bw.png" id="logo"></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-between" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="index.jsp">Home</a>
+          <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>/common/index.jsp">Home</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -24,18 +24,18 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="cart.jsp">Carrello<span class="badge bg-danger">${cart_list.size()}</span></a>
+          <a class="nav-link active" href="<%= request.getContextPath() %>/common/cart.jsp">Carrello<span class="badge bg-danger">${cart_list.size()}</span></a>
         </li>
         <% if(user != null){ %> <!-- Ignora errore -->
         		<li class="nav-item">
-                <a class="nav-link active" href="orders.jsp">Ordini</a>
+                <a class="nav-link active" href="<%= request.getContextPath() %>/common/orders.jsp">Ordini</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" aria-disabled="false" href="logout">Log out</a>
             </li>
        <%	} else {    %> 
        			<li>
-        		<a class="nav-link active" aria-disabled="false" href="login.jsp">Log in</a>
+        		<a class="nav-link active" aria-disabled="false" href="<%= request.getContextPath() %>/common/login.jsp">Log in</a>
                 </li>
         <% 	}   %> 
       </ul>
@@ -48,4 +48,4 @@
 </nav>
 
 <!-- IN FONDO perché se non ha caricato searchbar per lui non esiste -->
-<script src="scripts/navbar.js"></script>
+<script src="<%= request.getContextPath() %>/scripts/navbar.js"></script>

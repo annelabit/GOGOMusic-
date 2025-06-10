@@ -17,7 +17,7 @@ import dao.OrderDao;
 /**
  * Servlet implementation class CancelOrderServlet
  */
-@WebServlet("/cancel-order")
+@WebServlet("/common/cancel-order")
 public class CancelOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
    

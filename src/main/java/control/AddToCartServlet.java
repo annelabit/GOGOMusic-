@@ -17,7 +17,7 @@ import model.*;
 /**
  * Servlet implementation class AddToCartServlet
  */
-@WebServlet("/add-to-cart")
+@WebServlet("/common/add-to-cart")
 public class AddToCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

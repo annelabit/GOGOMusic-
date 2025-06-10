@@ -18,7 +18,7 @@ import dao.ShowSeatDao;
 /**
  * Servlet implementation class UpdateSeatServlet
  */
-@WebServlet("/update-seat")
+@WebServlet("/common/update-seat")
 public class UpdateSeatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -28,11 +28,11 @@
 <meta charset="UTF-8">
 <title>Seleziona posto</title>
 <%@include file="includes/head.jsp" %>
-<link rel="stylesheet" type="text/css" href="styles/style.css">
-<link rel="stylesheet" type="text/css" href="styles/seatSelectionStyle.css">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/seatSelectionStyle.css">
 </head>
 <body>
-<script src="scripts/seatScript.js"></script>
+<script src="<%= request.getContextPath() %>/scripts/seatScript.js"></script>
 <%@include file="includes/navbar.jsp" %>
 
 <h1>Scegli il tuo posto!</h1>

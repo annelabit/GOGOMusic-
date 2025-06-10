@@ -19,7 +19,7 @@ import dao.ShowSeatDao;
 /**
  * Servlet implementation class RemoveFromCartServlet
  */
-@WebServlet("/remove-from-cart")
+@WebServlet("/common/remove-from-cart")
 public class RemoveFromCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
