@@ -26,27 +26,21 @@
         <li class="nav-item">
           <a class="nav-link active" href="cart.jsp">Carrello<span class="badge bg-danger">${cart_list.size()}</span></a>
         </li>
-        <% if(user != null){ %> <!-- Ignora errore -->
+        <% if(user != null){ %>  
         		<li class="nav-item">
                 <a class="nav-link active" href="orders.jsp">Ordini</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" aria-disabled="false" href="logout">Log out</a>
             </li>
-       <%	} else {    %> 
+       <%	} else {    %>
        			<li>
         		<a class="nav-link active" aria-disabled="false" href="login.jsp">Log in</a>
                 </li>
-        <% 	}   %> 
+         <% 	}   %>  
       </ul>
-<<<<<<< HEAD
       <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"/>
-=======
-      <form class="d-flex ms-auto" role="search">
-        <input class="form-control me-2" id="searchbar" type="search" placeholder="Cerca" aria-label="Search"/>
->>>>>>> main
-        <button class="btn btn-outline-success" type="submit">Cerca</button>
       </form>
     </div>
 </nav>

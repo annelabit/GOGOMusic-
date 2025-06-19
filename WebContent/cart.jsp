@@ -1,15 +1,3 @@
-<<<<<<< HEAD
-<!-- %@page import= %> connessione al DB -->
-<%@page import="model.*" %>
-<%@page import="control.*" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <% 
-    User user = (User) request.getSession().getAttribute("user");  //recupero l'attributo dalla sessione dell'utente
-    if(user!=null){  //se l'user appartiene alla sessione
-    	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
-=======
-<!-- %@page import= %>connessione al DB -->
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="model.*"%>
 <%@page import="control.*"%>
@@ -21,7 +9,6 @@
     if(user!=null){
     	//response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
     	                                    //la pagina non sarà visibile
->>>>>>> main
     }
     //questo carrello contiene solo gli id
     ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
@@ -56,10 +43,7 @@
 </head>
 <body>
 <%@include file="includes/navbar.jsp" %>
-
-<<<<<<< HEAD
 <%@include file="includes/footer.jsp" %>
-=======
 	<div class="container">
 		<!-- p=padding,  m=margin -->
 		<div class="d-flex justify-content-between py-3">
@@ -147,7 +131,7 @@
 		<% } else{ %>
 		
 			<h2>Il carrello è vuoto, <a href="index.jsp">torna alla home</a> per scoprire gli eventi!</h2> 
-		<%} %>
+		<% } %>
 		
 		
 		
@@ -155,6 +139,5 @@
 
 
 	<%@include file="includes/footer.jsp"%>
->>>>>>> main
 </body>
 </html>
