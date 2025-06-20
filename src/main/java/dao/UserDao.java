@@ -21,7 +21,6 @@ public class UserDao {
 	public User userLogin(String username, String password) {
 		
 		User user = null;
-		String hashPassword = toHash(password);
 		
 		try {
 			
