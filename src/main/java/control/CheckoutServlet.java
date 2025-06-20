@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import dao.OrderDao;
@@ -33,6 +34,7 @@ public class CheckoutServlet extends HttpServlet {
 			
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
+			java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 			
 			//tutti i prodotti del carrello
 			ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list"); 
@@ -54,7 +56,8 @@ public class CheckoutServlet extends HttpServlet {
 					order.setId(c.getId());//product
 					order.setUid(user.getIdUtente());
 					order.setQuantity(c.getQuantity());
-					order.setDate(formatter.format(date));
+					//order.setDate(formatter.format(date));
+					order.setDate(dateSql);
 					order.setTime(formattedTime);
 					order.setPrice((float) pDao.getPriceForSelected(c.getSeatIds(), c.getShowId()));
 					order.setShowId(c.getShowId());

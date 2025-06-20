@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class OrderDao {
 			pst.setInt(1, order.getId());
 			pst.setInt(2, order.getUid());
 			pst.setInt(3, order.getQuantity());
-			pst.setString(4, order.getDate());
+			pst.setDate(4, order.getDate());
 			pst.setFloat(5, order.getPrice());
 			pst.setString(6, order.getTime());
 			pst.setInt(7, order.getShowId());
@@ -103,7 +104,7 @@ public class OrderDao {
 				order.setCategory(product.getCategory());
 				order.setPrice(rs.getFloat("totalPrice"));
 				order.setQuantity(rs.getInt("quantity"));
-				order.setDate(rs.getString("date"));
+				order.setDate(rs.getDate("date"));
 				order.setTime(rs.getString("time"));
 				orderList.add(order);
 			}
@@ -160,6 +161,79 @@ public class OrderDao {
 		
 		return result;
 		
+	}
+	
+	public ArrayList<Order> getOrdersByDate(Date start, Date end){
+		
+		ArrayList<Order> orderList = new ArrayList<>();
+		
+		ProductDao pDao = new ProductDao(this.connection);
+		
+		try {
+			
+			query = "SELECT * FROM `order` WHERE date BETWEEN ? AND ? ORDER BY orderId DESC";
+			
+			pst = this.connection.prepareStatement(query);
+			pst.setDate(1, start);
+			pst.setDate(2, end);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Order order = new Order();
+				int pId = rs.getInt("productId");
+				
+				Product product = pDao.getSingleProduct(pId);
+				order.setOrderId(rs.getInt("orderId"));
+				order.setId(pId);
+				order.setName(product.getName());
+				order.setCategory(product.getCategory());
+				order.setPrice(rs.getFloat("totalPrice"));
+				order.setQuantity(rs.getInt("quantity"));
+				order.setDate(rs.getDate("date"));
+				order.setTime(rs.getString("time"));
+				orderList.add(order);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return orderList;
+	}
+	
+
+	public ArrayList<Order> getAllOrders(){
+		
+		ArrayList<Order> orderList = new ArrayList<>();
+		
+		ProductDao pDao = new ProductDao(this.connection);
+		
+		try {
+			
+			query = "SELECT * FROM `order` ORDER BY orderId DESC";
+			
+			pst = this.connection.prepareStatement(query);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				Order order = new Order();
+				int pId = rs.getInt("productId");
+				
+				Product product = pDao.getSingleProduct(pId);
+				order.setOrderId(rs.getInt("orderId"));
+				order.setId(pId);
+				order.setName(product.getName());
+				order.setCategory(product.getCategory());
+				order.setPrice(rs.getFloat("totalPrice"));
+				order.setQuantity(rs.getInt("quantity"));
+				order.setDate(rs.getDate("date"));
+				order.setTime(rs.getString("time"));
+				orderList.add(order);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return orderList;
 	}
 	
 }

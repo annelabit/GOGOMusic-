@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import model.Show;
 import model.ShowSeat;
 
 public class ShowSeatDao {
@@ -132,5 +133,128 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		return total;
 		
 	}
+	
+	public boolean addShowSeat(ShowSeat showSeat) {
+		
+		//uno spettacolo non può essere reso pubblico se tutti i posti non sono stati assegnati a un prezzo
+		
+		boolean result = false;
+		
+		try {
+			
+			query = "INSERT INTO show_seats (showId, seatId, available, price) VALUES(?,?,?,?)";
+			
+			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, showSeat.getShowId());
+			pst.setInt(2, showSeat.getSeatId());
+			pst.setInt(3, 1);
+			pst.setFloat(4, showSeat.getPrice());
+			pst.executeUpdate();
+			
+			result = true; //se è arrivato qui non ci sono eccezioni
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+				
+		return result;
+	}
+	
+
+	public boolean addShowSeats(ArrayList<ShowSeat> showSeats) {
+		
+		boolean result = false;
+		
+		try {
+			
+			for(ShowSeat s : showSeats) {
+			
+				query = "INSERT INTO show_seats (showId, seatId, available, price) VALUES(?,?,?,?)";
+			
+				pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+				pst.setInt(1, s.getShowId());
+				pst.setInt(2, s.getSeatId());
+				pst.setInt(3, 1);
+				pst.setFloat(4, s.getPrice());
+				pst.executeUpdate();
+			
+			}
+			result = true; //se è arrivato qui non ci sono eccezioni
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+				
+		return result;
+	}
+	
+
+	public boolean addShowSeatPriceByCategory(Show show, String category, float price) {
+		
+		boolean result = false;
+		
+		SeatDao seatDao = new SeatDao(this.connection);
+		ArrayList<Integer> seats = seatDao.getSeatsByCategory(show.getVenueId(),category);
+		
+		try {
+			
+			for(Integer s : seats) {
+			
+				query = "INSERT INTO show_seats (showId, seatId, available, price) VALUES(?,?,?,?)";
+			
+				pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+				pst.setInt(1, show.getId()); //id spettacolo
+				pst.setInt(2, s); //intero id posto
+				pst.setInt(3, 1); //disponibile
+				pst.setFloat(4, price);
+				pst.executeUpdate();
+			
+			}
+			result = true; //se è arrivato qui non ci sono eccezioni
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+				
+		return result;
+	}
+	
+
+	//modifica il prezzo di tutti i posti di uno specifico spettacolo e di una specifica categoria
+	public boolean modifyShowSeatPriceByCategory(Show show, String category, float price) {
+		
+		boolean result = false;
+		
+		SeatDao seatDao = new SeatDao(this.connection);
+		ArrayList<Integer> seats = seatDao.getSeatsByCategory(show.getVenueId(),category);
+		
+		try {
+			
+			for(Integer s : seats) {
+			
+				query = "UPDATE show_seats SET price = ? WHERE showId = ? AND seatId = ?";
+			
+				pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+				pst.setFloat(1, price);
+				pst.setInt(2, show.getId()); //id spettacolo
+				pst.setInt(3, s); //intero id posto
+				
+				pst.executeUpdate();
+			
+			}
+			result = true; //se è arrivato qui non ci sono eccezioni
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+				
+		return result;
+	}
+	
+	
 	
 }

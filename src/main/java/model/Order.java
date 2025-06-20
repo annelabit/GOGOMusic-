@@ -1,17 +1,19 @@
 package model;
 
+import java.sql.Date;
+
 public class Order extends Product{
 
 	private int orderId;
 	private int uid;
 	private int showId;
 	private int quantity;
-	private String date;
+	private Date date;
 	private String time;
 	
 	public Order() {}
 
-	public Order(int orderId, int uid, int showId, int quantity, String date, String time) {
+	public Order(int orderId, int uid, int showId, int quantity, Date date, String time) {
 		super();
 		this.orderId = orderId;
 		this.uid = uid;
@@ -21,7 +23,7 @@ public class Order extends Product{
 		this.time=time;
 	}
 
-	public Order(int uid, int quantity, String date, String time) {
+	public Order(int uid, int quantity, Date date, String time) {
 		super();
 		this.uid = uid;
 		this.quantity = quantity;
@@ -54,11 +56,11 @@ public class Order extends Product{
 		this.quantity = quantity;
 	}
 
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

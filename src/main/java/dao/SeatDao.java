@@ -89,5 +89,27 @@ public class SeatDao {
 		return result;
 		
 	}
+
+	public ArrayList<Integer> getSeatsByCategory(int venueId, String category) {
+		
+		ArrayList<Integer> seatIds = new ArrayList<>();
+		
+		try {
+			query = "SELECT id FROM SEAT WHERE locationId=? AND type = ?";
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, venueId);
+			pst.setString(2, category);
+			rs = pst.executeQuery();
+			
+			while(rs.next()) {
+				seatIds.add(rs.getInt("id"));
+			}
+			
+		}	
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return seatIds;
+	}
 	
 }

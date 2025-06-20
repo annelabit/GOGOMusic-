@@ -73,7 +73,7 @@ public class ShowDao {
 		return show;
 	}
 	
-public double getMinimumPrice(int eventId) {
+	public double getMinimumPrice(int eventId) {
 		
 	double max=0;
 	
@@ -128,5 +128,52 @@ public double getMinimumPrice(int eventId) {
 		return max;
 	}
 	
+	public boolean insertShow(Show show) {
+		boolean result = false;
+		
+		try {
+			
+			query = "INSERT INTO show (locationId, eventId, date, time) VALUES(?,?,?,?)";
+			
+			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, show.getVenueId());
+			pst.setInt(2, show.getProductId());
+			pst.setString(3, show.getDate());
+			pst.setString(4, show.getTime());
+			pst.executeUpdate();
+			
+			
+			result = true; //se è arrivato qui non ci sono eccezioni
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+				
+		return result;
+	}
+	
+	public boolean deleteShow(Show show) {
+		boolean result = false;
+		
+		try {
+			
+			query = "DELETE FROM show WHERE id = ?";
+			
+			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, show.getId());
+			pst.executeUpdate();
+			
+			//lo spettacolo non scompare dagli ordini di nessun utente
+			
+			result = true; //se è arrivato qui non ci sono eccezioni
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}
+				
+		return result;
+	}
 	
 }

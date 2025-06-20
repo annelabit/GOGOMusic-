@@ -15,6 +15,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import dao.OrderDao;
@@ -37,6 +38,8 @@ public class BuyNowServlet extends HttpServlet {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = new Date();
 			
+			java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+			
 			ProductDao pDao = new ProductDao(DBConnection.getConnection());
 			
 			if(user != null) {
@@ -56,7 +59,7 @@ public class BuyNowServlet extends HttpServlet {
 				order.setUid(user.getIdUtente());
 				order.setQuantity(quantity);
 				
-				order.setDate(formatter.format(date));
+				order.setDate(dateSql);
 				order.setTime(formattedTime);
 				
 				ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list"); 
