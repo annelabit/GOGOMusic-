@@ -10,6 +10,7 @@ import model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 
 import dao.UserDao;
@@ -31,7 +32,8 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("login-password");
 		
 		UserDao udao = new UserDao();
-		User user = udao.userLogin(username, password);
+		//User user = udao.userLogin(username, toHash(password));
+		User user = udao.userLogin(username, password); //decommentare quando verrà aggiunta pagina iscrizione
 		
 		if(user != null) {
 			
@@ -50,6 +52,21 @@ public class LoginServlet extends HttpServlet {
 			response.sendRedirect("login.jsp");
 			//login dovrà mostrare un messaggio di errore
 		}
+	}
+	
+	private String toHash(String password) {
+		String hashString = null;
+		try {
+			java.security.MessageDigest digest = java.security.MessageDigest.getInstance("SHA-512");
+			byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+			hashString = "";
+			for (int i = 0; i < hash.length; i++) {
+				hashString += Integer.toHexString((hash[i] & 0xFF) | 0x100).substring(1, 3);
+			}
+		} catch (java.security.NoSuchAlgorithmException e) {
+			System.out.println(e);
+		}
+		return hashString;
 	}
 
 }
