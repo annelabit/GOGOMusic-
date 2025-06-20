@@ -3,11 +3,13 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.DBConnection;
 import model.Show;
 import model.ShowSeat;
-
+import model.DBConnection;
 public class ShowSeatDao {
 
 	private Connection connection;
@@ -16,16 +18,16 @@ public class ShowSeatDao {
 	private ResultSet rs;
 	
 	
-	public ShowSeatDao(Connection connection) {
-		this.connection = connection;
-	}
+	public ShowSeatDao() {}
 	
 	public ArrayList<ShowSeat> getAvailableSeats(int showId){
 		
 		ArrayList<ShowSeat> seatList = new ArrayList<>();
 		
 		String sql = "SELECT * FROM show_seats WHERE showId = ? AND available = true";
-        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+        try {
+        	connection = DBConnection.getConnection();	
+        	PreparedStatement pst = connection.prepareStatement(sql);
             pst.setInt(1, showId);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -38,7 +40,9 @@ public class ShowSeatDao {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			closeConnection(connection);
+		}
         return seatList;
 		
 	}
@@ -46,9 +50,10 @@ public class ShowSeatDao {
 public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		
 		ArrayList<ShowSeat> seatList = new ArrayList<>();
-		
 		String sql = "SELECT * FROM show_seats WHERE showId = ? ";
-        try (PreparedStatement pst = connection.prepareStatement(sql)) {
+        try{
+        	connection = DBConnection.getConnection();	
+        	PreparedStatement pst = connection.prepareStatement(sql);
             pst.setInt(1, showId);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -61,7 +66,9 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			closeConnection(connection);
+		}
         return seatList;
 		
 	}
@@ -71,6 +78,7 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		query = "UPDATE show_seats SET available = 0 WHERE showId = ? AND seatId = ? AND available = 1";
         
 		try {
+			connection = DBConnection.getConnection();	
         	PreparedStatement pst = connection.prepareStatement(query);
             for (int seatId : seatIds) {
                 pst.setInt(1, showId);
@@ -81,7 +89,9 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			closeConnection(connection);
+		}
         return false;
     }
 	
@@ -90,6 +100,7 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		query = "UPDATE show_seats SET available = 1 WHERE showId = ? AND seatId = ? AND available = 0";
         
 		try {
+			connection = DBConnection.getConnection();	
         	PreparedStatement pst = connection.prepareStatement(query);
             for (int seatId : seatIds) {
                 pst.setInt(1, showId);
@@ -100,7 +111,9 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
             return true;
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			closeConnection(connection);
+		}
         return false;
     }
 
@@ -109,6 +122,7 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
         float price = 0;
         query = "SELECT price FROM show_seats WHERE showId = ? AND seatId = ?";
         try  {
+        	connection = DBConnection.getConnection();	
         	PreparedStatement pst = connection.prepareStatement(query);
             pst.setInt(1, showId);
             pst.setInt(2, seatId);
@@ -118,7 +132,9 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }finally {
+			closeConnection(connection);
+		}
         return price;
     }
 	
@@ -141,6 +157,7 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		boolean result = false;
 		
 		try {
+			connection = DBConnection.getConnection();	
 			
 			query = "INSERT INTO show_seats (showId, seatId, available, price) VALUES(?,?,?,?)";
 			
@@ -156,6 +173,8 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 				
 		return result;
@@ -167,6 +186,7 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		boolean result = false;
 		
 		try {
+			connection = DBConnection.getConnection();	
 			
 			for(ShowSeat s : showSeats) {
 			
@@ -185,6 +205,8 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 				
 		return result;
@@ -195,10 +217,11 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		
 		boolean result = false;
 		
-		SeatDao seatDao = new SeatDao(this.connection);
+		SeatDao seatDao = new SeatDao();
 		ArrayList<Integer> seats = seatDao.getSeatsByCategory(show.getVenueId(),category);
 		
 		try {
+			connection = DBConnection.getConnection();	
 			
 			for(Integer s : seats) {
 			
@@ -217,6 +240,8 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 				
 		return result;
@@ -228,10 +253,11 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		
 		boolean result = false;
 		
-		SeatDao seatDao = new SeatDao(this.connection);
+		SeatDao seatDao = new SeatDao();
 		ArrayList<Integer> seats = seatDao.getSeatsByCategory(show.getVenueId(),category);
 		
 		try {
+			connection = DBConnection.getConnection();	
 			
 			for(Integer s : seats) {
 			
@@ -250,11 +276,22 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 				
 		return result;
 	}
 	
-	
+
+	public void closeConnection(Connection connection) {
+		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 	
 }

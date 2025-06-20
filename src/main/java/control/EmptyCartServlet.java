@@ -28,7 +28,7 @@ public class EmptyCartServlet extends HttpServlet {
 		
 		try(PrintWriter out = response.getWriter()){
 			
-			ShowSeatDao showSeatDao = new ShowSeatDao(DBConnection.getConnection());
+			ShowSeatDao showSeatDao = new ShowSeatDao();
 
 				ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list"); 
 				if(cart!=null) {
@@ -39,10 +39,6 @@ public class EmptyCartServlet extends HttpServlet {
 				cart.clear();
 				response.sendRedirect("cart.jsp");
 				
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 		
 	}

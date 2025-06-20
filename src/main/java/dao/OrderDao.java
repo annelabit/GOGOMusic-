@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
-
+import model.DBConnection;
 import model.Order;
 import model.Product;
 
@@ -16,8 +17,7 @@ public class OrderDao {
 	private PreparedStatement pst;
 	private ResultSet rs;
 	
-	public OrderDao(Connection connection) {
-		this.connection = connection;
+	public OrderDao() {
 	}
 	
 	public boolean insertOrder(Order order, ArrayList<Integer> seatIds) {
@@ -25,7 +25,7 @@ public class OrderDao {
 		boolean result = false;
 			
 		try {
-			
+			connection = DBConnection.getConnection();
 			//devo inserire sia in order sia in order_seats
 			query = "INSERT INTO `order` (productId, userId, quantity, date, totalPrice, time, showId) VALUES(?,?,?,?,?,?,?)";
 			
@@ -74,6 +74,8 @@ public class OrderDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 				
 		return result;
@@ -84,10 +86,10 @@ public class OrderDao {
 		
 		ArrayList<Order> orderList = new ArrayList<>();
 		
-		ProductDao pDao = new ProductDao(this.connection);
+		ProductDao pDao = new ProductDao();
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM `order` WHERE userId=? ORDER BY orderId DESC";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, id);
@@ -110,6 +112,8 @@ public class OrderDao {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return orderList;
@@ -121,7 +125,7 @@ public class OrderDao {
 		boolean result = false;
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			//posti associati all'ordine
 			query = "SELECT * FROM order_seats WHERE orderId = ?";
 			pst = this.connection.prepareStatement(query);
@@ -157,6 +161,8 @@ public class OrderDao {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return result;
@@ -167,10 +173,10 @@ public class OrderDao {
 		
 		ArrayList<Order> orderList = new ArrayList<>();
 		
-		ProductDao pDao = new ProductDao(this.connection);
+		ProductDao pDao = new ProductDao();
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM `order` WHERE date BETWEEN ? AND ? ORDER BY orderId DESC";
 			
 			pst = this.connection.prepareStatement(query);
@@ -195,6 +201,8 @@ public class OrderDao {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return orderList;
@@ -205,10 +213,10 @@ public class OrderDao {
 		
 		ArrayList<Order> orderList = new ArrayList<>();
 		
-		ProductDao pDao = new ProductDao(this.connection);
+		ProductDao pDao = new ProductDao();
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM `order` ORDER BY orderId DESC";
 			
 			pst = this.connection.prepareStatement(query);
@@ -231,9 +239,22 @@ public class OrderDao {
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return orderList;
+	}
+	
+
+	public void closeConnection(Connection connection) {
+		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

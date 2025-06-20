@@ -7,11 +7,11 @@
     pageEncoding="UTF-8"%>
 		
 		<% 
-			ProductDao pDao = new ProductDao(DBConnection.getConnection());
+			ProductDao pDao = new ProductDao();
 		 	ArrayList<Product> products = pDao.getProducts();
-		 	SeatDao sDao = new SeatDao(DBConnection.getConnection());
-		    ShowDao showDao = new ShowDao(DBConnection.getConnection());
-		    LocationDao lDao = new LocationDao(DBConnection.getConnection());
+		 	SeatDao sDao = new SeatDao();
+		    ShowDao showDao = new ShowDao();
+		    LocationDao lDao = new LocationDao();
 		    DecimalFormat df = new DecimalFormat("#0.00");
 		    
 		    String keyword = request.getParameter("keyword");

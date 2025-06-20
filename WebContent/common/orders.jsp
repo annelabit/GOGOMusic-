@@ -11,7 +11,7 @@
     
     if(user!=null){  //se l'user appartiene alla sessione
     	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
-    	OrderDao oDao = new OrderDao(DBConnection.getConnection());
+    	OrderDao oDao = new OrderDao();
     	orders = oDao.userOrders(user.getIdUtente());
 
     } else{

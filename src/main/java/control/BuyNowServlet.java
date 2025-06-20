@@ -40,7 +40,7 @@ public class BuyNowServlet extends HttpServlet {
 			
 			java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 			
-			ProductDao pDao = new ProductDao(DBConnection.getConnection());
+			ProductDao pDao = new ProductDao();
 			
 			if(user != null) {
 				
@@ -77,26 +77,19 @@ public class BuyNowServlet extends HttpServlet {
 				}
 				
 				
-				try {
-					OrderDao oDao = new OrderDao(DBConnection.getConnection());
-				
-						if(cart!=null) {
-							for(Cart c : cart) {
-								if(c.getId() == id) {
-									oDao.insertOrder(order, c.getSeatIds());
-									cart.remove(cart.indexOf(c));
-									break;
-								}
+				OrderDao oDao = new OrderDao();
+
+					if(cart!=null) {
+						for(Cart c : cart) {
+							if(c.getId() == id) {
+								oDao.insertOrder(order, c.getSeatIds());
+								cart.remove(cart.indexOf(c));
+								break;
 							}
-						response.sendRedirect("orders.jsp");
-					} else {
-						out.print("Order failed");
-					}
-					
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
+						}
+					response.sendRedirect("orders.jsp");
+				} else {
+					out.print("Order failed");
 				}
 				
 				
@@ -104,12 +97,6 @@ public class BuyNowServlet extends HttpServlet {
 			} else {
 				response.sendRedirect("login.jsp");
 			}
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	
 	}

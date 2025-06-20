@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Show;
-
+import model.DBConnection;
 public class ShowDao {
 
 	private Connection connection;
@@ -16,9 +16,7 @@ public class ShowDao {
 	private ResultSet rs;
 	
 	
-	public ShowDao(Connection connection) {
-		this.connection = connection;
-	}
+	public ShowDao() {}
 	
 	public ArrayList<Show> getShows(int eventId){
 		
@@ -27,6 +25,7 @@ public class ShowDao {
 		query = "SELECT * FROM `show` WHERE eventId = ?";
 		
 		try {
+			connection = DBConnection.getConnection();
 			pst = connection.prepareStatement(query);
 			pst.setInt(1, eventId);
 			rs = pst.executeQuery();
@@ -40,8 +39,10 @@ public class ShowDao {
 				show.setTime(rs.getString("time"));
 				shows.add(show);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 	return shows;	
@@ -55,6 +56,7 @@ public class ShowDao {
 		query = "SELECT * FROM `show` WHERE id = ?";
 		
 		try {
+			connection = DBConnection.getConnection();
 			pst = connection.prepareStatement(query);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
@@ -66,8 +68,10 @@ public class ShowDao {
 				show.setDate(rs.getString("date"));
 				show.setTime(rs.getString("time"));
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return show;
@@ -78,6 +82,7 @@ public class ShowDao {
 	double max=0;
 	
 	try {
+		connection = DBConnection.getConnection();
 		
 		//Unisci showId di show_seats a id di show. Show contiene eventId
 		
@@ -95,6 +100,8 @@ public class ShowDao {
 	} catch(Exception e) {
 		e.printStackTrace();
 		System.out.print(e.getMessage());	
+	}finally {
+		closeConnection(connection);
 	}
 	
 	return max;
@@ -106,6 +113,8 @@ public class ShowDao {
 		double max=0;
 		
 		try {
+			
+			connection = DBConnection.getConnection();
 			
 			//Unisci showId di show_seats a id di show. Show contiene eventId
 			
@@ -123,6 +132,8 @@ public class ShowDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return max;
@@ -132,6 +143,7 @@ public class ShowDao {
 		boolean result = false;
 		
 		try {
+			connection = DBConnection.getConnection();
 			
 			query = "INSERT INTO show (locationId, eventId, date, time) VALUES(?,?,?,?)";
 			
@@ -148,6 +160,8 @@ public class ShowDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 				
 		return result;
@@ -157,6 +171,7 @@ public class ShowDao {
 		boolean result = false;
 		
 		try {
+			connection = DBConnection.getConnection();
 			
 			query = "DELETE FROM show WHERE id = ?";
 			
@@ -171,9 +186,22 @@ public class ShowDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 				
 		return result;
+	}
+	
+
+	public void closeConnection(Connection connection) {
+		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

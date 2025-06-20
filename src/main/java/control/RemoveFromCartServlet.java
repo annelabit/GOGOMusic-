@@ -28,7 +28,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		try(PrintWriter out = response.getWriter()){
-			ShowSeatDao showSeatDao = new ShowSeatDao(DBConnection.getConnection());
+			ShowSeatDao showSeatDao = new ShowSeatDao();
 			int id = Integer.parseInt(request.getParameter("id"));
 			if(id!=0) {//valore di default per interi è 0
 				ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list"); 
@@ -47,10 +47,6 @@ public class RemoveFromCartServlet extends HttpServlet {
 			else {
 				response.sendRedirect("cart.jsp");
 			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
 	}
 		

@@ -16,7 +16,7 @@
     
     //questo carrello contiene solo i prodotti scelti
     ArrayList<Cart> cartProducts = null;
-    ProductDao pDao = new ProductDao(DBConnection.getConnection());
+    ProductDao pDao = new ProductDao();
     
     DecimalFormat df = new DecimalFormat("#0.00");
     

@@ -3,11 +3,12 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Product;
 import model.Seat;
-
+import model.DBConnection;
 public class SeatDao {
 	
 	private Connection connection;
@@ -15,16 +16,14 @@ public class SeatDao {
 	private PreparedStatement pst;
 	private ResultSet rs;
 	
-	public SeatDao(Connection connection) {
-		super();
-		this.connection = connection;
-	}
+	public SeatDao() {}
 	
 	public ArrayList<Seat> getAllSeats(int venueId){
 		
 		ArrayList<Seat> seats = new ArrayList<>();
 		
 		try {
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM SEAT WHERE locationId=?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, venueId);
@@ -41,6 +40,8 @@ public class SeatDao {
 		}	
 		catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		return seats;
 		
@@ -51,6 +52,7 @@ public class SeatDao {
 		ArrayList<Integer> seatIds = new ArrayList<>();
 		
 		try {
+			connection = DBConnection.getConnection();
 			query = "SELECT id FROM SEAT WHERE locationId=?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, venueId);
@@ -63,6 +65,8 @@ public class SeatDao {
 		}	
 		catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		return seatIds;
 		
@@ -73,7 +77,7 @@ public class SeatDao {
 		boolean result = false;
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			query = "UPDATE SEAT SET AVAILABLE = 0 WHERE ID = ? AND AVAILABLE = 1";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, seatId);
@@ -84,6 +88,8 @@ public class SeatDao {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return result;
@@ -95,6 +101,7 @@ public class SeatDao {
 		ArrayList<Integer> seatIds = new ArrayList<>();
 		
 		try {
+			connection = DBConnection.getConnection();
 			query = "SELECT id FROM SEAT WHERE locationId=? AND type = ?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, venueId);
@@ -108,8 +115,20 @@ public class SeatDao {
 		}	
 		catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		return seatIds;
+	}
+	
+	public void closeConnection(Connection connection) {
+		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

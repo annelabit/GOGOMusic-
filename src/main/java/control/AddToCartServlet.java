@@ -28,7 +28,7 @@ public class AddToCartServlet extends HttpServlet {
 			//verrà passato l'id del prodotto aggiunto al carrello a cart
 			ArrayList<Cart> cart = new ArrayList<>();
 			
-			ProductDao pDao = new ProductDao(DBConnection.getConnection());
+			ProductDao pDao = new ProductDao();
 		    
 			
 			int id = Integer.parseInt(request.getParameter("id"));
@@ -125,12 +125,6 @@ public class AddToCartServlet extends HttpServlet {
 			
 			}
 		
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
 		}
 	}
 }

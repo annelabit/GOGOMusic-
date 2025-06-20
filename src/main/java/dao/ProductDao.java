@@ -3,12 +3,13 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Cart;
 import model.Product;
 import model.Show;
-
+import model.DBConnection;
 
 public class ProductDao {
 
@@ -17,17 +18,14 @@ public class ProductDao {
 	private PreparedStatement pst;
 	private ResultSet rs;
 	
-	public ProductDao(Connection connection) {
-		super();
-		this.connection = connection;
-	}
+	public ProductDao() {}
 	
 	public ArrayList<Product> getProducts(){
 		
 		ArrayList<Product> products = new ArrayList<Product>();
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM PRODUCT";
 			pst = this.connection.prepareStatement(query);
 			rs = pst.executeQuery();
@@ -45,6 +43,8 @@ public class ProductDao {
 		}	
 		catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return products;
@@ -54,7 +54,7 @@ public class ProductDao {
 		ArrayList<Cart> cartProducts = new ArrayList<Cart>();
 		
 		try{
-			
+			connection = DBConnection.getConnection();
 			if(cart.size()>0) {
 				for(Cart cartItem : cart) {
 					query = "SELECT * FROM PRODUCT WHERE ID=?";
@@ -80,6 +80,8 @@ public class ProductDao {
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.print(e.getMessage());		
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return cartProducts;
@@ -90,7 +92,7 @@ public class ProductDao {
 		double total = 0;
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			for(Cart c : cart) {
 					
 				if(c.getSeatIds() != null && !c.getSeatIds().isEmpty()) { 
@@ -114,6 +116,8 @@ public class ProductDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return total;
@@ -127,6 +131,7 @@ public class ProductDao {
 		double total = 0;
 		
 		try {
+			connection = DBConnection.getConnection();
 			if(seatIds.size()!=0) {
 				
 				for(Integer i : seatIds) {
@@ -149,6 +154,8 @@ public class ProductDao {
 		} catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return total;
@@ -159,7 +166,7 @@ public class ProductDao {
 		Product p = null;
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM PRODUCT WHERE ID=?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, id);
@@ -176,6 +183,8 @@ public class ProductDao {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return p;
@@ -186,7 +195,7 @@ public class ProductDao {
 		ArrayList<Product> products = new ArrayList<Product>();
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM PRODUCT WHERE venueId = ?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, venueId);
@@ -205,6 +214,8 @@ public class ProductDao {
 		}	
 		catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		
 		return products;
@@ -216,6 +227,7 @@ public class ProductDao {
 		boolean result = false;
 		
 		try {
+			connection = DBConnection.getConnection();
 			
 			query = "INSERT INTO product (name, category, image, venueId) VALUES(?,?,?,?)";
 			
@@ -231,6 +243,8 @@ public class ProductDao {
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
 		}
 				
 		return result;
@@ -241,6 +255,7 @@ public class ProductDao {
 		ArrayList<Product> events = new ArrayList<>();
 		
 		try {
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM product WHERE category = ?";
 			pst = this.connection.prepareStatement(query);
 			pst.setString(1, category);
@@ -261,6 +276,8 @@ public class ProductDao {
 		}	
 		catch(Exception e) {
 			e.printStackTrace();
+		}finally {
+			closeConnection(connection);
 		}
 		return events;
 	}
@@ -270,11 +287,11 @@ public class ProductDao {
 			
 			boolean result = false;
 			
-			SeatDao seatDao = new SeatDao(this.connection);
+			SeatDao seatDao = new SeatDao();
 			ArrayList<Integer> seats = seatDao.getSeatsByCategory(show.getVenueId(),category);
 			
 			try {
-				
+				connection = DBConnection.getConnection();
 				for(Integer s : seats) {
 				
 					query = "UPDATE product SET name = ?, category = ?, image = ?, venueId = ? WHERE id = ?";
@@ -296,6 +313,8 @@ public class ProductDao {
 			}catch(Exception e) {
 				e.printStackTrace();
 				System.out.print(e.getMessage());	
+			}finally {
+				closeConnection(connection);
 			}
 					
 			return result;
@@ -304,10 +323,10 @@ public class ProductDao {
 		public boolean deleteEvent(Product p) {
 			
 			boolean result = false;
-			ShowDao showDao = new ShowDao(this.connection);
+			ShowDao showDao = new ShowDao();
 			
 			try {
-				
+				connection = DBConnection.getConnection();
 				ArrayList<Show> shows= showDao.getShows(p.getId());
 				
 				for(Show s : shows) {
@@ -327,8 +346,20 @@ public class ProductDao {
 			}catch(Exception e) {
 				e.printStackTrace();
 				System.out.print(e.getMessage());	
+			}finally {
+				closeConnection(connection);
 			}
 					
 			return result;
+		}
+		
+		public void closeConnection(Connection connection) {
+			
+			try {
+				connection.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 }

@@ -11,9 +11,9 @@
         	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
         }
         
-        SeatDao sDao = new SeatDao(DBConnection.getConnection());
-        ShowSeatDao showSeatDao = new ShowSeatDao(DBConnection.getConnection());
-        ShowDao showDao = new ShowDao(DBConnection.getConnection());
+        SeatDao sDao = new SeatDao();
+        ShowSeatDao showSeatDao = new ShowSeatDao();
+        ShowDao showDao = new ShowDao();
         DecimalFormat df = new DecimalFormat("#0.00");
         
         ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));

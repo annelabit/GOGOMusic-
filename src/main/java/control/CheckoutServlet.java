@@ -42,8 +42,8 @@ public class CheckoutServlet extends HttpServlet {
 			//utente deve essere logged in
 			User user = (User) request.getSession().getAttribute("user");
 
-			OrderDao oDao = new OrderDao(DBConnection.getConnection());
-			ProductDao pDao = new ProductDao(DBConnection.getConnection());
+			OrderDao oDao = new OrderDao();
+			ProductDao pDao = new ProductDao();
 			
 			if(user != null && cart != null) {
 				

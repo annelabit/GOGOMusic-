@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.DBConnection;
 import model.User;
 
 public class UserDao {
@@ -15,16 +16,16 @@ public class UserDao {
 	private PreparedStatement pst;
 	private ResultSet rs;
 	
-	
-	public UserDao(Connection connection) {
-		this.connection = connection;
-	}
+	public UserDao() {}
 	
 	public User userLogin(String username, String password) {
 		User user = null;
 		
 		
 		try {
+			
+			connection = DBConnection.getConnection();
+			
 			query = "SELECT * FROM USER WHERE USERNAME=? AND PASSWORD=?";
 			pst = this.connection.prepareStatement(query);
 			pst.setString(1, username);
@@ -41,9 +42,11 @@ public class UserDao {
 				//per ragioni di sicurezza non metto password
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());		
+		}finally{
+			closeConnection(connection);
 		}
 		
 		return user;
@@ -55,6 +58,7 @@ public class UserDao {
 		User user = null;
 		
 		try {
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM USER";
 			pst = this.connection.prepareStatement(query);
 			rs = pst.executeQuery();
@@ -70,12 +74,25 @@ public class UserDao {
 				users.add(user);
 			}
 			
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());		
+		}finally{
+			closeConnection(connection);
 		}
 		
 		return users;
+	}
+	
+
+	public void closeConnection(Connection connection) {
+		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 }

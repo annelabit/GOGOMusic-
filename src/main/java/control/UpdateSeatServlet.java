@@ -60,7 +60,7 @@ public class UpdateSeatServlet extends HttpServlet {
 		try (PrintWriter out = response.getWriter()){
 		
 			//SeatDao seatDao = new SeatDao(DBConnection.getConnection());
-			ShowSeatDao showSeatDao = new ShowSeatDao(DBConnection.getConnection());
+			ShowSeatDao showSeatDao = new ShowSeatDao();
 			
 			showSeatDao.reserveSeats(showId,seatIdList);
 			

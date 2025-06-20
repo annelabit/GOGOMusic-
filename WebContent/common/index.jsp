@@ -13,11 +13,11 @@
     	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
     }
     
-    ProductDao pDao = new ProductDao(DBConnection.getConnection());
-    SeatDao sDao = new SeatDao(DBConnection.getConnection());
-    ShowDao showDao = new ShowDao(DBConnection.getConnection());
+    ProductDao pDao = new ProductDao();
+    SeatDao sDao = new SeatDao();
+    ShowDao showDao = new ShowDao();
     ArrayList<Product> products = pDao.getProducts();
-    LocationDao lDao = new LocationDao(DBConnection.getConnection());
+    LocationDao lDao = new LocationDao();
     DecimalFormat df = new DecimalFormat("#0.00");
     
     ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");

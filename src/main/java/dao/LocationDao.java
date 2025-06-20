@@ -3,12 +3,13 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Location;
 import model.Order;
 import model.Product;
-
+import model.DBConnection;
 public class LocationDao {
 
 	private Connection connection;
@@ -16,15 +17,15 @@ public class LocationDao {
 	private PreparedStatement pst;
 	private ResultSet rs;
 	
-	public LocationDao(Connection connection) {
-		this.connection = connection;
-	}
+	
+	
+	public LocationDao() {}
 	
 	public Location getEventLocation(int id) {
 		Location l = null;
 		
 		try {
-			
+			connection = DBConnection.getConnection();
 			query = "SELECT * FROM LOCATION WHERE ID=?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, id);
@@ -43,9 +44,20 @@ public class LocationDao {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
 		}
 		
 		return l;
 	}
 	
+	public void closeConnection(Connection connection) {
+		
+		try {
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
 }

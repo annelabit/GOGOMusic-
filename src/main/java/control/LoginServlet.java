@@ -30,20 +30,15 @@ public class LoginServlet extends HttpServlet {
 		String username = request.getParameter("login-username");
 		String password = request.getParameter("login-password");
 		
-		try {
-			UserDao udao = new UserDao(DBConnection.getConnection());
-			User user = udao.userLogin(username, password);
-			
-			if(user != null) {
-				out.println("Login successful");
-				request.getSession().setAttribute("user", user);
-				response.sendRedirect("index.jsp");
-			} else {
-				out.println("Login failed");
-			}
-		} catch (ClassNotFoundException | SQLException e) {
-			out.println("Exception");
-			e.printStackTrace();
+		UserDao udao = new UserDao();
+		User user = udao.userLogin(username, password);
+		
+		if(user != null) {
+			out.println("Login successful");
+			request.getSession().setAttribute("user", user);
+			response.sendRedirect("index.jsp");
+		} else {
+			out.println("Login failed");
 		}
 	}
 
