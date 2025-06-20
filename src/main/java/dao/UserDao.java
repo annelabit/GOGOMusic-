@@ -19,8 +19,8 @@ public class UserDao {
 	public UserDao() {}
 	
 	public User userLogin(String username, String password) {
-		User user = null;
 		
+		User user = null;
 		
 		try {
 			
@@ -39,6 +39,7 @@ public class UserDao {
 				user.setCognome(rs.getString("cognome"));
 				user.setEmail(rs.getString("email"));
 				user.setUsername(rs.getString("username"));
+				user.setAdmin(rs.getInt("isAdmin")==1 ? Boolean.TRUE : Boolean.FALSE);
 				//per ragioni di sicurezza non metto password
 			}
 			

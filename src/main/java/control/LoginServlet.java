@@ -34,11 +34,21 @@ public class LoginServlet extends HttpServlet {
 		User user = udao.userLogin(username, password);
 		
 		if(user != null) {
+			
 			out.println("Login successful");
 			request.getSession().setAttribute("user", user);
+			
+			if(user.isAdmin()) {
+				request.getSession().setAttribute("isAdmin", Boolean.TRUE);//inserisco il token nella sessione
+			} else {
+				request.getSession().setAttribute("isAdmin", Boolean.FALSE);//inserisco il token nella sessione
+			}
+			
 			response.sendRedirect("index.jsp");
 		} else {
 			out.println("Login failed");
+			response.sendRedirect("login.jsp");
+			//login dovrà mostrare un messaggio di errore
 		}
 	}
 

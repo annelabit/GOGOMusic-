@@ -7,16 +7,18 @@ public class User {
 	private String nome;
 	private String cognome;
 	private String username;
+	private boolean isAdmin;
 	
 	public User() {
 	}
 	
-	public User(int idUtente, String email, String nome, String cognome, String username) {
+	public User(int idUtente, String email, String nome, String cognome, String username, boolean isAdmin) {
 		this.idUtente = idUtente;
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
 		this.username = username;
+		this.isAdmin = isAdmin;
 	}
 	
 	
@@ -50,7 +52,10 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
-	
-	
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 }
