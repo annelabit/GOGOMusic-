@@ -55,7 +55,7 @@
 					
 					<div class="col-md-3 my-3">
 					<div class="card w-100" style="width: 18rem;">
-	  					<img src="<%= request.getContextPath() %>/images/<%= p.getImage()%>" class="card-img-top" alt="...">
+	  					<img src="<%= request.getContextPath() %>/images/artisti/<%= p.getImage()%>.png" class="card-img-top" alt="...">
 	  						<div class="card-body">
 							    <h5 class="card-title"><%= p.getName() %></h5>
 							    
@@ -76,7 +76,8 @@
 							    %>
 							    <h6 class="venue"> <%= lDao.getEventLocation(p.getVenueId()).getVenue()%></h6>
 							    <h6 class="category"> <%= p.getCategory() %></h6>
-							    <div class="mt-3 d-flex gap-3 align-items-center"><a href="<%= request.getContextPath() %>/common/seatSelection.jsp?venue_id=<%=p.getVenueId()%>&pId=<%=p.getId() %>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>" class="btn btn-dark">Aggiungi al carrello</a>
+							    <div class="mt-3 d-flex gap-3 align-items-center">
+							    	<a href="<%= request.getContextPath() %>/common/seatSelection.jsp?venue_id=<%=p.getVenueId()%>&pId=<%=p.getId() %>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>" class="btn btn-dark">Aggiungi al carrello</a>
 							    	<a href="<%= request.getContextPath() %>/common/buy-now?quantity=1&id=<%=p.getId()%>" class="btn btn-primary">Compra ora</a>
 							    </div>
 	  						</div>

@@ -28,7 +28,7 @@
 					
 					<div class="col-md-3 my-3">
 					<div class="card w-100" style="width: 18rem;">
-	  					<img src="<%= request.getContextPath() %>/images/<%= p.getImage()%>" class="card-img-top" alt="...">
+	  					<img src="<%= request.getContextPath() %>/images/artisti/<%= p.getImage()%>.png" class="card-img-top" alt="...">
 	  						<div class="card-body">
 							    <h5 class="card-title"><%= p.getName() %></h5>
 							     <%
