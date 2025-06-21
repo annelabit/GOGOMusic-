@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@page import="model.*" %>
     <%@page import="control.*" %>
-    <%@page import="java.util.*" %>
+    <%@page import="java.util.ArrayList"%>
         <% 
     User user = (User) request.getSession().getAttribute("user");
     if(user!=null){

@@ -6,7 +6,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse justify-content-between" id="navbarScroll">
+    <div class="collapse navbar-collapse" id="navbarScroll">
       <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="<%= request.getContextPath() %>/common/index.jsp">Home</a>
@@ -26,24 +26,22 @@
         <li class="nav-item">
           <a class="nav-link active" href="<%= request.getContextPath() %>/common/cart.jsp">Carrello<span class="badge bg-danger">${cart_list.size()}</span></a>
         </li>
-        <% if(user != null){ %> <!-- Ignora errore -->
+        <% if(user != null){ %>  
         		<li class="nav-item">
                 <a class="nav-link active" href="<%= request.getContextPath() %>/common/orders.jsp">Ordini</a>
               </li>
               <li class="nav-item">
               <a class="nav-link" aria-disabled="false" href="logout">Log out</a>
             </li>
-       <%	} else {    %> 
+       <%	} else {    %>
        			<li>
         		<a class="nav-link active" aria-disabled="false" href="<%= request.getContextPath() %>/common/login.jsp">Log in</a>
                 </li>
-        <% 	}   %> 
+         <% 	}   %>  
       </ul>
-      <form class="d-flex ms-auto" role="search">
-        <input class="form-control me-2" id="searchbar" type="search" placeholder="Cerca" aria-label="Search"/>
-        <button class="btn btn-outline-success" type="submit">Cerca</button>
-    </form>
-</div>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Cerca" aria-label="Search"/>
+      </form>
     </div>
 </nav>
 

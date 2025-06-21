@@ -1,13 +1,12 @@
- <!-- %@page import= %> connessione al DB -->
 <%@page import="dao.*"%>
-<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.*"%>
 <%@page import="model.*" %>
 <%@page import="control.*" %>
 <%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <% 
 
-	<%
     User user = (User) request.getSession().getAttribute("user");  //recupero l'attributo dalla sessione dell'utente
     if(user!=null){  //se l'user appartiene alla sessione
     	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
@@ -25,8 +24,6 @@
     	request.setAttribute("cart_list", cart);
     }
     %>
-    
-	
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,8 +36,10 @@
 </head>
 <body>
 <h1>Welcome to GOGOMusic!</h1>
-	<%@include file="includes/navbar.jsp" %>
+<%@include file="includes/navbar.jsp" %>
 
+
+<%@include file="includes/footer.jsp" %>
 	<div class="container" id="event-container">
 		<div class="card-header my-3"> Tutti i prodotti</div>
 		<div class="row">
