@@ -61,15 +61,15 @@
 						<hr id="indicator">
 						</div>
 						
-						<form action="<%=request.getContextPath()%>/common/loginServlet" id="loginForm">
-							<input type="text" placeholder="Username">
-							<input type="password" placeholder="Password">
+						<form action="<%=request.getContextPath()%>/common/loginServlet" id="loginForm" method="post">
+							<input name="login-username" type="text" placeholder="Username">
+							<input name="login-password" type="password" placeholder="Password">
 							<button type="submit" class="btn">Login</button>  <!-- Aggiungere eventuali collegamenti -->
 						</form>
-						<form id="regForm">
-							<input type="email" placeholder="Email">
-							<input type="text" placeholder="Username">
-							<input type="password" placeholder="Password">
+						<form action="<%=request.getContextPath()%>/common/register" id="regForm" method="post">
+							<input name="register-email" type="email" placeholder="Email">
+							<input name="register-username" type="text" placeholder="Username">
+							<input name="register-password" type="password" placeholder="Password">
 							<button type="submit" class="btn">Registrati</button>   <!-- Aggiungere eventuali collegamenti -->
 						</form>
 					</div>

@@ -53,6 +53,34 @@ public class UserDao {
 		return user;
 	}
 	
+	//password ha già subito la modifica di funzione hash
+	public int userRegister(User user, String password) {
+		int id = 0;
+		try {
+			
+			connection = DBConnection.getConnection();
+			
+			query = "INSERT INTO user (email, username, password) VALUES(?,?,?)";
+			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setString(1, user.getEmail());
+			pst.setString(2, user.getUsername());
+			pst.setString(3, password);
+			pst.executeUpdate();
+			ResultSet generatedKeys = pst.getGeneratedKeys();
+	        
+	        if (generatedKeys.next()) {
+	            id = generatedKeys.getInt(1);
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());
+		}finally{
+			closeConnection(connection);
+		}
+		
+		return id;
+	}
+	
 	public ArrayList<User> getAllUsers() {
 
 		ArrayList<User> users = null;

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import model.Product;
 import model.Seat;
+import model.ShowSeat;
 import model.DBConnection;
 
 public class SeatDao {
@@ -71,6 +72,30 @@ public class SeatDao {
 		return seatIds;
 
 	}
+	
+	public Seat getSeatsByShowSeat(ShowSeat showSeat) {
+
+		Seat seat = new Seat();
+
+		try {
+			connection = DBConnection.getConnection();
+			query = "SELECT * FROM SEAT WHERE id = ?";
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, showSeat.getSeatId());
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				seat.setId(rs.getInt("id"));
+				seat.setType(rs.getString("type"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+		return seat;
+	}
 
 	public boolean reserveSeat(int seatId) {
 
@@ -132,7 +157,9 @@ public class SeatDao {
 			rs = pst.executeQuery();
 
 			while (rs.next()) {
-				categories.add(rs.getString("type"));
+				
+				if(!categories.contains(rs.getString("type")))
+						categories.add(rs.getString("type"));
 			}
 
 		} catch (Exception e) {
@@ -143,6 +170,30 @@ public class SeatDao {
 		return categories;
 	}
 
+	public Seat getSeatById(int id) {
+
+		Seat seat = new Seat();
+
+		try {
+			connection = DBConnection.getConnection();
+			query = "SELECT * FROM SEAT WHERE id = ?";
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				seat.setId(rs.getInt("id"));
+				seat.setType(rs.getString("type"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+		return seat;
+	}
+	
 	public void closeConnection(Connection connection) {
 
 		try {

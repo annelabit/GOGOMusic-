@@ -1,25 +1,7 @@
 package model;
 
 public class Product {
-<<<<<<< HEAD
 	
-	private int id;
-	private String name;
-	private String category;
-	private float price;
-	private String image;
-	
-	public Product() {
-	}
-
-	public Product(int id, String name, String category, float price, String image) {
-		this.id = id;
-		this.name = name;
-		this.category = category;
-		this.price = price;
-		this.image = image;
-=======
-
 	private int id;
 	private String name;
 	private float price;
@@ -37,7 +19,6 @@ public class Product {
 		this.category= category;
 		this.image= image;
 		this.venueId=venueId;
->>>>>>> main
 	}
 
 	public int getId() {
@@ -79,18 +60,7 @@ public class Product {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
 
-<<<<<<< HEAD
-	@Override
-	public String toString() {
-		return "Product [id=" + id + ", name=" + name + ", category=" + category + ", price=" + price + ", image="
-				+ image + "]";
-	}
-	
-	
-	
-=======
 	public int getVenueId() {
 		return venueId;
 	}
@@ -104,7 +74,5 @@ public class Product {
 		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", image=" + image + ", category="
 				+ category + ", venueId=" + venueId + "]";
 	}
-
->>>>>>> main
 	
 }

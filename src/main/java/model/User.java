@@ -58,4 +58,11 @@ public class User {
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
+
+	@Override
+	public String toString() {
+		return "User [idUtente=" + idUtente + ", email=" + email + ", nome=" + nome + ", cognome=" + cognome
+				+ ", username=" + username + ", isAdmin=" + isAdmin + "]";
+	}
+	
 }

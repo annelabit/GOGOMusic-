@@ -156,25 +156,7 @@ double max = showDao.getMaximumPrice(p.getId());
 				<!-- SELEZIONE POSTI -->
 				<div class="grid-container">
 
-					<%
-					for (ShowSeat s : seats) {
-					%>
-
-					<%
-					if (s.isAvailable() == 1) {
-					%>
-					<button class="button-1" id="<%=s.getSeatId()%>" role="button"
-						onclick="selectSeat(<%=s.getSeatId()%>)">
-						<%=df.format(s.getPrice())%>€
-					</button>
-					<%
-					} else {
-					%>
-					<button disabled class="button-2" role="button">N.A.</button>
-					<%
-					}
-					}
-					%>
+					
 
 				</div>
 

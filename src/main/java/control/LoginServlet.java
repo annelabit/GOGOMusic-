@@ -32,8 +32,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("login-password");
 		
 		UserDao udao = new UserDao();
-		//User user = udao.userLogin(username, toHash(password));
-		User user = udao.userLogin(username, password); //decommentare quando verrà aggiunta pagina iscrizione
+		User user = udao.userLogin(username, toHash(password));
 		
 		if(user != null) {
 			
@@ -46,10 +45,10 @@ public class LoginServlet extends HttpServlet {
 				request.getSession().setAttribute("isAdmin", Boolean.FALSE);//inserisco il token nella sessione
 			}
 			
-			response.sendRedirect("common/index.jsp");
+			response.sendRedirect("index.jsp");
 		} else {
 			System.out.println("Login failed");
-			response.sendRedirect("common/login.jsp");
+			response.sendRedirect("login.jsp");
 			//login dovrà mostrare un messaggio di errore
 		}
 	}

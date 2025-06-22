@@ -1,38 +1,35 @@
-/**
- * 
- */
-
 let selectedSeatsIds = [];
 
-function loadSeats(){
-	
-	const xhr = new XMLHttpRequest();
-	const select = document.getElementById("showSelect");
-	const showId = select.value;
+function loadSeats() {
+	const showSelect = document.getElementById("showSelect");
+	const categorySelect = document.getElementById("selectbtn");
+	const showId = showSelect.value;
+	const categoria = categorySelect.value;
 	const venueId = document.getElementById("buy-button").getAttribute("data-venue-id");
 
-	xhr.open("get", "loadSeats.jsp?showId=" + showId, true);
-	xhr.setRequestHeader("Connection", "close");
+	// verifica che siano state selezionate entrambe le opzioni
+	if (!showId || showId === "Seleziona spettacolo" || !categoria || categoria === "Seleziona settore") {
+		return; // esce se uno dei due non è valido
+	}
 
-	xhr.onreadystatechange = function() {
-	    if (xhr.readyState === 4 && xhr.status === 200) {
-	        // sostituisci posti
-	        document.querySelector(".grid-container").innerHTML = xhr.responseText;
+	const xhr = new XMLHttpRequest();
+	xhr.open("get", `loadSeats.jsp?showId=${showId}&categoria=${encodeURIComponent(categoria)}`, true);
+	//xhr.setRequestHeader("Connection", "close");
 
-			//svuoto array di posti selezionati altrimenti li conta ancora come selected			
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState === 4 && xhr.status === 200) {
+			document.querySelector(".grid-container").innerHTML = xhr.responseText;
 			selectedSeatsIds = [];
 
-			//cambia il link del bottone
 			const buyLink = document.getElementById("buy-button");
 			buyLink.href = "#";
-			document.getElementById("buy-button").setAttribute("data-show-id", showId);
-			//document.getElementById("buy-button").setAttribute("seatIds", null);
-	    }
- 	};
+			buyLink.setAttribute("data-show-id", showId);
+		}
+	};
 
- 	xhr.send();
-	
+	xhr.send();
 }
+
 
 function selectSeat(seatId){
 	
@@ -65,3 +62,4 @@ function selectSeat(seatId){
 	buyLink.href = baseUrl +"/common/update-seat?seatIds=" + encodeURIComponent(Ids) + "&pId=" + buyLink.dataset.venueId + "&showId=" + buyLink.dataset.showId + "&quantity="+selectedSeatsIds.length;
 	
 }
+
