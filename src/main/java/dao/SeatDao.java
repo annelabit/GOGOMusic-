@@ -9,97 +9,97 @@ import java.util.ArrayList;
 import model.Product;
 import model.Seat;
 import model.DBConnection;
+
 public class SeatDao {
-	
+
 	private Connection connection;
 	private String query;
 	private PreparedStatement pst;
 	private ResultSet rs;
-	
-	public SeatDao() {}
-	
-	public ArrayList<Seat> getAllSeats(int venueId){
-		
+
+	public SeatDao() {
+	}
+
+	public ArrayList<Seat> getAllSeats(int venueId) {
+
 		ArrayList<Seat> seats = new ArrayList<>();
-		
+
 		try {
 			connection = DBConnection.getConnection();
 			query = "SELECT * FROM SEAT WHERE locationId=?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, venueId);
 			rs = pst.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				Seat seat = new Seat();
 				seat.setId(rs.getInt("id"));
 				seat.setAvailable(rs.getInt("available"));
 				seat.setType(rs.getString("type"));
 				seats.add(seat);
 			}
-			
-		}	
-		catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			closeConnection(connection);
 		}
 		return seats;
-		
+
 	}
-	
-	public ArrayList<Integer> getAllSeatIds(int venueId){
-		
+
+	public ArrayList<Integer> getAllSeatIds(int venueId) {
+
 		ArrayList<Integer> seatIds = new ArrayList<>();
-		
+
 		try {
 			connection = DBConnection.getConnection();
 			query = "SELECT id FROM SEAT WHERE locationId=?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, venueId);
 			rs = pst.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				seatIds.add(rs.getInt("id"));
 			}
-			
-		}	
-		catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			closeConnection(connection);
 		}
 		return seatIds;
-		
+
 	}
-	
+
 	public boolean reserveSeat(int seatId) {
-		
+
 		boolean result = false;
-		
+
 		try {
 			connection = DBConnection.getConnection();
 			query = "UPDATE SEAT SET AVAILABLE = 0 WHERE ID = ? AND AVAILABLE = 1";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, seatId);
-			
+
 			pst.executeUpdate();
-			
+
 			result = true;
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			closeConnection(connection);
 		}
-		
+
 		return result;
-		
+
 	}
 
 	public ArrayList<Integer> getSeatsByCategory(int venueId, String category) {
-		
+
 		ArrayList<Integer> seatIds = new ArrayList<>();
-		
+
 		try {
 			connection = DBConnection.getConnection();
 			query = "SELECT id FROM SEAT WHERE locationId=? AND type = ?";
@@ -107,28 +107,50 @@ public class SeatDao {
 			pst.setInt(1, venueId);
 			pst.setString(2, category);
 			rs = pst.executeQuery();
-			
-			while(rs.next()) {
+
+			while (rs.next()) {
 				seatIds.add(rs.getInt("id"));
 			}
-			
-		}	
-		catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			closeConnection(connection);
 		}
 		return seatIds;
 	}
-	
+
+	public ArrayList<String> getAllCategories(int venueId) {
+
+		ArrayList<String> categories = new ArrayList<>();
+
+		try {
+			connection = DBConnection.getConnection();
+			query = "SELECT type FROM SEAT WHERE locationId = ?";
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, venueId);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				categories.add(rs.getString("type"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+		return categories;
+	}
+
 	public void closeConnection(Connection connection) {
-		
+
 		try {
 			connection.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 }

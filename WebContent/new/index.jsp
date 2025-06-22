@@ -1,29 +1,3 @@
-<%@page import="java.text.DecimalFormat"%>
-<%@page import="model.*"%>
-<%@page import="control.*"%>
-<%@page import="dao.*"%>
-<%@page import="java.util.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	 <% 
-	 User user = (User) request.getSession().getAttribute("user");  //recupero l'attributo dalla sessione dell'utente
-	    if(user!=null){  //se l'user appartiene alla sessione
-	    	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
-	    }
-	    
-	    ProductDao pDao = new ProductDao();
-	    SeatDao sDao = new SeatDao();
-	    ShowDao showDao = new ShowDao();
-	    ArrayList<Product> products = pDao.getProducts();
-	    LocationDao lDao = new LocationDao();
-	    DecimalFormat df = new DecimalFormat("#0.00");
-	    
-	    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
-	    if(cart != null){
-	    	request.setAttribute("cart_list", cart);
-	    }
-    
-    %>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,20 +11,48 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/Poppins.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/slider.css">
+<link rel="stylesheet" href="Poppins.css">
+<link rel="stylesheet" href="slider.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/stylesheet.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="footer.css">
 
 <title>GOGOMusic!</title>
 </head>
 <body>
 	
-	<%@include file= "/include/navbar.jsp"%>
+	<!-- navbar  -->
+	<div class="header">
+		<div class="container">
+			<div class="navbar">
+				<div class="logo">
+					<a href="index.html"><img src="images/loghi/logo-no.png" id="logo"
+						width="125px"></a>
+				</div>
+				<nav>
+					<ul id="menuItems">
+						<li><a href="index.html">Home</a></li>
+						<li><a href="Login.html">Log in</a></li>
+						<li><a href="">Ordini</a></li>
+						<li><a href="">Account</a></li>
+					</ul>
+				</nav>
+				<div class="search-container d-flex align-items-center">
+					<form class="d-flex" role="search">
+						<input class="form-control me-2" type="search"
+							placeholder="Search" aria-label="Search" />
+					</form>
+				</div>
+				<a href="cart.html"><img src="images/loghi/carrello-grande.png"
+					width="30px" height="30px"></a> <img src="images/loghi/menu-icon.png"
+					class="menu-icon" onclick="menutoggle()">
+			</div>
+		</div>
+	</div>
 	
 	<!-- carosello -->
 	<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -109,60 +111,32 @@
 		</button>
 	</div>
 	
+	
+
+	<!-- Prodotti -->
 	<div class="small-container">
 		<h2 class="title">Eventi proposti</h2>
-			
-	<!-- Prodotti -->
-	<div class="row">
-	
-	<% 
-				int elements = 0;
-				for(Product p : products){
-					if(elements++==6) break;
-	%>
-	
-	
-		
+		<div class="row">
 			<div class="col-3">
-				<a href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>"><img src="<%= request.getContextPath()%>/images/artisti/<%= p.getImage()%>.png"></a> <!-- inserire collegamento pagina singola -->
-				<h4><%= p.getName() %></h4>
-				
-				<%
-									
-				double min = showDao.getMinimumPrice(p.getId());
-				double max = showDao.getMaximumPrice(p.getId());
-				if (min==0||max==0){
-				
-				%>
-				
-				<p style = "color:red">Sold out</p>
-				
-				<%
-					}
-					else{
-				%>
-				
-				<p>Prezzo: <%= df.format(min) %>€-<%= df.format(max)%>€</p>
-				<p>Luogo: <%= lDao.getEventLocation(p.getVenueId()).getVenue()%></p>
-			
-		
-			<%
-			}
-				
-			%>
+				<a href=""><img src="images/billie-eilish/be.png"></a> <!-- inserire collegamento pagina singola -->
+				<h4>Hit me Hard and Soft Tour</h4>
+				<p>Prezzo: 100$</p>
+				<p>Luogo: Stadio Maradona</p>
 			</div>
-			<%
-				
-				
-		}
-	
-	
-		%>
-		
+			<div class="col-3">
+				<a href=""><img src="images/taylor-swift/ts.png"></a><!-- inserire collegamento pagina singola -->
+				<h4>The Eras Tour</h4>
+				<p>Prezzo: 50$</p>
+				<p>Luogo: Stadio San Siro</p>
+			</div>
+			<div class="col-3">
+				<a href=""><img src="images/olivia-rodrigo/or.png"></a> <!-- inserire collegamento pagina singola -->
+				<h4>Olivia Rodrigo</h4>
+				<p>Prezzo: 80$</p>
+				<p>Luogo: Unipol Arena</p>
+			</div>
 		</div>
-		
-		
-		<a href="products.jsp"><button class="btn" id="productsbtn">Vedi tutti</button></a>
+		<a href="products.html"><button class="btn" id="productsbtn">Vedi tutti</button></a>
 	</div>
 
 
@@ -188,19 +162,19 @@
 	<div class="small-container">
 		<div class="row">
 			<div class="col-4">
-				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/pop.png"> </a> <!-- inserire collegamento pagina con quel genere -->
+				<a href="products.html"><img src="images/loghi/pop.png"> </a> <!-- inserire collegamento pagina con quel genere -->
 				<h3>Pop</h3>
 			</div>
 			<div class="col-4">
-				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/rock.png"></a> <!-- inserire collegamento pagina con quel genere -->
+				<a href="products.html"><img src="images/loghi/rock.png"></a> <!-- inserire collegamento pagina con quel genere -->
 				<h3>Rock</h3>
 			</div>
 			<div class="col-4">
-				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/rap.png"></a> <!-- inserire collegamento pagina con quel genere -->
+				<a href="products.html"><img src="images/loghi/rap.png"></a> <!-- inserire collegamento pagina con quel genere -->
 				<h3>Rap</h3>
 			</div>
 			<div class="col-4">
-				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/latino.png"></a><!-- inserire collegamento pagina con quel genere -->
+				<a href="products.html"><img src="images/loghi/latino.png"></a><!-- inserire collegamento pagina con quel genere -->
 				<h3>Latino</h3>
 			</div>
 		</div>
@@ -212,27 +186,69 @@
 		<div class="small-container">
 			<div class="row">
 				<div class="col-5">
-					<img src="<%=request.getContextPath()%>/images/loghi/coca-cola.png">
+					<img src="images/loghi/coca-cola.png">
 				</div>
 				<div class="col-5">
-					<img src="<%=request.getContextPath()%>/images/loghi/amazon.png">
+					<img src="images/loghi/amazon.png">
 				</div>
 				<div class="col-5">
-					<img src="<%=request.getContextPath()%>/images/loghi/mcdonald.png">
+					<img src="images/loghi/mcdonald.png">
 				</div>
 				<div class="col-5">
-					<img src="<%=request.getContextPath()%>/images/loghi/paypal.png">
+					<img src="images/loghi/paypal.png">
 				</div>
 			</div>
 		</div>
 	</div>
 
-<%@include file= "/include/footer.jsp"%>
 
+	<!-- footer -->
+	<div class="footer-clean">
+		<footer>
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-sm-4 col-md-3 item">
+						<h3>Servizi</h3>
+						<ul>
+							<li>Web design</li>
+							<li>Sviluppo</li>
+							<li>Hosting</li>
+						</ul>
+					</div>
+					<div class="col-sm-4 col-md-3 item">
+						<h3>Chi siamo</h3>
+						<ul>
+							<li>Azienda</li>
+							<li>Team</li>
+							<li>Storia</li>
+						</ul>
+					</div>
+					<div class="col-sm-4 col-md-3 item">
+						<h3>Info</h3>
+						<ul>
+							<li>Biglietteria</li>
+							<li>Metodo di pagamento</li>
+							<li>Metodo di spedizione</li>
+						</ul>
+					</div>
+					<div class="col-lg-3 item social">
+						<a href="https://www.facebook.com/?locale=it_IT"><i
+							class="fa fa-facebook-square" aria-hidden="true"></i></a> <a
+							href="https://x.com"><i class="fa fa-twitter"
+							aria-hidden="true"></i></a> <a href="https://www.youtube.com"><i
+							class="fa fa-youtube-play" aria-hidden="true"></i></a> <a
+							href="https://www.instagram.com"><i class="fa fa-instagram"
+							aria-hidden="true"></i></a>
+						<p class="copyright">GOGOMusic! © 2025</p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-	<script src="<%= request.getContextPath() %>/scripts/javascript.js"></script>
+	<script src="javascript.js"></script>
 </body>
 </html>

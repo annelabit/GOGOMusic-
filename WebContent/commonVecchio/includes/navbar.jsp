@@ -26,7 +26,8 @@
         <li class="nav-item">
           <a class="nav-link active" href="<%= request.getContextPath() %>/common/cart.jsp">Carrello<span class="badge bg-danger">${cart_list.size()}</span></a>
         </li>
-        <% if(user != null){ %>  
+        <% if(user != null)
+        { %>  
         		<li class="nav-item">
                 <a class="nav-link active" href="<%= request.getContextPath() %>/common/orders.jsp">Ordini</a>
               </li>

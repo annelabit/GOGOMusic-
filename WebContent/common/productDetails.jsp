@@ -1,35 +1,34 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="dao.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page import="model.*" %>
-<%@page import="control.*" %>
+	pageEncoding="UTF-8"%>
+<%@page import="model.*"%>
+<%@page import="control.*"%>
 <%@page import="java.util.ArrayList"%>
-<% 
-    User user = (User) request.getSession().getAttribute("user");
-    
-    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
-    if(cart != null){
-    	request.setAttribute("cart_list", cart);
-    }
-    
-    SeatDao sDao = new SeatDao();
-    ShowSeatDao showSeatDao = new ShowSeatDao();
-    ShowDao showDao = new ShowDao();
-    ProductDao pDao = new ProductDao();
-    LocationDao lDao = new LocationDao();
-    DecimalFormat df = new DecimalFormat("#0.00");
-    
-    ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));
-    
-    int pId = Integer.parseInt(request.getParameter("eventId"));
-	int showId = Integer.parseInt(request.getParameter("showId"));
-	
-	Product p = pDao.getSingleProduct(pId);
-	
-	double min = showDao.getMinimumPrice(p.getId());
-	double max = showDao.getMaximumPrice(p.getId());
-    
+<%
+User user = (User) request.getSession().getAttribute("user");
+
+ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+if (cart != null) {
+	request.setAttribute("cart_list", cart);
+}
+
+SeatDao sDao = new SeatDao();
+ShowSeatDao showSeatDao = new ShowSeatDao();
+ShowDao showDao = new ShowDao();
+ProductDao pDao = new ProductDao();
+LocationDao lDao = new LocationDao();
+DecimalFormat df = new DecimalFormat("#0.00");
+
+ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));
+
+int pId = Integer.parseInt(request.getParameter("eventId"));
+int showId = Integer.parseInt(request.getParameter("showId"));
+
+Product p = pDao.getSingleProduct(pId);
+
+double min = showDao.getMinimumPrice(p.getId());
+double max = showDao.getMaximumPrice(p.getId());
 %>
 <!DOCTYPE html>
 <html>
@@ -44,76 +43,107 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/Poppins.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/slider.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/styles/Poppins.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/styles/slider.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/stylesheet.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/styles/stylesheet.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/styles/seatSelectionStyle.css">
 
 <title>GOGOMusic!</title>
 </head>
 <body>
 
-	<%@include file= "/include/navbar.jsp"%>
+	<%@include file="/include/navbar.jsp"%>
 
 	<!-- dettagli del singolo concerto  -->
 
 	<div class="small-container single-product">
 		<div class="row">
 			<div class="col-2">
-				<img src="<%= request.getContextPath() %>/images/artisti/<%=p.getImage()%>t.png" class="uniform-img" width="100%"
-					id="product-img">
+				<img
+					src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>t.png"
+					class="uniform-img" width="100%" id="product-img">
 
 				<div class="small-img-row">
 					<div class="small-img-col">
-						<img src="<%= request.getContextPath() %>/images/artisti/<%=p.getImage()%>t.png" width="100%" class="small-img">
+						<img
+							src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>t.png"
+							width="100%" class="small-img">
 					</div>
 					<div class="small-img-col">
-						<img src="<%= request.getContextPath() %>/images/artisti/<%=p.getImage()%>t1.png" width="100%" class="small-img">
+						<img
+							src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>t1.png"
+							width="100%" class="small-img">
 					</div>
 					<div class="small-img-col">
-						<img src="<%= request.getContextPath() %>/images/artisti/<%=p.getImage()%>t2.png" width="100%" class="small-img">
+						<img
+							src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>t2.png"
+							width="100%" class="small-img">
 					</div>
 				</div>
 
 
 			</div>
 			<div class="col-2">
-				<p>Home</p>  <!-- il nome dell'artista deve cambiare, forse anche il path: home/products/billie Eilish (?) -->
+				<p>Home</p>
+				<!-- il nome dell'artista deve cambiare, forse anche il path: home/products/billie Eilish (?) -->
 				<h1><%=p.getName()%></h1>
-				
+
 				<%
-				if (min==0||max==0){ 
+				if (min == 0 || max == 0) {
 				%>
-				
-					<h4 style = "color:red">Sold out</h4>
-					
-				
-				<%}else{%>
-				
-					<h4><%=min %>-<%=max %>$</h4>
-				
-				<%}%>
-				
-				
-				<h3><%=lDao.getEventLocation(p.getVenueId()).getVenue() %></h3>
+
+				<h4 style="color: red">Sold out</h4>
+
+
+				<%
+				} else {
+				%>
+
+				<h4><%=min%>-<%=max%>$
+				</h4>
+
+				<%
+				}
+				%>
+
+
+				<h3><%=lDao.getEventLocation(p.getVenueId()).getVenue()%></h3>
 				<div class="button-group">
 					<button id="showImageBtn">Visualizza mappa</button>
 
 					<!-- Overlay (schermo intero) che conterrà l'immagine della mappa-->
 					<div id="imageOverlay" class="overlay">
 						<span class="close-btn">&times;</span> <img id="fullscreenImage"
-							class="overlay-image" src="images/stadi/<%=lDao.getEventLocation(p.getVenueId()).getImage()%>"> <!-- da cambiare in base allo stadio -->
+							class="overlay-image"
+							src="images/stadi/<%=lDao.getEventLocation(p.getVenueId()).getImage()%>">
+						<!-- da cambiare in base allo stadio -->
 					</div>
 
-					<select id="selectbtn">
+					<select id="selectbtn" onchange="loadSeats()">
 						<option>Seleziona settore</option>
-						<option>parterre</option>
-						<option>settore 1</option>
-						<option>settore 2</option>
+
+						<%
+						//showSeatDao.getSeatsForShow(showId).
+						ArrayList<String> categories = sDao.getAllCategories(p.getVenueId());
+						for (String c : categories) {
+						%>
+
+						<option value=<%=c%>>
+							<%=c%>
+						</option>
+
+						<%
+						}
+						%>
 					</select>
 				</div>
 				<a href="cart.jsp" class="btn">Aggiungi al carrello</a>
@@ -121,17 +151,75 @@
 				<p>Billie Eilish torna in Italia dopo ben 6 anni di assenza per
 					il tour del suo terzo album intitolato "Hit me Hard and Soft" che
 					conta oltre 7 miliardi di stream.</p>
+
+				
+				<!-- SELEZIONE POSTI -->
+				<div class="grid-container">
+
+					<%
+					for (ShowSeat s : seats) {
+					%>
+
+					<%
+					if (s.isAvailable() == 1) {
+					%>
+					<button class="button-1" id="<%=s.getSeatId()%>" role="button"
+						onclick="selectSeat(<%=s.getSeatId()%>)">
+						<%=df.format(s.getPrice())%>€
+					</button>
+					<%
+					} else {
+					%>
+					<button disabled class="button-2" role="button">N.A.</button>
+					<%
+					}
+					}
+					%>
+
+				</div>
+
+				<%
+				ArrayList<Show> shows = showDao.getShows(Integer.parseInt(request.getParameter("eventId")));
+				%>
+				<p>
+					Seleziona spettacolo <select id="showSelect" onchange="loadSeats()">
+
+						<%
+						for (Show s : shows) {
+						%>
+
+						<option value=<%=s.getId()%>>
+							<%=s.getDate()%>,
+							<%=s.getTime()%>
+						</option>
+
+						<%
+						}
+						%>
+					</select>
+				</p>
+
+				<!-- link viene aggiunto nel js -->
+				<a href="#" data-show-id="<%=showId%>" data-venue-id=<%=pId%>
+					id="buy-button" class="btn btn-primary btn-sm"> Prenota e
+					aggiungi al carrello </a>
+
+
+
+
+
 			</div>
 		</div>
 	</div>
 
 
-	<%@include file= "/include/footer.jsp"%>
-	
+	<%@include file="/include/footer.jsp"%>
+
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-	<script src="<%= request.getContextPath() %>/scripts/javascript.js"></script>
+	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
+	<script src="<%=request.getContextPath()%>/scripts/seatScript.js"></script>
 </body>
 </html>
