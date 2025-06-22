@@ -1,22 +1,32 @@
-const searchbar = document.getElementById("searchbar");
 
-searchbar.addEventListener("keyup", (event) => {
-	
-	const xhr = new XMLHttpRequest();
-	
-	const searchInput = searchbar.value;
-	
-	xhr.open("get", "loadEvent.jsp?keyword=" + encodeURIComponent(searchInput), true);
-	xhr.setRequestHeader("Connection", "close");//chiude la connessione dopo che è stata inviata la richiesta
 
-	console.log("Searching: " + searchInput);
-	
-	xhr.onreadystatechange = function() {
-	    if (xhr.readyState === 4 && xhr.status === 200) {
-	        document.querySelector("#event-container .row").innerHTML = xhr.responseText;
-	    }
- 	};
+document.addEventListener("DOMContentLoaded", () => {
+    const searchbar = document.getElementById("searchbar");
+    const category = document.getElementById("category");
+    const container = document.querySelector(".row-products");
 
- 	xhr.send();
-	
+    if (!searchbar || !category || !container) {
+        console.error("Elemento mancante:", { searchbar, category, container });
+        return;
+    }
+
+    function loadFilteredProducts() {
+        const keyword = searchbar.value.trim();
+        const selectedCategory = category.value;
+
+		const xhr = new XMLHttpRequest();
+		xhr.open("GET", "loadEvent.jsp?keyword="+keyword+"&category="+selectedCategory, true);
+
+		xhr.onreadystatechange = function () {
+		    if (xhr.readyState === 4 && xhr.status === 200) {
+		        document.querySelector(".row-products").innerHTML = xhr.responseText;
+		    }
+		};
+
+		xhr.send();
+
+	}
+    searchbar.addEventListener("keyup", loadFilteredProducts);
+    category.addEventListener("change", loadFilteredProducts);
 });
+

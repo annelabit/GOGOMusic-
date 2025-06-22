@@ -15,7 +15,7 @@ import java.sql.SQLException;
 
 import dao.UserDao;
 
-@WebServlet("/common/login")
+@WebServlet("/common/loginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +37,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(user != null) {
 			
-			out.println("Login successful");
+			System.out.println("Login successful");
 			request.getSession().setAttribute("user", user);
 			
 			if(user.isAdmin()) {
@@ -46,10 +46,10 @@ public class LoginServlet extends HttpServlet {
 				request.getSession().setAttribute("isAdmin", Boolean.FALSE);//inserisco il token nella sessione
 			}
 			
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("common/index.jsp");
 		} else {
-			out.println("Login failed");
-			response.sendRedirect("login.jsp");
+			System.out.println("Login failed");
+			response.sendRedirect("common/login.jsp");
 			//login dovrà mostrare un messaggio di errore
 		}
 	}

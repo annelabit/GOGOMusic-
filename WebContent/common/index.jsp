@@ -1,95 +1,238 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="model.*"%>
+<%@page import="control.*"%>
 <%@page import="dao.*"%>
 <%@page import="java.util.*"%>
-<%@page import="model.*" %>
-<%@page import="control.*" %>
-<%@page import="java.text.DecimalFormat"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <% 
-
-    User user = (User) request.getSession().getAttribute("user");  //recupero l'attributo dalla sessione dell'utente
-    if(user!=null){  //se l'user appartiene alla sessione
-    	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
-    }
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	 <% 
+	 User user = (User) request.getSession().getAttribute("user");  //recupero l'attributo dalla sessione dell'utente
+	    if(user!=null){  //se l'user appartiene alla sessione
+	    	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
+	    }
+	    
+	    ProductDao pDao = new ProductDao();
+	    SeatDao sDao = new SeatDao();
+	    ShowDao showDao = new ShowDao();
+	    ArrayList<Product> products = pDao.getProducts();
+	    LocationDao lDao = new LocationDao();
+	    DecimalFormat df = new DecimalFormat("#0.00");
+	    
+	    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+	    if(cart != null){
+	    	request.setAttribute("cart_list", cart);
+	    }
     
-    ProductDao pDao = new ProductDao();
-    SeatDao sDao = new SeatDao();
-    ShowDao showDao = new ShowDao();
-    ArrayList<Product> products = pDao.getProducts();
-    LocationDao lDao = new LocationDao();
-    DecimalFormat df = new DecimalFormat("#0.00");
-    
-    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
-    if(cart != null){
-    	request.setAttribute("cart_list", cart);
-    }
     %>
+    
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="images/loghi/simple-logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/Poppins.css">
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/slider.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/stylesheet.css">
+
 <title>GOGOMusic!</title>
-<%@include file="includes/head.jsp" %>
-<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/styles/style.css">
-
-<!-- <script src="scripts/navbar.js"></script> --><!-- ?? -->
-
 </head>
 <body>
-<h1>Welcome to GOGOMusic!</h1>
-<%@include file="includes/navbar.jsp" %>
+	
+	<%@include file= "/include/navbar.jsp"%>
+	
+	<!-- carosello -->
+	<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
+		<div class="carousel-indicators">
+			<button type="button" data-bs-target="#hero-carousel"
+				data-bs-slide-to="0" class="active" aria-current="true"
+				aria-label="Slide 1"></button>
+			<button type="button" data-bs-target="#hero-carousel"
+				data-bs-slide-to="1" aria-label="Slide 2"></button>
+			<button type="button" data-bs-target="#hero-carousel"
+				data-bs-slide-to="2" aria-label="Slide 3"></button>
+		</div>
 
-
-<%@include file="includes/footer.jsp" %>
-	<div class="container" id="event-container">
-		<div class="card-header my-3"> Tutti i prodotti</div>
-		<div class="row">
-		
-		<% 
-			if(!products.isEmpty()){ //se c'è almeno un prodotto
-				
-				for(Product p : products){
-					
-					//showDao.getShow()
-		%>
-					
-					<div class="col-md-3 my-3">
-					<div class="card w-100" style="width: 18rem;">
-	  					<img src="<%= request.getContextPath() %>/images/artisti/<%= p.getImage()%>.png" class="card-img-top" alt="...">
-	  						<div class="card-body">
-							    <h5 class="card-title"><%= p.getName() %></h5>
-							    
-							    <%
-									double min = showDao.getMinimumPrice(p.getId());
-							    	double max = showDao.getMaximumPrice(p.getId());
-							    	if (min==0||max==0){
-							   	%>
-							    	<h6 class="price" style = "color:red"> Sold out </h6>
-							    <%
-							    	}
-							    	else{
-							    %>
-							    
-							    	<h6 class="price"> <%= df.format(min) %>€-<%= df.format(max)%>€ </h6>
-							    <% 
-							    	} 
-							    %>
-							    <h6 class="venue"> <%= lDao.getEventLocation(p.getVenueId()).getVenue()%></h6>
-							    <h6 class="category"> <%= p.getCategory() %></h6>
-							    <div class="mt-3 d-flex gap-3 align-items-center">
-							    	<a href="<%= request.getContextPath() %>/common/seatSelection.jsp?venue_id=<%=p.getVenueId()%>&pId=<%=p.getId() %>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>" class="btn btn-dark">Aggiungi al carrello</a>
-							    	<a href="<%= request.getContextPath() %>/common/buy-now?quantity=1&id=<%=p.getId()%>" class="btn btn-primary">Compra ora</a>
-							    </div>
-	  						</div>
-						</div>
-					</div>
-					
-				<%}
-			}
-		%>
-			
+		<div class="carousel-inner">
+			<div class="carousel-item active c-item">
+				<img src="images/foto-carosello/crc.png" class="d-block w-100 c-img"
+					alt="Slide 1">
+				<div class="carousel-caption top-0 mt-4">
+					<p class="text-uppercase fs-3 mt-5">Stadio Olimpio</p>
+					<p class="display-1 fw-bolder text-capitalize">Midwest Princess Tour</p>
+					<button class="btn px-4 py-2 fs-5 mt-5"><a href="#">Compra ora</button></a>
+					<!-- inserire collegamento pagina singola -->
+				</div>
+			</div>
+			<div class="carousel-item c-item">
+				<img src="images/foto-carosello/lgc.png" class="d-block w-100 c-img" alt="Slide 2">
+				<div class="carousel-caption top-0 mt-4">
+					<p class="text-uppercase fs-3 mt-5">Unipol Arena</p>
+					<p class="display-1 fw-bolder text-capitalize">The Mayhem Ball</p>
+					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
+						data-bs-target="#booking-modal"><a href="#">Compra ora</button></a>
+						<!-- inserire collegamento pagina singola -->
+				</div>
+			</div>
+			<div class="carousel-item c-item">
+				<img src="images/foto-carosello/tsc1.png" class="d-block w-100 c-img"
+					alt="Slide 3">
+				<div class="carousel-caption top-0 mt-4">
+					<p class="text-uppercase fs-3 mt-5">Stadio San Siro</p>
+					<p class="display-1 fw-bolder text-capitalize">The Eras Tour</p>
+					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
+						data-bs-target="#booking-modal"><a href="#">Compra ora</button></a>
+											<!-- inserire collegamento pagina singola -->
+				</div>
 			</div>
 		</div>
+		<button class="carousel-control-prev" type="button"
+			data-bs-target="#hero-carousel" data-bs-slide="prev">
+			<span class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Previous</span>
+		</button>
+		<button class="carousel-control-next" type="button"
+			data-bs-target="#hero-carousel" data-bs-slide="next">
+			<span class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Next</span>
+		</button>
+	</div>
+	
+	<div class="small-container">
+		<h2 class="title">Eventi proposti</h2>
+			
+	<!-- Prodotti -->
+	<div class="row">
+	
+	<% 
+				int elements = 0;
+				for(Product p : products){
+					if(elements++==6) break;
+	%>
+	
+	
 		
-	<%@include file="includes/footer.jsp" %>
+			<div class="col-3">
+				<a href="productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>"><img src="<%= request.getContextPath()%>/images/artisti/<%= p.getImage()%>.png"></a> <!-- inserire collegamento pagina singola -->
+				<h4><%= p.getName() %></h4>
+				
+				<%
+									
+				double min = showDao.getMinimumPrice(p.getId());
+				double max = showDao.getMaximumPrice(p.getId());
+				if (min==0||max==0){
+				
+				%>
+				
+				<p style = "color:red">Sold out</p>
+				
+				<%
+					}
+					else{
+				%>
+				
+				<p>Prezzo: <%= df.format(min) %>€-<%= df.format(max)%>€</p>
+				<p>Luogo: <%= lDao.getEventLocation(p.getVenueId()).getVenue()%></p>
+			
+		
+			<%
+			}
+				
+			%>
+			</div>
+			<%
+				
+				
+		}
+	
+	
+		%>
+		
+		</div>
+		
+		
+		<a href="products.jsp"><button class="btn" id="productsbtn">Vedi tutti</button></a>
+	</div>
+
+
+	<!-- Offerte -->
+	<div class="offer">
+		<div class="small-container">
+			<div class="row">
+				<div class="col-2">
+					<img src="images/billie-eilish/be.png" class="offer-img">
+				</div>
+				<div class="col-2" id="offerta">
+					<p>Offerta esclusiva</p>
+					<h1>Hit me Hard and Soft</h1>
+					<small>Offerta esclusiva per uno dei concerti più venduti
+						al mondo.</small> <br> <a href="" class="btn">Compra Ora &#8594;</a> <!-- inserire collegamento pagina singola -->
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- categorie  -->
+	<div class="small-container">
+		<div class="row">
+			<div class="col-4">
+				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/pop.png"> </a> <!-- inserire collegamento pagina con quel genere -->
+				<h3>Pop</h3>
+			</div>
+			<div class="col-4">
+				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/rock.png"></a> <!-- inserire collegamento pagina con quel genere -->
+				<h3>Rock</h3>
+			</div>
+			<div class="col-4">
+				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/rap.png"></a> <!-- inserire collegamento pagina con quel genere -->
+				<h3>Rap</h3>
+			</div>
+			<div class="col-4">
+				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/latino.png"></a><!-- inserire collegamento pagina con quel genere -->
+				<h3>Latino</h3>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- brand -->
+	<div class="brands">
+		<div class="small-container">
+			<div class="row">
+				<div class="col-5">
+					<img src="<%=request.getContextPath()%>/images/loghi/coca-cola.png">
+				</div>
+				<div class="col-5">
+					<img src="<%=request.getContextPath()%>/images/loghi/amazon.png">
+				</div>
+				<div class="col-5">
+					<img src="<%=request.getContextPath()%>/images/loghi/mcdonald.png">
+				</div>
+				<div class="col-5">
+					<img src="<%=request.getContextPath()%>/images/loghi/paypal.png">
+				</div>
+			</div>
+		</div>
+	</div>
+
+<%@include file= "/include/footer.jsp"%>
+
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+	<script src="<%= request.getContextPath() %>/scripts/javascript.js"></script>
 </body>
 </html>
