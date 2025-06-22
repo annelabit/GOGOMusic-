@@ -162,7 +162,7 @@
 		</div>
 		
 		
-		<a href="products.jsp"><button class="btn" id="productsbtn">Vedi tutti</button></a>
+		<a href="<%=request.getContextPath() %>/common/products.jsp"><button class="btn" id="productsbtn">Vedi tutti</button></a>
 	</div>
 
 
@@ -188,19 +188,19 @@
 	<div class="small-container">
 		<div class="row">
 			<div class="col-4">
-				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/pop.png"> </a> <!-- inserire collegamento pagina con quel genere -->
+				<a href="<%=request.getContextPath() %>/common/products.jsp?category=pop"><img src="<%=request.getContextPath()%>/images/generi/pop.png"> </a> <!-- inserire collegamento pagina con quel genere -->
 				<h3>Pop</h3>
 			</div>
 			<div class="col-4">
-				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/rock.png"></a> <!-- inserire collegamento pagina con quel genere -->
+				<a href="<%=request.getContextPath() %>/common/products.jsp?category=rock"><img src="<%=request.getContextPath()%>/images/generi/rock.png"></a> <!-- inserire collegamento pagina con quel genere -->
 				<h3>Rock</h3>
 			</div>
 			<div class="col-4">
-				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/rap.png"></a> <!-- inserire collegamento pagina con quel genere -->
+				<a href="<%=request.getContextPath() %>/common/products.jsp?category=rap"><img src="<%=request.getContextPath()%>/images/generi/rap.png"></a> <!-- inserire collegamento pagina con quel genere -->
 				<h3>Rap</h3>
 			</div>
 			<div class="col-4">
-				<a href="products.html"><img src="<%=request.getContextPath()%>/images/generi/latino.png"></a><!-- inserire collegamento pagina con quel genere -->
+				<a href="<%=request.getContextPath() %>/common/products.jsp?category=latino"><img src="<%=request.getContextPath()%>/images/generi/latino.png"></a><!-- inserire collegamento pagina con quel genere -->
 				<h3>Latino</h3>
 			</div>
 		</div>

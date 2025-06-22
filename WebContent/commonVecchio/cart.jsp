@@ -52,6 +52,7 @@
 	
 		<h3>Prezzo Totale: €<%= df.format(totalPrice) %></h3>
 			<a class="btn btn-primary mx-3" href="<%= request.getContextPath() %>/common/checkout"> Check out </a>
+			
 		</div>
 		<table class="table table-light">
 			<thead>

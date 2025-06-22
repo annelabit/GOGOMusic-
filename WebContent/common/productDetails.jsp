@@ -145,22 +145,7 @@ double max = showDao.getMaximumPrice(p.getId());
 						}
 						%>
 					</select>
-				</div>
-				<a href="cart.jsp" class="btn">Aggiungi al carrello</a>
-				<h3>Dettagli concerto</h3>
-				<p>Billie Eilish torna in Italia dopo ben 6 anni di assenza per
-					il tour del suo terzo album intitolato "Hit me Hard and Soft" che
-					conta oltre 7 miliardi di stream.</p>
-
-				
-				<!-- SELEZIONE POSTI -->
-				<div class="grid-container">
-
-					
-
-				</div>
-
-				<%
+					<%
 				ArrayList<Show> shows = showDao.getShows(Integer.parseInt(request.getParameter("eventId")));
 				%>
 				<p>
@@ -180,6 +165,22 @@ double max = showDao.getMaximumPrice(p.getId());
 						%>
 					</select>
 				</p>
+				</div>
+				<!-- <a href="cart.jsp" class="btn">Aggiungi al carrello</a> -->
+				<h3>Dettagli concerto</h3>
+				<p>Billie Eilish torna in Italia dopo ben 6 anni di assenza per
+					il tour del suo terzo album intitolato "Hit me Hard and Soft" che
+					conta oltre 7 miliardi di stream.</p>
+
+				
+				<!-- SELEZIONE POSTI -->
+				<div class="grid-container">
+
+					
+
+				</div>
+
+				
 
 				<!-- link viene aggiunto nel js -->
 				<a href="#" data-show-id="<%=showId%>" data-venue-id=<%=pId%>

@@ -143,7 +143,10 @@ body {
 		</div>
 
 		<button class="btn" id="checkoutbtn">
-			<a href="/common/CheckoutServlet">Checkout</a>
+			<a href="<%=request.getContextPath() %>/common/CheckoutServlet">Checkout</a>
+		</button>
+		<button class="btn" id="emptycart">
+			<a href="<%=request.getContextPath() %>/common/empty-cart">Svuota Carrello</a>
 		</button>
 
 	</div>
