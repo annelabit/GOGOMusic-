@@ -27,7 +27,9 @@ public class OrderDao {
 		try {
 			connection = DBConnection.getConnection();
 			//devo inserire sia in order sia in order_seats
-			query = "INSERT INTO `order` (productId, userId, quantity, date, totalPrice, time, showId) VALUES(?,?,?,?,?,?,?)";
+			query = "INSERT INTO `order` (productId, userId, quantity, date, totalPrice, time, showId,"
+					+ " nome, indirizzo, città, paese, cap, nomeTitolare, "
+					+ "numeroCarta, meseScadenza, annoScadenza, cvv, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			
 			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, order.getId());
@@ -37,6 +39,18 @@ public class OrderDao {
 			pst.setFloat(5, order.getPrice());
 			pst.setString(6, order.getTime());
 			pst.setInt(7, order.getShowId());
+			pst.setString(8, order.getNome());
+			pst.setString(9, order.getIndirizzo());
+			pst.setString(10, order.getCittà());
+			pst.setString(11, order.getPaese());
+			pst.setInt(12, order.getCap());
+			pst.setString(13, order.getNomeTitolare());
+			pst.setString(14, order.getNumeroCarta());
+			pst.setInt(15, order.getMeseScadenza());
+			pst.setInt(16, order.getAnnoScadenza());
+			pst.setInt(17, order.getCvv());
+			pst.setString(18, order.getEmail());
+			
 			pst.executeUpdate();
 			
 			//order è auto increment quindi devo prendere id

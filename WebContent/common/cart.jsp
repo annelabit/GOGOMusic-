@@ -121,7 +121,9 @@ body {
 			<%
 			}
 			%>
-
+<%
+	}
+	%>
 		</table>
 
 
@@ -143,7 +145,7 @@ body {
 		</div>
 
 		<button class="btn" id="checkoutbtn">
-			<a href="<%=request.getContextPath() %>/common/CheckoutServlet">Checkout</a>
+			<a href="<%=request.getContextPath() %>/common/checkout.jsp">Checkout</a>
 		</button>
 		<button class="btn" id="emptycart">
 			<a href="<%=request.getContextPath() %>/common/empty-cart">Svuota Carrello</a>
@@ -151,9 +153,7 @@ body {
 
 	</div>
 
-	<%
-	}
-	%>
+	
 
 	<%@include file="/include/footer.jsp"%>
 
