@@ -744,6 +744,89 @@ form a {
 
 
 
+/* Pagina Checkout*/
+.container-checkout{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	background: radial-gradient(#fff, #38B4BC);
+	padding: 25px;
+}
+
+.container-checkout form{
+	width: 700px;
+	padding: 40px;
+	background: #FFFAFF;
+}
+
+form .row{
+	display: flex;
+	gap: 15px;
+	flex-wrap: wrap;
+}
+
+.row-checkout .col-checkout{
+	flex: 1 1 250px;
+}
+
+.col-checkout .title{
+	font-size:20px;
+	text-transform: uppercase;
+	margin-bottom: 5px;
+}
+
+.col-checkout .input-box{
+	margin: 15px 0;
+}
+
+.input-box span{
+	display: block;
+	margin-bottom: 10px;
+	
+}
+
+.input-box input{
+	width: 100%;
+	padding: 10px 15px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
+	font-size: 15px;
+}
+
+.col-checkout .flex{
+	display: flex;
+	gap: 15px;
+}
+
+.flex .input-box{
+	margin-top: 5px;
+}
+
+form .btn-checkout{
+	width: 100%;
+	padding: 12px;
+	background: #226E75;
+	border: none;
+	outline: none;
+	border-radius: 6px;
+	font-size: 17px;
+	color: #FFFAFF;
+	margin-top: 5px;
+	cursor: pointer;
+}
+
+form .btn-checkout:hover{
+	background: #1A5C61;
+}
+
+.input-box img{
+	height: 34px;
+	margin-top: 5px;
+	filter: drop-shadow(0 0 1px #000);
+}
+
+
 /* MEDIA QUERY */
 @media only screen and (max-width: 1200px) {
 	.col-4, .col-4-products {
