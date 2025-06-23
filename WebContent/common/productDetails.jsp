@@ -154,8 +154,8 @@ double max = showDao.getMaximumPrice(p.getId());
 						<%
 						} else {
 						%>
-						<option value=<%=c%>>
-							<%=c%> - <span style="color: red">Sold Out</span>
+					 <option value=<%=c%>>
+							<%=c%>  <span style="color: red"></span> <!-- Sold out? -->
 						</option>
 
 						<%

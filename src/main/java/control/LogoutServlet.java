@@ -5,8 +5,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Cart;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+
+import dao.ShowSeatDao;
 
 /**
  * Servlet implementation class LogoutServlet
@@ -19,9 +24,16 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try(PrintWriter out= response.getWriter()) {
 			
-			//Boolean isAdmin = (Boolean) request.getSession().getAttribute("isAdmin");
+			ShowSeatDao showSeatDao = new ShowSeatDao();
 			
 			if(request.getSession().getAttribute("user")!= null) {  //attributo user (da settare) nella servlet Login
+				ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list"); 
+				if(cart!=null) {
+					for(Cart c : cart) {
+							showSeatDao.setSeatsAvailable(c.getShowId(), c.getSeatIds());
+					}
+				}
+				cart.clear();
 					request.getSession().invalidate();
 					response.sendRedirect("login.jsp");
 					} else { 
