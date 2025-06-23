@@ -94,7 +94,6 @@ double max = showDao.getMaximumPrice(p.getId());
 			</div>
 			<div class="col-2">
 				<p>Home</p>
-				<!-- il nome dell'artista deve cambiare, forse anche il path: home/products/billie Eilish (?) -->
 				<h1><%=p.getName()%></h1>
 
 				<%
@@ -120,21 +119,32 @@ double max = showDao.getMaximumPrice(p.getId());
 				<div class="button-group">
 					<button id="showImageBtn">Visualizza mappa</button>
 
-					<!-- Overlay (schermo intero) che conterrà l'immagine della mappa-->
 					<div id="imageOverlay" class="overlay">
 						<span class="close-btn">&times;</span> <img id="fullscreenImage"
 							class="overlay-image"
 							src="images/stadi/<%=lDao.getEventLocation(p.getVenueId()).getImage()%>">
-						<!-- da cambiare in base allo stadio -->
 					</div>
 
 					<select id="selectbtn" onchange="loadSeats()">
 						<option>Seleziona settore</option>
 
 						<%
-						//showSeatDao.getSeatsForShow(showId).
 						ArrayList<String> categories = sDao.getAllCategories(p.getVenueId());
 						for (String c : categories) {
+
+							boolean available = false;
+
+							for (ShowSeat s : seats) {
+
+								if (sDao.getSeatsByShowSeat(s).getType().equalsIgnoreCase(c)) {
+
+							if (s.isAvailable() == 1) {
+								available = true;
+								break;
+							}
+								}
+							}
+							if (available) {
 						%>
 
 						<option value=<%=c%>>
@@ -142,45 +152,50 @@ double max = showDao.getMaximumPrice(p.getId());
 						</option>
 
 						<%
-						}
+						} else {
 						%>
-					</select>
-					<%
-				ArrayList<Show> shows = showDao.getShows(Integer.parseInt(request.getParameter("eventId")));
-				%>
-				<p>
-					Seleziona spettacolo <select id="showSelect" onchange="loadSeats()">
-
-						<%
-						for (Show s : shows) {
-						%>
-
-						<option value=<%=s.getId()%>>
-							<%=s.getDate()%>,
-							<%=s.getTime()%>
+						<option value=<%=c%>>
+							<%=c%> - <span style="color: red">Sold Out</span>
 						</option>
 
 						<%
 						}
+						}
 						%>
 					</select>
-				</p>
+					<%
+					ArrayList<Show> shows = showDao.getShows(Integer.parseInt(request.getParameter("eventId")));
+					%>
+					<p>
+						Seleziona spettacolo <select id="showSelect"
+							onchange="loadSeats()">
+
+							<%
+							for (Show s : shows) {
+							%>
+
+							<option value=<%=s.getId()%>>
+								<%=s.getDate()%>,
+								<%=s.getTime()%>
+							</option>
+
+							<%
+							}
+							%>
+						</select>
+					</p>
 				</div>
-				<!-- <a href="cart.jsp" class="btn">Aggiungi al carrello</a> -->
+
 				<h3>Dettagli concerto</h3>
 				<p>Billie Eilish torna in Italia dopo ben 6 anni di assenza per
 					il tour del suo terzo album intitolato "Hit me Hard and Soft" che
 					conta oltre 7 miliardi di stream.</p>
 
-				
+
 				<!-- SELEZIONE POSTI -->
-				<div class="grid-container">
+				<div class="grid-container"></div>
 
-					
 
-				</div>
-
-				
 
 				<!-- link viene aggiunto nel js -->
 				<a href="#" data-show-id="<%=showId%>" data-venue-id=<%=pId%>

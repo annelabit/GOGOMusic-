@@ -1,10 +1,12 @@
 let selectedSeatsIds = [];
+const categorySelect = document.getElementById("selectbtn");
+const categoria = categorySelect.value;
 
 function loadSeats() {
 	const showSelect = document.getElementById("showSelect");
-	const categorySelect = document.getElementById("selectbtn");
+
 	const showId = showSelect.value;
-	const categoria = categorySelect.value;
+
 	const venueId = document.getElementById("buy-button").getAttribute("data-venue-id");
 
 	// verifica che siano state selezionate entrambe le opzioni
@@ -16,7 +18,7 @@ function loadSeats() {
 	xhr.open("get", `loadSeats.jsp?showId=${showId}&categoria=${encodeURIComponent(categoria)}`, true);
 	//xhr.setRequestHeader("Connection", "close");
 
-	xhr.onreadystatechange = function () {
+	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			document.querySelector(".grid-container").innerHTML = xhr.responseText;
 			selectedSeatsIds = [];
@@ -31,35 +33,36 @@ function loadSeats() {
 }
 
 
-function selectSeat(seatId){
-	
+function selectSeat(seatId) {
+
 	const seatButton = document.getElementById(seatId);
-	
+
 	//se è già selezionato
-	if(selectedSeatsIds.includes(seatId)){
+	if (selectedSeatsIds.includes(seatId)) {
 
 		selectedSeatsIds = selectedSeatsIds.filter(id => id !== seatId);
 		seatButton.classList.remove("selected-seat");
-	
+
 	} else {
-		
+
 		selectedSeatsIds.push(seatId);
 		seatButton.classList.add("selected-seat");
-		
+
 	}
-	
+
 	//ora acquista porta all'acquisto corretto
 	const buyLink = document.getElementById("buy-button");
-	
+
 	//concatena e separa con virgola
 	const Ids = selectedSeatsIds.join(",");
-	
+
 	const contextPath = window.location.pathname.split("/")[1];
 	const baseUrl = "/" + contextPath;
 	//const url = baseUrl + "/common/MyServlet";
-	
+
 	//passo la stringa con gli id
-	buyLink.href = baseUrl +"/common/update-seat?seatIds=" + encodeURIComponent(Ids) + "&pId=" + buyLink.dataset.venueId + "&showId=" + buyLink.dataset.showId + "&quantity="+selectedSeatsIds.length;
-	
+	buyLink.href = baseUrl + "/common/update-seat?seatIds=" + encodeURIComponent(Ids) + "&pId=" + buyLink.dataset.venueId + "&showId=" + buyLink.dataset.showId + "&quantity=" + selectedSeatsIds.length
+		+ "&type=" + categoria;
+
 }
 

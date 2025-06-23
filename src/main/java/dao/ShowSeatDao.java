@@ -43,7 +43,7 @@ public class ShowSeatDao {
         }finally {
 			closeConnection(connection);
 		}
-        return seatList;
+		return seatList;
 		
 	}
 	

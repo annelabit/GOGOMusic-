@@ -69,10 +69,9 @@
 				<img src="images/foto-carosello/crc.png" class="d-block w-100 c-img"
 					alt="Slide 1">
 				<div class="carousel-caption top-0 mt-4">
-					<p class="text-uppercase fs-3 mt-5">Stadio Olimpio</p>
+					<p class="text-uppercase fs-3 mt-5">Stadio Olimpico</p>
 					<p class="display-1 fw-bolder text-capitalize">Midwest Princess Tour</p>
-					<button class="btn px-4 py-2 fs-5 mt-5"><a href="#">Compra ora</button></a>
-					<!-- inserire collegamento pagina singola -->
+					<button class="btn px-4 py-2 fs-5 mt-5"><a href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=3&showId=3">Compra ora</button></a>
 				</div>
 			</div>
 			<div class="carousel-item c-item">
@@ -81,8 +80,7 @@
 					<p class="text-uppercase fs-3 mt-5">Unipol Arena</p>
 					<p class="display-1 fw-bolder text-capitalize">The Mayhem Ball</p>
 					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-						data-bs-target="#booking-modal"><a href="#">Compra ora</button></a>
-						<!-- inserire collegamento pagina singola -->
+						data-bs-target="#booking-modal"><a href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=2&showId=2">Compra ora</button></a>
 				</div>
 			</div>
 			<div class="carousel-item c-item">
@@ -92,8 +90,7 @@
 					<p class="text-uppercase fs-3 mt-5">Stadio San Siro</p>
 					<p class="display-1 fw-bolder text-capitalize">The Eras Tour</p>
 					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-						data-bs-target="#booking-modal"><a href="#">Compra ora</button></a>
-											<!-- inserire collegamento pagina singola -->
+						data-bs-target="#booking-modal"><a href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=6&showId=22">Compra ora</button></a>							
 				</div>
 			</div>
 		</div>
@@ -177,7 +174,7 @@
 					<p>Offerta esclusiva</p>
 					<h1>Hit me Hard and Soft</h1>
 					<small>Offerta esclusiva per uno dei concerti più venduti
-						al mondo.</small> <br> <a href="" class="btn">Compra Ora &#8594;</a> <!-- inserire collegamento pagina singola -->
+						al mondo.</small> <br> <a href="<%=request.getContextPath() %>/common/productDetails.jsp?eventId=1&showId=1" class="btn">Compra Ora &#8594;</a> <!-- inserire collegamento pagina singola -->
 				</div>
 			</div>
 		</div>

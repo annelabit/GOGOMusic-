@@ -18,6 +18,7 @@ ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
 ArrayList<Cart> cartProducts = null;
 ProductDao pDao = new ProductDao();
 SeatDao seatDao = new SeatDao();
+ShowDao showDao = new ShowDao();
 DecimalFormat df = new DecimalFormat("#0.00");
 
 double totalPrice = 0;
@@ -94,36 +95,38 @@ body {
 			<tr>
 				<td>
 					<div class="cart-info">
-						<img src="<%=request.getContextPath()%>/images/artisti/<%=c.getImage()%>.png">
+						<img
+							src="<%=request.getContextPath()%>/images/artisti/<%=c.getImage()%>.png">
 						<div class="text-container">
 							<p><%=c.getName()%></p>
-							  <small>Prezzo: <%=pDao.getPriceForSelected(c.getSeatIds(), c.getShowId())  %></small>
+							<small>Quantità: <%=c.getQuantity()%></small> <small>Data:
+								<%=showDao.getShow(c.getShowId()).getDate()%>, <%=showDao.getShow(c.getShowId()).getTime()%></small>
+							<!-- <small>Prezzo: <=pDao.getPriceForSelected(c.getSeatIds(), c.getShowId())  %></small> -->
 						</div>
 					</div>
 				</td>
-				
-				<% 
+
+				<%
 				ArrayList<String> s = new ArrayList<>();
-				for(Integer i : c.getSeatIds()){
-					
-					if(!s.contains(seatDao.getSeatById(i).getType()))
+				for (Integer i : c.getSeatIds()) {
+
+					if (!s.contains(seatDao.getSeatById(i).getType()))
 						s.add(seatDao.getSeatById(i).getType());
-				} 
+				}
 				%>
-				<td>
-				<%=s.toString().replaceAll("^.|.$", "")%> 
-				</td>
-				
-				<td><a href="<%=request.getContextPath()%>/common/remove-from-cart?id=<%=c.getId()%>">Rimuovi</a></td>
-				<td><%=pDao.getPriceForSelected(c.getSeatIds(), c.getShowId())%></td>
+				<td><%=s.toString().replaceAll("^.|.$", "")%></td>
+
+				<td><a
+					href="<%=request.getContextPath()%>/common/remove-from-cart?id=<%=c.getId()%>">Rimuovi</a></td>
+				<td><%=df.format(pDao.getPriceForSelected(c.getSeatIds(), c.getShowId()))%></td>
 			</tr>
 
 			<%
 			}
 			%>
-<%
-	}
-	%>
+			<%
+			}
+			%>
 		</table>
 
 
@@ -131,29 +134,39 @@ body {
 			<table>
 				<tr>
 					<td>Subtotale</td>
-					<td><%=total%>$</td>
+					<td><%=df.format(total)%>$</td>
 				</tr>
 				<tr>
 					<td>Tasse</td>
-					<td>4.30$</td>
+					<td><%=df.format(4.30)%>$</td>
 				</tr>
 				<tr>
 					<td>Totale</td>
-					<td><%=total + 4.30%>$</td>
+					<td><%=df.format(total + 4.30)%>$</td>
 				</tr>
 			</table>
 		</div>
 
 		<button class="btn" id="checkoutbtn">
-			<a href="<%=request.getContextPath() %>/common/checkout.jsp">Checkout</a>
+			<%
+			if (user == null) {
+			%>
+			<a href="<%=request.getContextPath()%>/common/login.jsp">Checkout</a>
+			<%
+			} else {
+			%>
+			<a href="<%=request.getContextPath()%>/common/checkout.jsp">Checkout</a>
+
+			<%
+			}
+			%>
 		</button>
 		<button class="btn" id="emptycart">
-			<a href="<%=request.getContextPath() %>/common/empty-cart">Svuota Carrello</a>
+			<a href="<%=request.getContextPath()%>/common/empty-cart">Svuota
+				Carrello</a>
 		</button>
 
 	</div>
-
-	
 
 	<%@include file="/include/footer.jsp"%>
 

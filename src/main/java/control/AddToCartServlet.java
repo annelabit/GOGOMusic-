@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.ProductDao;
+import dao.SeatDao;
 import model.*;
 /**
  * Servlet implementation class AddToCartServlet
@@ -29,10 +30,11 @@ public class AddToCartServlet extends HttpServlet {
 			ArrayList<Cart> cart = new ArrayList<>();
 			
 			ProductDao pDao = new ProductDao();
-		    
+		    SeatDao seatDao = new SeatDao();
 			
 			int id = Integer.parseInt(request.getParameter("id"));
 			int showId = Integer.parseInt(request.getParameter("showId"));
+			String type = request.getParameter("type");
 			
 			Product p = pDao.getSingleProduct(id);
 			Cart cartItem = new Cart(p);
@@ -89,7 +91,7 @@ public class AddToCartServlet extends HttpServlet {
 				//controlla se il prodotto è già presente nel carrello
 				for(Cart c : cart) {
 					//controllo sia l'id dell'evento sia dello spettacolo
-					if(c.getId() == id && c.getShowId() == showId) {//c'è già
+					if(c.getId() == id && c.getShowId() == showId && seatDao.getSeatById(c.getSeatIds().getFirst()).getType().equals(type)) {//c'è già
 						
 						exists = true;
 						
