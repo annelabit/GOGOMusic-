@@ -84,5 +84,24 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-
-
+/*pagina ordini*/
+function toggleDetails(orderId) {
+	    const detailsElement = document.getElementById(orderId);
+	    const button = detailsElement.previousElementSibling.querySelector('.details-btn');
+	    const btnText = button.querySelector('.btn-text');
+	    const arrow = button.querySelector('.arrow');
+	    
+	    if (detailsElement.style.display === 'block' || detailsElement.classList.contains('show')) {
+	        // Nascondi i dettagli
+	        detailsElement.style.display = 'none';
+	        detailsElement.classList.remove('show');
+	        btnText.textContent = 'Vedi Dettagli';
+	        arrow.style.transform = 'rotate(0deg)';
+	    } else {
+	        // Mostra i dettagli
+	        detailsElement.style.display = 'block';
+	        detailsElement.classList.add('show');
+	        btnText.textContent = 'Nascondi Dettagli';
+	        arrow.style.transform = 'rotate(180deg)';
+	    }
+	}
