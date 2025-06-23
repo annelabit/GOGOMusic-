@@ -58,6 +58,13 @@ a:hover {
 	color: #ADADAD;
 }
 
+a.active {
+    color: #FFFAFF;
+    font-weight: bold;
+    border-bottom: 2px solid #FFFAFF;
+    padding-bottom: 2px;
+}
+
 p {
 	margin-bottom: 10px;
 	color: #555;
