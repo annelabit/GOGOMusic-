@@ -96,6 +96,30 @@ public class SeatDao {
 		}
 		return seat;
 	}
+	
+	public Seat getSeatsByShowSeatId(int showSeat) {
+
+		Seat seat = new Seat();
+
+		try {
+			connection = DBConnection.getConnection();
+			query = "SELECT * FROM SEAT WHERE id = ?";
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, showSeat);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				seat.setId(rs.getInt("id"));
+				seat.setType(rs.getString("type"));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+		return seat;
+	}
 
 	public boolean reserveSeat(int seatId) {
 

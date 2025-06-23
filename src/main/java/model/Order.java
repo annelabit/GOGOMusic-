@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class Order extends Product{
 
@@ -21,6 +22,10 @@ public class Order extends Product{
 	private int meseScadenza;
 	private int annoScadenza;
 	private int cvv;
+	private String showDate;
+	private String showTime;
+	private ArrayList<Integer> showSeatIds;
+	
 	
 	public Order() {}
 
@@ -206,5 +211,30 @@ public class Order extends Product{
 		return "Order [orderId=" + orderId + ", uid=" + uid + ", showId=" + showId + ", quantity=" + quantity
 				+ ", date=" + date + ", time=" + time + "]";
 	}
+
+	public void setShowDate(String showDate) {
+		this.showDate=showDate;
+	}
+	
+	public void setShowTime(String showTime) {
+		this.showTime=showTime;
+	}
+
+	public String getShowDate() {
+		return showDate;
+	}
+
+	public String getShowTime() {
+		return showTime;
+	}
+
+	public ArrayList<Integer> getShowSeatIds() {
+		return showSeatIds;
+	}
+
+	public void setShowSeatIds(ArrayList<Integer> showSeatIds) {
+		this.showSeatIds = showSeatIds;
+	}
+
 
 }

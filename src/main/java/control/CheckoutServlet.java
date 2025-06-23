@@ -109,7 +109,7 @@ public class CheckoutServlet extends HttpServlet {
 				}
 
 				cart.clear();
-				response.sendRedirect("orders.jsp");
+				response.sendRedirect("common/order-history");
 
 			} else {
 

@@ -28,7 +28,7 @@
 					<li><a href="<%= request.getContextPath() %>/common/index.jsp">Home</a></li>
 					<li><a href="<%= request.getContextPath() %>/common/login.jsp">Log
 							in</a></li>
-					<li><a href="">Ordini</a></li>
+					<li><a href="<%=request.getContextPath() %>/common/order-history">Ordini</a></li>
 					<li><a href="">Account</a></li>
 				</ul>
 			</nav>
@@ -52,7 +52,7 @@
 	</div>
 </div>
 
-
+<script src="<%= request.getContextPath() %>/scripts/javascript.js"></script>
 <script src="<%= request.getContextPath() %>/scripts/suggestions.js"></script>
 <script src="<%= request.getContextPath() %>/scripts/navbar.js"></script>
 <script>

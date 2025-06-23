@@ -22,7 +22,7 @@ public class LocationDao {
 	public LocationDao() {}
 	
 	public Location getEventLocation(int id) {
-		Location l = null;
+		Location l = new Location();
 		
 		try {
 			connection = DBConnection.getConnection();
