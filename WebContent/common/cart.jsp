@@ -1,7 +1,6 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="model.*"%>
 <%@page import="control.*"%>
-<%@page import="dao.*"%>
 <%@page import="java.util.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>

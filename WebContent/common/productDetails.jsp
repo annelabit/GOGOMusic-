@@ -6,29 +6,18 @@
 <%@page import="control.*"%>
 <%@page import="java.util.ArrayList"%>
 <%
-User user = (User) request.getSession().getAttribute("user");
+User user = (User) request.getAttribute("user");
 
 ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
 if (cart != null) {
 	request.setAttribute("cart_list", cart);
 }
 
-SeatDao sDao = new SeatDao();
-ShowSeatDao showSeatDao = new ShowSeatDao();
-ShowDao showDao = new ShowDao();
-ProductDao pDao = new ProductDao();
-LocationDao lDao = new LocationDao();
 DecimalFormat df = new DecimalFormat("#0.00");
-
-ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));
-
-int pId = Integer.parseInt(request.getParameter("eventId"));
-int showId = Integer.parseInt(request.getParameter("showId"));
-
-Product p = pDao.getSingleProduct(pId);
-
-double min = showDao.getMinimumPrice(p.getId());
-double max = showDao.getMaximumPrice(p.getId());
+Product p = (Product) request.getAttribute("product");
+Location location = (Location) request.getAttribute("location");
+ArrayList<ShowSeat> seats = (ArrayList<ShowSeat>) request.getAttribute("seats");
+ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
 %>
 <!DOCTYPE html>
 <html>
@@ -97,7 +86,7 @@ double max = showDao.getMaximumPrice(p.getId());
 				<h1><%=p.getName()%></h1>
 
 				<%
-				if (min == 0 || max == 0) {
+				if (p.getMinPrice() == 0 || p.getMaxPrice() == 0) {
 				%>
 
 				<h4 style="color: red">Sold out</h4>
@@ -107,7 +96,7 @@ double max = showDao.getMaximumPrice(p.getId());
 				} else {
 				%>
 
-				<h4><%=min%>-<%=max%>$
+				<h4><%=df.format(p.getMinPrice())%>-<%=df.format(p.getMaxPrice())%>$
 				</h4>
 
 				<%
@@ -115,76 +104,43 @@ double max = showDao.getMaximumPrice(p.getId());
 				%>
 
 
-				<h3><%=lDao.getEventLocation(p.getVenueId()).getVenue()%></h3>
+				<h3><%=p.getLocation()%></h3>
 				<div class="button-group">
 					<button id="showImageBtn">Visualizza mappa</button>
 
 					<div id="imageOverlay" class="overlay">
 						<span class="close-btn">&times;</span> <img id="fullscreenImage"
-							class="overlay-image"
-							src="images/stadi/<%=lDao.getEventLocation(p.getVenueId()).getImage()%>">
+							class="overlay-image" src="images/stadi/<%=location.getImage()%>">
 					</div>
 
 					<select id="selectbtn" onchange="loadSeats()">
 						<option>Seleziona settore</option>
 
 						<%
-						ArrayList<String> categories = sDao.getAllCategories(p.getVenueId());
 						for (String c : categories) {
-
-							boolean available = false;
-
-							for (ShowSeat s : seats) {
-
-								if (sDao.getSeatsByShowSeat(s).getType().equalsIgnoreCase(c)) {
-
-							if (s.isAvailable() == 1) {
-								available = true;
-								break;
-							}
-								}
-							}
-							if (available) {
 						%>
-
 						<option value=<%=c%>>
 							<%=c%>
 						</option>
+						<%
+						}
+						%>
+					</select> 
+					<select id="showSelect" onchange="loadSeats()">
 
 						<%
-						} else {
+						for (Show s : p.getShows()) {
 						%>
-						<option value=<%=c%>>
-							<%=c%> <span style="color: red"></span>
-							<!-- Sold out? -->
+
+						<option value=<%=s.getId()%>>
+							<%=s.getDate()%>,
+							<%=s.getTime()%>
 						</option>
 
 						<%
 						}
-						}
 						%>
 					</select>
-					<%
-					ArrayList<Show> shows = showDao.getShows(Integer.parseInt(request.getParameter("eventId")));
-					%>
-					<p>
-						Seleziona spettacolo <select id="showSelect"
-							onchange="loadSeats()">
-
-							<%
-							for (Show s : shows) {
-							%>
-
-							<option value=<%=s.getId()%>>
-								<%=s.getDate()%>,
-								<%=s.getTime()%>
-							</option>
-
-							<%
-							}
-							%>
-						</select>
-					</p>
 				</div>
 
 				<h3>Dettagli concerto</h3>
@@ -199,9 +155,10 @@ double max = showDao.getMaximumPrice(p.getId());
 
 
 				<!-- link viene aggiunto nel js -->
-				<a href="#" data-show-id="<%=showId%>" data-venue-id=<%=pId%>
-					id="buy-button" class="btn btn-primary btn-sm"> Prenota e
-					aggiungi al carrello </a>
+				<a href="#" data-show-id="<%=p.getShows().getFirst().getId()%>"
+					data-venue-id=<%=p.getVenueId()%> id="buy-button"
+					class="btn btn-primary btn-sm"> Prenota e aggiungi al carrello
+				</a>
 
 
 

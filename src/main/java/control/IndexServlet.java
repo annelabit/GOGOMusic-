@@ -24,6 +24,9 @@ public class IndexServlet extends HttpServlet {
 
 		// controllo se viene da selezione categoria
 		String category = request.getParameter("category");
+		
+		//controllo se viene da tutti i prodotti
+		String all = request.getParameter("products");
 
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
@@ -53,6 +56,12 @@ public class IndexServlet extends HttpServlet {
 		}
 
 		if (category == null) {
+			
+			if(all != null) {
+				// Reindirizza alla JSP
+				request.getRequestDispatcher("products.jsp").forward(request, response);
+			}
+			
 			// Reindirizza alla JSP
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else {

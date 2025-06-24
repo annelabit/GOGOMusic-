@@ -532,7 +532,7 @@ input:focus {
 	gap: 12px;
 }
 
-#showImageBtn, #selectbtn {
+#showImageBtn, #selectbtn, #showSelect {
 	flex: 1;
 	min-width: 180px;
 	width: 0;
@@ -552,13 +552,13 @@ input:focus {
 	color: white;
 }
 
-#selectbtn {
+#selectbtn, #showSelect {
 	background: #f0f0f0;
 	color: #333;
 	border: 1px solid #ddd;
 }
 
-#selectbtn:hover {
+#selectbtn:hover, #showSelect:hover {
 	background-color: #d8d8d8;
 }
 
@@ -951,7 +951,7 @@ form .btn-checkout:hover{
 		flex-direction: column;
 		gap: 10px;
 	}
-	#showImageBtn, #selectbtn {
+	#showImageBtn, #selectbtn, #showSelect {
 		width: 100%;
 		margin: 0;
 	}
@@ -1005,7 +1005,7 @@ form .btn-checkout:hover{
 		flex-direction: column;
 		gap: 10px;
 	}
-	#showImageBtn, #selectbtn {
+	#showImageBtn, #selectbtn, #showSelect {
 		width: 100%;
 		min-width: auto;
 	}

@@ -18,7 +18,7 @@ function loadSeats() {
 	}
 
 	const xhr = new XMLHttpRequest();
-	xhr.open("get", `loadSeats.jsp?showId=${showId}&categoria=${encodeURIComponent(categoria)}`, true);
+	xhr.open("get", `show-seat?showId=${showId}&categoria=${encodeURIComponent(categoria)}`, true);
 	//xhr.setRequestHeader("Connection", "close");
 
 	xhr.onreadystatechange = function() {

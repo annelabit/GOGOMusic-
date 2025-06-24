@@ -3,25 +3,21 @@
 	pageEncoding="UTF-8"%>
 <%@page import="model.*"%>
 <%@page import="control.*"%>
-<%@page import="dao.*"%>
 <%@page import="java.util.ArrayList"%>
 <%
-User user = (User) request.getSession().getAttribute("user"); //recupero l'attributo dalla sessione dell'utente
+User user = (User) request.getAttribute("user"); //recupero l'attributo dalla sessione dell'utente
 if (user != null) { //se l'user appartiene alla sessione
 	request.setAttribute("user", user); //lo aggiunge agli attributi della richiesta
 }
-
-ProductDao pDao = new ProductDao();
-SeatDao sDao = new SeatDao();
-ShowDao showDao = new ShowDao();
-ArrayList<Product> products = pDao.getProducts();
-LocationDao lDao = new LocationDao();
 DecimalFormat df = new DecimalFormat("#0.00");
 
 ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
 if (cart != null) {
 	request.setAttribute("cart_list", cart);
 }
+
+ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+
 
 String category = (String) request.getParameter("category");
 if (category == null)
@@ -94,15 +90,15 @@ if (category == null)
 
 			<div class="col-4-products">
 				<a
-					href="productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>"><img
+					href="/common/product-details?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId()%>"><img
 					class="card-img-top"
 					src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>.png"></a>
 				<!-- inserire collegamento pagina singola -->
 				<h4><%=p.getName()%></h4>
 
 				<%
-				double min = showDao.getMinimumPrice(p.getId());
-				double max = showDao.getMaximumPrice(p.getId());
+				double min = p.getMinPrice();
+				double max = p.getMaxPrice();
 				if (min == 0 || max == 0) {
 				%>
 
@@ -118,7 +114,7 @@ if (category == null)
 				</p>
 				<p>
 					Luogo:
-					<%=lDao.getEventLocation(p.getVenueId()).getVenue()%></p>
+					<%=p.getLocation()%></p>
 
 
 				<%

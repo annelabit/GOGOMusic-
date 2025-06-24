@@ -6,17 +6,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-ShowSeatDao showSeatDao = new ShowSeatDao();
-int showId = Integer.parseInt(request.getParameter("showId"));
-ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(showId);
+User user = (User) request.getAttribute("user");
+
+ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+if (cart != null) {
+	request.setAttribute("cart_list", cart);
+}
+
+String categoria = (String) request.getAttribute("categoria");
+
 DecimalFormat df = new DecimalFormat("#0.00");
+Location location = (Location) request.getAttribute("location");
+ArrayList<Seat> seats = (ArrayList<Seat>) request.getAttribute("seats");
+ArrayList<ShowSeat> showSeats = (ArrayList<ShowSeat>) request.getAttribute("showSeats");
+ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
 
-String categoria = request.getParameter("categoria");
-SeatDao seatDao = new SeatDao();
+int i=0;
 
-for (ShowSeat s : seats) {
-
-	if (seatDao.getSeatsByShowSeat(s).getType().equalsIgnoreCase(categoria)) {
+for (ShowSeat s : showSeats) {
+	if (seats.get(i).getType().equalsIgnoreCase(categoria)) {
 
 		if (s.isAvailable() == 1) {
 %>
@@ -31,5 +39,6 @@ for (ShowSeat s : seats) {
 <%
 }
 }
+	i++;
 }
 %>

@@ -73,7 +73,7 @@ ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("product
 						Tour</p>
 					<button class="btn px-4 py-2 fs-5 mt-5">
 						<a
-							href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=3&showId=3">Compra
+							href="<%=request.getContextPath()%>/common/product-details?eventId=3&showId=3">Compra
 							ora
 					</button>
 					</a>
@@ -88,7 +88,7 @@ ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("product
 					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
 						data-bs-target="#booking-modal">
 						<a
-							href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=2&showId=2">Compra
+							href="<%=request.getContextPath()%>/product-details?eventId=2&showId=2">Compra
 							ora
 					</button>
 					</a>
@@ -103,7 +103,7 @@ ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("product
 					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
 						data-bs-target="#booking-modal">
 						<a
-							href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=6&showId=22">Compra
+							href="<%=request.getContextPath()%>/common/product-details?eventId=6&showId=22">Compra
 							ora
 					</button>
 					</a>
@@ -143,7 +143,7 @@ ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("product
 
 			<div class="col-3">
 				<a
-					href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId() %>"><img
+					href="<%=request.getContextPath()%>/common/product-details?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId() %>"><img
 					src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>.png"></a>
 				<!-- inserire collegamento pagina singola -->
 				<h4><%=p.getName()%></h4>
@@ -180,7 +180,7 @@ ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("product
 		</div>
 
 
-		<a href="<%=request.getContextPath()%>/common/products.jsp"><button
+		<a href="<%=request.getContextPath()%>/common/index?products=yes"><button
 				class="btn" id="productsbtn">Vedi tutti</button></a>
 	</div>
 
@@ -197,7 +197,7 @@ ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("product
 					<h1>Hit me Hard and Soft</h1>
 					<small>Offerta esclusiva per uno dei concerti più venduti
 						al mondo.</small> <br> <a
-						href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=1&showId=1"
+						href="<%=request.getContextPath()%>/common/product-details?eventId=1&showId=1"
 						class="btn">Compra Ora &#8594;</a>
 					<!-- inserire collegamento pagina singola -->
 				</div>
