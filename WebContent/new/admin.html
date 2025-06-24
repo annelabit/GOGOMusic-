@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="images/loghi/simple-logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
+<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="Poppins.css">
+<link rel="stylesheet" href="slider.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+
+<title>GOGOMusic!</title>
+
+</head>
+<body>
+    <!-- navbar -->
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="images/loghi/logo-no.png" id="logo" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="menuItems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Login.html">Log in</a></li>
+                        <li><a href="admin.html">Admin Page</a>
+                        <li><a href="">Ordini</a></li>
+                        <li><a href="">Account</a></li>
+                    </ul>
+                </nav>
+                <div class="search-container d-flex align-items-center">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                    </form>
+                </div>
+                <a href="cart.html"><img src="images/loghi/carrello-grande.png" width="30px" height="30px"></a>
+                <img src="images/loghi/menu-icon.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="small-container admin-dashboard">
+        <div class="title-h2">
+            <h2>Dashboard Amministratore</h2>
+        </div>
+
+        <!-- Admin Navigation -->
+        <div class="admin-nav">
+            <button class="admin-nav-btn active" onclick="showAdminSection('gestione-posti')">
+                <i class="fas fa-chair"></i> Gestione Posti
+            </button>
+            <button class="admin-nav-btn" onclick="showAdminSection('gestione-spettacoli')">
+                <i class="fas fa-calendar-plus"></i> Spettacoli
+            </button>
+            <button class="admin-nav-btn" onclick="showAdminSection('gestione-eventi')">
+                <i class="fas fa-music"></i> Eventi
+            </button>
+            <button class="admin-nav-btn" onclick="showAdminSection('visualizza-utenti')">
+                <i class="fas fa-users"></i> Utenti
+            </button>
+            <button class="admin-nav-btn" onclick="showAdminSection('gestione-ordini')">
+                <i class="fas fa-shopping-cart"></i> Ordini
+            </button>
+            <button class="admin-nav-btn" onclick="showAdminSection('catalogo')">
+                <i class="fas fa-list"></i> Catalogo
+            </button>
+        </div>
+
+        <!-- Gestione Posti -->
+        <div id="gestione-posti" class="admin-section active">
+            <h3>Gestione Posti</h3>
+            <div class="admin-card">
+                <h4>Modifica Prezzo Posti</h4>
+                <form class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="spettacolo-select">Seleziona Spettacolo:</label>
+                            <select id="spettacolo-select" name="spettacolo">
+                                <option value="">-- Seleziona Spettacolo --</option>
+                                <option value="1">Taylor Swift - Milano 15/06/2024</option>
+                                <option value="2">Ed Sheeran - Roma 20/07/2024</option>
+                                <option value="3">Coldplay - Napoli 10/08/2024</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria-select">Categoria Posto:</label>
+                            <select id="categoria-select" name="categoria">
+                                <option value="">-- Seleziona Categoria --</option>
+                                <option value="VIP">VIP</option>
+                                <option value="Premium">Parterre</option>
+                                <option value="Standard">Settore 1</option>
+                                <option value="Economy">Settore 2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nuovo-prezzo">Nuovo Prezzo (€):</label>
+                            <input type="number" id="nuovo-prezzo" name="prezzo" step="0.01" min="0">
+                        </div>
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="applica-categoria"> 
+                                Applica a tutti i posti della categoria
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Aggiorna Prezzo</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Gestione Spettacoli -->
+        <div id="gestione-spettacoli" class="admin-section">
+            <h3>Gestione Spettacoli</h3>
+            <div class="admin-card">
+                <h4>Aggiungi Nuovo Spettacolo</h4>
+                <form class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="evento-select">Seleziona Evento:</label>
+                            <select id="evento-select" name="evento" required>
+                                <option value="">-- Seleziona Evento --</option>
+                                <option value="1">Taylor Swift World Tour</option>
+                                <option value="2">Ed Sheeran Live</option>
+                                <option value="3">Coldplay Concert</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="venue-select">Venue:</label>
+                            <select id="venue-select" name="venue" required>
+                                <option value="">-- Seleziona Venue --</option>
+                                <option value="1">San Siro - Milano</option>
+                                <option value="2">Stadio Olimpico - Roma</option>
+                                <option value="3">Stadio Maradona - Napoli</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="data-spettacolo">Data:</label>
+                            <input type="date" id="data-spettacolo" name="data" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ora-spettacolo">Ora:</label>
+                            <input type="time" id="ora-spettacolo" name="ora" required>
+                        </div>
+                    </div>
+                    <div class="pricing-section">
+                        <h5>Prezzi per Settore</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="prezzo-vip">VIP (€):</label>
+                                <input type="number" id="prezzo-vip" name="prezzo_vip" step="0.01" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="prezzo-premium">Premium (€):</label>
+                                <input type="number" id="prezzo-premium" name="prezzo_premium" step="0.01" min="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="prezzo-standard">Standard (€):</label>
+                                <input type="number" id="prezzo-standard" name="prezzo_standard" step="0.01" min="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="prezzo-economy">Economy (€):</label>
+                                <input type="number" id="prezzo-economy" name="prezzo_economy" step="0.01" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Aggiungi Spettacolo</button>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h4>Spettacoli Esistenti</h4>
+                <div class="table-controls">
+                    <select id="filter-evento">
+                        <option value="">Tutti gli Eventi</option>
+                        <option value="1">Taylor Swift World Tour</option>
+                        <option value="2">Ed Sheeran Live</option>
+                    </select>
+                    <button class="btn" onclick="filterShows()">Filtra</button>
+                </div>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Evento</th>
+                                <th>Venue</th>
+                                <th>Data</th>
+                                <th>Ora</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Taylor Swift World Tour</td>
+                                <td>San Siro - Milano</td>
+                                <td>15/06/2024</td>
+                                <td>21:00</td>
+                                <td>
+                                    <button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
+                                    <button class="btn-small btn-delete" onclick="deleteShow(1)">Elimina</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Ed Sheeran Live</td>
+                                <td>Stadio Olimpico - Roma</td>
+                                <td>20/07/2024</td>
+                                <td>20:30</td>
+                                <td>
+                                    <button class="btn-small btn-edit" onclick="editShow(2)">Modifica</button>
+                                    <button class="btn-small btn-delete" onclick="deleteShow(2)">Elimina</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestione Eventi -->
+        <div id="gestione-eventi" class="admin-section">
+            <h3>Gestione Eventi</h3>
+            <div class="admin-card">
+                <h4>Aggiungi Nuovo Evento</h4>
+                <form class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nome-evento">Nome Evento:</label>
+                            <input type="text" id="nome-evento" name="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="categoria-evento">Categoria:</label>
+                            <select id="categoria-evento" name="categoria" required>
+                                <option value="">-- Seleziona Categoria --</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Rock">Rock</option>
+                                <option value="Rap">Rap</option>
+                                <option value="Latino">Latino</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="venue-evento">Venue ID:</label>
+                            <input type="number" id="venue-evento" name="venue_id" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="immagine-evento">URL Immagine:</label>
+                            <input type="url" id="immagine-evento" name="immagine">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label for="descrizione-evento">Descrizione:</label>
+                            <textarea id="descrizione-evento" name="descrizione" rows="4"></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn">Aggiungi Evento</button>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h4>Eventi Esistenti</h4>
+                <div class="table-controls">
+                    <select id="filter-categoria-eventi">
+                        <option value="">Tutte le Categorie</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Rap">Rap</option>
+                        <option value="Latino">Latino</option>
+                    </select>
+                    <select id="filter-venue-eventi">
+                        <option value="">Tutti i Venue</option>
+                        <option value="1">San Siro - Milano</option>
+                        <option value="2">Stadio Olimpico - Roma</option>
+                        <option value="2">Stadio Maradona - Napoli /option>
+                    </select>
+                    <button class="btn" onclick="filterEvents()">Filtra</button>
+                </div>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Categoria</th>
+                                <th>Venue</th>
+                                <th>Spettacoli</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Taylor Swift World Tour</td>
+                                <td>Pop</td>
+                                <td>San Siro - Milano</td>
+                                <td><button class="btn-small btn-info" onclick="viewShows(1)">Visualizza (3)</button></td>
+                                <td>
+                                    <button class="btn-small btn-edit" onclick="editEvent(1)">Modifica</button>
+                                    <button class="btn-small btn-delete" onclick="deleteEvent(1)">Elimina</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Ed Sheeran Live</td>
+                                <td>Pop</td>
+                                <td>Stadio Olimpico - Roma</td>
+                                <td><button class="btn-small btn-info" onclick="viewShows(2)">Visualizza (2)</button></td>
+                                <td>
+                                    <button class="btn-small btn-edit" onclick="editEvent(2)">Modifica</button>
+                                    <button class="btn-small btn-delete" onclick="deleteEvent(2)">Elimina</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Visualizza Utenti -->
+        <div id="visualizza-utenti" class="admin-section">
+            <h3>Gestione Utenti</h3>
+            <div class="admin-card">
+                <h4>Tutti gli Utenti</h4>
+                <div class="table-controls">
+                    <input type="text" id="search-users" placeholder="Cerca utente...">
+                    <button class="btn" onclick="searchUsers()">Cerca</button>
+                </div>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Data Registrazione</th>
+                                <th>Ordini</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Mario Rossi</td>
+                                <td>mario.rossi@email.com</td>
+                                <td>15/01/2024</td>
+                                <td><button class="btn-small btn-info" onclick="viewUserOrders(1)">Visualizza (5)</button></td>
+                                <td>
+                                    <button class="btn-small btn-edit" onclick="editUser(1)">Modifica</button>
+                                    <button class="btn-small btn-delete" onclick="deleteUser(1)">Elimina</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Anna Verdi</td>
+                                <td>anna.verdi@email.com</td>
+                                <td>20/02/2024</td>
+                                <td><button class="btn-small btn-info" onclick="viewUserOrders(2)">Visualizza (3)</button></td>
+                                <td>
+                                    <button class="btn-small btn-edit" onclick="editUser(2)">Modifica</button>
+                                    <button class="btn-small btn-delete" onclick="deleteUser(2)">Elimina</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gestione Ordini -->
+        <div id="gestione-ordini" class="admin-section">
+            <h3>Gestione Ordini</h3>
+            
+            <div class="stats-row">
+                <div class="stat-card">
+                    <h4>Ordini Totali</h4>
+                    <span class="stat-number">1,247</span>
+                </div>
+                <div class="stat-card">
+                    <h4>Fatturato Totale</h4>
+                    <span class="stat-number">€89,340</span>
+                </div>
+                <div class="stat-card">
+                    <h4>Ordini Oggi</h4>
+                    <span class="stat-number">23</span>
+                </div>
+            </div>
+
+            <div class="admin-card">
+                <h4>Filtra Ordini</h4>
+                <form class="admin-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="data-inizio">Data Inizio:</label>
+                            <input type="date" id="data-inizio" name="data_inizio">
+                        </div>
+                        <div class="form-group">
+                            <label for="data-fine">Data Fine:</label>
+                            <input type="date" id="data-fine" name="data_fine">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="cliente-select">Cliente:</label>
+                            <select id="cliente-select" name="cliente">
+                                <option value="">-- Tutti i Clienti --</option>
+                                <option value="1">Mario Rossi</option>
+                                <option value="2">Anna Verdi</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="stato-ordine">Stato:</label>
+                            <select id="stato-ordine" name="stato">
+                                <option value="">-- Tutti gli Stati --</option>
+                                <option value="pending">In Attesa</option>
+                                <option value="confirmed">Confermato</option>
+                                <option value="cancelled">Annullato</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="button" class="btn" onclick="filterOrders()">Filtra Ordini</button>
+                </form>
+            </div>
+
+            <div class="admin-card">
+                <h4>Ordini</h4>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID Ordine</th>
+                                <th>Cliente</th>
+                                <th>Evento</th>
+                                <th>Data Ordine</th>
+                                <th>Totale</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ORD001</td>
+                                <td>Mario Rossi</td>
+                                <td>Taylor Swift World Tour</td>
+                                <td>10/03/2024</td>
+                                <td>€150.00</td>
+                                <td>
+                                    <button class="btn-small btn-info" onclick="viewOrder('ORD001')">Dettagli</button>
+                                    <button class="btn-small btn-delete" onclick="cancelOrder('ORD001')">Annulla</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ORD002</td>
+                                <td>Anna Verdi</td>
+                                <td>Ed Sheeran Live</td>
+                                <td>12/03/2024</td>
+                                <td>€200.00</td>
+                                <td>
+                                    <button class="btn-small btn-info" onclick="viewOrder('ORD002')">Dettagli</button>
+                                    <button class="btn-small btn-delete" onclick="cancelOrder('ORD002')">Annulla</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Catalogo -->
+        <div id="catalogo" class="admin-section">
+            <h3>Gestione Catalogo</h3>
+            <div class="admin-card">
+                <h4>Elementi del Catalogo</h4>
+                <div class="table-controls">
+                    <select id="filter-categoria-catalogo">
+                        <option value="">Tutte le Categorie</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Hip-Hop">Hip-Hop</option>
+                    </select>
+                    <button class="btn" onclick="filterCatalog()">Filtra</button>
+                </div>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nome Prodotto</th>
+                                <th>Categoria</th>
+                                <th>Prezzo</th>
+                                <th>Disponibilità</th>
+                                <th>Azioni</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Biglietto Taylor Swift VIP</td>
+                                <td>Pop</td>
+                                <td>€250.00</td>
+                                <td><span class="status confirmed">Disponibile</span></td>
+                                <td>
+                                    <button class="btn-small btn-edit" onclick="editProduct(1)">Modifica</button>
+                                    <button class="btn-small btn-delete" onclick="deleteProduct(1)">Elimina</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Biglietto Ed Sheeran Standard</td>
+                                <td>Pop</td>
+                                <td>€80.00</td>
+                                <td><span class="status cancelled">Esaurito</span></td>
+                                <td>
+                                    <button class="btn-small btn-edit" onclick="editProduct(2)">Modifica</button>
+                                    <button class="btn-small btn-delete" onclick="deleteProduct(2)">Elimina</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+ 
+
+
+    <!-- footer -->
+    <div class="footer-clean">
+        <footer>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Servizi</h3>
+                        <ul>
+                            <li>Web design</li>
+                            <li>Sviluppo</li>
+                            <li>Hosting</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Chi siamo</h3>
+                        <ul>
+                            <li>Azienda</li>
+                            <li>Team</li>
+                            <li>Storia</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-4 col-md-3 item">
+                        <h3>Info</h3>
+                        <ul>
+                            <li>Biglietteria</li>
+                            <li>Metodo di pagamento</li>
+                            <li>Metodo di spedizione</li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-3 item social">
+                        <a href="https://www.facebook.com/?locale=it_IT"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        <a href="https://x.com"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://www.youtube.com"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                        <a href="https://www.instagram.com"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        <p class="copyright">GOGOMusic! © 2025</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+	<script src="javascript.js"></script>
+	
+</body>
+</html>
+
