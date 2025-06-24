@@ -24,7 +24,8 @@ if (cart != null) {
 }
 
 String category = (String) request.getParameter("category");
-if(category == null) category = "";
+if (category == null)
+	category = "";
 %>
 <!DOCTYPE html>
 <html>
@@ -82,12 +83,11 @@ if(category == null) category = "";
 			<%
 			int elements = 0;
 			for (Product p : products) {
-				
 
 				if (p.getCategory().toLowerCase().equals(category) || category.equals("")) {
-					
+
 					if (elements++ == 12)
-						break;
+				break;
 			%>
 
 
@@ -123,24 +123,24 @@ if(category == null) category = "";
 
 				<%
 				}
-				
 				%>
 			</div>
 			<%
-			}}
+			}
+			}
 			%>
 
-			
+
 		</div>
-		
-		
-		
+
+
+
 		<div class="page-btn">
-				<span>1</span>
-				<!-- inserire collegamento con pagine nuove -->
-				<span>2</span> <span>3</span> <span>&#8594;</span>
+			<span>1</span>
+			<!-- inserire collegamento con pagine nuove -->
+			<span>2</span> <span>3</span> <span>&#8594;</span>
 		</div>
-		
+
 	</div>
 	<%@include file="/include/footer.jsp"%>
 

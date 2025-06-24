@@ -36,13 +36,15 @@ public class OrderHistoryServlet extends HttpServlet {
 	    ProductDao pDao = new ProductDao();
 	    ShowDao showDao = new ShowDao();
 	    
+	    if(user == null) {
+	    	response.sendRedirect("login.jsp");
+	    }else {
 	    
 	    ArrayList<Order> orders = oDao.userOrders(user.getIdUtente());
 
 	    Map<Integer, String> orderAreas = new HashMap<>();
 	    for (Order o : orders) {
 	        ArrayList<Integer> showSeats = oDao.getOrderShowSeats(o.getOrderId());
-	        
 	        Product p = pDao.getSingleProduct(o.getId());
 	        o.setImage(p.getImage());
 	        o.setVenueId(p.getVenueId());
@@ -61,10 +63,14 @@ public class OrderHistoryServlet extends HttpServlet {
 	        
 	        
 	        if (showSeats != null && !showSeats.isEmpty()) {
-	            String area = seatDao.getSeatsByShowSeatId(showSeats.get(0)).getType();
-	            orderAreas.put(o.getOrderId(), area);
-	        } else {
-	            orderAreas.put(o.getOrderId(), "N/A");
+	        	int seatId = showSeats.get(0);
+	            Seat seat = seatDao.getSeatsByShowSeatId(seatId);
+	            if (seat != null && seat.getType() != null) {
+	                orderAreas.put(o.getOrderId(), seat.getType());
+	            } else {
+	                orderAreas.put(o.getOrderId(), "N/A");
+	                System.out.println("Nessuna area trovata per seatId: " + seatId);
+	            }
 	        }
 	    }
 	    
@@ -84,6 +90,7 @@ public class OrderHistoryServlet extends HttpServlet {
 	    
 	    
 	    request.getRequestDispatcher("orderHistory.jsp").forward(request, response);
+	    }
 
 	}
 }

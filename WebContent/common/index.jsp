@@ -121,7 +121,10 @@
 	
 		
 			<div class="col-3">
-				<a href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>"><img src="<%= request.getContextPath()%>/images/artisti/<%= p.getImage()%>.png"></a> <!-- inserire collegamento pagina singola -->
+				<a
+					href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>"><img
+					src="<%= request.getContextPath()%>/images/artisti/<%= p.getImage()%>.png"></a>
+				<!-- inserire collegamento pagina singola -->
 				<h4><%= p.getName() %></h4>
 				
 				<%

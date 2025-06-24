@@ -32,27 +32,6 @@
 	href="<%=request.getContextPath()%>/styles/order.css">
 
 <%
-/*ProductDao pDao = new ProductDao();
-LocationDao lDao = new LocationDao();
-SeatDao seatDao = new SeatDao();
-ShowSeatDao showSeatDao = new ShowSeatDao();
-User user = (User) request.getSession().getAttribute("user"); //recupero l'attributo dalla sessione dell'utente
-ArrayList<Order> orders = null;
-
-OrderDao oDao = new OrderDao();
-//System.out.print(user);
-if (user != null) { //se l'user appartiene alla sessione
-	request.setAttribute("user", user); //lo aggiunge agli attributi della richiesta
-	
-	orders = oDao.userOrders(user.getIdUtente());
-	
-} else {
-	response.sendRedirect("login.jsp");
-}
-ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
-if (cart != null) {
-	request.setAttribute("cart_list", cart);
-}*/
 
 //NUOVO
 User user = (User) request.getSession().getAttribute("user");

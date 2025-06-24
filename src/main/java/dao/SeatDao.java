@@ -103,7 +103,7 @@ public class SeatDao {
 
 		try {
 			connection = DBConnection.getConnection();
-			query = "SELECT * FROM SEAT WHERE id = ?";
+			query = "SELECT * FROM SEAT INNER JOIN show_seats ON show_seats.seatId = seat.id WHERE show_seats.id = ?";
 			pst = this.connection.prepareStatement(query);
 			pst.setInt(1, showSeat);
 			rs = pst.executeQuery();

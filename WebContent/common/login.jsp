@@ -42,10 +42,10 @@
 <title>GOGOMusic!</title>
 </head>
 <body>
-	
-	<%@include file= "/include/navbar.jsp"%>
 
-	
+	<%@include file="/include/navbar.jsp"%>
+
+
 	<!-- account page -->
 	<div class="account-page">
 		<div class="container">
