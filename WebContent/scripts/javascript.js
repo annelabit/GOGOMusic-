@@ -197,13 +197,13 @@ function toggleDetails(orderId) {
 	    }
 	}
 
-	function filterShows() {
+	/*function filterShows() {
 	    const eventoFilter = document.getElementById('filter-evento').value;
 	    console.log('Filtra spettacoli per evento:', eventoFilter);
 	    // Implement filtering logic here
 	    //alert('Filtro applicato per evento: ' + (eventoFilter || 'Tutti'));
 		//non ritengo necessario un alert anche per questo	
-	}
+	}*/
 
 	// Event Management Functions
 	function addEvent() {

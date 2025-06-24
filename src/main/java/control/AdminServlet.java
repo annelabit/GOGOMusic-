@@ -50,6 +50,8 @@ public class AdminServlet extends HttpServlet {
 		
 		//per ogni evento e per ogni spettacolo imposta tutti i posti
 		
+		
+		
 		for(Product p : events) {
 			p.setMinPrice(showDao.getMinimumPrice(p.getId()));
 			p.setMaxPrice(showDao.getMaximumPrice(p.getId()));
@@ -65,8 +67,19 @@ public class AdminServlet extends HttpServlet {
 			p.setShows(showDao.getShows(p.getId()));
 		}
 		
+		
+		
+		
 		request.setAttribute("events", events);
 		request.setAttribute("locations", locations);
+		
+		//viene da filtra eventi?
+		if(request.getParameter("eventId") != null) {
+			request.setAttribute("eventId", request.getParameter("eventId"));
+			request.getRequestDispatcher("adminShowTable.jsp").forward(request, response);
+
+		}else
+		
 		request.getRequestDispatcher("admin.jsp").forward(request, response);
 
 	}

@@ -28,6 +28,8 @@
 	href="<%=request.getContextPath()%>/styles/stylesheet.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/styles/admin.css">
+	
+	
 
 <title>GOGOMusic!</title>
 
@@ -153,7 +155,8 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 			<h3>Gestione Spettacoli</h3>
 			<div class="admin-card">
 				<h4>Aggiungi Nuovo Spettacolo</h4>
-				<form class="admin-form" action="<%=request.getContextPath()%>/admin/add-show" method="post">
+				<form class="admin-form"
+					action="<%=request.getContextPath()%>/admin/add-show" method="post">
 					<div class="form-row">
 						<div class="form-group">
 							<label for="evento-select">Seleziona Evento:</label> <select
@@ -173,12 +176,17 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 							<label for="venue-select">Venue:</label> <select
 								id="venue-select" name="venue" required>
 								<option value="">-- Seleziona Venue --</option>
-								
-								<%for(Location l : allLocations){ %>
-								
-								<option value="<%=l.getId() %>"><%=l.getVenue() %> - <%=l.getCity() %></option>
-								
-								<%} %>
+
+								<%
+								for (Location l : allLocations) {
+								%>
+
+								<option value="<%=l.getId()%>"><%=l.getVenue()%> -
+									<%=l.getCity()%></option>
+
+								<%
+								}
+								%>
 							</select>
 						</div>
 					</div>
@@ -227,13 +235,22 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 				<div class="table-controls">
 					<select id="filter-evento">
 						<option value="">Tutti gli Eventi</option>
-						<option value="1">Taylor Swift World Tour</option>
-						<option value="2">Ed Sheeran Live</option>
+
+						<%
+						for (Product p : allEvents) {
+						%>
+						<option value="<%=p.getId() %>"> <%=p.getName() %> </option>
+						<%
+						}
+						%>
 					</select>
-					<button class="btn" onclick="filterShows()">Filtra</button>
+					<button class="btn" id="filter-by-event-button">Filtra</button>
+
 				</div>
-				<div class="table-container">
-					<table class="admin-table">
+				<div class="table-container" >
+
+
+					<table class="admin-table" id="show-table">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -244,31 +261,37 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 								<th>Azioni</th>
 							</tr>
 						</thead>
+
+
 						<tbody>
+
+							<%
+							for (Product p : allEvents) {
+								for (Show s : p.getShows()) {
+							%>
 							<tr>
-								<td>1</td>
-								<td>Taylor Swift World Tour</td>
-								<td>San Siro - Milano</td>
-								<td>15/06/2024</td>
-								<td>21:00</td>
+								<td><%=p.getId()%></td>
+								<td><%=p.getName()%></td>
+								<td><%=p.getLocation()%></td>
+								<td><%=s.getDate()%></td>
+								<td><%=s.getTime()%></td>
 								<td>
 									<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
 									<button class="btn-small btn-delete" onclick="deleteShow(1)">Elimina</button>
 								</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>Ed Sheeran Live</td>
-								<td>Stadio Olimpico - Roma</td>
-								<td>20/07/2024</td>
-								<td>20:30</td>
-								<td>
-									<button class="btn-small btn-edit" onclick="editShow(2)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteShow(2)">Elimina</button>
-								</td>
-							</tr>
+							<%
+							}
+							}
+							%>
+
 						</tbody>
+
+
+
 					</table>
+
+
 				</div>
 			</div>
 		</div>
@@ -587,7 +610,7 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 	</div>
 
 	<%@include file="/include/footer.jsp"%>
-
+<script src="<%=request.getContextPath()%>/scripts/admin.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
