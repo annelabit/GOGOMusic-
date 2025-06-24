@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Show {
 
 	private int id;
@@ -7,6 +9,8 @@ public class Show {
     private int venueId;
     private String date;
     private String time;
+    private ArrayList<ShowSeat> seats;
+    private ArrayList<String> categories;
     
     public Show() {}
     
@@ -48,7 +52,19 @@ public class Show {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	public ArrayList<ShowSeat> getSeats() {
+		return seats;
+	}
+	public void setSeats(ArrayList<ShowSeat> seats2) {
+		this.seats = seats2;
+	}
+
+	public ArrayList<String> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(ArrayList<String> categories) {
+		this.categories = categories;
+	}
     
-    
-	
 }

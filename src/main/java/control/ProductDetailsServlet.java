@@ -37,8 +37,6 @@ public class ProductDetailsServlet extends HttpServlet {
 		ProductDao pDao = new ProductDao();
 		LocationDao lDao = new LocationDao();
 		
-		
-		
 		Product p = pDao.getSingleProduct(pId);
 		ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));
 
