@@ -40,8 +40,11 @@ if (!isAdmin || isAdmin == false) {
 	response.sendRedirect(request.getContextPath() + "/common/login.jsp");
 	return;
 }
+User user = (User) request.getSession().getAttribute("user");
+request.setAttribute("user", user);
 
 ArrayList<Product> allEvents = (ArrayList<Product>) request.getAttribute("events");
+ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("locations");
 %>
 
 
@@ -86,41 +89,44 @@ ArrayList<Product> allEvents = (ArrayList<Product>) request.getAttribute("events
 			<h3>Gestione Posti</h3>
 			<div class="admin-card">
 				<h4>Modifica Prezzo Posti</h4>
-				<form class="admin-form" action="<%=request.getContextPath() %>/admin/update-price" method="post">
+				<form class="admin-form"
+					action="<%=request.getContextPath()%>/admin/update-price"
+					method="post">
 					<div class="form-row">
 						<div class="form-group">
-							<label for="spettacolo-select">Seleziona Spettacolo:</label> 
-							<select
+							<label for="spettacolo-select">Seleziona Spettacolo:</label> <select
 								id="spettacolo-select" name="spettacolo">
 								<option value="">-- Seleziona Spettacolo --</option>
 
 								<%
 								for (Product e : allEvents) {
-									
-									for(Show s : e.getShows()){
+
+									for (Show s : e.getShows()) {
 								%>
 
 								<option value="<%=s.getId()%>"><%=e.getName()%> -
-									<%=e.getLocation()%>, <%=s.getDate() %> 
+									<%=e.getLocation()%>,
+									<%=s.getDate()%>
 								</option>
 
 								<!-- mettere anche spettacolo preciso?? -->
 
-								<%}
+								<%
+								}
 								}
 								%>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="categoria-select">Categoria Posto:</label> 
-							<select id="categoria-select" name="categoria">
+							<label for="categoria-select">Categoria Posto:</label> <select
+								id="categoria-select" name="categoria">
 								<option value="">-- Seleziona Categoria --</option>
-								
+
 								<option value="VIP">VIP</option>
 								<option value="Premium">Parterre</option>
 								<option value="Settore1">Settore 1</option>
 								<option value="Settore2">Settore 2</option>
-								
+
 							</select>
 						</div>
 					</div>
@@ -147,24 +153,32 @@ ArrayList<Product> allEvents = (ArrayList<Product>) request.getAttribute("events
 			<h3>Gestione Spettacoli</h3>
 			<div class="admin-card">
 				<h4>Aggiungi Nuovo Spettacolo</h4>
-				<form class="admin-form">
+				<form class="admin-form" action="<%=request.getContextPath()%>/admin/add-show" method="post">
 					<div class="form-row">
 						<div class="form-group">
 							<label for="evento-select">Seleziona Evento:</label> <select
 								id="evento-select" name="evento" required>
 								<option value="">-- Seleziona Evento --</option>
-								<option value="1">Taylor Swift World Tour</option>
-								<option value="2">Ed Sheeran Live</option>
-								<option value="3">Coldplay Concert</option>
+								<%
+								for (Product e : allEvents) {
+								%>
+
+								<option value="<%=e.getId()%>"><%=e.getName()%></option>
+								<%
+								}
+								%>
 							</select>
 						</div>
 						<div class="form-group">
 							<label for="venue-select">Venue:</label> <select
 								id="venue-select" name="venue" required>
 								<option value="">-- Seleziona Venue --</option>
-								<option value="1">San Siro - Milano</option>
-								<option value="2">Stadio Olimpico - Roma</option>
-								<option value="3">Stadio Maradona - Napoli</option>
+								
+								<%for(Location l : allLocations){ %>
+								
+								<option value="<%=l.getId() %>"><%=l.getVenue() %> - <%=l.getCity() %></option>
+								
+								<%} %>
 							</select>
 						</div>
 					</div>
@@ -187,19 +201,19 @@ ArrayList<Product> allEvents = (ArrayList<Product>) request.getAttribute("events
 							</div>
 							<div class="form-group">
 								<label for="prezzo-premium">Premium (€):</label> <input
-									type="number" id="prezzo-premium" name="prezzo_premium"
+									type="number" id="prezzo_premium" name="prezzo_premium"
 									step="0.01" min="0">
 							</div>
 						</div>
 						<div class="form-row">
 							<div class="form-group">
 								<label for="prezzo-standard">Standard (€):</label> <input
-									type="number" id="prezzo-standard" name="prezzo_standard"
+									type="number" id="prezzo_standard" name="prezzo_standard"
 									step="0.01" min="0">
 							</div>
 							<div class="form-group">
 								<label for="prezzo-economy">Economy (€):</label> <input
-									type="number" id="prezzo-economy" name="prezzo_economy"
+									type="number" id="prezzo_economy" name="prezzo_economy"
 									step="0.01" min="0">
 							</div>
 						</div>

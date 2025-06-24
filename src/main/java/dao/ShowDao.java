@@ -137,13 +137,12 @@ public class ShowDao {
 		return max;
 	}
 
-	public boolean insertShow(Show show) {
-		boolean result = false;
-
+	public int insertShow(Show show) {
+		int id = 0;
 		try {
 			connection = DBConnection.getConnection();
 
-			query = "INSERT INTO show (locationId, eventId, date, time) VALUES(?,?,?,?)";
+			query = "INSERT INTO `show` (locationId, eventId, date, time) VALUES(?,?,?,?)";
 
 			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, show.getVenueId());
@@ -152,8 +151,9 @@ public class ShowDao {
 			pst.setString(4, show.getTime());
 			pst.executeUpdate();
 
-			result = true; // se è arrivato qui non ci sono eccezioni
-
+			ResultSet keys = pst.getGeneratedKeys();
+			if(keys.next())
+				id = keys.getInt(1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.print(e.getMessage());
@@ -161,7 +161,7 @@ public class ShowDao {
 			closeConnection(connection);
 		}
 
-		return result;
+		return id;
 	}
 
 	public boolean deleteShow(Show show) {

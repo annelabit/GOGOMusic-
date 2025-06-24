@@ -46,6 +46,8 @@ public class AdminServlet extends HttpServlet {
 		ArrayList<Product> events = new ArrayList<>();
 		events = pDao.getProducts();
 		
+		ArrayList<Location> locations = locationDao.getAllLocations();
+		
 		//per ogni evento e per ogni spettacolo imposta tutti i posti
 		
 		for(Product p : events) {
@@ -64,7 +66,7 @@ public class AdminServlet extends HttpServlet {
 		}
 		
 		request.setAttribute("events", events);
-		
+		request.setAttribute("locations", locations);
 		request.getRequestDispatcher("admin.jsp").forward(request, response);
 
 	}

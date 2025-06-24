@@ -30,10 +30,15 @@ public class UpdatePriceServlet extends HttpServlet {
 		//controllo se utente è admin
 				boolean isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
 
+				
 				if(!isAdmin|| isAdmin == false){
 					response.sendRedirect(request.getContextPath()+"/common/login.jsp");
 					return;
 				}
+				
+				User user = (User) request.getSession().getAttribute("user");
+				request.setAttribute("user", user);
+				
 				String categoria = request.getParameter("categoria");
 				float prezzo = Float.parseFloat(request.getParameter("prezzo"));
 				int showId = Integer.parseInt(request.getParameter("spettacolo"));
