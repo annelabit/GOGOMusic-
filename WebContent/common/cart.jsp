@@ -16,22 +16,23 @@ ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
 
 //questo carrello contiene solo i prodotti scelti
 ArrayList<Cart> cartProducts = null;
-ProductDao pDao = new ProductDao();
-SeatDao seatDao = new SeatDao();
-ShowDao showDao = new ShowDao();
+
 DecimalFormat df = new DecimalFormat("#0.00");
+double totalPrice = (Double) request.getAttribute("totalPrice");
 
-double totalPrice = 0;
+//totale per ogni cart c
+ArrayList<Double> total = (ArrayList<Double>) request.getAttribute("total");
 
+ArrayList<String> dates = (ArrayList<String>) request.getAttribute("dates");
+ArrayList<String> times = (ArrayList<String>) request.getAttribute("times");
+ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
 if (cart != null) {
-
-	for (Cart c : cart) {
-
-		totalPrice = pDao.getTotalPrice(cart, c.getShowId());
-	}
-	request.setAttribute("cart_list", cart);
-	request.setAttribute("total", totalPrice);
+	
 }
+
+request.setAttribute("cart_list", cart);
+request.setAttribute("total", totalPrice);
+
 %>
 
 <!DOCTYPE html>
@@ -83,13 +84,12 @@ body {
 			</tr>
 
 			<%
-			float total = 0;
-
+			int i = 0;
 			if (cart != null && !cart.isEmpty()) {
 
 				for (Cart c : cart) {
 
-					total += pDao.getPriceForSelected(c.getSeatIds(), c.getShowId());
+					
 			%>
 
 			<tr>
@@ -100,32 +100,26 @@ body {
 						<div class="text-container">
 							<p><%=c.getName()%></p>
 							<small>Quantità: <%=c.getQuantity()%></small> <small>Data:
-								<%=showDao.getShow(c.getShowId()).getDate()%>, <%=showDao.getShow(c.getShowId()).getTime()%></small>
+								<%=dates.get(i)%>, <%=times.get(i)%></small>
 							<!-- <small>Prezzo: <=pDao.getPriceForSelected(c.getSeatIds(), c.getShowId())  %></small> -->
 						</div>
 					</div>
 				</td>
 
-				<%
-				ArrayList<String> s = new ArrayList<>();
-				for (Integer i : c.getSeatIds()) {
-
-					if (!s.contains(seatDao.getSeatById(i).getType()))
-						s.add(seatDao.getSeatById(i).getType());
-				}
-				%>
-				<td><%=s.toString().replaceAll("^.|.$", "")%></td>
+				<td><%=categories.get(i)%></td>
 
 				<td><a
 					href="<%=request.getContextPath()%>/common/remove-from-cart?id=<%=c.getId()%>">Rimuovi</a></td>
-				<td><%=df.format(pDao.getPriceForSelected(c.getSeatIds(), c.getShowId()))%></td>
+				<td><%=df.format(total.get(i))%></td>
 			</tr>
 
 			<%
+			i++;
+			}
 			}
 			%>
 			<%
-			}
+			
 			%>
 		</table>
 
@@ -134,7 +128,7 @@ body {
 			<table>
 				<tr>
 					<td>Subtotale</td>
-					<td><%=df.format(total)%>$</td>
+					<td><%=df.format(totalPrice)%>$</td>
 				</tr>
 				<tr>
 					<td>Tasse</td>
@@ -142,7 +136,7 @@ body {
 				</tr>
 				<tr>
 					<td>Totale</td>
-					<td><%=df.format(total + 4.30)%>$</td>
+					<td><%=df.format(totalPrice + 4.30)%>$</td>
 				</tr>
 			</table>
 		</div>

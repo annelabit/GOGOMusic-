@@ -1,29 +1,25 @@
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="model.*"%>
 <%@page import="control.*"%>
-<%@page import="dao.*"%>
 <%@page import="java.util.*"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-	 <% 
-	 User user = (User) request.getSession().getAttribute("user");  //recupero l'attributo dalla sessione dell'utente
-	    if(user!=null){  //se l'user appartiene alla sessione
-	    	request.setAttribute("user", user);   //lo aggiunge agli attributi della richiesta
-	    }
-	    
-	    ProductDao pDao = new ProductDao();
-	    SeatDao sDao = new SeatDao();
-	    ShowDao showDao = new ShowDao();
-	    ArrayList<Product> products = pDao.getProducts();
-	    LocationDao lDao = new LocationDao();
-	    DecimalFormat df = new DecimalFormat("#0.00");
-	    
-	    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
-	    if(cart != null){
-	    	request.setAttribute("cart_list", cart);
-	    }
-    
-    %>
-    
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+User user = (User) request.getAttribute("user"); //recupero l'attributo dalla sessione dell'utente
+if (user != null) { //se l'user appartiene alla sessione
+	request.setAttribute("user", user); //lo aggiunge agli attributi della richiesta
+}
+DecimalFormat df = new DecimalFormat("#0.00");
+
+ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+if (cart != null) {
+	request.setAttribute("cart_list", cart);
+}
+
+ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,21 +33,24 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css">
 <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/Poppins.css">
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/slider.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/styles/Poppins.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/styles/slider.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="<%= request.getContextPath() %>/styles/stylesheet.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/styles/stylesheet.css">
 
 <title>GOGOMusic!</title>
 </head>
 <body>
-	
-	<%@include file= "/include/navbar.jsp"%>
-	
+
+	<%@include file="/include/navbar.jsp"%>
+
 	<!-- carosello -->
 	<div id="hero-carousel" class="carousel slide" data-bs-ride="carousel">
 		<div class="carousel-indicators">
@@ -70,27 +69,44 @@
 					alt="Slide 1">
 				<div class="carousel-caption top-0 mt-4">
 					<p class="text-uppercase fs-3 mt-5">Stadio Olimpico</p>
-					<p class="display-1 fw-bolder text-capitalize">Midwest Princess Tour</p>
-					<button class="btn px-4 py-2 fs-5 mt-5"><a href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=3&showId=3">Compra ora</button></a>
+					<p class="display-1 fw-bolder text-capitalize">Midwest Princess
+						Tour</p>
+					<button class="btn px-4 py-2 fs-5 mt-5">
+						<a
+							href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=3&showId=3">Compra
+							ora
+					</button>
+					</a>
 				</div>
 			</div>
 			<div class="carousel-item c-item">
-				<img src="images/foto-carosello/lgc.png" class="d-block w-100 c-img" alt="Slide 2">
+				<img src="images/foto-carosello/lgc.png" class="d-block w-100 c-img"
+					alt="Slide 2">
 				<div class="carousel-caption top-0 mt-4">
 					<p class="text-uppercase fs-3 mt-5">Unipol Arena</p>
 					<p class="display-1 fw-bolder text-capitalize">The Mayhem Ball</p>
 					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-						data-bs-target="#booking-modal"><a href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=2&showId=2">Compra ora</button></a>
+						data-bs-target="#booking-modal">
+						<a
+							href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=2&showId=2">Compra
+							ora
+					</button>
+					</a>
 				</div>
 			</div>
 			<div class="carousel-item c-item">
-				<img src="images/foto-carosello/tsc1.png" class="d-block w-100 c-img"
-					alt="Slide 3">
+				<img src="images/foto-carosello/tsc1.png"
+					class="d-block w-100 c-img" alt="Slide 3">
 				<div class="carousel-caption top-0 mt-4">
 					<p class="text-uppercase fs-3 mt-5">Stadio San Siro</p>
 					<p class="display-1 fw-bolder text-capitalize">The Eras Tour</p>
 					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-						data-bs-target="#booking-modal"><a href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=6&showId=22">Compra ora</button></a>							
+						data-bs-target="#booking-modal">
+						<a
+							href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=6&showId=22">Compra
+							ora
+					</button>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -105,64 +121,67 @@
 				class="visually-hidden">Next</span>
 		</button>
 	</div>
-	
+
 	<div class="small-container">
 		<h2 class="title">Eventi proposti</h2>
-			
-	<!-- Prodotti -->
-	<div class="row">
-	
-	<% 
-				int elements = 0;
-				for(Product p : products){
-					if(elements++==6) break;
-	%>
-	
-	
-		
+
+		<!-- Prodotti -->
+		<div class="row">
+
+			<%
+			int elements = 0;
+			int i=0;
+			for (Product p : products) {
+				
+				
+				
+				if (elements++ == 6)
+					break;
+			%>
+
+
+
 			<div class="col-3">
 				<a
-					href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>"><img
-					src="<%= request.getContextPath()%>/images/artisti/<%= p.getImage()%>.png"></a>
+					href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId() %>"><img
+					src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>.png"></a>
 				<!-- inserire collegamento pagina singola -->
-				<h4><%= p.getName() %></h4>
-				
+				<h4><%=p.getName()%></h4>
+
 				<%
-									
-				double min = showDao.getMinimumPrice(p.getId());
-				double max = showDao.getMaximumPrice(p.getId());
-				if (min==0||max==0){
-				
+				if (p.getMinPrice() == 0 || p.getMaxPrice() == 0) {
 				%>
-				
-				<p style = "color:red">Sold out</p>
-				
+
+				<p style="color: red">Sold out</p>
+
 				<%
-					}
-					else{
+				} else {
 				%>
-				
-				<p>Prezzo: <%= df.format(min) %>€-<%= df.format(max)%>€</p>
-				<p>Luogo: <%= lDao.getEventLocation(p.getVenueId()).getVenue()%></p>
-			
-		
-			<%
-			}
-				
-			%>
+
+				<p>
+					Prezzo:
+					<%=df.format(p.getMinPrice())%>€-<%=df.format(p.getMaxPrice())%>€
+				</p>
+				<p>
+					Luogo:
+					<%=p.getLocation()%></p>
+
+
+				<%
+				}
+				%>
 			</div>
 			<%
-				
-				
-		}
-	
-	
-		%>
-		
+			
+			i++;
+			}
+			%>
+
 		</div>
-		
-		
-		<a href="<%=request.getContextPath() %>/common/products.jsp"><button class="btn" id="productsbtn">Vedi tutti</button></a>
+
+
+		<a href="<%=request.getContextPath()%>/common/products.jsp"><button
+				class="btn" id="productsbtn">Vedi tutti</button></a>
 	</div>
 
 
@@ -177,7 +196,10 @@
 					<p>Offerta esclusiva</p>
 					<h1>Hit me Hard and Soft</h1>
 					<small>Offerta esclusiva per uno dei concerti più venduti
-						al mondo.</small> <br> <a href="<%=request.getContextPath() %>/common/productDetails.jsp?eventId=1&showId=1" class="btn">Compra Ora &#8594;</a> <!-- inserire collegamento pagina singola -->
+						al mondo.</small> <br> <a
+						href="<%=request.getContextPath()%>/common/productDetails.jsp?eventId=1&showId=1"
+						class="btn">Compra Ora &#8594;</a>
+					<!-- inserire collegamento pagina singola -->
 				</div>
 			</div>
 		</div>
@@ -188,19 +210,31 @@
 	<div class="small-container">
 		<div class="row">
 			<div class="col-4">
-				<a href="<%=request.getContextPath() %>/common/products.jsp?category=pop"><img src="<%=request.getContextPath()%>/images/generi/pop.png"> </a> <!-- inserire collegamento pagina con quel genere -->
+				<a
+					href="<%=request.getContextPath()%>/common/products.jsp?category=pop"><img
+					src="<%=request.getContextPath()%>/images/generi/pop.png"> </a>
+				<!-- inserire collegamento pagina con quel genere -->
 				<h3>Pop</h3>
 			</div>
 			<div class="col-4">
-				<a href="<%=request.getContextPath() %>/common/products.jsp?category=rock"><img src="<%=request.getContextPath()%>/images/generi/rock.png"></a> <!-- inserire collegamento pagina con quel genere -->
+				<a
+					href="<%=request.getContextPath()%>/common/products.jsp?category=rock"><img
+					src="<%=request.getContextPath()%>/images/generi/rock.png"></a>
+				<!-- inserire collegamento pagina con quel genere -->
 				<h3>Rock</h3>
 			</div>
 			<div class="col-4">
-				<a href="<%=request.getContextPath() %>/common/products.jsp?category=rap"><img src="<%=request.getContextPath()%>/images/generi/rap.png"></a> <!-- inserire collegamento pagina con quel genere -->
+				<a
+					href="<%=request.getContextPath()%>/common/products.jsp?category=rap"><img
+					src="<%=request.getContextPath()%>/images/generi/rap.png"></a>
+				<!-- inserire collegamento pagina con quel genere -->
 				<h3>Rap</h3>
 			</div>
 			<div class="col-4">
-				<a href="<%=request.getContextPath() %>/common/products.jsp?category=latino"><img src="<%=request.getContextPath()%>/images/generi/latino.png"></a><!-- inserire collegamento pagina con quel genere -->
+				<a
+					href="<%=request.getContextPath()%>/common/products.jsp?category=latino"><img
+					src="<%=request.getContextPath()%>/images/generi/latino.png"></a>
+				<!-- inserire collegamento pagina con quel genere -->
 				<h3>Latino</h3>
 			</div>
 		</div>
@@ -227,12 +261,12 @@
 		</div>
 	</div>
 
-<%@include file= "/include/footer.jsp"%>
+	<%@include file="/include/footer.jsp"%>
 
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-	<script src="<%= request.getContextPath() %>/scripts/javascript.js"></script>
+	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
 </body>
 </html>

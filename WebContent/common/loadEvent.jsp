@@ -1,4 +1,3 @@
-<%@page import="dao.*"%>
 <%@page import="model.*"%>
 <%@page import="control.*"%>
 <%@page import="java.util.*"%>
@@ -25,45 +24,43 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/styles/stylesheet.css">
 <%
-ProductDao pDao = new ProductDao();
-ArrayList<Product> products = pDao.getProducts();
-SeatDao sDao = new SeatDao();
-ShowDao showDao = new ShowDao();
-LocationDao lDao = new LocationDao();
+
+User user = (User) request.getAttribute("user"); //recupero l'attributo dalla sessione dell'utente
+if (user != null) { //se l'user appartiene alla sessione
+	request.setAttribute("user", user); //lo aggiunge agli attributi della richiesta
+}
 DecimalFormat df = new DecimalFormat("#0.00");
 
-String category = request.getParameter("category");
-String keyword = request.getParameter("keyword");
-System.out.print(category);
+ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+if (cart != null) {
+	request.setAttribute("cart_list", cart);
+}
+
+ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+
+String category = (String) request.getAttribute("category");
 
 if (category == null)
 	category = "";
-if (keyword == null)
-	keyword = "";
-
-System.out.println(keyword);
 
 if (!products.isEmpty()) { //se c'è almeno un prodotto
 
 	for (Product p : products) {
-		if ((p.getName().toLowerCase().contains(keyword.toLowerCase())
-		|| lDao.getEventLocation(p.getVenueId()).getVenue().toLowerCase().contains(keyword.toLowerCase())
-		|| lDao.getEventLocation(p.getVenueId()).getCity().toLowerCase().contains(keyword.toLowerCase()))
-		&& (p.getCategory().toLowerCase().equals(category) || category.equals("default")
-				|| category.equals(""))) {
+		if (p.getCategory().toLowerCase().equals(category) || category.equals("default")
+				|| category.equals("")) {
 %>
 
 <div class="col-4-products">
 	<a
-		href="productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=showDao.getShows(p.getId()).getFirst().getId()%>"><img
+		href="productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId()%>"><img
 		class="card-img-top"
 		src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>.png"></a>
 	<!-- inserire collegamento pagina singola -->
 	<h4><%=p.getName()%></h4>
 
 	<%
-	double min = showDao.getMinimumPrice(p.getId());
-	double max = showDao.getMaximumPrice(p.getId());
+	double min = p.getMinPrice();
+	double max = p.getMaxPrice();
 	if (min == 0 || max == 0) {
 	%>
 
@@ -79,7 +76,7 @@ if (!products.isEmpty()) { //se c'è almeno un prodotto
 	</p>
 	<p>
 		Luogo:
-		<%=lDao.getEventLocation(p.getVenueId()).getVenue()%></p>
+		<%=p.getLocation()%></p>
 
 
 	<%

@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 public class Product {
 	
 	private int id;
@@ -8,6 +10,10 @@ public class Product {
 	private String image;
 	private String category;
 	private int venueId;
+	private double minPrice;
+	private double maxPrice;
+	private String location;
+	private ArrayList<Show> shows;
 	
 	public Product() {
 	}
@@ -67,6 +73,37 @@ public class Product {
 
 	public void setVenueId(int venueId) {
 		this.venueId = venueId;
+	}
+	
+	public double getMinPrice() {
+		return minPrice;
+	}
+
+	public void setMinPrice(double minPrice) {
+		this.minPrice = minPrice;
+	}
+
+	public double getMaxPrice() {
+		return maxPrice;
+	}
+
+	public void setMaxPrice(double maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+	public String getLocation() {
+		return location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
+	public ArrayList<Show> getShows() {
+		return shows;
+	}
+
+	public void setShows(ArrayList<Show> shows) {
+		this.shows = shows;
 	}
 
 	@Override

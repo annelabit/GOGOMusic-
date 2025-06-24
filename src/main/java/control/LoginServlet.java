@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 				request.getSession().setAttribute("isAdmin", Boolean.FALSE);//inserisco il token nella sessione
 			}
 			
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("index");
 		} else {
 			System.out.println("Login failed");
 			response.sendRedirect("login.jsp");

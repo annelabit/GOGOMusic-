@@ -83,7 +83,7 @@ public class AddToCartServlet extends HttpServlet {
 				cart.add(cartItem); //aggiungo il primo elemento al carrello
 				session.setAttribute("cart_list", cart);
 				//session.setAttribute("seat_ids_list", seatIds);
-				response.sendRedirect("cart.jsp");
+				response.sendRedirect("cart-products");
 			}else {
 				//carrello esiste
 				cart = cartList;
@@ -123,7 +123,7 @@ public class AddToCartServlet extends HttpServlet {
 				}
 				
 				session.setAttribute("cart_list",cart);
-				response.sendRedirect("cart.jsp");
+				response.sendRedirect("cart-products");
 			
 			}
 		

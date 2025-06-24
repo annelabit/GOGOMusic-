@@ -19,13 +19,13 @@
 	<div class="container">
 		<div class="navbar">
 			<div class="logo">
-				<a href="<%= request.getContextPath() %>/common/index.jsp"><img
+				<a href="<%= request.getContextPath() %>/common/index"><img
 					src="<%= request.getContextPath() %>/images/loghi/logo-no.png"
 					id="logo" width="125px"></a>
 			</div>
 			<nav>
 				<ul id="menuItems">
-					<li><a href="<%= request.getContextPath() %>/common/index.jsp">Home</a></li>
+					<li><a href="<%= request.getContextPath() %>/common/index">Home</a></li>
 					<li><a href="<%= request.getContextPath() %>/common/login.jsp">Log
 							in</a></li>
 					<li><a href="<%=request.getContextPath() %>/common/order-history">Ordini</a></li>
@@ -43,7 +43,7 @@
 					</div>
 				</form>
 			</div>
-			<a href="<%= request.getContextPath() %>/common/cart.jsp"><img
+			<a href="<%= request.getContextPath() %>/common/cart-products"><img
 				src="<%= request.getContextPath() %>/images/loghi/carrello-grande.png"
 				width="30px" height="30px"></a> <img
 				src="<%= request.getContextPath() %>/images/loghi/menu-icon.png"

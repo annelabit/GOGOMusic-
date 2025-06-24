@@ -37,7 +37,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 						if(c.getId() == id) {
 							showSeatDao.setSeatsAvailable(c.getShowId(), c.getSeatIds());
 							cart.remove(cart.indexOf(c));
-							response.sendRedirect("cart.jsp");
+							response.sendRedirect("cart-products");
 							break;
 						}
 					}
@@ -45,7 +45,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 				}
 			}
 			else {
-				response.sendRedirect("cart.jsp");
+				response.sendRedirect("cart-products");
 			}
 		}
 	}

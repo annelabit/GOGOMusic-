@@ -61,10 +61,12 @@ public class UpdateSeatServlet extends HttpServlet {
 		
 			//SeatDao seatDao = new SeatDao(DBConnection.getConnection());
 			ShowSeatDao showSeatDao = new ShowSeatDao();
-			
+			SeatDao seatDao = new SeatDao();
+			String type = seatDao.getSeatsByShowSeatId(seatIdList.getFirst()).getType();
 			showSeatDao.reserveSeats(showId,seatIdList);
 			
-			response.sendRedirect("add-to-cart?id="+pId+"&quantity="+request.getParameter("quantity")+"&seatIds="+seatIdsString+"&showId="+showId);
+			response.sendRedirect("add-to-cart?id="+pId+"&quantity="+request.getParameter("quantity")+"&seatIds="+seatIdsString+"&showId="+showId
+					+"&type="+type);
 			
 		}catch(Exception e) {
 			e.printStackTrace();

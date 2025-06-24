@@ -37,7 +37,7 @@ public class EmptyCartServlet extends HttpServlet {
 					}
 				}
 				cart.clear();
-				response.sendRedirect("cart.jsp");
+				response.sendRedirect("cart-products");
 				
 		}
 		
