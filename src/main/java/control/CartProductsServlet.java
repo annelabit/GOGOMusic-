@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Cart;
+import model.Product;
 import model.User;
 
 import java.io.IOException;
@@ -29,7 +30,6 @@ public class CartProductsServlet extends HttpServlet {
 		ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list");
 		ArrayList<String> date = new ArrayList<>();
 		ArrayList<String> time = new ArrayList<>();
-		
 		ArrayList<String> categories = new ArrayList<>();
 		
 		double totalPrice = 0;

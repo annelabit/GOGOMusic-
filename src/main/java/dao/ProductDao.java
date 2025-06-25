@@ -37,6 +37,7 @@ public class ProductDao {
 				prod.setCategory(rs.getString("category"));
 				prod.setImage(rs.getString("image"));
 				prod.setVenueId(rs.getInt("venueId"));
+				prod.setDescrizione(rs.getString("descrizione"));
 				products.add(prod);
 			}
 			
@@ -70,6 +71,7 @@ public class ProductDao {
 						c.setPrice(rs.getFloat("price")*cartItem.getQuantity());
 						c.setQuantity(cartItem.getQuantity());
 						c.setVenueId(rs.getInt("venueId"));
+						c.setDescrizione(rs.getString("descrizione"));
 						cartProducts.add(c);
 					}
 					
@@ -179,6 +181,7 @@ public class ProductDao {
 				p.setCategory(rs.getString("category"));
 				p.setImage(rs.getString("image"));
 				p.setVenueId(rs.getInt("venueId"));
+				p.setDescrizione(rs.getString("descrizione"));
 			}
 			
 		}catch(Exception e) {
@@ -208,6 +211,7 @@ public class ProductDao {
 				prod.setCategory(rs.getString("category"));
 				prod.setImage(rs.getString("image"));
 				prod.setVenueId(rs.getInt("venueId"));
+				prod.setDescrizione(rs.getString("descrizione"));
 				products.add(prod);
 			}
 			
@@ -222,9 +226,9 @@ public class ProductDao {
 		
 	}
 	
-	public boolean insertEvent(Product p) {
+	public int insertEvent(Product p) {
 		
-		boolean result = false;
+		int id = 0;
 		
 		try {
 			connection = DBConnection.getConnection();
@@ -238,7 +242,9 @@ public class ProductDao {
 			pst.setInt(4, p.getVenueId());
 			pst.executeUpdate();
 			
-			result = true; //se è arrivato qui non ci sono eccezioni
+			ResultSet keys = pst.getGeneratedKeys();
+			if(keys.next())
+				id = keys.getInt(1);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -247,7 +253,7 @@ public class ProductDao {
 			closeConnection(connection);
 		}
 				
-		return result;
+		return id;
 	}
 
 	public ArrayList<Product> getEventsByCategory(String category) {
@@ -268,6 +274,7 @@ public class ProductDao {
 				p.setName(rs.getString("name"));
 				p.setImage(rs.getString("image"));
 				p.setCategory(rs.getString("category"));
+				p.setDescrizione(rs.getString("descrizione"));
 				p.setVenueId(0);
 				
 				events.add(p);
@@ -283,7 +290,7 @@ public class ProductDao {
 	}
 	
 	//modifica il prezzo di tutti i posti di uno specifico spettacolo e di una specifica categoria
-		public boolean modifyEventInformation(Show show, String name, String category, String image, int venueId) {
+		public boolean modifyEventInformation(Show show, String name, String category, String image, int venueId, String descrizione) {
 			
 			boolean result = false;
 			
@@ -302,7 +309,7 @@ public class ProductDao {
 					pst.setString(3, image);
 					pst.setInt(4, venueId); 
 					pst.setInt(5, show.getId());
-					
+					pst.setString(6, descrizione);
 					pst.executeUpdate();
 				
 					//show.setName ...?

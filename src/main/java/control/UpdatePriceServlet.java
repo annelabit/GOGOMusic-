@@ -31,6 +31,7 @@ public class UpdatePriceServlet extends HttpServlet {
 				boolean isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
 
 				
+				
 				if(!isAdmin|| isAdmin == false){
 					response.sendRedirect(request.getContextPath()+"/common/login.jsp");
 					return;
@@ -49,8 +50,6 @@ public class UpdatePriceServlet extends HttpServlet {
 				ShowSeatDao showSeatDao = new ShowSeatDao();
 				SeatDao seatDao = new SeatDao();
 				LocationDao locationDao = new LocationDao();
-				
-				
 				
 				ArrayList<Product> events = new ArrayList<>();
 				events = pDao.getProducts();

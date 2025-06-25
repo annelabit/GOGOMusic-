@@ -18,6 +18,9 @@ Product p = (Product) request.getAttribute("product");
 Location location = (Location) request.getAttribute("location");
 ArrayList<ShowSeat> seats = (ArrayList<ShowSeat>) request.getAttribute("seats");
 ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
+ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+request.setAttribute("products", products);
+
 %>
 <!DOCTYPE html>
 <html>

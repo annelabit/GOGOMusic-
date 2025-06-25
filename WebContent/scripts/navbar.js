@@ -5,10 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
 	const category = document.getElementById("category");
 	const container = document.querySelector(".row-products");
 
-	if (!searchbar || !category || !container) {
-		console.error("Elemento mancante:", { searchbar, category, container });
+	/*if (!searchbar || !category || !container) {
+		console.error("Elemento mancante:", { searchbar });
 		return;
-	}
+	}*/
 
 	function loadFilteredProducts() {
 		const selectedCategory = category.value;

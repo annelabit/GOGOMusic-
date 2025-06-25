@@ -8,12 +8,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Cart;
 import model.DBConnection;
+import model.Product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import dao.ProductDao;
 import dao.ShowSeatDao;
 
 /**
@@ -28,6 +30,7 @@ public class RemoveFromCartServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		
 		try(PrintWriter out = response.getWriter()){
+			
 			ShowSeatDao showSeatDao = new ShowSeatDao();
 			int id = Integer.parseInt(request.getParameter("id"));
 			if(id!=0) {//valore di default per interi è 0

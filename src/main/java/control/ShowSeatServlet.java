@@ -33,9 +33,6 @@ public class ShowSeatServlet extends HttpServlet {
 		
 		SeatDao sDao = new SeatDao();
 		ShowSeatDao showSeatDao = new ShowSeatDao();
-		ShowDao showDao = new ShowDao();
-		ProductDao pDao = new ProductDao();
-		LocationDao lDao = new LocationDao();
 		
 		
 		

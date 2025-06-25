@@ -6,12 +6,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.DBConnection;
+import model.Product;
 import model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import dao.ProductDao;
 import dao.SeatDao;
 import dao.ShowSeatDao;
 
@@ -45,7 +47,6 @@ public class UpdateSeatServlet extends HttpServlet {
 		int showId = Integer.parseInt(request.getParameter("showId"));
 		
 		User user = (User) request.getSession().getAttribute("user");
-		//int uId = user.getIdUtente();
 		
 		//converto array di stringhe in arrayList di interi
 		ArrayList<Integer> seatIdList = new ArrayList<>();

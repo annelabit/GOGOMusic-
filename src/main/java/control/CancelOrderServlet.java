@@ -6,13 +6,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.DBConnection;
+import model.Product;
 import model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import dao.OrderDao;
+import dao.ProductDao;
 
 /**
  * Servlet implementation class CancelOrderServlet

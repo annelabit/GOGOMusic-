@@ -39,26 +39,30 @@ function login() {
 
 
 
-/*  galleria prodotti */
-var productImg = document.getElementById("product-img");
-var smallImg = document.getElementsByClassName("small-img");
-//small img è un array (sono 3 foto)
 
-smallImg[0].onclick = function() {
-	productImg.src = smallImg[0].src;
-}
-smallImg[1].onclick = function() {
-	productImg.src = smallImg[1].src;
-}
-smallImg[2].onclick = function() {
-	productImg.src = smallImg[2].src;
-}
 
 
 
 
 /* immagine mappa */
 document.addEventListener("DOMContentLoaded", function() {
+	
+	/*  galleria prodotti */
+	var productImg = document.getElementById("product-img");
+	var smallImg = document.getElementsByClassName("small-img");
+	//small img è un array (sono 3 foto)
+
+	smallImg[0].onclick = function() {
+		productImg.src = smallImg[0].src;
+	}
+	smallImg[1].onclick = function() {
+		productImg.src = smallImg[1].src;
+	}
+	smallImg[2].onclick = function() {
+		productImg.src = smallImg[2].src;
+	}
+	
+	
 	const btn = document.getElementById("showImageBtn");
 	const overlay = document.getElementById("imageOverlay");
 	const closeBtn = document.querySelector(".close-btn");

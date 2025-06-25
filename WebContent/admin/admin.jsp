@@ -301,7 +301,7 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 			<h3>Gestione Eventi</h3>
 			<div class="admin-card">
 				<h4>Aggiungi Nuovo Evento</h4>
-				<form class="admin-form">
+				<form class="admin-form" action="add-event" method="post">
 					<div class="form-row">
 						<div class="form-group">
 							<label for="nome-evento">Nome Evento:</label> <input type="text"

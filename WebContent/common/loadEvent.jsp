@@ -37,7 +37,7 @@ if (cart != null) {
 }
 
 ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
-
+request.setAttribute("products", products);
 String category = (String) request.getAttribute("category");
 
 if (category == null)

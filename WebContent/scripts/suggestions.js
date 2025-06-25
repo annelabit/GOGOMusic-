@@ -31,9 +31,9 @@ function autocomplete(inp, arr) {
 		  b.addEventListener("click", function(e) {
 		    inp.value = this.getElementsByTagName("input")[0].value;
 
-		    const selected = concerts.find(c => c.name === inp.value);
+		    const selected = arr.find(c => c.name === inp.value);
 		    if (selected) {
-		      const url = getPath() + `/common/productDetails.jsp?eventId=${encodeURIComponent(selected.eventId)}&showId=${encodeURIComponent(selected.showId)}`;
+		      const url = getPath() + `/common/product-details?eventId=${encodeURIComponent(selected.eventId)}`;
 		      window.location.href = url;
 		    }
 

@@ -41,12 +41,16 @@ public class IndexServlet extends HttpServlet {
 		// Carica prodotti
 		ArrayList<Product> products = productDao.getProducts();
 		request.setAttribute("products", products);
-
+		//request.getSession().setAttribute("products",products);
 		for (Product p : products) {
+			
+			if(showDao.getShows(p.getId())!=null) {
+			
 			p.setMinPrice(showDao.getMinimumPrice(p.getId()));
 			p.setMaxPrice(showDao.getMaximumPrice(p.getId()));
 			p.setLocation(locationDao.getEventLocation(p.getVenueId()).getVenue());
 			p.setShows(showDao.getShows(p.getId()));
+			}
 		}
 
 		// Carrello

@@ -31,7 +31,8 @@ if (cart != null) {
 
 request.setAttribute("cart_list", cart);
 request.setAttribute("total", totalPrice);
-
+ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+request.setAttribute("products", products);
 %>
 
 <!DOCTYPE html>

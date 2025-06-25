@@ -5,12 +5,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Product;
 import model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 
+import dao.ProductDao;
 import dao.UserDao;
 
 /**
@@ -54,7 +57,6 @@ public class RegisterServlet extends HttpServlet {
 		int id = udao.userRegister(user, toHash(password));
 		user.setIdUtente(id);
 		System.out.println(user.toString());
-		
 		if(id==0) {
 			//DOVREBBE MOSTRARE MESSAGGIO DI ERRORE EMAIL GIà ESISTENTE ECC
 			response.sendRedirect("login.jsp");

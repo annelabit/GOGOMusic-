@@ -35,7 +35,6 @@ public class OrderHistoryServlet extends HttpServlet {
 	    SeatDao seatDao = new SeatDao();
 	    ProductDao pDao = new ProductDao();
 	    ShowDao showDao = new ShowDao();
-	    
 	    if(user == null) {
 	    	response.sendRedirect("login.jsp");
 	    }else {

@@ -23,7 +23,6 @@ public class ProductDetailsServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		int pId = Integer.parseInt(request.getParameter("eventId"));
-		int showId = Integer.parseInt(request.getParameter("showId"));
 		
 		
 		User user = (User) request.getSession().getAttribute("user");
@@ -38,15 +37,16 @@ public class ProductDetailsServlet extends HttpServlet {
 		LocationDao lDao = new LocationDao();
 		
 		Product p = pDao.getSingleProduct(pId);
-		ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(Integer.parseInt(request.getParameter("showId")));
-
+		
+		p.setShows(showDao.getShows(pId));
+		
+		ArrayList<ShowSeat> seats = showSeatDao.getSeatsForShow(p.getShows().getFirst().getId());
 		ArrayList<String> categories = sDao.getAllCategories(p.getVenueId());
 		
 		p.setMinPrice(showDao.getMinimumPrice(p.getId()));
 		p.setMaxPrice(showDao.getMaximumPrice(p.getId()));
 		p.setLocation(lDao.getEventLocation(p.getVenueId()).getVenue());
 		p.setShows(showDao.getShows(p.getId()));
-		
 		Location location = lDao.getEventLocation(p.getVenueId());
 		
 		request.setAttribute("product", p);

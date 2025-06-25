@@ -20,7 +20,8 @@ Location location = (Location) request.getAttribute("location");
 ArrayList<Seat> seats = (ArrayList<Seat>) request.getAttribute("seats");
 ArrayList<ShowSeat> showSeats = (ArrayList<ShowSeat>) request.getAttribute("showSeats");
 ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
-
+ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+request.setAttribute("products", products);
 int i=0;
 
 for (ShowSeat s : showSeats) {

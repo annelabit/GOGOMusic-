@@ -6,13 +6,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.DBConnection;
+import model.Product;
 import model.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import dao.ProductDao;
 import dao.UserDao;
 
 @WebServlet("/common/loginServlet")
@@ -33,7 +36,6 @@ public class LoginServlet extends HttpServlet {
 		
 		UserDao udao = new UserDao();
 		User user = udao.userLogin(username, toHash(password));
-		
 		if(user != null) {
 			
 			System.out.println("Login successful");

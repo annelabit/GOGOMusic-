@@ -29,7 +29,8 @@
 
 <title>GOGOMusic!</title>
 </head>
-
+<%ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+request.setAttribute("products", products); %>
 
 <body>
 

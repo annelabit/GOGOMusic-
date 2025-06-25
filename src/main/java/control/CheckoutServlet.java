@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Cart;
 import model.DBConnection;
 import model.Order;
+import model.Product;
 import model.User;
 
 import java.io.IOException;
@@ -68,8 +69,7 @@ public class CheckoutServlet extends HttpServlet {
 			User user = (User) request.getSession().getAttribute("user");
 
 			OrderDao oDao = new OrderDao();
-			ProductDao pDao = new ProductDao();
-
+			
 			if (user != null && cart != null) {
 
 				for (Cart c : cart) {
@@ -78,6 +78,7 @@ public class CheckoutServlet extends HttpServlet {
 					String formattedTime = String.format("%02d:%02d:%02d", currentTime.getHour(),
 							currentTime.getMinute(), currentTime.getSecond());
 
+					ProductDao pDao = new ProductDao();
 					Order order = new Order();
 					order.setId(c.getId());// product
 					order.setUid(user.getIdUtente());

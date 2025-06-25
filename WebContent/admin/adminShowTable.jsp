@@ -24,7 +24,7 @@ if (cart != null) {
 ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("events");
 String category = (String) request.getAttribute("category");
 int eventId = Integer.parseInt((String) request.getAttribute("eventId"));
-
+request.setAttribute("products", products);
 %>
 
 <thead>

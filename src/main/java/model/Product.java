@@ -6,7 +6,6 @@ public class Product {
 	
 	private int id;
 	private String name;
-	private float price;
 	private String image;
 	private String category;
 	private int venueId;
@@ -14,14 +13,25 @@ public class Product {
 	private double maxPrice;
 	private String location;
 	private ArrayList<Show> shows;
+	private String descrizione;
+	private float price;
 	
 	public Product() {
+		id=0;
+		name="";
+		image="";
+		category="";
+		venueId=0;
+		minPrice=0;
+		maxPrice=0;
+		location="";
+		shows=null;
+		descrizione="";
 	}
 	
 	public Product(int id, String name, float price, String category, String image, int venueId) {
 		this.id= id;
 		this.name= name;
-		this.price= price;
 		this.category= category;
 		this.image= image;
 		this.venueId=venueId;
@@ -49,14 +59,6 @@ public class Product {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
 	}
 
 	public String getImage() {
@@ -104,6 +106,22 @@ public class Product {
 
 	public void setShows(ArrayList<Show> shows) {
 		this.shows = shows;
+	}
+
+	public String getDescrizione() {
+		return descrizione;
+	}
+
+	public void setDescrizione(String descrizione) {
+		this.descrizione = descrizione;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
 	}
 
 	@Override

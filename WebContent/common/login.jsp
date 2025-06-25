@@ -3,19 +3,7 @@
     <%@page import="model.*" %>
     <%@page import="control.*" %>
     <%@page import="java.util.ArrayList"%>
-        <% 
-    User user = (User) request.getSession().getAttribute("user");
-    if(user!=null){
-    	response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
-    	                                    //la pagina non sarà visibile
-    }
-    
-    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
-    if(cart != null){
-    	request.setAttribute("cart_list", cart);
-    }
-    
-%>
+        
 
 <!DOCTYPE html>
 <html>
@@ -38,7 +26,20 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="<%= request.getContextPath() %>/styles/stylesheet.css">
-
+<% 
+    User user = (User) request.getSession().getAttribute("user");
+    if(user!=null){
+    	response.sendRedirect("index.jsp"); //l'utente ha già fatto log in, non deve farlo nuovamente
+    	                                    //la pagina non sarà visibile
+    }
+    
+    ArrayList<Cart> cart = (ArrayList<Cart>) session.getAttribute("cart_list");
+    if(cart != null){
+    	request.setAttribute("cart_list", cart);
+    }
+    ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+    request.setAttribute("products", products);
+%>
 <title>GOGOMusic!</title>
 </head>
 <body>

@@ -69,7 +69,7 @@ public class AdminServlet extends HttpServlet {
 		
 		
 		
-		
+		request.setAttribute("products", events);
 		request.setAttribute("events", events);
 		request.setAttribute("locations", locations);
 		

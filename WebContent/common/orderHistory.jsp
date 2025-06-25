@@ -45,6 +45,8 @@ ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
 Map<Integer, String> orderAreas = (Map<Integer, String>) request.getAttribute("orderAreas");
 Map<Integer, String> venueNames = (Map<Integer, String>) request.getAttribute("venueNames");
 DecimalFormat df = new DecimalFormat("#0.00");
+ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
+request.setAttribute("products", products);
 %>
 
 <title>GOGOMusic!</title>

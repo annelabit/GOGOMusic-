@@ -5,9 +5,9 @@
 <%@ page import="java.util.ArrayList"%>
 
 <%
-    ProductDao productDao = new ProductDao();
+   /* ProductDao productDao = new ProductDao();
 	ShowDao sdao = new ShowDao();
-    ArrayList<Product> events = productDao.getProducts();
+    ArrayList<Product> events = productDao.getProducts();*/
 %>
 <!-- navbar  -->
 
@@ -56,21 +56,12 @@
 <script src="<%= request.getContextPath() %>/scripts/suggestions.js"></script>
 <script src="<%= request.getContextPath() %>/scripts/navbar.js"></script>
 <script>
-var concerts = [
-  <% for (Product pr : events) {
-       int show = sdao.getShows(pr.getId()).getFirst().getId();
-       //String name = p.getName().replace("\"", "\\\"");
-  %>
-    {
-      name: "<%= pr.getName() %>",
-      eventId: <%= pr.getId() %>,
-      showId: <%= show %>
-    }<%= (events.indexOf(pr) < events.size() - 1) ? "," : "" %>
-  <% } %>
-];
-
-  
-  autocomplete(document.getElementById("searchbar"), concerts);
+fetch('<%= request.getContextPath() %>/common/search-data')
+  .then(response => response.json())
+  .then(concerts => {
+    autocomplete(document.getElementById("searchbar"), concerts);
+  });
 </script>
+
 
 

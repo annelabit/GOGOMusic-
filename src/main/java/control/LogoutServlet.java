@@ -6,11 +6,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Cart;
+import model.Product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import dao.ProductDao;
 import dao.ShowSeatDao;
 
 /**

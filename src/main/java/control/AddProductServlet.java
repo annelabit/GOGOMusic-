@@ -21,8 +21,8 @@ import dao.ShowSeatDao;
 /**
  * Servlet implementation class AddShowServlet
  */
-@WebServlet("/admin/add-show")
-public class AddShowServlet extends HttpServlet {
+@WebServlet("/admin/add-event")
+public class AddProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,30 +41,30 @@ public class AddShowServlet extends HttpServlet {
 			response.sendRedirect(request.getContextPath()+"/common/login.jsp");
 			return;
 		}
-		int pId = Integer.parseInt(request.getParameter("evento"));
-		int venueId = Integer.parseInt(request.getParameter("venue"));
+		
 		String data = request.getParameter("data");
 		String ora = request.getParameter("ora");
 		
-		float prezzoVip = Float.parseFloat(request.getParameter("prezzo_vip"));
-		float prezzoPremium = Float.parseFloat(request.getParameter("prezzo_premium"));
-		float prezzoStandard = Float.parseFloat(request.getParameter("prezzo_standard"));
-		float prezzoEconomy = Float.parseFloat(request.getParameter("prezzo_economy"));
+		String nome = request.getParameter("nome");
+		int venueId = Integer.parseInt(request.getParameter("venue_id"));
+		String img = request.getParameter("immagine");
+		String descrizione = request.getParameter("descrizione");
+		String categoria = request.getParameter("categoria");
 		
-		ShowDao showDao = new ShowDao();
-		ShowSeatDao showSeatDao = new ShowSeatDao();
+		ProductDao pDao = new ProductDao();
 		
-		Show s = new Show();
-		s.setProductId(pId);
-		s.setVenueId(venueId);
-		s.setDate(data);
-		s.setTime(ora);
+		Product p = new Product();
+		p.setVenueId(venueId);
+		p.setName(nome);
+		p.setImage(img);
+		p.setDescrizione(descrizione);
+		p.setCategory(categoria);
 		
-		s.setId(showDao.insertShow(s));
+		p.setId(pDao.insertEvent(p));
+
+		ArrayList<Product> events = new ArrayList<>();
+		events = pDao.getProducts();
 		
-		showSeatDao.addShowSeatPriceByCategory(s, "Vip", prezzoVip);
-		showSeatDao.addShowSeatPriceByCategory(s, "Settore1", prezzoPremium);
-		showSeatDao.addShowSeatPriceByCategory(s, "Settore2", prezzoStandard);
 		System.out.println("Ok");
 		
 		request.getRequestDispatcher("admin-page").include(request, response);

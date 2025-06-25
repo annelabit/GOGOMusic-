@@ -17,7 +17,7 @@ if (cart != null) {
 }
 
 ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
-
+request.setAttribute("products", products);
 %>
 
 <!DOCTYPE html>
