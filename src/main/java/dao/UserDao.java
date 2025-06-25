@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.DBConnection;
+import model.Show;
 import model.User;
 
 public class UserDao {
@@ -92,7 +93,7 @@ public class UserDao {
 			pst = this.connection.prepareStatement(query);
 			rs = pst.executeQuery();
 			
-			if(rs.next()) {
+			while(rs.next()) {
 				user = new User();
 				user.setIdUtente(rs.getInt("id"));
 				user.setNome(rs.getString("nome"));
@@ -121,6 +122,32 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+	}
+
+	public boolean deleteUser(int uId) {
+
+		boolean result = false;
+		
+		try {
+			connection = DBConnection.getConnection();
+			
+			query = "DELETE FROM user WHERE id = ?";
+			
+			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1,uId);
+			pst.executeUpdate();
+			
+			result = true; //se è arrivato qui non ci sono eccezioni
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());	
+		}finally {
+			closeConnection(connection);
+		}
+				
+		return result;
 		
 	}
 	

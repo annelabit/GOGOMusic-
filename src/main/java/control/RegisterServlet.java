@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import dao.ProductDao;
 import dao.UserDao;
@@ -53,7 +54,8 @@ public class RegisterServlet extends HttpServlet {
 		user.setUsername(username);
 		user.setEmail(email);
 		user.setAdmin(false);//se si sta iscrivendo adesso non è un admin
-		
+		java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+		user.setDate(dateSql);
 		int id = udao.userRegister(user, toHash(password));
 		user.setIdUtente(id);
 		System.out.println(user.toString());
@@ -66,7 +68,7 @@ public class RegisterServlet extends HttpServlet {
 			
 			request.getSession().setAttribute("isAdmin", Boolean.FALSE);//inserisco il token nella sessione
 			
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("index");
 		}
 		
 	}

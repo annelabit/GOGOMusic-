@@ -86,6 +86,9 @@ public class AdminServlet extends HttpServlet {
 			request.setAttribute("venue", Integer.parseInt(request.getParameter("venue")));
 			request.getRequestDispatcher("adminEventTable.jsp").forward(request, response);
 			
+		} else if(request.getParameter("keyword") != null && request.getParameter("keyword") != null) {
+			request.setAttribute("keyword", request.getParameter("keyword"));
+			request.getRequestDispatcher("adminUserTable.jsp").forward(request, response);
 		} else
 		
 		request.getRequestDispatcher("admin.jsp").forward(request, response);

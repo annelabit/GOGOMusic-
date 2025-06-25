@@ -54,3 +54,29 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("filter-by-category-and-venue").addEventListener("click", filterShows);
 
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+	const filterUser = document.getElementById("search-users");
+	
+	if (!filterUser) {
+		console.error("Elemento mancante");
+		return;
+}
+
+	function filterShows() {
+		const selectedUser = filterUser.value;
+		const xhr = new XMLHttpRequest();
+		xhr.open("GET", "admin-page?keyword=" + encodeURIComponent(selectedUser), true);
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				document.querySelector("#user-table").innerHTML = xhr.responseText;
+			}
+		};
+
+		xhr.send();
+
+	}
+	document.getElementById("filter-by-user").addEventListener("click", filterShows);
+
+});

@@ -308,7 +308,9 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 			<h3>Gestione Eventi</h3>
 			<div class="admin-card">
 				<h4>Aggiungi Nuovo Evento</h4>
-				<form class="admin-form" action="<%=request.getContextPath()%>/admin/add-event" method="post">
+				<form class="admin-form"
+					action="<%=request.getContextPath()%>/admin/add-event"
+					method="post">
 					<div class="form-row">
 						<div class="form-group">
 							<label for="nome-evento">Nome Evento:</label> <input type="text"
@@ -368,13 +370,15 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 						<thead>
 							<tr>
 								<th>ID</th>
-								<th>Nome</th>
-								<th>Categoria</th>
+								<th>Evento</th>
 								<th>Venue</th>
-								<th>Spettacoli</th>
+								<th>Data</th>
+								<th>Ora</th>
 								<th>Azioni</th>
 							</tr>
 						</thead>
+
+
 						<tbody>
 
 							<%
@@ -412,10 +416,10 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 				<h4>Tutti gli Utenti</h4>
 				<div class="table-controls">
 					<input type="text" id="search-users" placeholder="Cerca utente...">
-					<button class="btn" onclick="searchUsers()">Cerca</button>
+					<button id="filter-by-user" class="btn">Cerca</button>
 				</div>
 				<div class="table-container">
-					<table class="admin-table">
+					<table class="admin-table" id="user-table">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -427,30 +431,28 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 							</tr>
 						</thead>
 						<tbody>
+							<%
+							for (User u : allUsers) {
+							%>
 							<tr>
-								<td>1</td>
-								<td>Mario Rossi</td>
-								<td>mario.rossi@email.com</td>
-								<td>15/01/2024</td>
-								<td><button class="btn-small btn-info"
-										onclick="viewUserOrders(1)">Visualizza (5)</button></td>
+								<td><%=u.getIdUtente()%></td>
+								<td><%=u.getUsername()%></td>
+								<td><%=u.getEmail() %></td>
+								<td><%=u.getDate()%></td>
+								<!-- numero di ordini -->
+								<!--   -->
 								<td>
-									<button class="btn-small btn-edit" onclick="editUser(1)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteUser(1)">Elimina</button>
+									<button class="btn-small btn-edit">Modifica</button>
+									<form action="<%=request.getContextPath()%>/admin/delete-user?uId=<%=u.getIdUtente() %>"
+										method="post" style="display: inline;">
+										<input type="hidden" name="uId" value="<%=u.getIdUtente()%>">
+										<button type="submit" class="btn-small btn-delete">Elimina</button>
+									</form>
 								</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>Anna Verdi</td>
-								<td>anna.verdi@email.com</td>
-								<td>20/02/2024</td>
-								<td><button class="btn-small btn-info"
-										onclick="viewUserOrders(2)">Visualizza (3)</button></td>
-								<td>
-									<button class="btn-small btn-edit" onclick="editUser(2)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteUser(2)">Elimina</button>
-								</td>
-							</tr>
+							<%
+							}
+							%>
 						</tbody>
 					</table>
 				</div>

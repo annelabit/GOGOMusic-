@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Date;
+
 public class User {
 
 	private int idUtente;
@@ -8,6 +10,7 @@ public class User {
 	private String cognome;
 	private String username;
 	private boolean isAdmin;
+	private Date date; 
 	
 	public User() {
 	}
@@ -57,6 +60,15 @@ public class User {
 	}
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+	
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	@Override

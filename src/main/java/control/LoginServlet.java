@@ -14,6 +14,7 @@ import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import dao.ProductDao;
 import dao.UserDao;
@@ -36,6 +37,12 @@ public class LoginServlet extends HttpServlet {
 		
 		UserDao udao = new UserDao();
 		User user = udao.userLogin(username, toHash(password));
+
+		ProductDao pDao = new ProductDao();
+		ArrayList<Product> products = pDao.getProducts();
+		request.setAttribute("products", products);
+		
+		
 		if(user != null) {
 			
 			System.out.println("Login successful");
@@ -46,8 +53,7 @@ public class LoginServlet extends HttpServlet {
 			} else {
 				request.getSession().setAttribute("isAdmin", Boolean.FALSE);//inserisco il token nella sessione
 			}
-			
-			response.sendRedirect("index");
+			request.getRequestDispatcher("index").forward(request, response);
 		} else {
 			System.out.println("Login failed");
 			response.sendRedirect("login.jsp");
