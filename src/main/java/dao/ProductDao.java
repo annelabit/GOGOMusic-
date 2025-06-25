@@ -337,7 +337,7 @@ public class ProductDao {
 				ArrayList<Show> shows= showDao.getShows(p.getId());
 				
 				for(Show s : shows) {
-					showDao.deleteShow(s);
+					showDao.deleteShow(s.getId());
 				}
 				
 				query = "DELETE FROM product WHERE id = ?";

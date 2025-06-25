@@ -164,16 +164,19 @@ public class ShowDao {
 		return id;
 	}
 
-	public boolean deleteShow(Show show) {
+	public boolean deleteShow(int showId) {
 		boolean result = false;
 
 		try {
+			
+			ShowSeatDao showSeatDao = new ShowSeatDao();
+			showSeatDao.deleteallShowSeats(showId);
 			connection = DBConnection.getConnection();
 
-			query = "DELETE FROM show WHERE id = ?";
+			query = "DELETE FROM `show` WHERE id = ?";
 
 			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-			pst.setInt(1, show.getId());
+			pst.setInt(1, showId);
 			pst.executeUpdate();
 
 			// lo spettacolo non scompare dagli ordini di nessun utente

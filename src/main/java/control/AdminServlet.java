@@ -27,6 +27,8 @@ public class AdminServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		System.out.println("Admin servlet");
+		
 		// controllo se utente è admin
 		//boolean isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
 
@@ -73,7 +75,7 @@ public class AdminServlet extends HttpServlet {
 		request.setAttribute("events", events);
 		request.setAttribute("locations", locations);
 		
-		//viene da filtra eventi?
+		//viene da filtra eventi
 		if(request.getParameter("eventId") != null) {
 			request.setAttribute("eventId", request.getParameter("eventId"));
 			request.getRequestDispatcher("adminShowTable.jsp").forward(request, response);

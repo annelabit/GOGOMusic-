@@ -28,8 +28,8 @@
 	href="<%=request.getContextPath()%>/styles/stylesheet.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/styles/admin.css">
-	
-	
+
+
 
 <title>GOGOMusic!</title>
 
@@ -239,7 +239,9 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 						<%
 						for (Product p : allEvents) {
 						%>
-						<option value="<%=p.getId() %>"> <%=p.getName() %> </option>
+						<option value="<%=p.getId()%>">
+							<%=p.getName()%>
+						</option>
 						<%
 						}
 						%>
@@ -247,7 +249,7 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 					<button class="btn" id="filter-by-event-button">Filtra</button>
 
 				</div>
-				<div class="table-container" >
+				<div class="table-container">
 
 
 					<table class="admin-table" id="show-table">
@@ -277,7 +279,11 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 								<td><%=s.getTime()%></td>
 								<td>
 									<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteShow(1)">Elimina</button>
+									<form action="<%=request.getContextPath()%>/admin/delete-show"
+										method="post" style="display: inline;">
+										<input type="hidden" name="showId" value="<%=s.getId()%>">
+										<button type="submit" class="btn-small btn-delete">Elimina</button>
+									</form>
 								</td>
 							</tr>
 							<%
@@ -351,9 +357,10 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 						<option value="0">Tutti i Venue</option>
 						<option value="2">San Siro - Milano</option>
 						<option value="3">Stadio Olimpico - Roma</option>
-						<option value="1">Stadio Maradona - Napoli </option>
+						<option value="1">Stadio Maradona - Napoli</option>
 					</select>
-					<button id="filter-by-category-and-venue" class="btn" onclick="filterEvents()">Filtra</button>
+					<button id="filter-by-category-and-venue" class="btn"
+						onclick="filterEvents()">Filtra</button>
 				</div>
 				<div class="table-container">
 					<table class="admin-table" id="event-table">
@@ -377,7 +384,7 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 								<td><%=p.getName()%></td>
 								<td><%=p.getCategory()%></td>
 								<td><%=p.getLocation()%></td>
-								<td><%=p.getShows().size() %></td>
+								<td><%=p.getShows().size()%></td>
 								<td>
 									<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
 									<button class="btn-small btn-delete" onclick="deleteShow(1)">Elimina</button>
@@ -387,7 +394,7 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 							}
 							%>
 
-</tbody>
+						</tbody>
 					</table>
 				</div>
 			</div>
@@ -605,7 +612,7 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 	</div>
 
 	<%@include file="/include/footer.jsp"%>
-<script src="<%=request.getContextPath()%>/scripts/admin.js"></script>
+	<script src="<%=request.getContextPath()%>/scripts/admin.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script

@@ -283,7 +283,33 @@ public ArrayList<ShowSeat> getSeatsForShow(int showId){
 		return result;
 	}
 	
+	public boolean deleteallShowSeats(int showId) {
+		boolean result = false;
 
+		try {
+			connection = DBConnection.getConnection();
+
+			query = "DELETE FROM `show_seats` WHERE showId = ?";
+
+			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, showId);
+			pst.executeUpdate();
+
+			// lo spettacolo non scompare dagli ordini di nessun utente
+
+			result = true; // se è arrivato qui non ci sono eccezioni
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());
+		} finally {
+			closeConnection(connection);
+		}
+
+		return result;
+	}
+	
+	
 	public void closeConnection(Connection connection) {
 		
 		try {
