@@ -578,9 +578,13 @@ DecimalFormat df = new DecimalFormat("#0.00");
 								<td><%=o.getPrice() %> </td>
 								<td>
 									<button class="btn-small btn-info"
-										onclick="viewOrder('ORD001')">Dettagli</button>
-									<button class="btn-small btn-delete"
-										onclick="cancelOrder('ORD001')">Annulla</button>
+										>Dettagli</button>
+									<form action="<%=request.getContextPath()%>/admin/cancel-order?orderId=<%=o.getOrderId()%>"
+										method="post" style="display: inline;">
+										<input type="hidden" name="orderId" value="<%=o.getOrderId()%>">
+										<button class="btn-small btn-delete" >Annulla</button>
+									</form>
+									
 								</td>
 							</tr>
 						<%} %>
