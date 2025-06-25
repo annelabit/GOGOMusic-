@@ -39,6 +39,7 @@ public class AdminServlet extends HttpServlet {
 		User user = (User) request.getSession().getAttribute("user");
 			request.setAttribute("user", user);
 
+		UserDao uDao = new UserDao();
 		ProductDao pDao = new ProductDao();
 		ShowDao showDao = new ShowDao();
 		ShowSeatDao showSeatDao = new ShowSeatDao();
@@ -52,7 +53,7 @@ public class AdminServlet extends HttpServlet {
 		
 		//per ogni evento e per ogni spettacolo imposta tutti i posti
 		
-		
+		ArrayList<User> users = uDao.getAllUsers();
 		
 		for(Product p : events) {
 			p.setMinPrice(showDao.getMinimumPrice(p.getId()));
@@ -74,7 +75,7 @@ public class AdminServlet extends HttpServlet {
 		request.setAttribute("products", events);
 		request.setAttribute("events", events);
 		request.setAttribute("locations", locations);
-		
+		request.setAttribute("users", users);
 		//viene da filtra eventi
 		if(request.getParameter("eventId") != null) {
 			request.setAttribute("eventId", request.getParameter("eventId"));

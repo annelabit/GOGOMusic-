@@ -327,14 +327,14 @@ public class ProductDao {
 			return result;
 		}
 	
-		public boolean deleteEvent(Product p) {
+		public boolean deleteEvent(int pId) {
 			
 			boolean result = false;
 			ShowDao showDao = new ShowDao();
 			
 			try {
 				connection = DBConnection.getConnection();
-				ArrayList<Show> shows= showDao.getShows(p.getId());
+				ArrayList<Show> shows= showDao.getShows(pId);
 				
 				for(Show s : shows) {
 					showDao.deleteShow(s.getId());
@@ -343,7 +343,7 @@ public class ProductDao {
 				query = "DELETE FROM product WHERE id = ?";
 				
 				pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-				pst.setInt(1, p.getId());
+				pst.setInt(1, pId);
 				pst.executeUpdate();
 				
 				//lo spettacolo non scompare dagli ordini di nessun utente

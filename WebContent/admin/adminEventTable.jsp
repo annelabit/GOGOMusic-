@@ -55,7 +55,11 @@ int venue = (int) request.getAttribute("venue");
 								<td><%=p.getShows().size() %></td>
 								<td>
 									<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteShow(1)">Elimina</button>
+									<form action="<%=request.getContextPath()%>/admin/delete-event"
+										method="post" style="display: inline;">
+										<input type="hidden" name="eventId" value="<%=p.getId()%>">
+										<button type="submit" class="btn-small btn-delete">Elimina</button>
+									</form>
 								</td>
 							</tr>
 							<%

@@ -83,7 +83,7 @@ public class UserDao {
 	
 	public ArrayList<User> getAllUsers() {
 
-		ArrayList<User> users = null;
+		ArrayList<User> users = new ArrayList<>();
 		User user = null;
 		
 		try {

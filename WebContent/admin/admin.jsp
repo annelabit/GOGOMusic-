@@ -47,6 +47,7 @@ request.setAttribute("user", user);
 
 ArrayList<Product> allEvents = (ArrayList<Product>) request.getAttribute("events");
 ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("locations");
+ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 %>
 
 
@@ -307,7 +308,7 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 			<h3>Gestione Eventi</h3>
 			<div class="admin-card">
 				<h4>Aggiungi Nuovo Evento</h4>
-				<form class="admin-form" action="add-event" method="post">
+				<form class="admin-form" action="<%=request.getContextPath()%>/admin/add-event" method="post">
 					<div class="form-row">
 						<div class="form-group">
 							<label for="nome-evento">Nome Evento:</label> <input type="text"
@@ -387,7 +388,11 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 								<td><%=p.getShows().size()%></td>
 								<td>
 									<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteShow(1)">Elimina</button>
+									<form action="<%=request.getContextPath()%>/admin/delete-event"
+										method="post" style="display: inline;">
+										<input type="hidden" name="eId" value="<%=p.getId()%>">
+										<button type="submit" class="btn-small btn-delete">Elimina</button>
+									</form>
 								</td>
 							</tr>
 							<%

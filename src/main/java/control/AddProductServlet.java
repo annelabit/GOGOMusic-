@@ -34,16 +34,12 @@ public class AddProductServlet extends HttpServlet {
 		//controllo se utente è admin
 		boolean isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
 
-		User user = (User) request.getSession().getAttribute("user");
-		request.setAttribute("user", user);
+		System.out.println("Ok");
 		
-		if(!isAdmin|| isAdmin == false){
+		if(request.getSession().getAttribute("isAdmin") == null || (boolean) request.getSession().getAttribute("isAdmin") == false){
 			response.sendRedirect(request.getContextPath()+"/common/login.jsp");
 			return;
 		}
-		
-		String data = request.getParameter("data");
-		String ora = request.getParameter("ora");
 		
 		String nome = request.getParameter("nome");
 		int venueId = Integer.parseInt(request.getParameter("venue_id"));

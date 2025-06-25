@@ -332,7 +332,7 @@ function toggleDetails(orderId) {
 	}
 
 	// Form submission handlers
-	document.addEventListener('DOMContentLoaded', function() {
+	/*document.addEventListener('DOMContentLoaded', function() {
 	    // Handle form submissions
 	    const forms = document.querySelectorAll('.admin-form');
 	    forms.forEach(form => {
@@ -361,7 +361,7 @@ function toggleDetails(orderId) {
 	    
 	    // Initialize first section as active
 	    showAdminSection('gestione-posti');
-	});
+	});*/
 
 	// Menu toggle function for mobile (from original theme)
 	function menutoggle() {
