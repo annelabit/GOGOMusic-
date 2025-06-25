@@ -53,7 +53,7 @@ request.setAttribute("products", products);
 		<td><%=s.getDate()%></td>
 		<td><%=s.getTime()%></td>
 		<td>
-	<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
+	<!--  <button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>-->
 
 	<form action="<%=request.getContextPath()%>/admin/delete-show" method="post" style="display:inline;">
 		<input type="hidden" name="showId" value="<%=s.getId()%>">

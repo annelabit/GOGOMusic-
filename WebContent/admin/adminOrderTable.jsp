@@ -38,8 +38,8 @@ ArrayList<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
 								<td><%=o.getDate() %> </td>
 								<td><%=o.getPrice() %> </td>
 								<td>
-									<button class="btn-small btn-info"
-										onclick="viewOrder('ORD001')">Dettagli</button>
+									<!--  <button class="btn-small btn-info"
+										onclick="viewOrder('ORD001')">Dettagli</button>-->
 									<button class="btn-small btn-delete"
 										onclick="cancelOrder('ORD001')">Annulla</button>
 								</td>

@@ -286,7 +286,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 								<td><%=s.getDate()%></td>
 								<td><%=s.getTime()%></td>
 								<td>
-									<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
+									<!-- <button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button> -->
 									<form action="<%=request.getContextPath()%>/admin/delete-show"
 										method="post" style="display: inline;">
 										<input type="hidden" name="showId" value="<%=s.getId()%>">
@@ -398,7 +398,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 								<td><%=p.getLocation()%></td>
 								<td><%=p.getShows().size()%></td>
 								<td>
-									<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
+									<!--  <button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>-->
 									<form action="<%=request.getContextPath()%>/admin/delete-event"
 										method="post" style="display: inline;">
 										<input type="hidden" name="eId" value="<%=p.getId()%>">
@@ -440,16 +440,23 @@ DecimalFormat df = new DecimalFormat("#0.00");
 						<tbody>
 							<%
 							for (User u : allUsers) {
+								
+								int tot=0;
+								for(Order o : allOrders){
+									if(o.getUid()==u.getIdUtente())
+										tot++;
+								}
+								
 							%>
 							<tr>
 								<td><%=u.getIdUtente()%></td>
 								<td><%=u.getUsername()%></td>
 								<td><%=u.getEmail() %></td>
 								<td><%=u.getDate()%></td>
-								<!-- numero di ordini -->
+								<td><%=tot %></td>
 								<!--   -->
 								<td>
-									<button class="btn-small btn-edit">Modifica</button>
+									<!-- <button class="btn-small btn-edit">Modifica</button> -->
 									<form action="<%=request.getContextPath()%>/admin/delete-user?uId=<%=u.getIdUtente() %>"
 										method="post" style="display: inline;">
 										<input type="hidden" name="uId" value="<%=u.getIdUtente()%>">
@@ -577,8 +584,8 @@ DecimalFormat df = new DecimalFormat("#0.00");
 								<td><%=o.getDate() %> </td>
 								<td><%=o.getPrice() %> </td>
 								<td>
-									<button class="btn-small btn-info"
-										>Dettagli</button>
+									<!--  <button class="btn-small btn-info"
+										>Dettagli</button>-->
 									<form action="<%=request.getContextPath()%>/admin/cancel-order?orderId=<%=o.getOrderId()%>"
 										method="post" style="display: inline;">
 										<input type="hidden" name="orderId" value="<%=o.getOrderId()%>">

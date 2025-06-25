@@ -91,6 +91,7 @@ public class AdminServlet extends HttpServlet {
 			request.getRequestDispatcher("adminEventTable.jsp").forward(request, response);
 			
 		} else if(request.getParameter("keyword") != null && request.getParameter("keyword") != null) {
+			request.setAttribute("orders",orders);
 			request.setAttribute("keyword", request.getParameter("keyword"));
 			request.getRequestDispatcher("adminUserTable.jsp").forward(request, response);
 		} else if(request.getParameter("userOrder") != null || request.getParameter("startDate")!= null || request.getParameter("endDate")!=null) {

@@ -142,6 +142,7 @@ public class OrderDao {
 				Product product = pDao.getSingleProduct(pId);
 				order.setOrderId(rs.getInt("orderId"));
 				order.setId(pId);
+				order.setUid(rs.getInt("userId"));
 				order.setName(product.getName());
 				order.setCategory(product.getCategory());
 				order.setPrice(rs.getFloat("totalPrice"));
@@ -242,6 +243,7 @@ public class OrderDao {
 				Product product = pDao.getSingleProduct(pId);
 				order.setOrderId(rs.getInt("orderId"));
 				order.setId(pId);
+				order.setUid(rs.getInt("userId"));
 				order.setName(product.getName());
 				order.setCategory(product.getCategory());
 				order.setPrice(rs.getFloat("totalPrice"));
@@ -293,6 +295,7 @@ public class OrderDao {
 				Product product = pDao.getSingleProduct(pId);
 				order.setOrderId(rs.getInt("orderId"));
 				order.setId(pId);
+				order.setUid(rs.getInt("userId"));
 				order.setName(product.getName());
 				order.setCategory(product.getCategory());
 				order.setPrice(rs.getFloat("totalPrice"));
@@ -341,6 +344,7 @@ public class OrderDao {
 				Product product = pDao.getSingleProduct(pId);
 				order.setOrderId(rs.getInt("orderId"));
 				order.setId(pId);
+				order.setUid(rs.getInt("userId"));
 				order.setName(product.getName());
 				order.setCategory(product.getCategory());
 				order.setPrice(rs.getFloat("totalPrice"));
