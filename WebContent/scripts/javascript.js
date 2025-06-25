@@ -18,23 +18,23 @@ var loginForm = document.getElementById("loginForm");
 var regForm = document.getElementById("regForm");
 var indicator = document.getElementById("indicator");
 
-function register() {
-	// Sposta il form di login a sinistra (fuori dallo schermo)
-	loginForm.style.transform = "translateX(-100%)";
-	// Porta il form di registrazione al centro
-	regForm.style.transform = "translateX(0)";
-	// Sposta l'indicatore sotto "Registrati"
-	indicator.style.transform = "translateX(100px)";
-}
+document.addEventListener("DOMContentLoaded", () => {
+		var loginForm = document.getElementById("loginForm");
+		var regForm = document.getElementById("regForm");
+		var indicator = document.getElementById("indicator");
 
-function login() {
-	// Porta il form di login al centro
-	loginForm.style.transform = "translateX(0)";
-	// Sposta il form di registrazione a destra (fuori dallo schermo)
-	regForm.style.transform = "translateX(100%)";
-	// Riporta l'indicatore sotto "Login"
-	indicator.style.transform = "translateX(0)";
-}
+		window.register = function () {
+			loginForm.style.transform = "translateX(-100%)";
+			regForm.style.transform = "translateX(0)";
+			indicator.style.transform = "translateX(100px)";
+		};
+
+		window.login = function () {
+			loginForm.style.transform = "translateX(0)";
+			regForm.style.transform = "translateX(100%)";
+			indicator.style.transform = "translateX(0)";
+		};
+	});
 
 
 

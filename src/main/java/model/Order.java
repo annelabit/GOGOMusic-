@@ -25,6 +25,8 @@ public class Order extends Product{
 	private String showDate;
 	private String showTime;
 	private ArrayList<Integer> showSeatIds;
+	private String username;
+	private double totalPrice;
 	
 	
 	public Order() {}
@@ -234,6 +236,22 @@ public class Order extends Product{
 
 	public void setShowSeatIds(ArrayList<Integer> showSeatIds) {
 		this.showSeatIds = showSeatIds;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 
 

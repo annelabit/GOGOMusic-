@@ -26,7 +26,7 @@ public class IndexServlet extends HttpServlet {
 		String category = request.getParameter("category");
 		
 		//controllo se viene da tutti i prodotti
-		String all = request.getParameter("products");
+		String all = request.getParameter("all");
 
 		User user = (User) request.getSession().getAttribute("user");
 		if (user != null) {
@@ -59,12 +59,17 @@ public class IndexServlet extends HttpServlet {
 			request.setAttribute("cart_list", cart);
 		}
 
+		if(all != null) {
+			// Reindirizza alla JSP
+			request.getRequestDispatcher("products.jsp").forward(request, response);
+		}
+		
 		if (category == null) {
 			
-			if(all != null) {
+			/*if(all != null) {
 				// Reindirizza alla JSP
 				request.getRequestDispatcher("products.jsp").forward(request, response);
-			}
+			}*/
 			
 			// Reindirizza alla JSP
 			request.getRequestDispatcher("index.jsp").forward(request, response);

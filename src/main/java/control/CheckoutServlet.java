@@ -22,6 +22,7 @@ import java.util.Date;
 
 import dao.OrderDao;
 import dao.ProductDao;
+import dao.UserDao;
 
 /**
  * Servlet implementation class CheckoutServlet
@@ -69,7 +70,7 @@ public class CheckoutServlet extends HttpServlet {
 			User user = (User) request.getSession().getAttribute("user");
 
 			OrderDao oDao = new OrderDao();
-			
+			UserDao uDao = new UserDao();
 			if (user != null && cart != null) {
 
 				for (Cart c : cart) {
@@ -100,7 +101,7 @@ public class CheckoutServlet extends HttpServlet {
 					order.setMeseScadenza(Integer.parseInt(request.getParameter("mese")));
 					order.setAnnoScadenza(Integer.parseInt(request.getParameter("anno")));
 					order.setCvv(Integer.parseInt(request.getParameter("cvv")));
-					
+					order.setUsername(uDao.getUserFromId(user.getIdUtente()).getUsername());
 					boolean result = oDao.insertOrder(order, c.getSeatIds());
 					
 					System.out.println("Ok " + result);

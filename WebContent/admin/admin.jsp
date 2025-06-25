@@ -48,6 +48,7 @@ request.setAttribute("user", user);
 ArrayList<Product> allEvents = (ArrayList<Product>) request.getAttribute("events");
 ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("locations");
 ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
+ArrayList<Order> allOrders = (ArrayList<Order>) request.getAttribute("orders");
 %>
 
 
@@ -496,8 +497,13 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 							<label for="cliente-select">Cliente:</label> <select
 								id="cliente-select" name="cliente">
 								<option value="">-- Tutti i Clienti --</option>
-								<option value="1">Mario Rossi</option>
-								<option value="2">Anna Verdi</option>
+								
+								<%
+							for (User u : allUsers) {
+							%>
+								<option value="<%=u.getIdUtente()%>"><%=u.getUsername() %></option>
+							<%} %>
+							
 							</select>
 						</div>
 						<div class="form-group">
@@ -510,7 +516,7 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 							</select>
 						</div>
 					</div>
-					<button type="button" class="btn" onclick="filterOrders()">Filtra
+					<button type="button" class="btn" id="filter-by-user-and-date">Filtra
 						Ordini</button>
 				</form>
 			</div>
@@ -518,7 +524,7 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 			<div class="admin-card">
 				<h4>Ordini</h4>
 				<div class="table-container">
-					<table class="admin-table">
+					<table class="admin-table" id="order-table">
 						<thead>
 							<tr>
 								<th>ID Ordine</th>
@@ -530,12 +536,15 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 							</tr>
 						</thead>
 						<tbody>
+						
+						<%for(Order o : allOrders){ %>
+						
 							<tr>
-								<td>ORD001</td>
-								<td>Mario Rossi</td>
-								<td>Taylor Swift World Tour</td>
-								<td>10/03/2024</td>
-								<td>€150.00</td>
+								<td>ORD-<%=o.getOrderId() %></td>
+								<td><%=o.getNome() %> </td>
+								<td><%=o.getName() %></td>
+								<td><%=o.getDate() %> </td>
+								<td><%=o.getPrice() %> </td>
 								<td>
 									<button class="btn-small btn-info"
 										onclick="viewOrder('ORD001')">Dettagli</button>
@@ -543,19 +552,8 @@ ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 										onclick="cancelOrder('ORD001')">Annulla</button>
 								</td>
 							</tr>
-							<tr>
-								<td>ORD002</td>
-								<td>Anna Verdi</td>
-								<td>Ed Sheeran Live</td>
-								<td>12/03/2024</td>
-								<td>€200.00</td>
-								<td>
-									<button class="btn-small btn-info"
-										onclick="viewOrder('ORD002')">Dettagli</button>
-									<button class="btn-small btn-delete"
-										onclick="cancelOrder('ORD002')">Annulla</button>
-								</td>
-							</tr>
+						<%} %>
+
 						</tbody>
 					</table>
 				</div>

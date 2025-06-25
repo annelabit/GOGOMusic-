@@ -211,28 +211,28 @@ request.setAttribute("products", products);
 		<div class="row">
 			<div class="col-4">
 				<a
-					href="<%=request.getContextPath()%>/common/products.jsp?category=pop"><img
+					href="<%=request.getContextPath()%>/common/index?category=pop&all=yes"><img
 					src="<%=request.getContextPath()%>/images/generi/pop.png"> </a>
 				<!-- inserire collegamento pagina con quel genere -->
 				<h3>Pop</h3>
 			</div>
 			<div class="col-4">
 				<a
-					href="<%=request.getContextPath()%>/common/products.jsp?category=rock"><img
+					href="<%=request.getContextPath()%>/common/index?category=rock&all=yes"><img
 					src="<%=request.getContextPath()%>/images/generi/rock.png"></a>
 				<!-- inserire collegamento pagina con quel genere -->
 				<h3>Rock</h3>
 			</div>
 			<div class="col-4">
 				<a
-					href="<%=request.getContextPath()%>/common/products.jsp?category=rap"><img
+					href="<%=request.getContextPath()%>/common/index?category=rap&all=yes"><img
 					src="<%=request.getContextPath()%>/images/generi/rap.png"></a>
 				<!-- inserire collegamento pagina con quel genere -->
 				<h3>Rap</h3>
 			</div>
 			<div class="col-4">
 				<a
-					href="<%=request.getContextPath()%>/common/products.jsp?category=latino"><img
+					href="<%=request.getContextPath()%>/common/index?category=latino&all=yes"><img
 					src="<%=request.getContextPath()%>/images/generi/latino.png"></a>
 				<!-- inserire collegamento pagina con quel genere -->
 				<h3>Latino</h3>

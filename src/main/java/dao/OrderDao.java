@@ -269,6 +269,57 @@ public class OrderDao {
 
 		return orderList;
 	}
+	
+	public ArrayList<Order> getOrdersByDateAndUser(Date start, Date end, int id) {
+
+		ArrayList<Order> orderList = new ArrayList<>();
+
+		ProductDao pDao = new ProductDao();
+
+		try {
+			connection = DBConnection.getConnection();
+			query = "SELECT * FROM `order` WHERE userId = ? AND date BETWEEN ? AND ? ORDER BY orderId DESC";
+
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, id);
+			pst.setDate(2, start);
+			pst.setDate(3, end);
+			rs = pst.executeQuery();
+
+			while (rs.next()) {
+				Order order = new Order();
+				int pId = rs.getInt("productId");
+
+				Product product = pDao.getSingleProduct(pId);
+				order.setOrderId(rs.getInt("orderId"));
+				order.setId(pId);
+				order.setName(product.getName());
+				order.setCategory(product.getCategory());
+				order.setPrice(rs.getFloat("totalPrice"));
+				order.setQuantity(rs.getInt("quantity"));
+				order.setDate(rs.getDate("date"));
+				order.setTime(rs.getString("time"));
+				order.setNome(rs.getString(("nome")));
+				order.setIndirizzo(rs.getString(("indirizzo")));
+				order.setCittà(rs.getString(("città")));
+				order.setPaese(rs.getString(("paese")));
+				order.setCap(rs.getInt(("cap")));
+				order.setNomeTitolare(rs.getString(("nomeTitolare")));
+				// order.setNome(rs.getString(("numeroCarta")));
+				order.setMeseScadenza(rs.getInt(("meseScadenza")));
+				order.setAnnoScadenza(rs.getInt(("annoScadenza")));
+				// order.setCvv(rs.getInt(("cvv")));
+				order.setEmail(rs.getString(("email")));
+				orderList.add(order);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			closeConnection(connection);
+		}
+
+		return orderList;
+	}
 
 	public ArrayList<Order> getAllOrders() {
 

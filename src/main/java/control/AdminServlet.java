@@ -45,6 +45,10 @@ public class AdminServlet extends HttpServlet {
 		ShowSeatDao showSeatDao = new ShowSeatDao();
 		SeatDao seatDao = new SeatDao();
 		LocationDao locationDao = new LocationDao();
+		OrderDao orderDao = new OrderDao();
+		
+		ArrayList<Order> orders = orderDao.getAllOrders();
+		request.setAttribute("orders", orders);
 		
 		ArrayList<Product> events = new ArrayList<>();
 		events = pDao.getProducts();
@@ -89,7 +93,34 @@ public class AdminServlet extends HttpServlet {
 		} else if(request.getParameter("keyword") != null && request.getParameter("keyword") != null) {
 			request.setAttribute("keyword", request.getParameter("keyword"));
 			request.getRequestDispatcher("adminUserTable.jsp").forward(request, response);
-		} else
+		} else if(request.getParameter("userOrder") != null || request.getParameter("startDate")!= null || request.getParameter("endDate")!=null) {
+			
+			if(request.getParameter("startDate")==null || request.getParameter("endDate")==null) {
+				
+				request.setAttribute("orders", orderDao.userOrders(Integer.parseInt(request.getParameter("userOrder"))));
+				
+			}else{
+				String startParam = request.getParameter("startDate");
+				String endParam = request.getParameter("endDate");
+
+				System.out.println("Raw startParam: " + startParam + ", endParam: " + endParam);
+
+				java.sql.Date start = null;
+				java.sql.Date end = null;
+
+				try {
+				    if (startParam != null && endParam != null) {
+				        start = java.sql.Date.valueOf(startParam);
+				        end = java.sql.Date.valueOf(endParam);
+				    }
+				} catch (IllegalArgumentException e) {
+				    e.printStackTrace();
+				}
+				request.setAttribute("orders", orderDao.getOrdersByDateAndUser(start, end, Integer.parseInt(request.getParameter("userOrder"))) );
+			}
+			request.getRequestDispatcher("adminOrderTable.jsp").forward(request, response);
+		
+		}else
 		
 		request.getRequestDispatcher("admin.jsp").forward(request, response);
 

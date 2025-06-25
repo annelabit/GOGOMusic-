@@ -80,3 +80,32 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("filter-by-user").addEventListener("click", filterShows);
 
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+	const filterUser = document.getElementById("cliente-select");
+	const filterStartDate = document.getElementById("data-inizio");
+	const filterEndDate = document.getElementById("data-fine");
+	
+
+	function filterOrders() {
+		const selectedUser = filterUser.value;
+		const selectedStartDate = filterStartDate.value;
+		const selectedEndDate = filterEndDate.value
+		const xhr = new XMLHttpRequest();
+		xhr.open("GET", "admin-page?userOrder=" + encodeURIComponent(selectedUser)
+		    + "&startDate=" + encodeURIComponent(selectedStartDate)
+		    + "&endDate=" + encodeURIComponent(selectedEndDate), true);
+
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				document.querySelector("#order-table").innerHTML = xhr.responseText;
+			}
+		};
+
+		xhr.send();
+
+	}
+	document.getElementById("filter-by-user-and-date").addEventListener("click", filterOrders);
+
+});

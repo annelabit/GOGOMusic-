@@ -40,7 +40,7 @@ public class UserDao {
 				user.setCognome(rs.getString("cognome"));
 				user.setEmail(rs.getString("email"));
 				user.setUsername(rs.getString("username"));
-				user.setAdmin(rs.getInt("isAdmin")==1 ? Boolean.TRUE : Boolean.FALSE);
+				user.setAdmin(rs.getInt("isAdmin") == 1 ? true : false);
 				//per ragioni di sicurezza non metto password
 			}
 			
@@ -100,6 +100,7 @@ public class UserDao {
 				user.setCognome(rs.getString("cognome"));
 				user.setEmail(rs.getString("email"));
 				user.setUsername(rs.getString("username"));
+				user.setAdmin(rs.getInt("isAdmin") == 1 ? true : false);
 				//per ragioni di sicurezza non metto password
 				users.add(user);
 			}
@@ -112,6 +113,39 @@ public class UserDao {
 		}
 		
 		return users;
+	}
+	
+	public User getUserFromId(int id) {
+
+		
+		User user = new User();
+		
+		try {
+			connection = DBConnection.getConnection();
+			query = "SELECT * FROM USER WHERE id = ?";
+			pst = this.connection.prepareStatement(query);
+			pst.setInt(1, id);
+			rs = pst.executeQuery();
+			
+			if(rs.next()) {
+				user = new User();
+				user.setIdUtente(rs.getInt("id"));
+				user.setNome(rs.getString("nome"));
+				user.setCognome(rs.getString("cognome"));
+				user.setEmail(rs.getString("email"));
+				user.setUsername(rs.getString("username"));
+				user.setAdmin(rs.getInt("isAdmin") == 1 ? true : false);
+				//per ragioni di sicurezza non metto password
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());		
+		}finally{
+			closeConnection(connection);
+		}
+		
+		return user;
 	}
 	
 
