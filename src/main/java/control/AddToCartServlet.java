@@ -34,12 +34,20 @@ public class AddToCartServlet extends HttpServlet {
 			
 			int id = Integer.parseInt(request.getParameter("id"));
 			int showId = Integer.parseInt(request.getParameter("showId"));
+			
+			int pid = pDao.getProductIdfromShowId(showId);
+			
+			System.out.println(pid);
+			
 			String type = request.getParameter("type");
 			
-			Product p = pDao.getSingleProduct(id);
+			Product p = pDao.getSingleProduct(pid);
 			Cart cartItem = new Cart(p);
 			cartItem.setId(id);
 			cartItem.setShowId(showId);
+			
+			System.out.println(id);
+			System.out.println(showId);
 			
 			int q = Integer.parseInt(request.getParameter("quantity"));
 			cartItem.setQuantity(q);
@@ -91,7 +99,7 @@ public class AddToCartServlet extends HttpServlet {
 				//controlla se il prodotto è già presente nel carrello
 				for(Cart c : cart) {
 					//controllo sia l'id dell'evento sia dello spettacolo
-					if(c.getId() == id && c.getShowId() == showId && seatDao.getSeatById(c.getSeatIds().getFirst()).getType().equals(type)) {//c'è già
+					if(c.getId() == pid && c.getShowId() == showId && seatDao.getSeatById(c.getSeatIds().getFirst()).getType().equals(type)) {//c'è già
 						
 						exists = true;
 						

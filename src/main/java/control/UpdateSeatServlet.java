@@ -46,6 +46,9 @@ public class UpdateSeatServlet extends HttpServlet {
 		int pId = Integer.parseInt(request.getParameter("pId"));
 		int showId = Integer.parseInt(request.getParameter("showId"));
 		
+		System.out.println(pId);
+		System.out.println(showId);
+		
 		User user = (User) request.getSession().getAttribute("user");
 		
 		//converto array di stringhe in arrayList di interi

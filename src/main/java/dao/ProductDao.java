@@ -326,6 +326,31 @@ public class ProductDao {
 					
 			return result;
 		}
+		
+		public int getProductIdfromShowId(int showId) {
+
+			ArrayList<Show> shows = new ArrayList<>();
+
+			query = "SELECT * FROM `show` WHERE id = ?";
+			int id = 0;
+			try {
+				connection = DBConnection.getConnection();
+				pst = connection.prepareStatement(query);
+				pst.setInt(1, showId);
+				rs = pst.executeQuery();
+
+				if (rs.next()) {
+					id=rs.getInt("eventId");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				closeConnection(connection);
+			}
+
+			return id;
+
+		}
 	
 		public boolean deleteEvent(int pId) {
 			

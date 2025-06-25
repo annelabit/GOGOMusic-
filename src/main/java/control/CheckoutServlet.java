@@ -81,7 +81,7 @@ public class CheckoutServlet extends HttpServlet {
 
 					ProductDao pDao = new ProductDao();
 					Order order = new Order();
-					order.setId(c.getId());// product
+					order.setId(pDao.getProductIdfromShowId(c.getShowId()));// product
 					order.setUid(user.getIdUtente());
 					order.setQuantity(c.getQuantity());
 					// order.setDate(formatter.format(date));

@@ -25,9 +25,6 @@ ArrayList<Double> total = (ArrayList<Double>) request.getAttribute("total");
 ArrayList<String> dates = (ArrayList<String>) request.getAttribute("dates");
 ArrayList<String> times = (ArrayList<String>) request.getAttribute("times");
 ArrayList<String> categories = (ArrayList<String>) request.getAttribute("categories");
-if (cart != null) {
-	
-}
 
 request.setAttribute("cart_list", cart);
 request.setAttribute("total", totalPrice);
