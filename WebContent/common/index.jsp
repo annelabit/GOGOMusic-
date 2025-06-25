@@ -88,7 +88,7 @@ request.setAttribute("products", products);
 					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
 						data-bs-target="#booking-modal">
 						<a
-							href="<%=request.getContextPath()%>/product-details?eventId=2&showId=2">Compra
+							href="<%=request.getContextPath()%>/common/product-details?eventId=2&showId=22">Compra
 							ora
 					</button>
 					</a>
@@ -103,7 +103,7 @@ request.setAttribute("products", products);
 					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
 						data-bs-target="#booking-modal">
 						<a
-							href="<%=request.getContextPath()%>/common/product-details?eventId=6&showId=22">Compra
+							href="<%=request.getContextPath()%>/common/product-details?eventId=2&showId=2">Compra
 							ora
 					</button>
 					</a>

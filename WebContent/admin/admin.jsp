@@ -1,5 +1,9 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@page import="java.sql.Date" %>	
+<%@page import="java.util.Calendar" %>
+<%@page import="java.text.SimpleDateFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +53,8 @@ ArrayList<Product> allEvents = (ArrayList<Product>) request.getAttribute("events
 ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("locations");
 ArrayList<User> allUsers = (ArrayList<User>) request.getAttribute("users");
 ArrayList<Order> allOrders = (ArrayList<Order>) request.getAttribute("orders");
+
+DecimalFormat df = new DecimalFormat("#0.00");
 %>
 
 
@@ -467,15 +473,40 @@ ArrayList<Order> allOrders = (ArrayList<Order>) request.getAttribute("orders");
 			<div class="stats-row">
 				<div class="stat-card">
 					<h4>Ordini Totali</h4>
-					<span class="stat-number">1,247</span>
+					<span class="stat-number"><%=allOrders.size() %> </span>
 				</div>
+				
+				<%
+				double total=0;
+				for(Order o : allOrders){
+					total+=o.getPrice();
+				} %>
+				
 				<div class="stat-card">
 					<h4>Fatturato Totale</h4>
-					<span class="stat-number">€89,340</span>
+					<span class="stat-number"><%=df.format(total)%>$</span>
 				</div>
+				<%
+				
+				int ordersToday = 0;
+
+				// Data di oggi in formato stringa "yyyy-MM-dd"
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+				String todayStr = sdf.format(new java.util.Date());
+
+				for (Order o : allOrders) {
+				    String orderDateStr = sdf.format(o.getDate());
+				    if (orderDateStr.equals(todayStr)) {
+				        ordersToday++;
+				    }
+				}
+
+				
+				%>
+				
 				<div class="stat-card">
 					<h4>Ordini Oggi</h4>
-					<span class="stat-number">23</span>
+					<span class="stat-number"><%=ordersToday %></span>
 				</div>
 			</div>
 
@@ -506,7 +537,7 @@ ArrayList<Order> allOrders = (ArrayList<Order>) request.getAttribute("orders");
 							
 							</select>
 						</div>
-						<div class="form-group">
+						<!--  <div class="form-group">
 							<label for="stato-ordine">Stato:</label> <select
 								id="stato-ordine" name="stato">
 								<option value="">-- Tutti gli Stati --</option>
@@ -514,7 +545,7 @@ ArrayList<Order> allOrders = (ArrayList<Order>) request.getAttribute("orders");
 								<option value="confirmed">Confermato</option>
 								<option value="cancelled">Annullato</option>
 							</select>
-						</div>
+						</div> -->
 					</div>
 					<button type="button" class="btn" id="filter-by-user-and-date">Filtra
 						Ordini</button>

@@ -36,6 +36,7 @@ public class ProductDetailsServlet extends HttpServlet {
 		ProductDao pDao = new ProductDao();
 		LocationDao lDao = new LocationDao();
 		
+		System.out.println(pId);
 		Product p = pDao.getSingleProduct(pId);
 		
 		p.setShows(showDao.getShows(pId));
