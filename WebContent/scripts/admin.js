@@ -26,3 +26,31 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.getElementById("filter-by-event-button").addEventListener("click", filterShows);
 
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+	const filterEvent = document.getElementById("filter-categoria-eventi");
+	const filterVenue = document.getElementById("filter-venue-eventi");
+	
+	if (!filterEvent || !filterVenue) {
+		console.error("Elemento mancante");
+		return;
+}
+
+	function filterShows() {
+		const selectedEvent = filterEvent.value;
+		const selectedVenue = filterVenue.value;
+		const xhr = new XMLHttpRequest();
+		xhr.open("GET", "admin-page?categoria=" + encodeURIComponent(selectedEvent)+"&venue=" + encodeURIComponent(selectedVenue), true);
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4 && xhr.status === 200) {
+				document.querySelector("#event-table").innerHTML = xhr.responseText;
+			}
+		};
+
+		xhr.send();
+
+	}
+	document.getElementById("filter-by-category-and-venue").addEventListener("click", filterShows);
+
+});

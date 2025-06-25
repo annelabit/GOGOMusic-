@@ -28,9 +28,9 @@ public class AdminServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		// controllo se utente è admin
-		boolean isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
+		//boolean isAdmin = (boolean) request.getSession().getAttribute("isAdmin");
 
-		if (!isAdmin || isAdmin == false) {
+		if (request.getSession().getAttribute("isAdmin")==null || (boolean) request.getSession().getAttribute("isAdmin") == false) {
 			response.sendRedirect(request.getContextPath() + "/common/login.jsp");
 			return;
 		}
@@ -78,7 +78,12 @@ public class AdminServlet extends HttpServlet {
 			request.setAttribute("eventId", request.getParameter("eventId"));
 			request.getRequestDispatcher("adminShowTable.jsp").forward(request, response);
 
-		}else
+		}else if(request.getParameter("categoria") != null && request.getParameter("venue") != null) {
+			request.setAttribute("categoria", request.getParameter("categoria"));
+			request.setAttribute("venue", Integer.parseInt(request.getParameter("venue")));
+			request.getRequestDispatcher("adminEventTable.jsp").forward(request, response);
+			
+		} else
 		
 		request.getRequestDispatcher("admin.jsp").forward(request, response);
 

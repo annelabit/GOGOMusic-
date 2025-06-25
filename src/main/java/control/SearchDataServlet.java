@@ -24,10 +24,19 @@ public class SearchDataServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		        ProductDao dao = new ProductDao();
+		        ShowDao sDao = new ShowDao();
+		        
 		        ArrayList<Product> products = dao.getProducts();
 
+		        
+		        
 		        JSONArray json = new JSONArray();
 		        for (Product p : products) {
+		        	
+		        	if(sDao.getShows(p.getId()).isEmpty()) {
+		        		continue;
+		        	}
+		        	
 		            JSONObject obj = new JSONObject();
 		            try {
 						obj.put("name", p.getName());

@@ -348,15 +348,15 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 						<option value="Rap">Rap</option>
 						<option value="Latino">Latino</option>
 					</select> <select id="filter-venue-eventi">
-						<option value="">Tutti i Venue</option>
-						<option value="1">San Siro - Milano</option>
-						<option value="2">Stadio Olimpico - Roma</option>
-						<option value="2">Stadio Maradona - Napoli /option>
+						<option value="0">Tutti i Venue</option>
+						<option value="2">San Siro - Milano</option>
+						<option value="3">Stadio Olimpico - Roma</option>
+						<option value="1">Stadio Maradona - Napoli </option>
 					</select>
-					<button class="btn" onclick="filterEvents()">Filtra</button>
+					<button id="filter-by-category-and-venue" class="btn" onclick="filterEvents()">Filtra</button>
 				</div>
 				<div class="table-container">
-					<table class="admin-table">
+					<table class="admin-table" id="event-table">
 						<thead>
 							<tr>
 								<th>ID</th>
@@ -368,31 +368,26 @@ ArrayList<Location> allLocations = (ArrayList<Location>) request.getAttribute("l
 							</tr>
 						</thead>
 						<tbody>
+
+							<%
+							for (Product p : allEvents) {
+							%>
 							<tr>
-								<td>1</td>
-								<td>Taylor Swift World Tour</td>
-								<td>Pop</td>
-								<td>San Siro - Milano</td>
-								<td><button class="btn-small btn-info"
-										onclick="viewShows(1)">Visualizza (3)</button></td>
+								<td><%=p.getId()%></td>
+								<td><%=p.getName()%></td>
+								<td><%=p.getCategory()%></td>
+								<td><%=p.getLocation()%></td>
+								<td><%=p.getShows().size() %></td>
 								<td>
-									<button class="btn-small btn-edit" onclick="editEvent(1)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteEvent(1)">Elimina</button>
+									<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>
+									<button class="btn-small btn-delete" onclick="deleteShow(1)">Elimina</button>
 								</td>
 							</tr>
-							<tr>
-								<td>2</td>
-								<td>Ed Sheeran Live</td>
-								<td>Pop</td>
-								<td>Stadio Olimpico - Roma</td>
-								<td><button class="btn-small btn-info"
-										onclick="viewShows(2)">Visualizza (2)</button></td>
-								<td>
-									<button class="btn-small btn-edit" onclick="editEvent(2)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteEvent(2)">Elimina</button>
-								</td>
-							</tr>
-						</tbody>
+							<%
+							}
+							%>
+
+</tbody>
 					</table>
 				</div>
 			</div>
