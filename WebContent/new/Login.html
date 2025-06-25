@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="images/loghi/simple-logo.png" type="image/png">
+<link rel="icon" href="images/loghi/simple-logo.png" type="image/png"> 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link rel="stylesheet"
@@ -24,19 +24,19 @@
 <title>GOGOMusic!</title>
 </head>
 <body>
-
+	
 	<!-- navbar  -->
 	<div class="header">
 		<div class="container">
 			<div class="navbar">
 				<div class="logo">
-					<a href="index.html"><img src="images/loghi/logo-no.png"
-						id="logo" width="125px"></a>
+					<a href="index.html"><img src="images/loghi/logo-no.png" id="logo"
+						width="125px"></a>
 				</div>
 				<nav>
 					<ul id="menuItems">
 						<li><a href="index.html">Home</a></li>
-						<li><a href="Login.html">Log in</a></li>
+						<li><a href="Login.html" class="active">Log in</a></li>
 						<li><a href="order-history.html">Ordini</a></li>
 						<li><a href="account.html">Account</a></li>
 					</ul>
@@ -48,81 +48,44 @@
 					</form>
 				</div>
 				<a href="cart.html"><img src="images/loghi/carrello-grande.png"
-					width="30px" height="30px"></a> <img
-					src="images/loghi/menu-icon.png" class="menu-icon"
-					onclick="menutoggle()">
+					width="30px" height="30px"></a> <img src="images/loghi/menu-icon.png"
+					class="menu-icon" onclick="menutoggle()">
 			</div>
 		</div>
 	</div>
 
-
-
-	<div class="container-checkout">
-		<form a22ction="">
-			<div class="row-checkout">
-				<div class="col-checkout">
-					<h3 class="title-checkout">Indirizzo di fattura</h3>
-					<div class="input-box">
-						<span>Nome e Cognome:</span> <input type="text"
-							placeholder="Nome e Cognome">
-					</div>
-					<div class="input-box">
-						<span>Email:</span> <input type="email"
-							placeholder="esempio@gmail.com">
-					</div>
-					<div class="input-box">
-						<span>Indirizzo:</span> <input type="text" placeholder="Indirizzo">
-					</div>
-					<div class="input-box">
-						<span>Città:</span> <input type="text" placeholder="Città">
-					</div>
-
-					<div class="flex">
-						<div class="input-box">
-							<span>Paese:</span> <input type="text" placeholder="Paese">
-						</div>
-						<div class="input-box">
-							<span>Codice postale:</span> <input type="number" min="0"
-								placeholder="12345">
-						</div>
-					</div>
+	
+	<!-- account page -->
+	<div class="account-page">
+		<div class="container">
+			<div class="row">
+				<div class="col-2">
+					<img src="images/foto-artiste/artists-3.png" id="artists" width="100%" style="max-width: 350px;">
 				</div>
-
-				<div class="col-checkout">
-					<h3 class="title-checkout">Metodo di pagamento</h3>
-					<div class="input-box">
-						<span>Carte accettate:</span> <img
-							src="images/loghi/carte-credito.png">
-					</div>
-					<div class="input-box">
-						<span>Nome e Cognome titolare:</span> <input type="text"
-							placeholder="Nome e Cognome titolare della carta">
-					</div>
-					<div class="input-box">
-						<span>Numero di carta:</span> <input type="number" min="0"
-							placeholder="1234 5678 9012 3456">
-					</div>
-
-					<div class="flex">
-						<div class="input-box">
-							<span>Mese Scadenza:</span> <input type="number" min="0"
-								placeholder="MM">
+				<div class="col-2" id="login">
+					<div class="form-container">
+						<div class="form-btn">
+						<span onclick="login()">Login</span>
+						<span onclick="register()">Registrati</span>
+						<hr id="indicator">
 						</div>
-						<div class="input-box">
-							<span>Anno Scadenza:</span> <input type="number" min="0"
-								placeholder="AAAA">
-						</div>
-						<div class="input-box">
-							<span>CVV:</span> <input type="number" min="0" placeholder="123">
-						</div>
+						
+						<form id="loginForm">
+							<input type="text" placeholder="Username">
+							<input type="password" placeholder="Password">
+							<button type="submit" class="btn">Login</button>  <!-- Aggiungere eventuali collegamenti -->
+						</form>
+						<form id="regForm">
+							<input type="email" placeholder="Email">
+							<input type="text" placeholder="Username">
+							<input type="password" placeholder="Password">
+							<button type="submit" class="btn">Registrati</button>   <!-- Aggiungere eventuali collegamenti -->
+						</form>
 					</div>
 				</div>
 			</div>
-
-			<button type="submit" class="btn-checkout">Acquista</button>
-		</form>
+		</div>
 	</div>
-
 
 
 	<!-- footer -->

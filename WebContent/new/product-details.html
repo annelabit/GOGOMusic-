@@ -30,8 +30,8 @@
 		<div class="container">
 			<div class="navbar">
 				<div class="logo">
-					<a href="index.html"><img src="images/loghi/logo-no.png"
-						id="logo" width="125px"></a>
+					<a href="index.html"><img src="images/loghi/logo-no.png" id="logo"
+						width="125px"></a>
 				</div>
 				<nav>
 					<ul id="menuItems">
@@ -48,81 +48,63 @@
 					</form>
 				</div>
 				<a href="cart.html"><img src="images/loghi/carrello-grande.png"
-					width="30px" height="30px"></a> <img
-					src="images/loghi/menu-icon.png" class="menu-icon"
-					onclick="menutoggle()">
+					width="30px" height="30px"></a> <img src="images/loghi/menu-icon.png"
+					class="menu-icon" onclick="menutoggle()">
 			</div>
 		</div>
 	</div>
 
+	<!-- dettagli del singolo concerto  -->
 
+	<div class="small-container single-product">
+		<div class="row">
+			<div class="col-2">
+				<img src="images/billie-eilish/be.png" class="uniform-img" width="100%"
+					id="product-img">
 
-	<div class="container-checkout">
-		<form a22ction="">
-			<div class="row-checkout">
-				<div class="col-checkout">
-					<h3 class="title-checkout">Indirizzo di fattura</h3>
-					<div class="input-box">
-						<span>Nome e Cognome:</span> <input type="text"
-							placeholder="Nome e Cognome">
+				<div class="small-img-row">
+					<div class="small-img-col">
+						<img src="images/billie-eilish/be.png" width="100%" class="small-img">
 					</div>
-					<div class="input-box">
-						<span>Email:</span> <input type="email"
-							placeholder="esempio@gmail.com">
+					<div class="small-img-col">
+						<img src="images/billie-eilish/bet2.png" width="100%" class="small-img">
 					</div>
-					<div class="input-box">
-						<span>Indirizzo:</span> <input type="text" placeholder="Indirizzo">
-					</div>
-					<div class="input-box">
-						<span>Città:</span> <input type="text" placeholder="Città">
-					</div>
-
-					<div class="flex">
-						<div class="input-box">
-							<span>Paese:</span> <input type="text" placeholder="Paese">
-						</div>
-						<div class="input-box">
-							<span>Codice postale:</span> <input type="number" min="0"
-								placeholder="12345">
-						</div>
+					<div class="small-img-col">
+						<img src="images/billie-eilish/bet3.png" width="100%" class="small-img">
 					</div>
 				</div>
 
-				<div class="col-checkout">
-					<h3 class="title-checkout">Metodo di pagamento</h3>
-					<div class="input-box">
-						<span>Carte accettate:</span> <img
-							src="images/loghi/carte-credito.png">
-					</div>
-					<div class="input-box">
-						<span>Nome e Cognome titolare:</span> <input type="text"
-							placeholder="Nome e Cognome titolare della carta">
-					</div>
-					<div class="input-box">
-						<span>Numero di carta:</span> <input type="number" min="0"
-							placeholder="1234 5678 9012 3456">
-					</div>
 
-					<div class="flex">
-						<div class="input-box">
-							<span>Mese Scadenza:</span> <input type="number" min="0"
-								placeholder="MM">
-						</div>
-						<div class="input-box">
-							<span>Anno Scadenza:</span> <input type="number" min="0"
-								placeholder="AAAA">
-						</div>
-						<div class="input-box">
-							<span>CVV:</span> <input type="number" min="0" placeholder="123">
-						</div>
-					</div>
-				</div>
 			</div>
+			<div class="col-2">
+				<p>Home / Billie Eilish</p>  <!-- il nome dell'artista deve cambiare, forse anche il path: home/products/billie Eilish (?) -->
+				<h1>Hit me Hard and Soft Tour</h1>
+				<h4>50$</h4>
+				<h3>Stadio Maradona</h3>
+				<div class="button-group">
+					<button id="showImageBtn">Visualizza mappa</button>
 
-			<button type="submit" class="btn-checkout">Acquista</button>
-		</form>
+					<!-- Overlay (schermo intero) che conterrà l'immagine della mappa-->
+					<div id="imageOverlay" class="overlay">
+						<span class="close-btn">&times;</span> <img id="fullscreenImage"
+							class="overlay-image" src="images/stadi/maradona.png"> <!-- da cambiare in base allo stadio -->
+					</div>
+
+					<select id="selectbtn">
+						<option>Seleziona settore</option>
+						<option>parterre</option>
+						<option>settore 1</option>
+						<option>settore 2</option>
+					</select>
+				</div>
+				<a href="cart.html" class="btn">Aggiungi al carrello</a>
+				<h3>Dettagli concerto</h3>
+				<p>Billie Eilish torna in Italia dopo ben 6 anni di assenza per
+					il tour del suo terzo album intitolato "Hit me Hard and Soft" che
+					conta oltre 7 miliardi di stream.</p>
+			</div>
+		</div>
 	</div>
-
 
 
 	<!-- footer -->

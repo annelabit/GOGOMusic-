@@ -18,10 +18,16 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="style.css">
 
 <title>GOGOMusic!</title>
+
+<style>
+body {
+	background-color: #FFFAFF;
+}
+</style>
 </head>
 <body>
 
@@ -30,8 +36,8 @@
 		<div class="container">
 			<div class="navbar">
 				<div class="logo">
-					<a href="index.html"><img src="images/loghi/logo-no.png"
-						id="logo" width="125px"></a>
+					<a href="index.html"><img src="images/loghi/logo-no.png" id="logo"
+						width="125px"></a>
 				</div>
 				<nav>
 					<ul id="menuItems">
@@ -48,79 +54,86 @@
 					</form>
 				</div>
 				<a href="cart.html"><img src="images/loghi/carrello-grande.png"
-					width="30px" height="30px"></a> <img
-					src="images/loghi/menu-icon.png" class="menu-icon"
-					onclick="menutoggle()">
+					width="30px" height="30px"></a> <img src="images/loghi/menu-icon.png"
+					class="menu-icon" onclick="menutoggle()">
 			</div>
 		</div>
 	</div>
 
 
-
-	<div class="container-checkout">
-		<form a22ction="">
-			<div class="row-checkout">
-				<div class="col-checkout">
-					<h3 class="title-checkout">Indirizzo di fattura</h3>
-					<div class="input-box">
-						<span>Nome e Cognome:</span> <input type="text"
-							placeholder="Nome e Cognome">
-					</div>
-					<div class="input-box">
-						<span>Email:</span> <input type="email"
-							placeholder="esempio@gmail.com">
-					</div>
-					<div class="input-box">
-						<span>Indirizzo:</span> <input type="text" placeholder="Indirizzo">
-					</div>
-					<div class="input-box">
-						<span>Città:</span> <input type="text" placeholder="Città">
-					</div>
-
-					<div class="flex">
-						<div class="input-box">
-							<span>Paese:</span> <input type="text" placeholder="Paese">
-						</div>
-						<div class="input-box">
-							<span>Codice postale:</span> <input type="number" min="0"
-								placeholder="12345">
+	<!-- dettagli prodotti nel carrello -->
+	<div class="small-container cart-page">
+		<table>
+			<tr>
+				<th>Prodotto</th>
+				<th>Tipologia</th>
+				<th>Quantità</th>
+				<th>Totale</th>
+			</tr>
+			<tr>
+				<td>
+					<div class="cart-info">
+						<img src="images/taylor-swift/tst.png">
+						<div class="text-container">
+							<p>Eras Tour</p>
+							<small>Prezzo: 50$</small> 
 						</div>
 					</div>
-				</div>
-
-				<div class="col-checkout">
-					<h3 class="title-checkout">Metodo di pagamento</h3>
-					<div class="input-box">
-						<span>Carte accettate:</span> <img
-							src="images/loghi/carte-credito.png">
-					</div>
-					<div class="input-box">
-						<span>Nome e Cognome titolare:</span> <input type="text"
-							placeholder="Nome e Cognome titolare della carta">
-					</div>
-					<div class="input-box">
-						<span>Numero di carta:</span> <input type="number" min="0"
-							placeholder="1234 5678 9012 3456">
-					</div>
-
-					<div class="flex">
-						<div class="input-box">
-							<span>Mese Scadenza:</span> <input type="number" min="0"
-								placeholder="MM">
-						</div>
-						<div class="input-box">
-							<span>Anno Scadenza:</span> <input type="number" min="0"
-								placeholder="AAAA">
-						</div>
-						<div class="input-box">
-							<span>CVV:</span> <input type="number" min="0" placeholder="123">
+				</td>
+				<td>Parterre</td>
+				<td><a href="">Rimuovi</a></td>
+				<td>50$</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="cart-info">
+						<img src="images/billie-eilish/be.png">
+						<div class="text-container">
+							<p>Hit me Hard and Soft Tour</p>
+							<small>Prezzo: 50$</small> 
 						</div>
 					</div>
-				</div>
-			</div>
-
-			<button type="submit" class="btn-checkout">Acquista</button>
-		</form>
+				</td>
+				<td>Curva A</td>
+				<td><a href="">Rimuovi</a></td>
+				<td>50$</td>
+			</tr>
+			<tr>
+				<td>
+					<div class="cart-info">
+						<img src="images/olivia-rodrigo/or.png">
+						<div class="text-container">
+							<p>Guts Tour</p>
+							<small>Prezzo: 50$</small>
+						</div>
+					</div>
+				</td>
+				<td>Prato Gold</td>
+				<td><a href="">Rimuovi</a></td>
+				<td>50$</td>
+			</tr>
+		</table>
+		
+		
+		<div class="total-price">
+			<table>
+				<tr>
+					<td>Subtotale</td>
+					<td>200$</td>
+				</tr>
+				<tr>
+					<td>Tasse</td>
+					<td>30$</td>
+				</tr>
+				<tr>
+					<td>Totale</td>
+					<td>230$</td>
+				</tr>
+			</table>
+		</div>
+		
+		<button class="btn" id="checkoutbtn"><a href="#">Checkout</a></button>
+		
 	</div>
 
 
