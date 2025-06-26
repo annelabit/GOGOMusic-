@@ -119,6 +119,10 @@ request.setAttribute("products", products);
 			int elements = 0;
 			int i = 0;
 			for (Product p : products) {
+				
+				if(p.getShows().isEmpty()) {
+	        		continue;
+	        	}
 
 				if (elements++ == 6)
 					break;

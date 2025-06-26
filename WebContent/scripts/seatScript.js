@@ -2,10 +2,10 @@ let selectedSeatsIds = [];
 
 
 function loadSeats() {
-	
+
 	const categorySelect = document.getElementById("selectbtn");
 	const categoria = categorySelect.value;
-	
+
 	const showSelect = document.getElementById("showSelect");
 
 	const showId = showSelect.value;
@@ -37,7 +37,7 @@ function loadSeats() {
 
 
 function selectSeat(seatId) {
-	
+
 	const categorySelect = document.getElementById("selectbtn");
 	const categoria = categorySelect.value;
 

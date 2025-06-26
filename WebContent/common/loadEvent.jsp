@@ -46,6 +46,11 @@ if (category == null)
 if (!products.isEmpty()) { //se c'è almeno un prodotto
 
 	for (Product p : products) {
+		
+		if(p.getShows().isEmpty()) {
+    		continue;
+    	}
+		
 		if (p.getCategory().toLowerCase().equals(category) || category.equals("default")
 				|| category.equals("")) {
 %>

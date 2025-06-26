@@ -1055,13 +1055,21 @@ form .btn-checkout:hover {
 		width: 100% !important;
 		padding: 10px !important;
 	}
-	
 }
+
+
 .error-message {
-		color: red;
-		font-size: 0.9em;
-		margin-top: 4px;
-	}
-	.invalid {
-		border: 1px solid red !important;
-	}
+	color: red;
+	font-size: 0.9em;
+	margin-top: 4px;
+}
+
+.invalid {
+	border: 1px solid red !important;
+}
+
+.text-danger {
+	color: red;
+	font-size: 0.9em;
+	margin-top: 5px;
+}

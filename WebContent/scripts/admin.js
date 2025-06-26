@@ -65,3 +65,28 @@ document.addEventListener("DOMContentLoaded", () => {
 		});
 	}
 });
+
+function showAdminSection(sectionId) {
+	// Hide all sections
+	const sections = document.querySelectorAll('.admin-section');
+	sections.forEach(section => {
+		section.classList.remove('active');
+	});
+
+	// Show selected section
+	document.getElementById(sectionId).classList.add('active');
+
+	// Update navigation active state
+	const navButtons = document.querySelectorAll('.admin-nav-btn');
+	navButtons.forEach(btn => {
+		btn.classList.remove('active');
+	});
+
+	// Find and activate the corresponding nav button
+	const activeButton = Array.from(navButtons).find(btn =>
+		btn.getAttribute('onclick').includes(sectionId)
+	);
+	if (activeButton) {
+		activeButton.classList.add('active');
+	}
+}

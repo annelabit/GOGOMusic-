@@ -125,15 +125,15 @@ body {
 			<table>
 				<tr>
 					<td>Subtotale</td>
-					<td><%=df.format(totalPrice)%>$</td>
+					<td><%=df.format(totalPrice)%>€</td>
 				</tr>
 				<tr>
 					<td>Tasse</td>
-					<td><%=df.format(4.30)%>$</td>
+					<td><%=df.format(4.30)%>€</td>
 				</tr>
 				<tr>
 					<td>Totale</td>
-					<td><%=df.format(totalPrice + 4.30)%>$</td>
+					<td><%=df.format(totalPrice + 4.30)%>€</td>
 				</tr>
 			</table>
 		</div>

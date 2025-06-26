@@ -68,8 +68,9 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 						<div class="user-avatar">
 							<i class="fas fa-user-circle"></i>
 						</div>
-						<h3><%=user.getNome() %> <%=user.getCognome() %></h3>
-						<p><%=user.getEmail() %></p>
+						<h3><%=user.getNome()%>
+							<%=user.getCognome()%></h3>
+						<p><%=user.getEmail()%></p>
 					</div>
 
 					<!-- Desktop Menu -->
@@ -136,13 +137,12 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 								<div class="form-grid">
 									<div class="form-group">
 										<label for="username">Nome Utente</label> <input type="text"
-											id="username" name="username"
-											value="<%=user.getUsername()%>" required>
+											id="username" name="username" value="<%=user.getUsername()%>"
+											required>
 									</div>
 									<div class="form-group">
 										<label for="email">Email</label> <input type="email"
-											id="email" name="email" value="<%=user.getEmail()%>"
-											required>
+											id="email" name="email" value="<%=user.getEmail()%>" required>
 									</div>
 									<div class="form-group">
 										<label for="nome">Nome</label> <input type="text" id="nome"
@@ -442,7 +442,7 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 
 	<%@include file="/include/footer.jsp"%>
 
-	
+
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 	<script src="https://kit.fontawesome.com/b53f3cfd48.js"></script>

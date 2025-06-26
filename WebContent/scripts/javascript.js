@@ -177,7 +177,7 @@ function showAdminSection(sectionId) {
 }
 
 // Seat Management Functions
-function updateSeatPrices() {
+/*function updateSeatPrices() {
 	const spettacolo = document.getElementById('spettacolo-select').value;
 	const categoria = document.getElementById('categoria-select').value;
 	const prezzo = document.getElementById('nuovo-prezzo').value;
@@ -395,7 +395,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					console.log('Form submitted for section:', sectionId);
 			}
 		});
-	});
+	});*/
 
 	// Initialize first section as active
 	showAdminSection('gestione-posti');

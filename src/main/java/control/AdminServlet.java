@@ -106,6 +106,8 @@ public class AdminServlet extends HttpServlet {
 				request.setAttribute("orders", orderDao.userOrders(Integer.parseInt(request.getParameter("userOrder"))));
 				
 			}else{
+				
+				
 				String startParam = request.getParameter("startDate");
 				String endParam = request.getParameter("endDate");
 

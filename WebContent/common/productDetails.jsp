@@ -99,7 +99,7 @@ request.setAttribute("products", products);
 				} else {
 				%>
 
-				<h4><%=df.format(p.getMinPrice())%>-<%=df.format(p.getMaxPrice())%>$
+				<h4><%=df.format(p.getMinPrice())%>-<%=df.format(p.getMaxPrice())%>€
 				</h4>
 
 				<%

@@ -319,7 +319,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 					<div class="form-row">
 						<div class="form-group">
 							<label for="nome-evento">Nome Evento:</label> <input type="text"
-								id="nome-evento" name="nome" required>
+								id="nome-evento" name="nome" >
 						</div>
 						<div class="form-group">
 							<label for="categoria-evento">Categoria:</label> <select
@@ -430,7 +430,6 @@ DecimalFormat df = new DecimalFormat("#0.00");
 								<th>ID</th>
 								<th>Nome</th>
 								<th>Email</th>
-								<th>Data Registrazione</th>
 								<th>Ordini</th>
 								<th>Azioni</th>
 							</tr>
@@ -450,7 +449,6 @@ DecimalFormat df = new DecimalFormat("#0.00");
 								<td><%=u.getIdUtente()%></td>
 								<td><%=u.getUsername()%></td>
 								<td><%=u.getEmail() %></td>
-								<td><%=u.getDate()%></td>
 								<td><%=tot %></td>
 								<!--   -->
 								<td>
@@ -489,7 +487,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 				
 				<div class="stat-card">
 					<h4>Fatturato Totale</h4>
-					<span class="stat-number"><%=df.format(total)%>$</span>
+					<span class="stat-number"><%=df.format(total)%>€</span>
 				</div>
 				<%
 				
@@ -517,7 +515,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 
 			<div class="admin-card">
 				<h4>Filtra Ordini</h4>
-				<form class="admin-form">
+				<form class="admin-form" id="filterForm">
 					<div class="form-row">
 						<div class="form-group">
 							<label for="data-inizio">Data Inizio:</label> <input type="date"
@@ -552,6 +550,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 							</select>
 						</div> -->
 					</div>
+					<div id="filter-error" class="text-danger"></div>
 					<button type="button" class="btn" id="filter-by-user-and-date">Filtra
 						Ordini</button>
 				</form>
@@ -609,6 +608,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
 	<script src="https://kit.fontawesome.com/b53f3cfd48.js"></script>
+	<script src="<%=request.getContextPath()%>/scripts/validate.js"></script>
 
 </body>
 </html>

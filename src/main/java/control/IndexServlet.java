@@ -44,7 +44,8 @@ public class IndexServlet extends HttpServlet {
 		//request.getSession().setAttribute("products",products);
 		for (Product p : products) {
 			
-			if(showDao.getShows(p.getId())!=null) {
+			if(showDao.getShows(p.getId())!=null || showDao.getShows(p.getId()).isEmpty()) {
+	        	
 			
 			p.setMinPrice(showDao.getMinimumPrice(p.getId()));
 			p.setMaxPrice(showDao.getMaximumPrice(p.getId()));
