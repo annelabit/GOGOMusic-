@@ -35,7 +35,7 @@
 
 
 
-<title>GOGOMusic!</title>
+<title>GOGOMusic!- Admin page</title>
 
 </head>
 
@@ -88,9 +88,6 @@ DecimalFormat df = new DecimalFormat("#0.00");
 			<button class="admin-nav-btn"
 				onclick="showAdminSection('gestione-ordini')">
 				<i class="fas fa-shopping-cart"></i> Ordini
-			</button>
-			<button class="admin-nav-btn" onclick="showAdminSection('catalogo')">
-				<i class="fas fa-list"></i> Catalogo
 			</button>
 		</div>
 
@@ -602,61 +599,6 @@ DecimalFormat df = new DecimalFormat("#0.00");
 				</div>
 			</div>
 		</div>
-
-		<!-- Catalogo -->
-		<div id="catalogo" class="admin-section">
-			<h3>Gestione Catalogo</h3>
-			<div class="admin-card">
-				<h4>Elementi del Catalogo</h4>
-				<div class="table-controls">
-					<select id="filter-categoria-catalogo">
-						<option value="">Tutte le Categorie</option>
-						<option value="Pop">Pop</option>
-						<option value="Rock">Rock</option>
-						<option value="Hip-Hop">Hip-Hop</option>
-					</select>
-					<button class="btn" onclick="filterCatalog()">Filtra</button>
-				</div>
-				<div class="table-container">
-					<table class="admin-table">
-						<thead>
-							<tr>
-								<th>ID</th>
-								<th>Nome Prodotto</th>
-								<th>Categoria</th>
-								<th>Prezzo</th>
-								<th>Disponibilità</th>
-								<th>Azioni</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>1</td>
-								<td>Biglietto Taylor Swift VIP</td>
-								<td>Pop</td>
-								<td>€250.00</td>
-								<td><span class="status confirmed">Disponibile</span></td>
-								<td>
-									<button class="btn-small btn-edit" onclick="editProduct(1)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteProduct(1)">Elimina</button>
-								</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>Biglietto Ed Sheeran Standard</td>
-								<td>Pop</td>
-								<td>€80.00</td>
-								<td><span class="status cancelled">Esaurito</span></td>
-								<td>
-									<button class="btn-small btn-edit" onclick="editProduct(2)">Modifica</button>
-									<button class="btn-small btn-delete" onclick="deleteProduct(2)">Elimina</button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<%@include file="/include/footer.jsp"%>
@@ -666,6 +608,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
+	<script src="https://kit.fontawesome.com/b53f3cfd48.js"></script>
 
 </body>
 </html>

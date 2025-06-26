@@ -43,7 +43,7 @@
 						class="fa fa-youtube-play" aria-hidden="true"></i></a> <a
 						href="https://www.instagram.com"><i class="fa fa-instagram"
 						aria-hidden="true"></i></a>
-					<p class="copyright">GOGOMusic! Â© 2025</p>
+					<p class="copyright">GOGOMusic! © 2025</p>
 				</div>
 			</div>
 		</div>

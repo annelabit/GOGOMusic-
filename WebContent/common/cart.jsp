@@ -57,7 +57,7 @@ request.setAttribute("products", products);
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/styles/stylesheet.css">
 
-<title>GOGOMusic!</title>
+<title>GOGOMusic!- Carrello</title>
 
 <style>
 body {
@@ -166,5 +166,6 @@ body {
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
+	<script src="https://kit.fontawesome.com/b53f3cfd48.js"></script>
 </body>
 </html>

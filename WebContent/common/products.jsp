@@ -50,7 +50,7 @@ if (category == null)
 
 
 
-<title>GOGOMusic!</title>
+<title>GOGOMusic!- Tutti gli eventi</title>
 </head>
 <body>
 
@@ -77,13 +77,10 @@ if (category == null)
 
 
 			<%
-			//int elements = 0;
 			for (Product p : products) {
 
 				if (p.getCategory().toLowerCase().equals(category) || category.equals("")) {
 
-					//if (elements++ == 12)
-				//break;
 			%>
 
 
@@ -141,5 +138,6 @@ if (category == null)
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
 	<script src="<%=request.getContextPath()%>/scripts/category.js"></script>
+	<script src="https://kit.fontawesome.com/b53f3cfd48.js"></script>
 </body>
 </html>

@@ -50,7 +50,7 @@ ArrayList<IndirizzoSpedizione> addresses = user.getAddresses();
 ArrayList<MetodoPagamento> methods = user.getMethods();
 %>
 
-<title>GOGOMusic!</title>
+<title>GOGOMusic!- Account</title>
 <body>
 	<%@include file="/include/navbar.jsp"%>
 
@@ -442,11 +442,12 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 
 	<%@include file="/include/footer.jsp"%>
 
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+	<script src="https://kit.fontawesome.com/b53f3cfd48.js"></script>
 	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
+	<script src="<%=request.getContextPath()%>/scripts/account.js"></script>
 </body>
 </html>
 
