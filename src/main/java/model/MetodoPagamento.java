@@ -10,7 +10,7 @@ public class MetodoPagamento {
 	private String scadenza;
 	private int cvv;
 	private int main;
-	private String last4Numbers;
+	private int last4Numbers;
 	
 	
 	public MetodoPagamento() {}
@@ -101,12 +101,12 @@ public class MetodoPagamento {
 	}
 
 
-	public String getLast4Numbers() {
+	public int getLast4Numbers() {
 		return last4Numbers;
 	}
 
 
-	public void setLast4Numbers(String last4Numbers) {
+	public void setLast4Numbers(int last4Numbers) {
 		this.last4Numbers = last4Numbers;
 	}
 	

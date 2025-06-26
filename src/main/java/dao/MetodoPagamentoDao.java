@@ -32,12 +32,13 @@ public class MetodoPagamentoDao {
 				MetodoPagamento method = new MetodoPagamento();
 				method.setId(rs.getInt("id"));
 				method.setNomeCarta(rs.getString("nomeCarta"));
+				method.setTipo(rs.getString("tipo"));
 				method.setScadenza(rs.getString("scadenza"));
 				method.setNumeroCarta(rs.getString("numero"));
 				method.setCvv(rs.getInt("cvv"));
 				method.setMain(rs.getInt("main"));
 				method.setUserId(uId);
-				
+				method.setLast4Numbers(rs.getInt("lastDigits"));
 				addresses.add(method);
 			}
 		} catch (Exception e) {
@@ -57,7 +58,7 @@ public class MetodoPagamentoDao {
 			connection = DBConnection.getConnection();
 
 			query = "INSERT INTO metodo_pagamento (userId,tipo,numero,nomeCarta,"
-					+ "scadenza,cvv,main) VALUES(?,?,?,?,?,?,?)";
+					+ "scadenza,cvv,main,lastDigits) VALUES(?,?,?,?,?,?,?,?)";
 			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, method.getUserId());
 			pst.setString(2, method.getTipo());
@@ -66,6 +67,7 @@ public class MetodoPagamentoDao {
 			pst.setString(5, method.getScadenza());
 			pst.setInt(6, method.getCvv());
 			pst.setInt(7, method.getMain());
+			pst.setInt(8, method.getLast4Numbers());
 			pst.executeUpdate();
 
 			

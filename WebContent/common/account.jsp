@@ -314,9 +314,9 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 											<label for="tipo-carta">Tipo di Carta</label> <select
 												id="tipo-carta" name="tipo_carta" required>
 												<option value="">-- Seleziona Tipo --</option>
-												<option value="visa">Visa</option>
-												<option value="mastercard">Mastercard</option>
-												<option value="amex">American Express</option>
+												<option value="Visa">Visa</option>
+												<option value="Mastercard">Mastercard</option>
+												<option value="American Express">American Express</option>
 											</select>
 										</div>
 										<div class="form-group">

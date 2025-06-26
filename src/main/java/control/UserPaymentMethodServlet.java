@@ -47,14 +47,22 @@ public class UserPaymentMethodServlet extends HttpServlet {
 			response.sendRedirect("login.jsp");
 		}
 		
+		
+		
 		String tipo = request.getParameter("tipo_carta");
 		String numero =  request.getParameter("numero_carta");
-		
+		System.out.println(tipo);
 		String nomeCarta = request.getParameter("nome_carta");
 		//no cognome?
 		String scadenza = request.getParameter("scadenza"); 
 		
 		int cvv = Integer.parseInt(request.getParameter("cvv"));
+		
+		String numeroPulito = numero.replaceAll("\\D", ""); // rimuove spazi e caratteri non numerici
+		int last4 = Integer.parseInt(numeroPulito.substring(numeroPulito.length() - 4));
+		
+		System.out.println(numeroPulito);
+		System.out.println(last4);
 		
 		int main = 0;
 		
@@ -72,7 +80,7 @@ public class UserPaymentMethodServlet extends HttpServlet {
 		m.setMain(main);
 		m.setScadenza(scadenza);
 		m.setCvv(cvv);
-		m.setLast4Numbers(numero.substring(numero.length() - 4));
+		m.setLast4Numbers(last4);
 		m.setId(aDao.insertMethod(m));
 		
 		user.setMethods(aDao.getAllPaymentMethods(user.getIdUtente()));
