@@ -29,7 +29,7 @@ public class OrderDao {
 			// devo inserire sia in order sia in order_seats
 			query = "INSERT INTO `order` (productId, userId, quantity, date, totalPrice, time, showId,"
 					+ " nome, indirizzo, città, paese, cap, nomeTitolare, "
-					+ "numeroCarta, meseScadenza, annoScadenza, cvv, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					+ "numeroCarta, scadenza, cvv, email) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setInt(1, order.getId());
@@ -46,10 +46,9 @@ public class OrderDao {
 			pst.setInt(12, order.getCap());
 			pst.setString(13, order.getNomeTitolare());
 			pst.setString(14, order.getNumeroCarta());
-			pst.setInt(15, order.getMeseScadenza());
-			pst.setInt(16, order.getAnnoScadenza());
-			pst.setInt(17, order.getCvv());
-			pst.setString(18, order.getEmail());
+			pst.setString(15, order.getScadenza());
+			pst.setInt(16, order.getCvv());
+			pst.setString(17, order.getEmail());
 
 			pst.executeUpdate();
 
@@ -156,8 +155,7 @@ public class OrderDao {
 				order.setCap(rs.getInt(("cap")));
 				order.setNomeTitolare(rs.getString(("nomeTitolare")));
 				// order.setNome(rs.getString(("numeroCarta")));
-				order.setMeseScadenza(rs.getInt(("meseScadenza")));
-				order.setAnnoScadenza(rs.getInt(("annoScadenza")));
+				order.setScadenza(rs.getString("scadenza"));
 				// order.setCvv(rs.getInt(("cvv")));
 				order.setEmail(rs.getString(("email")));
 				orderList.add(order);
@@ -257,8 +255,7 @@ public class OrderDao {
 				order.setCap(rs.getInt(("cap")));
 				order.setNomeTitolare(rs.getString(("nomeTitolare")));
 				// order.setNome(rs.getString(("numeroCarta")));
-				order.setMeseScadenza(rs.getInt(("meseScadenza")));
-				order.setAnnoScadenza(rs.getInt(("annoScadenza")));
+				order.setScadenza(rs.getString("scadenza"));
 				// order.setCvv(rs.getInt(("cvv")));
 				order.setEmail(rs.getString(("email")));
 				orderList.add(order);
@@ -309,8 +306,7 @@ public class OrderDao {
 				order.setCap(rs.getInt(("cap")));
 				order.setNomeTitolare(rs.getString(("nomeTitolare")));
 				// order.setNome(rs.getString(("numeroCarta")));
-				order.setMeseScadenza(rs.getInt(("meseScadenza")));
-				order.setAnnoScadenza(rs.getInt(("annoScadenza")));
+				order.setScadenza(rs.getString("scadenza"));
 				// order.setCvv(rs.getInt(("cvv")));
 				order.setEmail(rs.getString(("email")));
 				orderList.add(order);
@@ -359,8 +355,7 @@ public class OrderDao {
 				order.setCap(rs.getInt(("cap")));
 				order.setNomeTitolare(rs.getString(("nomeTitolare")));
 				// order.setNome(rs.getString(("numeroCarta")));
-				order.setMeseScadenza(rs.getInt(("meseScadenza")));
-				order.setAnnoScadenza(rs.getInt(("annoScadenza")));
+				order.setScadenza(rs.getString("scadenza"));
 				// order.setCvv(rs.getInt(("cvv")));
 				order.setEmail(rs.getString(("email")));
 

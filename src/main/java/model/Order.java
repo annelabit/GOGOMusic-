@@ -27,6 +27,8 @@ public class Order extends Product{
 	private ArrayList<Integer> showSeatIds;
 	private String username;
 	private double totalPrice;
+	private String scadenza;
+	private String tipoCarta;
 	
 	
 	public Order() {}
@@ -252,6 +254,22 @@ public class Order extends Product{
 
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
+	}
+
+	public String getScadenza() {
+		return scadenza;
+	}
+
+	public void setScadenza(String scadenza) {
+		this.scadenza = scadenza;
+	}
+
+	public String getTipoCarta() {
+		return tipoCarta;
+	}
+
+	public void setTipoCarta(String tipoCarta) {
+		this.tipoCarta = tipoCarta;
 	}
 
 

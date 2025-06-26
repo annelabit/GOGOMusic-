@@ -180,7 +180,7 @@ request.setAttribute("products", products);
 		</div>
 
 
-		<a href="<%=request.getContextPath()%>/common/index?products=yes"><button
+		<a href="<%=request.getContextPath()%>/common/index?all=yes"><button
 				class="btn" id="productsbtn">Vedi tutti</button></a>
 	</div>
 
@@ -190,7 +190,7 @@ request.setAttribute("products", products);
 		<div class="small-container">
 			<div class="row">
 				<div class="col-2">
-					<img src="images/billie-eilish/be.png" class="offer-img">
+					<img src="<%=request.getContextPath() %>/images/artisti/be.png" class="offer-img">
 				</div>
 				<div class="col-2" id="offerta">
 					<p>Offerta esclusiva</p>

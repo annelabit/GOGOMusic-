@@ -49,6 +49,7 @@ public class MetodoPagamentoDao {
 		return addresses;
 
 	}
+	
 
 	public int insertMethod(MetodoPagamento method) {
 

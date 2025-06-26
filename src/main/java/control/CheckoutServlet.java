@@ -95,11 +95,14 @@ public class CheckoutServlet extends HttpServlet {
 					order.setIndirizzo(request.getParameter("indirizzo"));
 					order.setCittà(request.getParameter("città"));
 					order.setPaese(request.getParameter("paese"));
+					order.setScadenza(request.getParameter("scadenza"));
 					order.setCap(Integer.parseInt(request.getParameter("cap")));
 					order.setNomeTitolare(request.getParameter("nomeTitolare"));
+					
 					order.setNumeroCarta(toHash(request.getParameter("cardNumber")));
-					order.setMeseScadenza(Integer.parseInt(request.getParameter("mese")));
-					order.setAnnoScadenza(Integer.parseInt(request.getParameter("anno")));
+					//order.setMeseScadenza(Integer.parseInt(request.getParameter("mese")));
+					
+					//order.setAnnoScadenza(Integer.parseInt(request.getParameter("anno")));
 					order.setCvv(Integer.parseInt(request.getParameter("cvv")));
 					order.setUsername(uDao.getUserFromId(user.getIdUtente()).getUsername());
 					boolean result = oDao.insertOrder(order, c.getSeatIds());

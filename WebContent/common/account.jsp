@@ -177,7 +177,7 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 								<div class="address-info">
 
 									<%
-									if (a.getMain() == 1) {
+									if (a.equals(addresses.getFirst())) {
 									%>
 									<h4>Indirizzo Principale</h4>
 									<span class="badge primary">Principale</span>

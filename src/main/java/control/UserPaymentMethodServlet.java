@@ -76,7 +76,8 @@ public class UserPaymentMethodServlet extends HttpServlet {
 		m.setUserId(user.getIdUtente());
 		m.setNomeCarta(nomeCarta);
 		m.setTipo(tipo);
-		m.setNumeroCarta(toHash(numero));
+		//m.setNumeroCarta(toHash(numero));
+		m.setNumeroCarta(numero);
 		m.setMain(main);
 		m.setScadenza(scadenza);
 		m.setCvv(cvv);

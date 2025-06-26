@@ -52,7 +52,7 @@ if (!products.isEmpty()) { //se c'è almeno un prodotto
 
 <div class="col-4-products">
 	<a
-		href="productDetails.jsp?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId()%>"><img
+		href="<%=request.getContextPath()%>/common/product-details?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId()%>"><img
 		class="card-img-top"
 		src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>.png"></a>
 	<!-- inserire collegamento pagina singola -->

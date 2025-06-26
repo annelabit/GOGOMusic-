@@ -16,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import dao.IndirizzoSpedizioneDao;
+import dao.MetodoPagamentoDao;
 import dao.ProductDao;
 import dao.UserDao;
 
@@ -37,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		
 		UserDao udao = new UserDao();
 		User user = udao.userLogin(username, toHash(password));
-
+		
 		ProductDao pDao = new ProductDao();
 		ArrayList<Product> products = pDao.getProducts();
 		request.setAttribute("products", products);
@@ -46,19 +48,21 @@ public class LoginServlet extends HttpServlet {
 		if(user != null) {
 			
 			System.out.println("Login successful");
-			request.getSession().setAttribute("user", user);
 			
+			IndirizzoSpedizioneDao addressDao = new IndirizzoSpedizioneDao();
+			MetodoPagamentoDao mDao = new MetodoPagamentoDao();
+			user.setAddresses(addressDao.getAllAddresses(user.getIdUtente()));
+			user.setMethods(mDao.getAllPaymentMethods(user.getIdUtente()));
+			
+			request.getSession().setAttribute("user", user);
 			if(user.isAdmin()) {
 				request.getSession().setAttribute("isAdmin", Boolean.TRUE);//inserisco il token nella sessione
 			} else {
 				request.getSession().setAttribute("isAdmin", Boolean.FALSE);//inserisco il token nella sessione
 			}
 			request.getRequestDispatcher("index").forward(request, response);
-		} else {
-			System.out.println("Login failed");
-			response.sendRedirect("login.jsp");
-			//login dovrà mostrare un messaggio di errore
-		}
+		} 
+		request.getRequestDispatcher("login").forward(request, response);
 	}
 	
 	private String toHash(String password) {

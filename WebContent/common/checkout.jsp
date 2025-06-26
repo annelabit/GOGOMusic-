@@ -18,42 +18,55 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="footer.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/styles/stylesheet.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/styles/footer.css">
 
 <title>GOGOMusic!</title>
 </head>
+<%
+User user = (User) request.getSession().getAttribute("user");
+if (user != null) { //se l'user appartiene alla sessione
+	request.setAttribute("user", user); //lo aggiunge agli attributi della richiesta
+
+} else {
+	response.sendRedirect("login.jsp");
+}
+
+ArrayList<IndirizzoSpedizione> addresses = user.getAddresses();
+ArrayList<MetodoPagamento> methods = user.getMethods();
+%>
 <body>
 
 	<%@include file="/include/navbar.jsp"%>
 
 	<div class="container-checkout">
-		<form a22ction="">
+		<form action="<%=request.getContextPath()%>/common/checkout" method="post">
 			<div class="row-checkout">
 				<div class="col-checkout">
 					<h3 class="title-checkout">Indirizzo di fattura</h3>
 					<div class="input-box">
-						<span>Nome e Cognome:</span> <input type="text"
-							placeholder="Nome e Cognome">
+						<span>Nome e Cognome:</span> <input name="name" type="text"
+							value="<%=user.getNome() %> <%=user.getCognome()%>">
 					</div>
 					<div class="input-box">
-						<span>Email:</span> <input type="email"
-							placeholder="esempio@gmail.com">
+						<span>Email:</span> <input name="email" type="email"
+							value="<%=user.getEmail() %>">
 					</div>
 					<div class="input-box">
-						<span>Indirizzo:</span> <input type="text" placeholder="Indirizzo">
+						<span>Indirizzo:</span> <input name="indirizzo" type="text" value="<%= addresses.isEmpty() ? "CAP" : addresses.get(0).getIndirizzo() %>">
 					</div>
 					<div class="input-box">
-						<span>Citt√†:</span> <input type="text" placeholder="Citt√†">
+						<span>Citt√†:</span> <input name="citt‡" type="text" value="<%= addresses.isEmpty() ? "Citt‡" : addresses.get(0).getCitt‡() %>">
 					</div>
 
 					<div class="flex">
 						<div class="input-box">
-							<span>Paese:</span> <input type="text" placeholder="Paese">
+							<span>Paese:</span> <input name="paese" type="text" value="<%= addresses.isEmpty() ? "paese" : addresses.get(0).getPaese() %>">
+
 						</div>
 						<div class="input-box">
-							<span>Codice postale:</span> <input type="number" min="0"
-								placeholder="12345">
+							<span>Codice postale:</span> <input name="cap" type="number" min="0"
+								value="<%= addresses.isEmpty() ? "CAP" : addresses.get(0).getCAP() %>">
 						</div>
 					</div>
 				</div>
@@ -62,28 +75,25 @@
 					<h3 class="title-checkout">Metodo di pagamento</h3>
 					<div class="input-box">
 						<span>Carte accettate:</span> <img
-							src="images/loghi/carte-credito.png">
+							src="<%=request.getContextPath()%>/images/loghi/carte-credito.png">
 					</div>
 					<div class="input-box">
-						<span>Nome e Cognome titolare:</span> <input type="text"
-							placeholder="Nome e Cognome titolare della carta">
+						<span>Nome e Cognome titolare:</span> <input name="nomeTitolare" type="text"
+							value="<%= methods.isEmpty() ? "Nome e cognome titolare" : methods.get(0).getNomeCarta() %>">
 					</div>
+					
 					<div class="input-box">
-						<span>Numero di carta:</span> <input type="number" min="0"
-							placeholder="1234 5678 9012 3456">
+						<span>Numero di carta:</span> <input name="cardNumber" type="text" min="0"
+							value="<%= methods.isEmpty() ? "1234567890123456" : methods.get(0).getNumeroCarta() %>">
 					</div>
 
 					<div class="flex">
 						<div class="input-box">
-							<span>Mese Scadenza:</span> <input type="number" min="0"
-								placeholder="MM">
+							<span>Scadenza:</span> <input name="scadenza" type="text" min="0" 
+								value="<%= methods.isEmpty() ? "Scadenza" : methods.get(0).getScadenza() %>">
 						</div>
 						<div class="input-box">
-							<span>Anno Scadenza:</span> <input type="number" min="0"
-								placeholder="AAAA">
-						</div>
-						<div class="input-box">
-							<span>CVV:</span> <input type="number" min="0" placeholder="123">
+							<span>CVV:</span> <input name="cvv" type="number" min="0" value="<%= methods.isEmpty() ? "Cvv" : methods.get(0).getCvv() %>">
 						</div>
 					</div>
 				</div>
@@ -142,6 +152,6 @@
 		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-	<script src="javascript.js"></script>
+	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
 </body>
 </html>

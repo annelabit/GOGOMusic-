@@ -47,6 +47,9 @@ Map<Integer, String> venueNames = (Map<Integer, String>) request.getAttribute("v
 DecimalFormat df = new DecimalFormat("#0.00");
 ArrayList<Product> products = (ArrayList<Product>) request.getAttribute("products");
 request.setAttribute("products", products);
+
+ArrayList<IndirizzoSpedizione> addresses = user.getAddresses();
+ArrayList<MetodoPagamento> methods = user.getMethods();
 %>
 
 <title>GOGOMusic!</title>
@@ -96,9 +99,10 @@ request.setAttribute("products", products);
 						<div class="ticket-detail">
 							<span class="label">Area:</span> <span class="value"><%=orderAreas.get(o.getOrderId())%></span>
 						</div>
-						<div class="ticket-detail">
+						<!-- <div class="ticket-detail">
 							<span class="label">Sezione:</span> <span class="value">A1</span>
 						</div>
+						 -->
 						<div class="ticket-detail total-cost">
 							<span class="label">Totale:</span> <span class="value"><%=df.format(o.getPrice())%></span>
 						</div>
@@ -132,10 +136,14 @@ request.setAttribute("products", products);
 								<p>
 									<strong>Carta di Credito</strong>
 								</p>
-								<p>Mastercard</p>
+								<!-- <p><o.getTipoCarta() %></p> -->
+								<p>
+									Nome Titolare:
+									<%=o.getNomeTitolare()%>
+								</p>
 								<p>
 									Scadenza:
-									<%=o.getMeseScadenza()%>/<%=o.getAnnoScadenza()%></p>
+									<%=o.getScadenza()%></p>
 							</div>
 						</div>
 
