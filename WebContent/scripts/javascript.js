@@ -507,7 +507,7 @@ function showAccountSection(sectionId) {
 }
 
 // Form handlers
-/*
+
 function updatePersonalInfo() {
 	const form = document.getElementById('form-info-personali');
 	const formData = new FormData(form);
@@ -578,7 +578,7 @@ function changePassword() {
 	form.reset();
 }
 
-function logout() {
+/*function logout() {
 	if (confirm('Sei sicuro di voler effettuare il log out?')) {
 		console.log('Logout richiesto');
 		alert('Log out in corso...');
@@ -655,8 +655,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Mobile navigation buttons
 	const mobileButtons = document.querySelectorAll('.mobile-nav-btn');
 	mobileButtons.forEach(button => {
-		
-		if (this.classList.contains('logout-item')) return;
 		
 		button.addEventListener('click', function() {
 			
