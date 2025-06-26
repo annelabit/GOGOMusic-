@@ -77,13 +77,13 @@ if (category == null)
 
 
 			<%
-			int elements = 0;
+			//int elements = 0;
 			for (Product p : products) {
 
 				if (p.getCategory().toLowerCase().equals(category) || category.equals("")) {
 
-					if (elements++ == 12)
-				break;
+					//if (elements++ == 12)
+				//break;
 			%>
 
 
@@ -131,11 +131,6 @@ if (category == null)
 
 
 
-		<div class="page-btn">
-			<span>1</span>
-			<!-- inserire collegamento con pagine nuove -->
-			<span>2</span> <span>3</span> <span>&#8594;</span>
-		</div>
 
 	</div>
 	<%@include file="/include/footer.jsp"%>

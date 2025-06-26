@@ -4,10 +4,14 @@
 <%@ page import="dao.*"%>
 <%@ page import="java.util.ArrayList"%>
 
+
 <%
-   /* ProductDao productDao = new ProductDao();
-	ShowDao sdao = new ShowDao();
-    ArrayList<Product> events = productDao.getProducts();*/
+User utente = (User) request.getAttribute("user"); //recupero l'attributo dalla sessione dell'utente
+if (utente != null) { //se l'user appartiene alla sessione
+	request.setAttribute("user", utente); //lo aggiunge agli attributi della richiesta
+}
+
+
 %>
 <!-- navbar  -->
 
@@ -25,10 +29,29 @@
 			<nav>
 				<ul id="menuItems">
 					<li><a href="<%= request.getContextPath() %>/common/index">Home</a></li>
+					<li><a
+						href="<%=request.getContextPath()%>/common/index?all=yes">Tutti
+							gli eventi</a></li>
+					<%if(utente==null){ %>
+
 					<li><a href="<%= request.getContextPath() %>/common/login.jsp">Log
 							in</a></li>
-					<li><a href="<%=request.getContextPath() %>/common/order-history">Ordini</a></li>
-					<li><a href="<%=request.getContextPath() %>/common/user-account">Account</a></li>
+					<%} %>
+
+					<%if(utente!=null){ %>
+					<li><a
+						href="<%=request.getContextPath() %>/common/order-history">Ordini</a></li>
+
+					<li><a
+						href="<%=request.getContextPath() %>/common/user-account">Account</a></li>
+
+
+					<%if(utente.isAdmin()){ %>
+
+					<li><a
+						href="<%=request.getContextPath()%>/admin/admin-page">Admin</a></li>
+					<%}}if(utente==null){ %>
+					<%} %>
 				</ul>
 			</nav>
 

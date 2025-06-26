@@ -180,23 +180,24 @@ DecimalFormat df = new DecimalFormat("#0.00");
 								%>
 							</select>
 						</div>
-						<div class="form-group">
+						<!--  <div class="form-group">
 							<label for="venue-select">Venue:</label> <select
 								id="venue-select" name="venue" required>
 								<option value="">-- Seleziona Venue --</option>
 
-								<%
+								<
 								for (Location l : allLocations) {
 								%>
 
-								<option value="<%=l.getId()%>"><%=l.getVenue()%> -
-									<%=l.getCity()%></option>
+								<option value="<=l.getId()%>"><=l.getVenue()%> -
+									<=l.getCity()%></option>
 
-								<%
+								<
 								}
 								%>
 							</select>
 						</div>
+						-->
 					</div>
 					<div class="form-row">
 						<div class="form-group">

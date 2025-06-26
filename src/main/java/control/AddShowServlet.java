@@ -42,7 +42,7 @@ public class AddShowServlet extends HttpServlet {
 			return;
 		}
 		int pId = Integer.parseInt(request.getParameter("evento"));
-		int venueId = Integer.parseInt(request.getParameter("venue"));
+		//int venueId = Integer.parseInt(request.getParameter("venue"));
 		String data = request.getParameter("data");
 		String ora = request.getParameter("ora");
 		
@@ -53,10 +53,11 @@ public class AddShowServlet extends HttpServlet {
 		
 		ShowDao showDao = new ShowDao();
 		ShowSeatDao showSeatDao = new ShowSeatDao();
+		ProductDao pDao = new ProductDao();
 		
 		Show s = new Show();
 		s.setProductId(pId);
-		s.setVenueId(venueId);
+		s.setVenueId(pDao.getSingleProduct(pId).getVenueId());
 		s.setDate(data);
 		s.setTime(ora);
 		
@@ -65,6 +66,7 @@ public class AddShowServlet extends HttpServlet {
 		showSeatDao.addShowSeatPriceByCategory(s, "Vip", prezzoVip);
 		showSeatDao.addShowSeatPriceByCategory(s, "Settore1", prezzoPremium);
 		showSeatDao.addShowSeatPriceByCategory(s, "Settore2", prezzoStandard);
+		showSeatDao.addShowSeatPriceByCategory(s, "Economy", prezzoEconomy);
 		System.out.println("Ok");
 		
 		request.getRequestDispatcher("admin-page").include(request, response);

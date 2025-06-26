@@ -63,52 +63,39 @@ request.setAttribute("products", products);
 				data-bs-slide-to="2" aria-label="Slide 3"></button>
 		</div>
 
+
+
+
+
 		<div class="carousel-inner">
+
+			<%
+			int e = 0;
+			for (Product p : products) {
+				if (e == 3)
+					break;
+			%>
 			<div class="carousel-item active c-item">
-				<img src="images/foto-carosello/crc.png" class="d-block w-100 c-img"
+				<img src="<%=request.getContextPath() %>/images/artisti/<%=p.getImage() %>t3.png" class="d-block w-100 c-img"
 					alt="Slide 1">
 				<div class="carousel-caption top-0 mt-4">
-					<p class="text-uppercase fs-3 mt-5">Stadio Olimpico</p>
-					<p class="display-1 fw-bolder text-capitalize">Midwest Princess
-						Tour</p>
+					<p class="text-uppercase fs-3 mt-5"><%=p.getLocation() %></p>
+					<p class="display-1 fw-bolder text-capitalize"><%=p.getName() %></p>
 					<button class="btn px-4 py-2 fs-5 mt-5">
 						<a
-							href="<%=request.getContextPath()%>/common/product-details?eventId=3&showId=3">Compra
-							ora
+							href="<%=request.getContextPath()%>/common/product-details?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId()%>">Compra
+							ora 
 					</button>
 					</a>
 				</div>
 			</div>
-			<div class="carousel-item c-item">
-				<img src="images/foto-carosello/lgc.png" class="d-block w-100 c-img"
-					alt="Slide 2">
-				<div class="carousel-caption top-0 mt-4">
-					<p class="text-uppercase fs-3 mt-5">Unipol Arena</p>
-					<p class="display-1 fw-bolder text-capitalize">The Mayhem Ball</p>
-					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-						data-bs-target="#booking-modal">
-						<a
-							href="<%=request.getContextPath()%>/common/product-details?eventId=2&showId=22">Compra
-							ora
-					</button>
-					</a>
-				</div>
-			</div>
-			<div class="carousel-item c-item">
-				<img src="images/foto-carosello/tsc1.png"
-					class="d-block w-100 c-img" alt="Slide 3">
-				<div class="carousel-caption top-0 mt-4">
-					<p class="text-uppercase fs-3 mt-5">Stadio San Siro</p>
-					<p class="display-1 fw-bolder text-capitalize">The Eras Tour</p>
-					<button class="btn px-4 py-2 fs-5 mt-5" data-bs-toggle="modal"
-						data-bs-target="#booking-modal">
-						<a
-							href="<%=request.getContextPath()%>/common/product-details?eventId=2&showId=2">Compra
-							ora
-					</button>
-					</a>
-				</div>
-			</div>
+
+
+			<%
+			e++;}
+			%>
+			
+			
 		</div>
 		<button class="carousel-control-prev" type="button"
 			data-bs-target="#hero-carousel" data-bs-slide="prev">
@@ -130,11 +117,9 @@ request.setAttribute("products", products);
 
 			<%
 			int elements = 0;
-			int i=0;
+			int i = 0;
 			for (Product p : products) {
-				
-				
-				
+
 				if (elements++ == 6)
 					break;
 			%>
@@ -143,7 +128,7 @@ request.setAttribute("products", products);
 
 			<div class="col-3">
 				<a
-					href="<%=request.getContextPath()%>/common/product-details?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId() %>"><img
+					href="<%=request.getContextPath()%>/common/product-details?eventId=<%=p.getId()%>&showId=<%=p.getShows().getFirst().getId()%>"><img
 					src="<%=request.getContextPath()%>/images/artisti/<%=p.getImage()%>.png"></a>
 				<!-- inserire collegamento pagina singola -->
 				<h4><%=p.getName()%></h4>
@@ -172,7 +157,6 @@ request.setAttribute("products", products);
 				%>
 			</div>
 			<%
-			
 			i++;
 			}
 			%>
@@ -190,7 +174,8 @@ request.setAttribute("products", products);
 		<div class="small-container">
 			<div class="row">
 				<div class="col-2">
-					<img src="<%=request.getContextPath() %>/images/artisti/be.png" class="offer-img">
+					<img src="<%=request.getContextPath()%>/images/artisti/be.png"
+						class="offer-img">
 				</div>
 				<div class="col-2" id="offerta">
 					<p>Offerta esclusiva</p>

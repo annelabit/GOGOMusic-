@@ -147,9 +147,7 @@ request.setAttribute("products", products);
 				</div>
 
 				<h3>Dettagli concerto</h3>
-				<p>Billie Eilish torna in Italia dopo ben 6 anni di assenza per
-					il tour del suo terzo album intitolato "Hit me Hard and Soft" che
-					conta oltre 7 miliardi di stream.</p>
+				<p><%=p.getDescrizione() %></p>
 
 
 				<!-- SELEZIONE POSTI -->

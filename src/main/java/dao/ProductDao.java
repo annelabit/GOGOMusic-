@@ -233,13 +233,14 @@ public class ProductDao {
 		try {
 			connection = DBConnection.getConnection();
 			
-			query = "INSERT INTO product (name, category, image, venueId) VALUES(?,?,?,?)";
+			query = "INSERT INTO product (name, category, image, venueId, descrizione) VALUES(?,?,?,?,?)";
 			
 			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
 			pst.setString(1, p.getName());
 			pst.setString(2, p.getCategory());
 			pst.setString(3, p.getImage());
 			pst.setInt(4, p.getVenueId());
+			pst.setString(5, p.getDescrizione());
 			pst.executeUpdate();
 			
 			ResultSet keys = pst.getGeneratedKeys();

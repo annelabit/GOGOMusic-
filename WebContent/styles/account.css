@@ -25,9 +25,9 @@
     width: 280px;
     background: #FFFAFF;
     border-radius: 15px;
-    padding: 30px 0;
+    padding: 30px 0 !important;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    height: fit-content;
+    height: fit-content !important;
     position: sticky;
     top: 20px;
 }
@@ -68,17 +68,17 @@
 }
 
 .account-menu li {
-    margin-bottom: 5px;
+    margin-bottom: 5px !important;
 }
 
 .menu-item {
-    display: flex;
-    align-items: center;
-    padding: 15px 30px;
+    display: flex !important;
+    align-items: center !important;
+    padding: 15px 30px !important;
     color: #555;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border-left: 4px solid transparent;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    border-left: 4px solid transparent !important;
 }
 
 .menu-item:hover {
