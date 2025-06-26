@@ -21,7 +21,7 @@
 	href="<%=request.getContextPath()%>/styles/Poppins.css">
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/styles/slider.css">
-	<link rel="stylesheet"
+<link rel="stylesheet"
 	href="<%=request.getContextPath()%>/styles/responsive.css">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -37,17 +37,17 @@
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/styles/account.css">
 
-<% User user = (User) request.getSession().getAttribute("user");
+<%
+User user = (User) request.getSession().getAttribute("user");
 if (user != null) { //se l'user appartiene alla sessione
 	request.setAttribute("user", user); //lo aggiunge agli attributi della richiesta
-	
+
 } else {
 	response.sendRedirect("login.jsp");
 }
 
 ArrayList<IndirizzoSpedizione> addresses = user.getAddresses();
 ArrayList<MetodoPagamento> methods = user.getMethods();
-
 %>
 
 <title>GOGOMusic!</title>
@@ -68,8 +68,8 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 						<div class="user-avatar">
 							<i class="fas fa-user-circle"></i>
 						</div>
-						<h3>Mario Rossi</h3>
-						<p>mario.rossi@email.com</p>
+						<h3><%=user.getNome() %> <%=user.getCognome() %></h3>
+						<p><%=user.getEmail() %></p>
 					</div>
 
 					<!-- Desktop Menu -->
@@ -131,24 +131,27 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 						</div>
 
 						<div class="content-card">
-							<form action="user-info" method="post" class="account-form" id="form-info-personali">
+							<form action="user-info" method="post" class="account-form"
+								id="form-info-personali">
 								<div class="form-grid">
 									<div class="form-group">
 										<label for="username">Nome Utente</label> <input type="text"
-											id="username" name="username" value="<%=user.getUsername() %>" required>
+											id="username" name="username"
+											value="<%=user.getUsername()%>" required>
 									</div>
 									<div class="form-group">
 										<label for="email">Email</label> <input type="email"
-											id="email" name="email" value="<%=user.getEmail() %>"
+											id="email" name="email" value="<%=user.getEmail()%>"
 											required>
 									</div>
 									<div class="form-group">
 										<label for="nome">Nome</label> <input type="text" id="nome"
-											name="nome" value="<%=user.getNome() %>" required>
+											name="nome" value="<%=user.getNome()%>" required>
 									</div>
 									<div class="form-group">
 										<label for="cognome">Cognome</label> <input type="text"
-											id="cognome" name="cognome" value="<%=user.getCognome() %>" required>
+											id="cognome" name="cognome" value="<%=user.getCognome()%>"
+											required>
 									</div>
 								</div>
 								<button type="submit" class="btn">Salva Modifiche</button>
@@ -164,41 +167,56 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 						</div>
 
 						<!-- Indirizzo Esistente -->
-						
-						<%for(IndirizzoSpedizione a : addresses){ %>
-						
+
+						<%
+						for (IndirizzoSpedizione a : addresses) {
+						%>
+
 						<div class="content-card address-card">
 							<div class="address-header">
 								<div class="address-info">
-									
-									<%if(a.getMain() == 1){ %>
+
+									<%
+									if (a.getMain() == 1) {
+									%>
 									<h4>Indirizzo Principale</h4>
 									<span class="badge primary">Principale</span>
-									<%} else{%>
+									<%
+									} else {
+									%>
 									<h4>Indirizzo Secondario</h4>
-									<%} %>
+									<%
+									}
+									%>
 								</div>
 								<div class="address-actions">
-									<button class="btn-icon" data-action="edit-address" data-id="1">
+									<!-- <button class="btn-icon" data-action="edit-address" data-id="1">
 										<i class="fas fa-edit"></i>
 									</button>
-									<button class="btn-icon delete" data-action="delete-address"
-										data-id="<%=a.getId() %>">
-										<i class="fas fa-trash"></i>
-									</button>
+									-->
+									<form action="delete-address" method="post"
+										style="display: inline;">
+										<input type="hidden" name="id" value="<%=a.getId()%>" />
+										<button class="btn-icon delete" type="submit">
+											<i class="fas fa-trash"></i>
+										</button>
+									</form>
 								</div>
 							</div>
 							<div class="address-details">
 								<p>
-									<strong><%=a.getNomeDestinatario() %> <%=a.getCognomeDestinatario() %></strong>
+									<strong><%=a.getNomeDestinatario()%> <%=a.getCognomeDestinatario()%></strong>
 								</p>
-								<p><%=a.getIndirizzo() %></p>
-								<p><%=a.getCAP() %> <%=a.getCittà() %></p>
-								<p><%=a.getPaese() %></p>
+								<p><%=a.getIndirizzo()%></p>
+								<p><%=a.getCAP()%>
+									<%=a.getCittà()%></p>
+								<p><%=a.getPaese()%></p>
 							</div>
 						</div>
-						<%} %>
-						
+						<%
+						}
+						%>
+
 						<!-- Aggiungi Nuovo Indirizzo -->
 						<div class="content-card">
 							<button class="btn btn-add" id="btn-show-add-address">
@@ -208,7 +226,8 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 							<div class="add-form-container" id="add-address-form"
 								style="display: none;">
 								<h4>Nuovo Indirizzo</h4>
-								<form action="user-address" method="get" class="account-form" id="form-nuovo-indirizzo">
+								<form action="user-address" method="get" class="account-form"
+									id="form-nuovo-indirizzo">
 									<div class="form-grid">
 										<div class="form-group">
 											<label for="nome-destinatario">Nome Destinatario</label> <input
@@ -244,8 +263,9 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 										</div>
 										<div class="form-group checkbox-group">
 											<label class="checkbox-label"> <input type="checkbox"
-												id="indirizzo-principale" name="principale" value="1"> <span
-												class="checkmark"></span> Imposta come indirizzo principale
+												id="indirizzo-principale" name="principale" value="1">
+												<span class="checkmark"></span> Imposta come indirizzo
+												principale
 											</label>
 										</div>
 									</div>
@@ -268,9 +288,11 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 
 
 						<!-- Carta Esistente -->
-						
-						<%for(MetodoPagamento m : methods){ %>
-						
+
+						<%
+						for (MetodoPagamento m : methods) {
+						%>
+
 						<div class="content-card payment-card">
 							<div class="payment-header">
 								<div class="payment-info">
@@ -278,27 +300,43 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 										<i class="fab fa-cc-visa"></i>
 									</div>
 									<div class="card-details">
-										<h4><%=m.getTipo() %> •••• •••• •••• <%=m.getLast4Numbers() %></h4>
-										<p>Scade: <%=m.getScadenza() %></p>
-										<%if(m.getMain() == 1){ %>
+										<h4><%=m.getTipo()%>
+											•••• •••• ••••
+											<%=m.getLast4Numbers()%></h4>
+										<p>
+											Scade:
+											<%=m.getScadenza()%></p>
+										<%
+										if (m.getMain() == 1) {
+										%>
 										<span class="badge primary">Principale</span>
-										<%}else{ %>
+										<%
+										} else {
+										%>
 										<span class="badge primary">Secondario</span>
-										<%} %>
+										<%
+										}
+										%>
 									</div>
 								</div>
 								<div class="payment-actions">
-									<button class="btn-icon" data-action="edit-payment" data-id="1">
+									<!--  <button class="btn-icon" data-action="edit-payment" data-id="1">
 										<i class="fas fa-edit"></i>
-									</button>
-									<button class="btn-icon delete" data-action="delete-payment"
-										data-id="1">
-										<i class="fas fa-trash"></i>
-									</button>
+									</button>-->
+									<form action="delete-payment-method" method="post"
+										style="display: inline;">
+										<input type="hidden" name="id" value="<%=m.getId()%>" />
+										<button class="btn-icon delete" type="submit">
+											<i class="fas fa-trash"></i>
+										</button>
+									</form>
+
 								</div>
 							</div>
 						</div>
-						<%} %>
+						<%
+						}
+						%>
 						<!-- Aggiungi Nuovo Metodo -->
 						<div class="content-card">
 							<button class="btn btn-add" id="btn-show-add-payment">
@@ -308,7 +346,8 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 							<div class="add-form-container" id="add-payment-form"
 								style="display: none;">
 								<h4>Nuovo Metodo di Pagamento</h4>
-								<form class="account-form" id="form-nuovo-pagamento" action="user-payment-method" method="post">
+								<form class="account-form" id="form-nuovo-pagamento"
+									action="user-payment-method" method="post">
 									<div class="form-grid">
 										<div class="form-group">
 											<label for="tipo-carta">Tipo di Carta</label> <select
@@ -363,7 +402,8 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 
 						<div class="content-card">
 							<h4>Modifica Password</h4>
-							<form class="account-form" id="form-password" action="change-password" method="post">
+							<form class="account-form" id="form-password"
+								action="change-password" method="post">
 								<div class="form-grid">
 									<div class="form-group full-width">
 										<label for="password-attuale">Password Attuale</label> <input

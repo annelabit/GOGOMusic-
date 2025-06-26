@@ -91,6 +91,33 @@ public class MetodoPagamentoDao {
 
 		return id;
 	}
+	
+	public boolean deletePaymentMethod(int id) {
+
+		boolean result = false;
+
+		try {
+			
+			System.out.println("Setting " + id +" as Main");
+			
+			connection = DBConnection.getConnection();
+
+			query = "DELETE FROM metodo_pagamento WHERE id = ?";
+
+			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+			pst.setInt(1, id);
+
+			pst.executeUpdate();
+
+			result = true; // se è arrivato qui non ci sono eccezioni
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());
+		}
+
+		return result;
+	}
 
 	public boolean setAsMain(int id, int uId) {
 
