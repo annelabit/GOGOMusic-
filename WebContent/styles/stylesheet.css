@@ -75,10 +75,10 @@ a:hover {
 }
 
 a.active {
-    color: #FFFAFF;
-    font-weight: bold;
-    border-bottom: 2px solid #FFFAFF;
-    padding-bottom: 2px;
+	color: #FFFAFF;
+	font-weight: bold;
+	border-bottom: 2px solid #FFFAFF;
+	padding-bottom: 2px;
 }
 
 p {
@@ -170,7 +170,6 @@ h4 {
 	font-size: 15px;
 }
 
-
 .offer {
 	background: radial-gradient(#fff, #226E75);
 	margin-top: 80px;
@@ -232,9 +231,6 @@ small {
 	color: #fff;
 }
 
-
-
-
 /*foto categorie*/
 .col-4 {
 	flex: 0 0 calc(25% - 20px);
@@ -263,8 +259,6 @@ h3 {
 .col-4:hover {
 	transform: translateY(-5px);
 }
-
-
 
 /*brands*/
 .brands {
@@ -310,19 +304,17 @@ h3 {
 	width: auto;
 }
 
-
 .menu-icon {
-    width: 28px;
-    margin-left: 20px;
-    display: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+	width: 28px;
+	margin-left: 20px;
+	display: none;
+	cursor: pointer;
+	transition: transform 0.3s ease;
 }
 
 .menu-icon:hover {
-    transform: scale(1.1);
+	transform: scale(1.1);
 }
-
 
 /* Pagina prodotti */
 .row-products {
@@ -492,7 +484,6 @@ input:focus {
 	cursor: pointer;
 }
 
-
 .uniform-img {
 	width: 500px;
 	height: 500px;
@@ -508,7 +499,6 @@ input:focus {
 	object-fit: cover;
 	border: 1px solid #ddd;
 }
-
 
 .small-img:hover {
 	transform: scale(1.02);
@@ -588,10 +578,6 @@ input:focus {
 	color: #fff;
 }
 
-
-
-
-
 /* Elementi carrello */
 .cart-page {
 	margin: 80px auto;
@@ -667,8 +653,6 @@ th:last-child {
 	margin: 30px 0 40px auto;
 	display: block;
 }
-
-
 
 /* Login-page */
 #artists {
@@ -771,9 +755,8 @@ form a {
 	justify-content: center;
 }
 
-
 /* Pagina Checkout*/
-.container-checkout{
+.container-checkout {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -782,39 +765,38 @@ form a {
 	padding: 25px;
 }
 
-.container-checkout form{
+.container-checkout form {
 	width: 700px;
 	padding: 40px;
 	background: #FFFAFF;
 }
 
-form .row{
+form .row {
 	display: flex;
 	gap: 15px;
 	flex-wrap: wrap;
 }
 
-.row-checkout .col-checkout{
+.row-checkout .col-checkout {
 	flex: 1 1 250px;
 }
 
-.col-checkout .title{
-	font-size:20px;
+.col-checkout .title {
+	font-size: 20px;
 	text-transform: uppercase;
 	margin-bottom: 5px;
 }
 
-.col-checkout .input-box{
+.col-checkout .input-box {
 	margin: 15px 0;
 }
 
-.input-box span{
+.input-box span {
 	display: block;
 	margin-bottom: 10px;
-	
 }
 
-.input-box input{
+.input-box input {
 	width: 100%;
 	padding: 10px 15px;
 	border: 1px solid #ccc;
@@ -822,16 +804,16 @@ form .row{
 	font-size: 15px;
 }
 
-.col-checkout .flex{
+.col-checkout .flex {
 	display: flex;
 	gap: 15px;
 }
 
-.flex .input-box{
+.flex .input-box {
 	margin-top: 5px;
 }
 
-form .btn-checkout{
+form .btn-checkout {
 	width: 100%;
 	padding: 12px;
 	background: #226E75;
@@ -844,16 +826,15 @@ form .btn-checkout{
 	cursor: pointer;
 }
 
-form .btn-checkout:hover{
+form .btn-checkout:hover {
 	background: #1A5C61;
 }
 
-.input-box img{
+.input-box img {
 	height: 34px;
 	margin-top: 5px;
 	filter: drop-shadow(0 0 1px #000);
 }
-
 
 /* MEDIA QUERY */
 @media only screen and (max-width: 1200px) {
@@ -898,212 +879,189 @@ form .btn-checkout:hover{
 }
 
 @media only screen and (max-width: 768px) {
-    .account-page .row {
-        flex-direction: column;
-        align-items: center;
-        gap: 30px;
-    }
-
-    .account-page .col-2 {
-        width: 100%;
-        max-width: 300px;
-        text-align: center;
-    }
-
-    #artists {
-        max-width: 300px;
-        margin-bottom: 20px;
-    }
+	.account-page .row {
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+	}
+	.account-page .col-2 {
+		width: 100%;
+		max-width: 300px;
+		text-align: center;
+	}
+	#artists {
+		max-width: 300px;
+		margin-bottom: 20px;
+	}
 }
 
 /* Media query per menu e mobile */
 @media only screen and (max-width: 800px) {
-	 .menu-icon {
-        display: block;
-        cursor: pointer;
-        margin-left: 15px;
-        transition: transform 0.3s;
-    }
-
-    .navbar {
-        flex-wrap: wrap;
-        padding: 10px 5px;
-        position: relative;
-    }
-
-    nav ul {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 100%;
-        background: #226E75;
-        flex-direction: column;
-        align-items: center;
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s ease-out;
-        box-shadow: 0 10px 15px rgba(0,0,0,0.1);
-        z-index: 999;
-        margin: 0;
-        padding: 0;
-    }
-
-    nav ul.show {
-        max-height: 500px;
-        padding: 20px 0;
-    }
-
-    nav ul li {
-        display: block;
-        margin: 15px 0;
-        padding: 0;
-        width: 100%;
-        text-align: center;
-    }
-
-    nav ul li a {
-        display: block;
-        padding: 12px 0;
-        color: #FFFAFF;
-        border-bottom: none;
-    }
-
-    nav ul li a.active {
-        background-color: rgba(255,255,255,0.1);
-        border-bottom: none;
-    }
-
-    .search-container {
-        order: 1;
-        width: 100%;
-        margin: 15px 0 0 0;
-        padding: 0 15px;
-    }
-
-    .search-container form {
-        width: 100%;
-    }
-
-    .search-container input {
-        width: 100%;
-    }
-
-    #logo {
-        margin-left: 15px;
-        width: 110px;
-    }
-
-    .col-4, .col-4-products, .col-3 {
-        flex: 0 0 100%;
-        margin: 15px 0;
-    }
-    
+	.menu-icon {
+		display: block;
+		cursor: pointer;
+		margin-left: 15px;
+		transition: transform 0.3s;
+	}
+	.navbar {
+		flex-wrap: wrap;
+		padding: 10px 5px;
+		position: relative;
+	}
+	nav ul {
+		position: absolute;
+		top: 100%;
+		right: 0;
+		width: 100%;
+		background: #226E75;
+		flex-direction: column;
+		align-items: center;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.5s ease-out;
+		box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+		z-index: 999;
+		margin: 0;
+		padding: 0;
+	}
+	nav ul.show {
+		max-height: 500px;
+		padding: 20px 0;
+	}
+	nav ul li {
+		display: block;
+		margin: 15px 0;
+		padding: 0;
+		width: 100%;
+		text-align: center;
+	}
+	nav ul li a {
+		display: block;
+		padding: 12px 0;
+		color: #FFFAFF;
+		border-bottom: none;
+	}
+	nav ul li a.active {
+		background-color: rgba(255, 255, 255, 0.1);
+		border-bottom: none;
+	}
+	.search-container {
+		order: 1;
+		width: 100%;
+		margin: 15px 0 0 0;
+		padding: 0 15px;
+	}
+	.search-container form {
+		width: 100%;
+	}
+	.search-container input {
+		width: 100%;
+	}
+	#logo {
+		margin-left: 15px;
+		width: 110px;
+	}
+	.col-4, .col-4-products, .col-3 {
+		flex: 0 0 100%;
+		margin: 15px 0;
+	}
 }
 
 @media only screen and (min-width: 801px) {
-    .menu-icon {
-        display: none !important;
-    }
-
-    nav ul {
-        display: inline-block !important;
-        position: static !important;
-        width: auto !important;
-        background: transparent !important;
-        max-height: none !important;
-        overflow: visible !important;
-        padding: 0 !important;
-        box-shadow: none !important;
-    }
-
-    nav ul li {
-        display: inline-block !important;
-        margin: 0 12px !important;
-        padding-top: 8px !important;
-    }
-
-    nav ul li a {
-        display: inline !important;
-        padding: 0 0 5px 0 !important;
-    }
-
-    nav ul li a.active {
-        border-bottom: 2px solid #FFFAFF !important;
-        padding-bottom: 3px !important;
-    }
-
-    .search-container {
-        order: 0;
-        width: auto;
-        margin: 0 20px 0 0;
-    }
-
-    .navbar {
-        flex-wrap: nowrap;
-        padding: 5px;
-    }
-
-    #logo {
-        margin-left: 40px;
-        width: 125px;
-    }
+	.menu-icon {
+		display: none !important;
+	}
+	nav ul {
+		display: inline-block !important;
+		position: static !important;
+		width: auto !important;
+		background: transparent !important;
+		max-height: none !important;
+		overflow: visible !important;
+		padding: 0 !important;
+		box-shadow: none !important;
+	}
+	nav ul li {
+		display: inline-block !important;
+		margin: 0 12px !important;
+		padding-top: 8px !important;
+	}
+	nav ul li a {
+		display: inline !important;
+		padding: 0 0 5px 0 !important;
+	}
+	nav ul li a.active {
+		border-bottom: 2px solid #FFFAFF !important;
+		padding-bottom: 3px !important;
+	}
+	.search-container {
+		order: 0;
+		width: auto;
+		margin: 0 20px 0 0;
+	}
+	.navbar {
+		flex-wrap: nowrap;
+		padding: 5px;
+	}
+	#logo {
+		margin-left: 40px;
+		width: 125px;
+	}
 }
 
 @media only screen and (max-width: 600px) {
-	 .navbar {
-        padding: 8px 5px;
-    }
-
-    #logo {
-        width: 90px !important;
-        margin-left: 5px !important;
-    }
-
-    .menu-icon {
-        width: 24px;
-        margin-left: 10px;
-    }
-
-    nav ul {
-        width: 100% !important;
-        right: 0 !important;
-    }
-
-    nav ul li a {
-        padding: 10px 0 !important;
-        font-size: 14px;
-    }
-
-    .search-container {
-        margin-top: 10px !important;
-        padding: 0 10px !important;
-    }
-
-    .search-container input {
-        padding: 8px 12px;
-        font-size: 14px;
-    }
-
-    .col-4-products img {
-        max-width: 200px !important;
-    }
-
-    .uniform-img {
-        height: 300px !important;
-    }
-
-    .small-img-col {
-        width: 80px !important;
-        height: 80px !important;
-    }
-
-    .button-container {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    #showImageBtn, #selectbtn {
-        width: 100% !important;
-        padding: 10px !important;
-    }
+	.navbar {
+		padding: 8px 5px;
+	}
+	#logo {
+		width: 90px !important;
+		margin-left: 5px !important;
+	}
+	.menu-icon {
+		width: 24px;
+		margin-left: 10px;
+	}
+	nav ul {
+		width: 100% !important;
+		right: 0 !important;
+	}
+	nav ul li a {
+		padding: 10px 0 !important;
+		font-size: 14px;
+	}
+	.search-container {
+		margin-top: 10px !important;
+		padding: 0 10px !important;
+	}
+	.search-container input {
+		padding: 8px 12px;
+		font-size: 14px;
+	}
+	.col-4-products img {
+		max-width: 200px !important;
+	}
+	.uniform-img {
+		height: 300px !important;
+	}
+	.small-img-col {
+		width: 80px !important;
+		height: 80px !important;
+	}
+	.button-container {
+		flex-direction: column;
+		gap: 8px;
+	}
+	#showImageBtn, #selectbtn {
+		width: 100% !important;
+		padding: 10px !important;
+	}
+	
 }
+.error-message {
+		color: red;
+		font-size: 0.9em;
+		margin-top: 4px;
+	}
+	.invalid {
+		border: 1px solid red !important;
+	}

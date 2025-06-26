@@ -39,6 +39,21 @@ width: 39%;
 }
 
 }
+
+
+
+@media screen and (max-width: 600px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    padding: 10px;
+  }
+
+  .button-1, .button-2 {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
 @media screen and (max-width: 550px) {
 section, aside {
 width: 100%;

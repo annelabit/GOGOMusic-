@@ -50,85 +50,79 @@ if (methods == null) {
 	<%@include file="/include/navbar.jsp"%>
 
 	<div class="container-checkout">
-		<form action="<%=request.getContextPath()%>/common/checkout" method="post">
-	<div class="row-checkout">
-		<div class="col-checkout">
-			<h3 class="title-checkout">Indirizzo di fattura</h3>
-			<div class="input-box">
-				<span>Nome e Cognome:</span>
-				<input name="name" type="text"
-					   value="<%=user.getNome()%> <%=user.getCognome()%>">
-			</div>
-			<div class="input-box">
-				<span>Email:</span>
-				<input name="email" type="email"
-					   value="<%=user.getEmail()%>">
-			</div>
-			<div class="input-box">
-				<span>Indirizzo:</span>
-				<input name="indirizzo" type="text"
-					   value="<%=addresses.isEmpty() ? "" : addresses.get(0).getIndirizzo()%>"
-					   placeholder="Via / Piazza, numero civico">
-			</div>
-			<div class="input-box">
-				<span>Città:</span>
-				<input name="città"
-					   value="<%= addresses.isEmpty() ? "" : addresses.get(0).getCittà() %>"
-					   placeholder="Città">
-			</div>
-			<div class="flex">
-				<div class="input-box">
-					<span>Paese:</span>
-					<input name="paese" type="text"
-						   value="<%=addresses.isEmpty() ? "" : addresses.get(0).getPaese()%>"
-						   placeholder="Paese">
-				</div>
-				<div class="input-box">
-					<span>CAP:</span>
-					<input name="cap" type="text"
-						   value="<%=addresses.isEmpty() ? "" : addresses.get(0).getCAP()%>"
-						   placeholder="CAP">
-				</div>
-			</div>
-		</div>
+		<form id="checkoutForm" action="<%=request.getContextPath()%>/common/checkout" method="post">
+  <div class="row-checkout">
+    <div class="col-checkout">
+      <h3 class="title-checkout">Indirizzo di fattura</h3>
+      <div class="input-box">
+        <span>Nome e Cognome:</span>
+        <input name="name" type="text" value="<%=user.getNome()%> <%=user.getCognome()%>">
+      </div>
+      <div class="input-box">
+        <span>Email:</span>
+        <input name="email" type="email" value="<%=user.getEmail()%>">
+      </div>
+      <div class="input-box">
+        <span>Indirizzo:</span>
+        <input name="indirizzo" type="text" placeholder="Via / Piazza, numero civico"
+               value="<%=addresses.isEmpty() ? "" : addresses.get(0).getIndirizzo()%>">
+      </div>
+      <div class="input-box">
+        <span>Città:</span>
+        <input name="città" placeholder="Città"
+               value="<%= addresses.isEmpty() ? "" : addresses.get(0).getCittà() %>">
+      </div>
+      <div class="flex">
+        <div class="input-box">
+          <span>Paese:</span>
+          <input name="paese" type="text" placeholder="Paese"
+                 value="<%=addresses.isEmpty() ? "" : addresses.get(0).getPaese()%>">
+        </div>
+        <div class="input-box">
+          <span>CAP:</span>
+          <input name="cap" type="text" placeholder="CAP"
+                 value="<%=addresses.isEmpty() ? "" : addresses.get(0).getCAP()%>">
+          <div class="error-message" id="cap-error"></div>
+        </div>
+      </div>
+    </div>
 
-		<div class="col-checkout">
-			<h3 class="title-checkout">Metodo di pagamento</h3>
-			<div class="input-box">
-				<span>Carte accettate:</span>
-				<img src="<%=request.getContextPath()%>/images/loghi/carte-credito.png">
-			</div>
-			<div class="input-box">
-				<span>Nome e Cognome titolare:</span>
-				<input name="nomeTitolare" type="text"
-					   value="<%= methods.isEmpty() ? "" : methods.get(0).getNomeCarta() %>"
-					   placeholder="Nome e Cognome">
-			</div>
-			<div class="input-box">
-				<span>Numero di carta:</span>
-				<input name="cardNumber" type="text"
-					   value="<%= methods.isEmpty() ? "" : methods.get(0).getNumeroCarta() %>"
-					   placeholder="1234 5678 9012 3456">
-			</div>
-			<div class="flex">
-				<div class="input-box">
-					<span>Scadenza:</span>
-					<input name="scadenza" type="text"
-						   value="<%= methods.isEmpty() ? "" : methods.get(0).getScadenza() %>"
-						   placeholder="MM/AA">
-				</div>
-				<div class="input-box">
-					<span>CVV:</span>
-					<input name="cvv" type="text"
-						   value="<%= methods.isEmpty() ? "" : methods.get(0).getCvv() %>"
-						   placeholder="CVV">
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<button type="submit" class="btn-checkout">Acquista</button>
+    <div class="col-checkout">
+      <h3 class="title-checkout">Metodo di pagamento</h3>
+      <div class="input-box">
+        <span>Carte accettate:</span>
+        <img src="<%=request.getContextPath()%>/images/loghi/carte-credito.png">
+      </div>
+      <div class="input-box">
+        <span>Nome e Cognome titolare:</span>
+        <input name="nomeTitolare" type="text" placeholder="Nome e Cognome"
+               value="<%= methods.isEmpty() ? "" : methods.get(0).getNomeCarta() %>">
+      </div>
+      <div class="input-box">
+        <span>Numero di carta:</span>
+        <input name="cardNumber" type="text" placeholder="1234567890123456"
+               value="<%= methods.isEmpty() ? "" : methods.get(0).getNumeroCarta() %>">
+        <div class="error-message" id="cardNumber-error"></div>
+      </div>
+      <div class="flex">
+        <div class="input-box">
+          <span>Scadenza:</span>
+          <input name="scadenza" type="text" placeholder="MM/AA"
+                 value="<%= methods.isEmpty() ? "" : methods.get(0).getScadenza() %>">
+          <div class="error-message" id="scadenza-error"></div>
+        </div>
+        <div class="input-box">
+          <span>CVV:</span>
+          <input name="cvv" type="text" placeholder="CVV"
+                 value="<%= methods.isEmpty() ? "" : methods.get(0).getCvv() %>">
+          <div class="error-message" id="cvv-error"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn-checkout">Acquista</button>
 </form>
+
 
 	</div>
 
@@ -171,7 +165,7 @@ if (methods == null) {
 							class="fa fa-youtube-play" aria-hidden="true"></i></a> <a
 							href="https://www.instagram.com"><i class="fa fa-instagram"
 							aria-hidden="true"></i></a>
-						<p class="copyright">GOGOMusic! Â© 2025</p>
+						<p class="copyright">GOGOMusic! © 2025</p>
 					</div>
 				</div>
 			</div>
@@ -182,6 +176,8 @@ if (methods == null) {
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
 	<script src="<%=request.getContextPath()%>/scripts/javascript.js"></script>
+		<script src="<%=request.getContextPath()%>/scripts/validate.js"></script>
+	
 	<script src="https://kit.fontawesome.com/b53f3cfd48.js"></script>
 </body>
 </html>

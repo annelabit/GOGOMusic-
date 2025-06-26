@@ -1,13 +1,12 @@
 @charset "UTF-8";
 
 .grid-container {
-  float: center;
-  display: inline-grid;
-  grid-template-columns: auto auto auto auto auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
   padding: 20px;
-  align: center;
+  justify-content: center;
   text-align: center;
-  
 }
 
 .button-1 {
@@ -84,18 +83,20 @@
 }
 .button-1,
 .button-2 {
-  width: 100px;   /* fissa larghezza */
-  height: 60px;   /* fissa altezza */
-  font-size: 18px;
-  padding: 0;     /* elimina padding che potrebbe causare variazioni */
+  width: 100%;
+  min-height: 48px;
+  font-size: 16px;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  text-wrap: nowrap;
   box-sizing: border-box;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
 }
-
 .selected-seat{
   background-color: #4CAF50 !important;
   color: white;
