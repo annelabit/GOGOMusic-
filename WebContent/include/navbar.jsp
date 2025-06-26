@@ -14,7 +14,6 @@
 <link rel="stylesheet"
 	href="<%= request.getContextPath() %>/styles/suggestions.css">
 
-
 <div class="header">
 	<div class="container">
 		<div class="navbar">
@@ -29,7 +28,7 @@
 					<li><a href="<%= request.getContextPath() %>/common/login.jsp">Log
 							in</a></li>
 					<li><a href="<%=request.getContextPath() %>/common/order-history">Ordini</a></li>
-					<li><a href="">Account</a></li>
+					<li><a href="<%=request.getContextPath() %>/common/user-account">Account</a></li>
 				</ul>
 			</nav>
 

@@ -37,7 +37,12 @@ public class AdminServlet extends HttpServlet {
 			return;
 		}
 		User user = (User) request.getSession().getAttribute("user");
-			request.setAttribute("user", user);
+		if (user != null) { //se l'user appartiene alla sessione
+			request.setAttribute("user", user); //lo aggiunge agli attributi della richiesta
+			
+		} else {
+			response.sendRedirect("login.jsp");
+		}
 
 		UserDao uDao = new UserDao();
 		ProductDao pDao = new ProductDao();

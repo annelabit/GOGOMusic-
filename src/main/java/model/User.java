@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class User {
 
@@ -11,7 +12,8 @@ public class User {
 	private String username;
 	private boolean isAdmin;
 	private Date date; 
-	
+	private ArrayList<IndirizzoSpedizione> addresses;
+	private ArrayList<MetodoPagamento> methods;
 	public User() {
 	}
 	
@@ -69,6 +71,29 @@ public class User {
 
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public ArrayList<IndirizzoSpedizione> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(ArrayList<IndirizzoSpedizione> addresses) {
+		this.addresses = addresses;
+	}
+	public void setAddressesAsNotMain(int exception) {
+		for(IndirizzoSpedizione i : addresses) {
+			if(i.getId()!=exception) {
+				i.setMain(0);
+			}
+		}
+	}
+	
+	public ArrayList<MetodoPagamento> getMethods() {
+		return methods;
+	}
+
+	public void setMethods(ArrayList<MetodoPagamento> methods) {
+		this.methods = methods;
 	}
 
 	@Override

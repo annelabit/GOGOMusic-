@@ -70,6 +70,8 @@
 						<form action="<%=request.getContextPath()%>/common/register" id="regForm" method="post">
 							<input name="register-email" type="email" placeholder="Email">
 							<input name="register-username" type="text" placeholder="Username">
+							<input name="register-nome" type="text" placeholder="Nome">
+							<input name="register-cognome" type="text" placeholder="Cognome">
 							<input name="register-password" type="password" placeholder="Password">
 							<button type="submit" class="btn">Registrati</button>   <!-- Aggiungere eventuali collegamenti -->
 						</form>

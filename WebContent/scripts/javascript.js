@@ -67,69 +67,57 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-/* pagina login e register*/
-var loginForm = document.getElementById("loginForm");
-var regForm = document.getElementById("regForm");
-var indicator = document.getElementById("indicator");
+window.addEventListener("DOMContentLoaded", () => {
+	const loginForm = document.getElementById("loginForm");
+	const regForm = document.getElementById("regForm");
+	const indicator = document.getElementById("indicator");
 
-function register() {
-	// Sposta il form di login a sinistra (fuori dallo schermo)
-	loginForm.style.transform = "translateX(-100%)";
-	// Porta il form di registrazione al centro
-	regForm.style.transform = "translateX(0)";
-	// Sposta l'indicatore sotto "Registrati"
-	indicator.style.transform = "translateX(100px)";
-}
+	if (!loginForm || !regForm || !indicator) {
+		console.error("Uno degli elementi non esiste!");
+		return;
+	}
 
-function login() {
-	// Porta il form di login al centro
-	loginForm.style.transform = "translateX(0)";
-	// Sposta il form di registrazione a destra (fuori dallo schermo)
-	regForm.style.transform = "translateX(100%)";
-	// Riporta l'indicatore sotto "Login"
-	indicator.style.transform = "translateX(0)";
-}
+	window.register = function () {
+		loginForm.style.transform = "translateX(-100%)";
+		regForm.style.transform = "translateX(0)";
+		indicator.style.transform = "translateX(100px)";
+	};
 
-
-
-
-/*  galleria prodotti */
-var productImg = document.getElementById("product-img");
-var smallImg = document.getElementsByClassName("small-img");
-//small img è un array (sono 3 foto)
-
-smallImg[0].onclick = function() {
-	productImg.src = smallImg[0].src;
-}
-smallImg[1].onclick = function() {
-	productImg.src = smallImg[1].src;
-}
-smallImg[2].onclick = function() {
-	productImg.src = smallImg[2].src;
-}
+	window.login = function () {
+		loginForm.style.transform = "translateX(0)";
+		regForm.style.transform = "translateX(100%)";
+		indicator.style.transform = "translateX(0)";
+	};
+});
 
 
 
 
-/* immagine mappa */
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
+	// Galleria prodotti
+	const productImg = document.getElementById("product-img");
+	const smallImgs = document.getElementsByClassName("small-img");
+
+	for (let i = 0; i < smallImgs.length; i++) {
+		smallImgs[i].addEventListener("click", function () {
+			productImg.src = smallImgs[i].src;
+		});
+	}
+
+	// Overlay mappa
 	const btn = document.getElementById("showImageBtn");
 	const overlay = document.getElementById("imageOverlay");
 	const closeBtn = document.querySelector(".close-btn");
-	const fullscreenImage = document.getElementById("fullscreenImage");
 
-	// Apre l'overlay al click
-	btn.addEventListener("click", function() {
+	btn?.addEventListener("click", function () {
 		overlay.style.display = "block";
 	});
 
-	// Chiude l'overlay
-	closeBtn.addEventListener("click", function() {
+	closeBtn?.addEventListener("click", function () {
 		overlay.style.display = "none";
 	});
 
-	// Chiude l'overlay se si clicca fuori dall'immagine
-	overlay.addEventListener("click", function(e) {
+	overlay?.addEventListener("click", function (e) {
 		if (e.target === overlay) {
 			overlay.style.display = "none";
 		}
@@ -519,6 +507,7 @@ function showAccountSection(sectionId) {
 }
 
 // Form handlers
+/*
 function updatePersonalInfo() {
 	const form = document.getElementById('form-info-personali');
 	const formData = new FormData(form);
@@ -596,7 +585,7 @@ function logout() {
 		// Redirect to login page
 		window.location.href = 'Login.html';
 	}
-}
+}*/
 
 // Generic action handler
 function handleAction(action, id) {
@@ -682,7 +671,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	// Form submissions
-	document.getElementById('form-info-personali')?.addEventListener('submit', function(e) {
+	/*document.getElementById('form-info-personali')?.addEventListener('submit', function(e) {
 		e.preventDefault();
 		updatePersonalInfo();
 	});
@@ -700,7 +689,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('form-password')?.addEventListener('submit', function(e) {
 		e.preventDefault();
 		changePassword();
-	});
+	});*/
 
 	// Show/Hide forms
 	document.getElementById('btn-show-add-address')?.addEventListener('click', function() {

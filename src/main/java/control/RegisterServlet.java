@@ -48,11 +48,16 @@ public class RegisterServlet extends HttpServlet {
 		String username = request.getParameter("register-username");
 		String email = request.getParameter("register-email");
 		String password = request.getParameter("register-password");
+		String nome = request.getParameter("register-nome");
+		String cognome = request.getParameter("register-cognome");
+
 		
 		UserDao udao = new UserDao();
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(email);
+		user.setNome(nome);
+		user.setCognome(cognome);
 		user.setAdmin(false);//se si sta iscrivendo adesso non è un admin
 		java.sql.Date dateSql = new java.sql.Date(Calendar.getInstance().getTime().getTime());
 		user.setDate(dateSql);

@@ -61,11 +61,13 @@ public class UserDao {
 			
 			connection = DBConnection.getConnection();
 			
-			query = "INSERT INTO user (email, username, password) VALUES(?,?,?)";
+			query = "INSERT INTO user (nome,cognome,email, username, password) VALUES(?,?,?,?,?)";
 			pst = this.connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-			pst.setString(1, user.getEmail());
-			pst.setString(2, user.getUsername());
-			pst.setString(3, password);
+			pst.setString(1, user.getNome());
+			pst.setString(2, user.getCognome());
+			pst.setString(3, user.getEmail());
+			pst.setString(4, user.getUsername());
+			pst.setString(5, password);
 			pst.executeUpdate();
 			ResultSet generatedKeys = pst.getGeneratedKeys();
 	        
@@ -114,6 +116,30 @@ public class UserDao {
 		
 		return users;
 	}
+	
+	public boolean updateUserInfo(User user) {
+        
+		query = "UPDATE user SET nome = ?, cognome = ?, email = ?, username = ? WHERE id = ?";
+        
+		try {
+			connection = DBConnection.getConnection();	
+        	PreparedStatement pst = connection.prepareStatement(query);
+            
+                pst.setString(1, user.getNome());
+                pst.setString(2, user.getCognome());
+                pst.setString(3, user.getEmail() );
+                pst.setString(4, user.getUsername());
+                pst.setInt(5, user.getIdUtente());
+                pst.executeUpdate();
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+			closeConnection(connection);
+		}
+        return false;
+    }
 	
 	public User getUserFromId(int id) {
 
