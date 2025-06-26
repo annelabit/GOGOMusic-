@@ -640,10 +640,10 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Desktop menu items
 	const menuItems = document.querySelectorAll('.menu-item');
 	menuItems.forEach(item => {
-		
-		if (this.classList.contains('logout-item')) return;
-		
 		item.addEventListener('click', function(e) {
+			// Qui `this` è l'elemento cliccato
+			if (this.classList.contains('logout-item')) return; // lascia fare il link logout
+			
 			e.preventDefault();
 			const sectionId = this.getAttribute('data-section');
 			if (sectionId) {

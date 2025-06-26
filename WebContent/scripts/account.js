@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	for (var i = 0; i < menuItems.length; i++) {
 		menuItems[i].addEventListener('click', function (e) {
 			
-			if (this.classList.contains('logout-item')) return;
+			if (!this.classList.contains('logout-item')) 
 			
 			e.preventDefault();
 			var sectionId = this.getAttribute('data-section');

@@ -239,8 +239,8 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 												name="cap" pattern="[0-9]{5}" required>
 										</div>
 										<div class="form-group">
-											<label for="paese">Provincia</label> <input type="text"
-												id="paese" name="paese" maxlength="2" required>
+											<label for="paese">Paese</label> <input type="text"
+												id="paese" name="paese" required>
 										</div>
 										<div class="form-group checkbox-group">
 											<label class="checkbox-label"> <input type="checkbox"
