@@ -640,6 +640,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Desktop menu items
 	const menuItems = document.querySelectorAll('.menu-item');
 	menuItems.forEach(item => {
+		
+		if (this.classList.contains('logout-item')) return;
+		
 		item.addEventListener('click', function(e) {
 			e.preventDefault();
 			const sectionId = this.getAttribute('data-section');
@@ -652,7 +655,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Mobile navigation buttons
 	const mobileButtons = document.querySelectorAll('.mobile-nav-btn');
 	mobileButtons.forEach(button => {
+		
+		if (this.classList.contains('logout-item')) return;
+		
 		button.addEventListener('click', function() {
+			
+			
 			const sectionId = this.getAttribute('data-section');
 			if (sectionId) {
 				showAccountSection(sectionId);
@@ -715,7 +723,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});
 
 	// Logout (both desktop and mobile)
-	document.getElementById('logout-link')?.addEventListener('click', function(e) {
+	/*document.getElementById('logout-link')?.addEventListener('click', function(e) {
 		e.preventDefault();
 		logout();
 	});
@@ -723,7 +731,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.getElementById('mobile-logout')?.addEventListener('click', function(e) {
 		e.preventDefault();
 		logout();
-	});
+	});*/
 
 	// Format card number and expiry date
 	document.getElementById('numero-carta')?.addEventListener('input', function() {

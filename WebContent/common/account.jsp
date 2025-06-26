@@ -92,7 +92,7 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 							<li><a href="#" class="menu-item" data-section="sicurezza">
 									<i class="fas fa-shield-alt"></i> <span>Sicurezza</span>
 							</a></li>
-							<li><a href="#" class="menu-item logout-item"
+							<li><a href="logout" class="menu-item logout-item"
 								id="logout-link"> <i class="fas fa-sign-out-alt"></i> <span>Log
 										Out</span>
 							</a></li>
@@ -363,7 +363,7 @@ ArrayList<MetodoPagamento> methods = user.getMethods();
 
 						<div class="content-card">
 							<h4>Modifica Password</h4>
-							<form class="account-form" id="form-password">
+							<form class="account-form" id="form-password" action="change-password" method="post">
 								<div class="form-grid">
 									<div class="form-group full-width">
 										<label for="password-attuale">Password Attuale</label> <input

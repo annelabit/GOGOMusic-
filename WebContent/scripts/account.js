@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	var menuItems = document.querySelectorAll('.menu-item');
 	for (var i = 0; i < menuItems.length; i++) {
 		menuItems[i].addEventListener('click', function (e) {
+			
+			if (this.classList.contains('logout-item')) return;
+			
 			e.preventDefault();
 			var sectionId = this.getAttribute('data-section');
 			if (sectionId) {
@@ -52,6 +55,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	var actionButtons = document.querySelectorAll('[data-action]');
 	for (var i = 0; i < actionButtons.length; i++) {
 		actionButtons[i].addEventListener('click', function () {
+			
+			
+			if (this.classList.contains('logout-item')) return;
+			
 			var action = this.getAttribute('data-action');
 			var id = this.getAttribute('data-id');
 			handleAction(action, id);
@@ -132,7 +139,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	}
 
 	// Logout buttons
-	var logoutLink = document.getElementById('logout-link');
+	/*var logoutLink = document.getElementById('logout-link');
 	if (logoutLink) {
 		logoutLink.addEventListener('click', function (e) {
 			e.preventDefault();
@@ -146,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			e.preventDefault();
 			logout();
 		});
-	}
+	}*/
 
 	// Format card number and expiry date
 	var numeroCarta = document.getElementById('numero-carta');

@@ -28,15 +28,19 @@ public class LogoutServlet extends HttpServlet {
 			
 			ShowSeatDao showSeatDao = new ShowSeatDao();
 			
+			System.out.println("In logout Servlet");
+			
 			if(request.getSession().getAttribute("user")!= null) {  //attributo user (da settare) nella servlet Login
 				ArrayList<Cart> cart = (ArrayList<Cart>) request.getSession().getAttribute("cart_list"); 
 				if(cart!=null) {
 					for(Cart c : cart) {
 							showSeatDao.setSeatsAvailable(c.getShowId(), c.getSeatIds());
 					}
+					cart.clear();
 				}
-				cart.clear();
+				
 					request.getSession().invalidate();
+					System.out.println("Logout successful");
 					response.sendRedirect("login.jsp");
 					} else { 
 				response.sendRedirect("index.jsp");
