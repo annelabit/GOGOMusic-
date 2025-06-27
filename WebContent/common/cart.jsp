@@ -107,7 +107,7 @@ body {
 
 				<td><a
 					href="<%=request.getContextPath()%>/common/remove-from-cart?id=<%=c.getId()%>">Rimuovi</a></td>
-				<td><%=df.format(total.get(i))%></td>
+				<td><%=df.format(total.get(i))%>€</td>
 			</tr>
 
 			<%

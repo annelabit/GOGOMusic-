@@ -178,15 +178,15 @@ request.setAttribute("products", products);
 		<div class="small-container">
 			<div class="row">
 				<div class="col-2">
-					<img src="<%=request.getContextPath()%>/images/artisti/be.png"
+					<img src="<%=request.getContextPath()%>/images/artisti/<%=products.getFirst().getImage()%>.png"
 						class="offer-img">
 				</div>
 				<div class="col-2" id="offerta">
 					<p>Offerta esclusiva</p>
-					<h1>Hit me Hard and Soft</h1>
+					<h1><%=products.getFirst().getName() %></h1>
 					<small>Offerta esclusiva per uno dei concerti più venduti
 						al mondo.</small> <br> <a
-						href="<%=request.getContextPath()%>/common/product-details?eventId=1&showId=1"
+						href="<%=request.getContextPath()%>/common/product-details?eventId=<%=products.getFirst().getId() %>&showId=<%=products.getFirst().getShows().getFirst().getId() %>"
 						class="btn">Compra Ora &#8594;</a>
 					<!-- inserire collegamento pagina singola -->
 				</div>
