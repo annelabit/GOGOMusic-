@@ -700,27 +700,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	});*/
 
 	// Show/Hide forms
-	document.getElementById('btn-show-add-address')?.addEventListener('click', function() {
-		document.getElementById('add-address-form').style.display = 'block';
-		this.style.display = 'none';
-	});
-
-	document.getElementById('btn-cancel-address')?.addEventListener('click', function() {
-		document.getElementById('add-address-form').style.display = 'none';
-		document.getElementById('btn-show-add-address').style.display = 'block';
-		document.getElementById('form-nuovo-indirizzo').reset();
-	});
-
-	document.getElementById('btn-show-add-payment')?.addEventListener('click', function() {
-		document.getElementById('add-payment-form').style.display = 'block';
-		this.style.display = 'none';
-	});
-
-	document.getElementById('btn-cancel-payment')?.addEventListener('click', function() {
-		document.getElementById('add-payment-form').style.display = 'none';
-		document.getElementById('btn-show-add-payment').style.display = 'block';
-		document.getElementById('form-nuovo-pagamento').reset();
-	});
+	
 
 	// Logout (both desktop and mobile)
 	/*document.getElementById('logout-link')?.addEventListener('click', function(e) {

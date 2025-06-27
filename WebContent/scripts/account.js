@@ -65,39 +65,8 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 
-	// Form submissions
-	var formInfo = document.getElementById('form-info-personali');
-	if (formInfo) {
-		formInfo.addEventListener('submit', function (e) {
-			e.preventDefault();
-			updatePersonalInfo();
-		});
-	}
-
-	var formIndirizzo = document.getElementById('form-nuovo-indirizzo');
-	if (formIndirizzo) {
-		formIndirizzo.addEventListener('submit', function (e) {
-			e.preventDefault();
-			addNewAddress();
-		});
-	}
-
-	var formPagamento = document.getElementById('form-nuovo-pagamento');
-	if (formPagamento) {
-		formPagamento.addEventListener('submit', function (e) {
-			e.preventDefault();
-			addNewPayment();
-		});
-	}
-
-	var formPassword = document.getElementById('form-password');
-	if (formPassword) {
-		formPassword.addEventListener('submit', function (e) {
-			e.preventDefault();
-			changePassword();
-		});
-	}
-
+	
+	
 	// Show/Hide address form
 	var btnShowAddress = document.getElementById('btn-show-add-address');
 	if (btnShowAddress) {
