@@ -32,8 +32,7 @@ int venue = (int) request.getAttribute("venue");
 		<th>ID</th>
 		<th>Evento</th>
 		<th>Venue</th>
-		<th>Data</th>
-		<th>Ora</th>
+		<th>Numero spettacoli</th>
 		<th>Azioni</th>
 	</tr>
 </thead>
@@ -50,8 +49,7 @@ int venue = (int) request.getAttribute("venue");
 		<td><%=p.getId()%></td>
 		<td><%=p.getName()%></td>
 		<td><%=p.getLocation()%></td>
-		<td><%=s.getDate() %></td>
-		<td><%=s.getTime() %></td>
+		<td><%=p.getShows().size()%></td>
 		<td>
 			<!--<button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>-->
 			<form action="<%=request.getContextPath()%>/admin/delete-event"

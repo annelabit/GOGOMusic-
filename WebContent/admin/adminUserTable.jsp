@@ -56,7 +56,7 @@ String username = (String) request.getAttribute("keyword");
 		<td><%=u.getIdUtente()%></td>
 		<td><%=u.getUsername()%></td>
 		<td><%=u.getEmail()%></td>
-		<td><%=df.format(tot)%>€</td>
+		<td><%=tot %></td>
 		<td>
 			<!--  <button class="btn-small btn-edit" onclick="editShow(1)">Modifica</button>-->
 			<form action="<%=request.getContextPath()%>/admin/delete-user?uId=<%=u.getIdUtente() %>"

@@ -377,8 +377,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 								<th>ID</th>
 								<th>Evento</th>
 								<th>Venue</th>
-								<th>Data</th>
-								<th>Ora</th>
+								<th>Numero spettacoli</th>
 								<th>Azioni</th>
 							</tr>
 						</thead>
@@ -392,7 +391,6 @@ DecimalFormat df = new DecimalFormat("#0.00");
 							<tr>
 								<td><%=p.getId()%></td>
 								<td><%=p.getName()%></td>
-								<td><%=p.getCategory()%></td>
 								<td><%=p.getLocation()%></td>
 								<td><%=p.getShows().size()%></td>
 								<td>
@@ -530,7 +528,7 @@ DecimalFormat df = new DecimalFormat("#0.00");
 						<div class="form-group">
 							<label for="cliente-select">Cliente:</label> <select
 								id="cliente-select" name="cliente">
-								<option value="">-- Tutti i Clienti --</option>
+								<option value="">-- Seleziona Cliente --</option>
 								
 								<%
 							for (User u : allUsers) {

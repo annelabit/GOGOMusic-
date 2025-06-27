@@ -170,6 +170,43 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 	}
 
+	function showAccountSection(sectionId) {
+		// Hide all sections
+		const sections = document.querySelectorAll('.content-section');
+		sections.forEach(section => {
+			section.classList.remove('active');
+		});
+
+		// Show selected section
+		const targetSection = document.getElementById(sectionId);
+		if (targetSection) {
+			targetSection.classList.add('active');
+		}
+
+		// Update menu active state (desktop)
+		const menuItems = document.querySelectorAll('.menu-item');
+		menuItems.forEach(item => {
+			item.classList.remove('active');
+		});
+
+		const activeMenuItem = document.querySelector(`.menu-item[data-section="${sectionId}"]`);
+		if (activeMenuItem) {
+			activeMenuItem.classList.add('active');
+		}
+
+		// Update mobile buttons active state
+		const mobileButtons = document.querySelectorAll('.mobile-nav-btn');
+		mobileButtons.forEach(btn => {
+			btn.classList.remove('active');
+		});
+
+		const activeMobileBtn = document.querySelector(`.mobile-nav-btn[data-section="${sectionId}"]`);
+		if (activeMobileBtn) {
+			activeMobileBtn.classList.add('active');
+		}
+	}
+	
 	// Initial section
 	showAccountSection('informazioni-personali');
+	
 });

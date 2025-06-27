@@ -120,7 +120,7 @@ body {
 			%>
 		</table>
 
-
+<% if (cart != null && !cart.isEmpty()) {%>
 		<div class="total-price">
 			<table>
 				<tr>
@@ -137,6 +137,9 @@ body {
 				</tr>
 			</table>
 		</div>
+<%} %>
+
+<% if (cart != null && !cart.isEmpty()) {%>
 
 		<button class="btn" id="checkoutbtn">
 			<%
@@ -152,12 +155,19 @@ body {
 			}
 			%>
 		</button>
+		<%}else{%>
+			<h4>Il carrello è vuoto.</h4>
+	<% 	} %>
+		
+		<% if (cart != null && !cart.isEmpty()) {%>
 		<button class="btn" id="emptycart">
 			<a href="<%=request.getContextPath()%>/common/empty-cart">Svuota
 				Carrello</a>
 		</button>
-
+<%} %>
 	</div>
+
+
 
 	<%@include file="/include/footer.jsp"%>
 

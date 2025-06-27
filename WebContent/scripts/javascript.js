@@ -77,13 +77,13 @@ window.addEventListener("DOMContentLoaded", () => {
 		return;
 	}
 
-	window.register = function () {
+	window.register = function() {
 		loginForm.style.transform = "translateX(-100%)";
 		regForm.style.transform = "translateX(0)";
 		indicator.style.transform = "translateX(100px)";
 	};
 
-	window.login = function () {
+	window.login = function() {
 		loginForm.style.transform = "translateX(0)";
 		regForm.style.transform = "translateX(100%)";
 		indicator.style.transform = "translateX(0)";
@@ -93,13 +93,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
 	// Galleria prodotti
 	const productImg = document.getElementById("product-img");
 	const smallImgs = document.getElementsByClassName("small-img");
 
 	for (let i = 0; i < smallImgs.length; i++) {
-		smallImgs[i].addEventListener("click", function () {
+		smallImgs[i].addEventListener("click", function() {
 			productImg.src = smallImgs[i].src;
 		});
 	}
@@ -109,15 +109,15 @@ document.addEventListener("DOMContentLoaded", function () {
 	const overlay = document.getElementById("imageOverlay");
 	const closeBtn = document.querySelector(".close-btn");
 
-	btn?.addEventListener("click", function () {
+	btn?.addEventListener("click", function() {
 		overlay.style.display = "block";
 	});
 
-	closeBtn?.addEventListener("click", function () {
+	closeBtn?.addEventListener("click", function() {
 		overlay.style.display = "none";
 	});
 
-	overlay?.addEventListener("click", function (e) {
+	overlay?.addEventListener("click", function(e) {
 		if (e.target === overlay) {
 			overlay.style.display = "none";
 		}
@@ -395,11 +395,11 @@ document.addEventListener('DOMContentLoaded', function() {
 					console.log('Form submitted for section:', sectionId);
 			}
 		});
-	});*/
+	});	showAdminSection('gestione-posti');
+	});
+*/
 
-	// Initialize first section as active
-	showAdminSection('gestione-posti');
-});
+// Initialize first section as active
 
 // Menu toggle function for mobile (from original theme)
 function menutoggle() {
@@ -643,7 +643,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		item.addEventListener('click', function(e) {
 			// Qui `this` è l'elemento cliccato
 			if (this.classList.contains('logout-item')) return; // lascia fare il link logout
-			
+
 			e.preventDefault();
 			const sectionId = this.getAttribute('data-section');
 			if (sectionId) {
@@ -655,12 +655,12 @@ document.addEventListener('DOMContentLoaded', function() {
 	// Mobile navigation buttons
 	const mobileButtons = document.querySelectorAll('.mobile-nav-btn');
 	mobileButtons.forEach(button => {
-		
+
 		if (this.classList.contains('logout-item')) return;
-		
+
 		button.addEventListener('click', function() {
-			
-			
+
+
 			const sectionId = this.getAttribute('data-section');
 			if (sectionId) {
 				showAccountSection(sectionId);
